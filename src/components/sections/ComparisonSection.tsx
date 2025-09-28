@@ -1,0 +1,115 @@
+import { Card } from "@/components/ui/card";
+import { Check, X } from "lucide-react";
+import comparisonImage from "@/assets/comparison-table.png";
+
+const comparisonData = [
+  {
+    feature: "100% Proprietário",
+    reddata: true,
+    traditional: false,
+    saas: false
+  },
+  {
+    feature: "IA Generativa Local",
+    reddata: true,
+    traditional: false,
+    saas: false
+  },
+  {
+    feature: "Funciona Offline / Appliance",
+    reddata: true,
+    traditional: false,
+    saas: false
+  },
+  {
+    feature: "Soberania Digital",
+    reddata: true,
+    traditional: false,
+    saas: false
+  },
+  {
+    feature: "Conectividade Total",
+    reddata: true,
+    traditional: "partial",
+    saas: "partial"
+  }
+];
+
+export const ComparisonSection = () => {
+  return (
+    <section className="py-24 bg-gradient-tech">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Por que escolher <span className="text-primary">RedData</span>?
+          </h2>
+          <p className="text-xl text-muted-foreground">
+            Compare e veja as vantagens de uma solução verdadeiramente nacional
+          </p>
+        </div>
+        
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left - Interactive Comparison */}
+          <div>
+            <Card className="p-8 bg-card/50 backdrop-blur-sm border-0">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-border">
+                      <th className="text-left py-3 text-foreground font-semibold">Características</th>
+                      <th className="text-center py-3 text-primary font-semibold">RedData</th>
+                      <th className="text-center py-3 text-muted-foreground font-semibold">BI Tradicional</th>
+                      <th className="text-center py-3 text-muted-foreground font-semibold">SaaS Genérico</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {comparisonData.map((row, index) => (
+                      <tr key={index} className="border-b border-border/50">
+                        <td className="py-4 text-foreground">{row.feature}</td>
+                        <td className="py-4 text-center">
+                          <Check className="h-5 w-5 text-green-500 mx-auto" />
+                        </td>
+                        <td className="py-4 text-center">
+                          {row.traditional === "partial" ? (
+                            <span className="text-sm text-muted-foreground">Parcial</span>
+                          ) : (
+                            <X className="h-5 w-5 text-red-500 mx-auto" />
+                          )}
+                        </td>
+                        <td className="py-4 text-center">
+                          {row.saas === "partial" ? (
+                            <span className="text-sm text-muted-foreground">Parcial</span>
+                          ) : (
+                            <X className="h-5 w-5 text-red-500 mx-auto" />
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </Card>
+          </div>
+          
+          {/* Right - Visual Comparison */}
+          <div className="flex justify-center">
+            <img 
+              src={comparisonImage}
+              alt="Comparativo Visual RedData vs Concorrentes"
+              className="max-w-full h-auto rounded-lg shadow-medium"
+            />
+          </div>
+        </div>
+        
+        <div className="text-center mt-12">
+          <div className="inline-flex flex-col gap-2">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full">
+              <Check className="h-4 w-4 text-primary" />
+              <span className="text-sm font-medium text-primary">Única solução 100% brasileira com IA offline</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};

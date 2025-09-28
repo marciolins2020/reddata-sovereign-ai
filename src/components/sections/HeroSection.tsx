@@ -1,0 +1,113 @@
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Shield, Zap, Database } from "lucide-react";
+import reddataLogo from "@/assets/reddata-logo.png";
+import dashboardHero from "@/assets/dashboard-hero.jpg";
+
+export const HeroSection = () => {
+  const scrollToForm = () => {
+    document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const scrollToDemo = () => {
+    document.getElementById('dashboard-demo')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <section className="relative min-h-screen flex items-center bg-gradient-hero overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/4 -right-32 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 -left-32 w-96 h-96 bg-primary/3 rounded-full blur-3xl"></div>
+      </div>
+      
+      <div className="container relative z-10 mx-auto px-4 py-20">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left Content */}
+          <div className="text-center lg:text-left">
+            <div className="flex items-center justify-center lg:justify-start mb-8">
+              <img 
+                src={reddataLogo} 
+                alt="RedData - Plataforma de Big Data e IA"
+                className="h-12 md:h-16"
+              />
+            </div>
+            
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6">
+              Decisões baseadas em <span className="text-primary">dados</span>.
+              <br />
+              Inteligência baseada em <span className="text-primary">RedData</span>.
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-muted-foreground mb-8 leading-relaxed">
+              A plataforma brasileira de Big Data e IA que transforma dados em estratégia com 
+              <strong className="text-foreground"> segurança, soberania e previsibilidade</strong>.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12">
+              <Button size="lg" onClick={scrollToForm} className="group">
+                Solicitar Demonstração
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Button>
+              <Button variant="outline" size="lg" onClick={scrollToDemo}>
+                Ver Dashboard ao Vivo
+              </Button>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center lg:text-left">
+              <div className="flex flex-col sm:flex-row items-center gap-3">
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                  <Shield className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <div className="font-semibold">100% Nacional</div>
+                  <div className="text-sm text-muted-foreground">Soberania Digital</div>
+                </div>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row items-center gap-3">
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                  <Zap className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <div className="font-semibold">IA Offline</div>
+                  <div className="text-sm text-muted-foreground">Sem Dependência</div>
+                </div>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row items-center gap-3">
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                  <Database className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <div className="font-semibold">15+ Anos</div>
+                  <div className="text-sm text-muted-foreground">Experiência</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Right Content - Dashboard Preview */}
+          <div className="relative">
+            <div className="relative bg-card border border-border rounded-2xl overflow-hidden shadow-large">
+              <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-primary rounded-full opacity-20 blur-xl"></div>
+              <img 
+                src={dashboardHero}
+                alt="RedData Dashboard Preview"
+                className="w-full h-auto object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+              <div className="absolute bottom-4 left-4 right-4">
+                <div className="bg-black/50 backdrop-blur-sm rounded-lg px-4 py-2">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    <span className="text-white text-sm font-medium">Dashboard em tempo real</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
