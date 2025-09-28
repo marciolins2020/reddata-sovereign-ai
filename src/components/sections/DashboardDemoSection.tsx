@@ -20,7 +20,7 @@ export const DashboardDemoSection = () => {
         </div>
         
         <div className="max-w-6xl mx-auto">
-          <Card className="p-4 bg-card/50 backdrop-blur-sm border-0 shadow-large">
+          <Card className="p-2 bg-white/95 border-0 shadow-large">
             <div className="relative bg-white rounded-lg overflow-hidden" style={{ aspectRatio: "16/10" }}>
               <iframe
                 src="https://bigdata.redmaxx.com.br/b/semed"
