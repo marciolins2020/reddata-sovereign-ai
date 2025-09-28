@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Send, CheckCircle } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 interface FormData {
   nome: string;
@@ -52,8 +53,13 @@ export const ContactFormSection = () => {
     setIsSubmitting(true);
 
     try {
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: formData
+      });
+
+      if (error) {
+        throw error;
+      }
       
       setIsSubmitted(true);
       toast({
@@ -75,10 +81,11 @@ export const ContactFormSection = () => {
         setIsSubmitted(false);
       }, 3000);
       
-    } catch (error) {
+    } catch (error: any) {
+      console.error("Error sending form:", error);
       toast({
         title: "Erro ao enviar formulário",
-        description: "Tente novamente ou entre em contato diretamente.",
+        description: error.message || "Tente novamente ou entre em contato diretamente.",
         variant: "destructive"
       });
     } finally {
