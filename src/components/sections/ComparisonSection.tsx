@@ -1,6 +1,5 @@
 import { Card } from "@/components/ui/card";
 import { Check, X } from "lucide-react";
-import comparisonImage from "@/assets/comparison-table.png";
 
 const comparisonData = [
   {
@@ -48,57 +47,45 @@ export const ComparisonSection = () => {
           </p>
         </div>
         
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left - Interactive Comparison */}
-          <div>
-            <Card className="p-8 bg-card/50 backdrop-blur-sm border-0">
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b border-border">
-                      <th className="text-left py-3 text-foreground font-semibold">Características</th>
-                      <th className="text-center py-3 text-primary font-semibold">RedData</th>
-                      <th className="text-center py-3 text-muted-foreground font-semibold">BI Tradicional</th>
-                      <th className="text-center py-3 text-muted-foreground font-semibold">SaaS Genérico</th>
+        <div className="max-w-4xl mx-auto">
+          <Card className="p-8 bg-card/50 backdrop-blur-sm border-0">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-border">
+                    <th className="text-left py-3 text-foreground font-semibold">Características</th>
+                    <th className="text-center py-3 text-primary font-semibold">RedData</th>
+                    <th className="text-center py-3 text-muted-foreground font-semibold">BI Tradicional</th>
+                    <th className="text-center py-3 text-muted-foreground font-semibold">SaaS Genérico</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {comparisonData.map((row, index) => (
+                    <tr key={index} className="border-b border-border/50">
+                      <td className="py-4 text-foreground">{row.feature}</td>
+                      <td className="py-4 text-center">
+                        <Check className="h-5 w-5 text-green-500 mx-auto" />
+                      </td>
+                      <td className="py-4 text-center">
+                        {row.traditional === "partial" ? (
+                          <span className="text-sm text-muted-foreground">Parcial</span>
+                        ) : (
+                          <X className="h-5 w-5 text-red-500 mx-auto" />
+                        )}
+                      </td>
+                      <td className="py-4 text-center">
+                        {row.saas === "partial" ? (
+                          <span className="text-sm text-muted-foreground">Parcial</span>
+                        ) : (
+                          <X className="h-5 w-5 text-red-500 mx-auto" />
+                        )}
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {comparisonData.map((row, index) => (
-                      <tr key={index} className="border-b border-border/50">
-                        <td className="py-4 text-foreground">{row.feature}</td>
-                        <td className="py-4 text-center">
-                          <Check className="h-5 w-5 text-green-500 mx-auto" />
-                        </td>
-                        <td className="py-4 text-center">
-                          {row.traditional === "partial" ? (
-                            <span className="text-sm text-muted-foreground">Parcial</span>
-                          ) : (
-                            <X className="h-5 w-5 text-red-500 mx-auto" />
-                          )}
-                        </td>
-                        <td className="py-4 text-center">
-                          {row.saas === "partial" ? (
-                            <span className="text-sm text-muted-foreground">Parcial</span>
-                          ) : (
-                            <X className="h-5 w-5 text-red-500 mx-auto" />
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </Card>
-          </div>
-          
-          {/* Right - Visual Comparison */}
-          <div className="flex justify-center">
-            <img 
-              src={comparisonImage}
-              alt="Comparativo Visual RedData vs Concorrentes"
-              className="max-w-full h-auto rounded-lg shadow-medium"
-            />
-          </div>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Card>
         </div>
         
         <div className="text-center mt-12">
