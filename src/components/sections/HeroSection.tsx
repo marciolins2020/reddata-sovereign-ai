@@ -79,8 +79,8 @@ export const HeroSection = () => {
                   <Database className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <div className="font-semibold">15+ Anos</div>
-                  <div className="text-sm text-muted-foreground">Experiência</div>
+                  <div className="font-semibold">100+ Implementações</div>
+                  <div className="text-sm text-muted-foreground">Órgãos Públicos e Empresas</div>
                 </div>
               </div>
             </div>
