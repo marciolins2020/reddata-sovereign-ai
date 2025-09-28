@@ -114,12 +114,34 @@ export const ApplianceSection = () => {
           {/* Right Content - Real Appliance Product */}
           <div className="relative">
             <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden shadow-large">
-              <div className="p-4">
+              <div className="p-6">
                 <img 
                   src={reddataApplianceServer}
                   alt="Plataforma RedData Big Data Analytics - RedData BD Appliance Server"
                   className="w-full h-auto object-contain"
                 />
+              </div>
+            </div>
+            
+            {/* Technical Specifications - Below Image */}
+            <div className="mt-6 bg-black/40 backdrop-blur-sm border border-white/20 rounded-xl p-4">
+              <div className="grid grid-cols-2 gap-4 text-sm">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                  <span className="text-white font-medium">NVIDIA GPU</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                  <span className="text-white font-medium">SUSE Linux</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                  <span className="text-white font-medium">Big Data Analytics</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                  <span className="text-white font-medium">IA Integrada</span>
+                </div>
               </div>
             </div>
           </div>
