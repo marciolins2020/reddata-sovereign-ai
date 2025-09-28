@@ -7,7 +7,7 @@ import {
   Zap,
   Shield
 } from "lucide-react";
-import serverAppliance from "@/assets/server-appliance.jpg";
+import reddataApplianceServer from "@/assets/reddata-appliance-server.png";
 
 const highlights = [
   {
@@ -111,51 +111,49 @@ export const ApplianceSection = () => {
             </Button>
           </div>
           
-          {/* Right Content - Appliance Visual */}
+          {/* Right Content - Real Appliance Product */}
           <div className="relative">
-            <div className="relative bg-gray-900/50 border border-gray-700 rounded-2xl overflow-hidden shadow-large">
-              <img 
-                src={serverAppliance}
-                alt="RedData Appliance - Servidor dedicado"
-                className="w-full h-80 object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+            <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden shadow-large">
+              <div className="p-6">
+                <img 
+                  src={reddataApplianceServer}
+                  alt="RedData BD Appliance Server - Hardware dedicado"
+                  className="w-full h-auto object-contain"
+                />
+              </div>
               
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <div className="bg-black/50 backdrop-blur-sm rounded-lg p-4">
-                  <div className="flex items-center justify-between mb-4">
+              {/* Product badges */}
+              <div className="absolute top-4 left-4">
+                <div className="bg-primary/90 backdrop-blur-sm rounded-lg px-3 py-2">
+                  <span className="text-white text-sm font-bold">REDDATA</span>
+                </div>
+              </div>
+              
+              <div className="absolute top-4 right-4">
+                <div className="bg-black/70 backdrop-blur-sm rounded-lg px-3 py-2">
+                  <span className="text-white text-xs">BD APPLIANCE SERVER</span>
+                </div>
+              </div>
+              
+              {/* Tech specs overlay */}
+              <div className="absolute bottom-4 left-4 right-4">
+                <div className="bg-black/80 backdrop-blur-sm rounded-lg p-4">
+                  <div className="grid grid-cols-2 gap-3 text-sm">
                     <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                      <span className="text-sm text-gray-300">Status: Online</span>
+                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                      <span className="text-gray-300">NVIDIA GPU</span>
                     </div>
-                    <div className="text-xs text-gray-400">RedData Appliance v2.1</div>
-                  </div>
-                  
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-400">CPU</span>
-                      <div className="w-24 h-2 bg-gray-700 rounded-full overflow-hidden">
-                        <div className="w-3/4 h-full bg-primary-glow rounded-full"></div>
-                      </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                      <span className="text-gray-300">SUSE Linux</span>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-400">RAM</span>
-                      <div className="w-24 h-2 bg-gray-700 rounded-full overflow-hidden">
-                        <div className="w-1/2 h-full bg-primary-glow rounded-full"></div>
-                      </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                      <span className="text-gray-300">Big Data Analytics</span>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-400">Storage</span>
-                      <div className="w-24 h-2 bg-gray-700 rounded-full overflow-hidden">
-                        <div className="w-2/3 h-full bg-primary-glow rounded-full"></div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="text-center mt-4">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/20 rounded-full">
-                      <Lock className="h-3 w-3 text-primary-glow" />
-                      <span className="text-xs text-primary-glow">Criptografado</span>
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                      <span className="text-gray-300">IA Integrada</span>
                     </div>
                   </div>
                 </div>

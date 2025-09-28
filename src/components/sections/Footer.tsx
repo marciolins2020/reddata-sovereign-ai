@@ -20,12 +20,11 @@ export const Footer = () => {
               A plataforma brasileira de Big Data e IA que transforma dados em estratégia 
               com segurança, soberania e previsibilidade.
             </p>
-            <div className="flex items-center gap-4 mb-6">
-              <span className="text-gray-400 text-sm">Um produto da:</span>
+            <div className="flex items-center mb-6">
               <img 
                 src={redmaxxLogo} 
                 alt="RedMaxx - Maxximizando Resultados" 
-                className="h-6"
+                className="h-8"
               />
             </div>
           </div>
