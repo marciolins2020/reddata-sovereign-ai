@@ -3,9 +3,9 @@ import { Quote } from "lucide-react";
 
 const testimonials = [
   {
-    quote: "Com o RedData, conseguimos antever gargalos e evitar prejuízos de milhões.",
-    author: "Secretaria da Fazenda",
-    role: "Gestão Tributária",
+    quote: "Com o RedData, conseguimos antever gargalos, melhorar a predição de manutenção e evitar prejuízos de milhões.",
+    author: "Empresa Geração e Distribuição de Energia",
+    role: "Setor Energético",
     image: "👨‍💼"
   },
   {
