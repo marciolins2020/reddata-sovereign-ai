@@ -9,6 +9,7 @@ import { DashboardDemoSection } from "@/components/sections/DashboardDemoSection
 import { FAQSection } from "@/components/sections/FAQSection";
 import { ContactFormSection } from "@/components/sections/ContactFormSection";
 import { Footer } from "@/components/sections/Footer";
+import { WhatsAppWidget } from "@/components/ui/WhatsAppWidget";
 
 const Index = () => {
   return (
@@ -24,6 +25,7 @@ const Index = () => {
       <FAQSection />
       <ContactFormSection />
       <Footer />
+      <WhatsAppWidget />
     </main>
   );
 };

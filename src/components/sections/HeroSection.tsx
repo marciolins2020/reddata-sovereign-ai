@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, Zap, Database } from "lucide-react";
 import reddataLogo from "@/assets/reddata-logo.png";
-import dashboardHero from "@/assets/dashboard-hero.jpg";
+import reddataDashboardReal from "@/assets/reddata-dashboard-real.png";
 
 export const HeroSection = () => {
   const scrollToForm = () => {
@@ -86,22 +86,26 @@ export const HeroSection = () => {
             </div>
           </div>
           
-          {/* Right Content - Dashboard Preview */}
+          {/* Right Content - Real Dashboard Preview */}
           <div className="relative">
             <div className="relative bg-card border border-border rounded-2xl overflow-hidden shadow-large">
               <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-primary rounded-full opacity-20 blur-xl"></div>
               <img 
-                src={dashboardHero}
-                alt="RedData Dashboard Preview"
+                src={reddataDashboardReal}
+                alt="RedData Dashboard - Ministério Público do Amazonas"
                 className="w-full h-auto object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
               <div className="absolute bottom-4 left-4 right-4">
-                <div className="bg-black/50 backdrop-blur-sm rounded-lg px-4 py-2">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                    <span className="text-white text-sm font-medium">Dashboard em tempo real</span>
+                <div className="bg-black/70 backdrop-blur-sm rounded-lg px-4 py-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                      <span className="text-white text-sm font-medium">Dashboard em produção</span>
+                    </div>
+                    <span className="text-white/80 text-xs">MP-AM Produtividade</span>
                   </div>
+                  <p className="text-white/90 text-xs mt-1">128 Promotores • 872.576 Processos • Analytics em tempo real</p>
                 </div>
               </div>
             </div>
