@@ -15,8 +15,8 @@ const testimonials = [
     image: "👩‍⚖️"
   },
   {
-    quote: "Conseguimos prever nossa arrecadação com dados reais.",
-    author: "Município cliente",
+    quote: "Conseguimos prever nossa arrecadação com dados reais, além de aumentá-la promovendo a justiça fiscal.",
+    author: "Prefeitura",
     role: "Gestão Municipal",
     image: "🏛️"
   }
