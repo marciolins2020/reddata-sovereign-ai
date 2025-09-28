@@ -31,6 +31,12 @@ const comparisonData = [
     reddata: true,
     traditional: "partial",
     saas: "partial"
+  },
+  {
+    feature: "Licença SaaS Ilimitada",
+    reddata: true,
+    traditional: false,
+    saas: "partial"
   }
 ];
 
@@ -89,10 +95,34 @@ export const ComparisonSection = () => {
         </div>
         
         <div className="text-center mt-12">
-          <div className="inline-flex flex-col gap-2">
+          <div className="inline-flex flex-col gap-4">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full">
               <Check className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium text-primary">Única solução 100% brasileira com IA offline</span>
+            </div>
+            
+            {/* Seção de Licenciamento SaaS */}
+            <div className="mt-8 max-w-2xl mx-auto">
+              <Card className="p-6 bg-gradient-primary border-0 text-white">
+                <h3 className="text-xl font-bold mb-3">Modelo de Licenciamento SaaS Revolucionário</h3>
+                <p className="text-white/90 mb-4">
+                  RedData oferece um modelo de licenciamento SaaS único com <strong>usuários ilimitados</strong> e <strong>cores de servidor ilimitados</strong>, tudo em um <strong>preço fixo anual</strong>.
+                </p>
+                <div className="flex flex-wrap justify-center gap-4 text-sm">
+                  <div className="flex items-center gap-2">
+                    <Check className="h-4 w-4" />
+                    <span>Usuários Ilimitados</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Check className="h-4 w-4" />
+                    <span>Cores Ilimitados</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Check className="h-4 w-4" />
+                    <span>Preço Fixo Anual</span>
+                  </div>
+                </div>
+              </Card>
             </div>
           </div>
         </div>
