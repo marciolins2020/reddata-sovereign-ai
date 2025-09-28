@@ -17,7 +17,7 @@ const pillars = [
   {
     icon: Globe,
     title: "Conector Universal de Dados",
-    description: "Integra qualquer fonte de dados: ERPs, APIs, CRMs, planilhas, sensores, redes sociais, bancos de dados e sistemas legados."
+    description: "Poderoso motor de Big Data Analytics que integra dados estruturados e não estruturados de qualquer fonte: ERPs, APIs, CRMs, planilhas, sensores, redes sociais, bancos de dados e sistemas legados. Compatível com Windows, Linux, Unix, macOS, AIX, Solaris e FreeBSD."
   },
   {
     icon: Brain,
