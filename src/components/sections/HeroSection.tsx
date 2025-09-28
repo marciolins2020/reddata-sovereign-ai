@@ -80,7 +80,7 @@ export const HeroSection = () => {
                 </div>
                 <div>
                   <div className="font-semibold">100+ Implementações</div>
-                  <div className="text-sm text-muted-foreground">Órgãos Públicos e Empresas</div>
+                  <div className="text-sm text-muted-foreground">Órgãos Públicos e Empresas Privadas</div>
                 </div>
               </div>
             </div>
