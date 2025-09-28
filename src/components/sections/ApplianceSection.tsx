@@ -114,49 +114,12 @@ export const ApplianceSection = () => {
           {/* Right Content - Real Appliance Product */}
           <div className="relative">
             <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden shadow-large">
-              <div className="p-6">
+              <div className="p-4">
                 <img 
                   src={reddataApplianceServer}
-                  alt="RedData BD Appliance Server - Hardware dedicado"
+                  alt="Plataforma RedData Big Data Analytics - RedData BD Appliance Server"
                   className="w-full h-auto object-contain"
                 />
-              </div>
-              
-              {/* Product badges */}
-              <div className="absolute top-4 left-4">
-                <div className="bg-primary/90 backdrop-blur-sm rounded-lg px-3 py-2">
-                  <span className="text-white text-sm font-bold">REDDATA</span>
-                </div>
-              </div>
-              
-              <div className="absolute top-4 right-4">
-                <div className="bg-black/70 backdrop-blur-sm rounded-lg px-3 py-2">
-                  <span className="text-white text-xs">BD APPLIANCE SERVER</span>
-                </div>
-              </div>
-              
-              {/* Tech specs overlay */}
-              <div className="absolute bottom-4 left-4 right-4">
-                <div className="bg-black/80 backdrop-blur-sm rounded-lg p-4">
-                  <div className="grid grid-cols-2 gap-3 text-sm">
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                      <span className="text-gray-300">NVIDIA GPU</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                      <span className="text-gray-300">SUSE Linux</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                      <span className="text-gray-300">Big Data Analytics</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                      <span className="text-gray-300">IA Integrada</span>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
