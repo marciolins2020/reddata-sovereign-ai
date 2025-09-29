@@ -71,6 +71,8 @@ export const Footer = () => {
               <div className="pt-2 border-t border-gray-600">
                 <p>E-mail: contato@redmaxx.com.br</p>
                 <p>Site: <a href="http://www.redmaxx.com.br" target="_blank" rel="noopener noreferrer" className="text-primary-glow hover:text-white transition-colors">www.redmaxx.com.br</a></p>
+                <p>Instagram: <a href="https://www.instagram.com/redmaxxbr" target="_blank" rel="noopener noreferrer" className="text-primary-glow hover:text-white transition-colors">@redmaxxbr</a></p>
+                <p>LinkedIn: <a href="https://www.linkedin.com/company/redmaxx/" target="_blank" rel="noopener noreferrer" className="text-primary-glow hover:text-white transition-colors">redmaxx</a></p>
                 <p>Seg-Sex: 8h – 17h</p>
               </div>
             </div>
