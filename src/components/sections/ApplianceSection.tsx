@@ -33,11 +33,12 @@ const highlights = [
 ];
 
 const useCases = [
-  "Justiça",
-  "Saúde", 
+  "Saúde",
+  "Educação", 
   "Segurança",
-  "Fiscalizações",
-  "Órgãos Críticos"
+  "Fazenda",
+  "Tribunais de Justiça",
+  "Tribunais de Contas"
 ];
 
 export const ApplianceSection = () => {
