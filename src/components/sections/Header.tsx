@@ -1,15 +1,27 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
+import { Link } from "react-router-dom";
 import redmaxxLogo from "@/assets/redmaxx-logo.png";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 
 const menuItems = [
   { label: "Início", href: "#hero" },
-  { label: "Casos de Uso", href: "#casos-uso" },
   { label: "Como Funciona", href: "#como-funciona" },
   { label: "Dashboard", href: "#dashboard-demo" },
   { label: "FAQ", href: "#faq" },
   { label: "Contato", href: "#contact-form" },
+];
+
+const casosUsoItems = [
+  { label: "Energia", href: "/casos-uso/energia", description: "Transformação digital em operações energéticas" },
 ];
 
 export const Header = () => {
@@ -64,6 +76,33 @@ export const Header = () => {
                 {item.label}
               </button>
             ))}
+            
+            {/* Casos de Uso Dropdown */}
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="h-auto px-4 py-2 text-sm font-medium">
+                    Casos de Uso
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <ul className="grid w-[400px] gap-3 p-4">
+                      {casosUsoItems.map((item) => (
+                        <li key={item.href}>
+                          <Link to={item.href}>
+                            <NavigationMenuLink className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+                              <div className="text-sm font-medium leading-none">{item.label}</div>
+                              <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                                {item.description}
+                              </p>
+                            </NavigationMenuLink>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
           </nav>
 
           {/* CTA Button Desktop */}
@@ -100,6 +139,22 @@ export const Header = () => {
                   {item.label}
                 </button>
               ))}
+              
+              {/* Mobile Casos de Uso Submenu */}
+              <div className="px-4 py-2">
+                <div className="text-sm font-medium text-muted-foreground mb-2">Casos de Uso</div>
+                {casosUsoItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    to={item.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block px-4 py-3 text-left text-sm text-foreground hover:text-primary hover:bg-accent transition-colors rounded-md"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+              
               <div className="px-4 pt-2">
                 <Button
                   onClick={() => scrollToSection("#contact-form")}
