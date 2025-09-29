@@ -42,13 +42,38 @@ export const Footer = () => {
           
           {/* Contact */}
           <div>
-            <h4 className="font-semibold text-white mb-4">Contato</h4>
-            <ul className="space-y-2 text-gray-300 text-sm">
-              <li>contato@redmaxx.com.br</li>
-              <li>+55 (11) 3000-0000</li>
-              <li>LinkedIn</li>
-              <li>YouTube</li>
-            </ul>
+            <h4 className="font-semibold text-white mb-4">Endereços</h4>
+            <div className="space-y-4 text-gray-300 text-sm">
+              <div>
+                <p className="font-medium text-white">Joinville - SC (Matriz)</p>
+                <p>R. Dona Francisca, 801 - Andar 1</p>
+                <p>Sala 05 e 06 - Saguaçu</p>
+                <p>89221-006 - Joinville - SC</p>
+                <p>(11) 94076-4626</p>
+              </div>
+              
+              <div>
+                <p className="font-medium text-white">Manaus - AM (Filial)</p>
+                <p>R. Rio Purús, 458, Cj.Vieiralves</p>
+                <p>Nossa Sra. das Graças</p>
+                <p>69053-050 - Manaus/AM</p>
+                <p>(92) 98223-6695</p>
+              </div>
+              
+              <div>
+                <p className="font-medium text-white">São Paulo - SP (Filial)</p>
+                <p>Av. Eng. Luiz Carlos Berrini, 1140</p>
+                <p>7° Andar - Sala 201/202</p>
+                <p>04571-000 - São Paulo - SP</p>
+                <p>(11) 2391-0597</p>
+              </div>
+              
+              <div className="pt-2 border-t border-gray-600">
+                <p>E-mail: contato@redmaxx.com.br</p>
+                <p>Site: <a href="http://www.redmaxx.com.br" target="_blank" rel="noopener noreferrer" className="text-primary-glow hover:text-white transition-colors">www.redmaxx.com.br</a></p>
+                <p>Seg-Sex: 8h – 17h</p>
+              </div>
+            </div>
           </div>
         </div>
         
