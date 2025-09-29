@@ -1,3 +1,4 @@
+import { Header } from "@/components/sections/Header";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { StatsSection } from "@/components/sections/StatsSection";
 import { HowItWorksSection } from "@/components/sections/HowItWorksSection";
@@ -15,6 +16,7 @@ import { WhatsAppWidget } from "@/components/ui/WhatsAppWidget";
 const Index = () => {
   return (
     <main className="min-h-screen">
+      <Header />
       <HeroSection />
       <StatsSection />
       <HowItWorksSection />
