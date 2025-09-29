@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Zap, TrendingUp, Shield, BarChart3 } from "lucide-react";
+import { ArrowLeft, Zap, TrendingUp, Shield, BarChart3, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
 import enelDashboard from "@/assets/enel-dashboard.jpeg";
 
@@ -135,6 +135,33 @@ const CasosUsoEnergia = () => {
               Com o RedData, a Enel passou a atuar de forma proativa e orientada por dados, 
               garantindo maior eficiência, segurança e sustentabilidade em suas operações.
             </p>
+          </div>
+
+          {/* Scientific Article Section */}
+          <div className="mt-8 p-8 bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl border border-primary/20">
+            <div className="flex items-start gap-4">
+              <div className="p-3 rounded-lg bg-primary/10">
+                <FileText className="h-8 w-8 text-primary" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-xl font-semibold mb-2">Artigo Científico</h3>
+                <p className="text-muted-foreground mb-4">
+                  Este projeto gerou um artigo científico desenvolvido a pedido da própria Enel, 
+                  documentando os resultados e metodologias aplicadas na predição de falhas em religadoras automáticas.
+                </p>
+                <a 
+                  href="/enel-scientific-article.pdf" 
+                  download
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button variant="default" className="gap-2">
+                    <FileText className="h-4 w-4" />
+                    Baixar Artigo Científico
+                  </Button>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
