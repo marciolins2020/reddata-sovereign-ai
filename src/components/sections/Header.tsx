@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 import redmaxxLogo from "@/assets/redmaxx-logo.png";
 import {
   NavigationMenu,
@@ -12,24 +13,25 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 
-const menuItems = [
-  { label: "Início", href: "#hero" },
-  { label: "Como Funciona", href: "#como-funciona" },
-  { label: "Aplicações Reais", href: "#casos-uso" },
-  { label: "Dashboard", href: "#dashboard-demo" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contato", href: "#contact-form" },
-];
-
-const casosUsoItems = [
-  { label: "Energia", href: "/casos-uso/energia", description: "Transformação digital em operações energéticas" },
-  { label: "Indústria", href: "/casos-uso/industria", description: "Evolução para Indústria 4.0 com Big Data e IA" },
-  { label: "Governo", href: "/casos-uso/governo", description: "Modernização da gestão pública com Big Data e IA" },
-];
-
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { language, setLanguage, t } = useLanguage();
+
+  const menuItems = [
+    { label: t('header.mainNav'), href: "#hero" },
+    { label: t('header.howItWorks'), href: "#como-funciona" },
+    { label: t('header.solutions'), href: "#casos-uso" },
+    { label: "Dashboard", href: "#dashboard-demo" },
+    { label: t('header.faq'), href: "#faq" },
+    { label: t('header.contact'), href: "#contact-form" },
+  ];
+
+  const casosUsoItems = [
+    { label: t('applications.energy'), href: "/casos-uso/energia", description: t('applications.energyDesc') },
+    { label: t('applications.industry'), href: "/casos-uso/industria", description: t('applications.industryDesc') },
+    { label: t('applications.government'), href: "/casos-uso/governo", description: t('applications.governmentDesc') },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -85,7 +87,7 @@ export const Header = () => {
               <NavigationMenuList>
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="h-auto px-4 py-2 text-sm font-medium">
-                    Casos de Uso
+                    {t('header.cases')}
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid w-[400px] gap-3 p-4">
@@ -118,10 +120,19 @@ export const Header = () => {
             ))}
           </nav>
 
-          {/* CTA Button Desktop */}
-          <div className="hidden lg:block">
+          {/* Language Switcher & CTA Button Desktop */}
+          <div className="hidden lg:flex items-center gap-3">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setLanguage(language === 'pt' ? 'en' : 'pt')}
+              className="flex items-center gap-2"
+              aria-label="Switch language"
+            >
+              <span className="text-xl">{language === 'pt' ? '🇺🇸' : '🇧🇷'}</span>
+            </Button>
             <Button onClick={() => scrollToSection("#contact-form")}>
-              Solicitar Demonstração
+              {t('header.requestDemo')}
             </Button>
           </div>
 
@@ -155,7 +166,7 @@ export const Header = () => {
               
               {/* Mobile Casos de Uso Submenu */}
               <div className="px-4 py-2">
-                <div className="text-sm font-medium text-muted-foreground mb-2">Casos de Uso</div>
+                <div className="text-sm font-medium text-muted-foreground mb-2">{t('header.cases')}</div>
                 {casosUsoItems.map((item) => (
                   <Link
                     key={item.href}
@@ -168,12 +179,20 @@ export const Header = () => {
                 ))}
               </div>
               
-              <div className="px-4 pt-2">
+              <div className="px-4 pt-2 space-y-2">
+                <Button
+                  variant="outline"
+                  onClick={() => setLanguage(language === 'pt' ? 'en' : 'pt')}
+                  className="w-full flex items-center justify-center gap-2"
+                >
+                  <span className="text-xl">{language === 'pt' ? '🇺🇸' : '🇧🇷'}</span>
+                  <span>{language === 'pt' ? 'English' : 'Português'}</span>
+                </Button>
                 <Button
                   onClick={() => scrollToSection("#contact-form")}
                   className="w-full"
                 >
-                  Solicitar Demonstração
+                  {t('header.requestDemo')}
                 </Button>
               </div>
             </nav>

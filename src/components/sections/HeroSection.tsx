@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, Zap, Database } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import reddataLogo from "@/assets/reddata-logo.png";
 import reddataDashboardReal from "@/assets/reddata-dashboard-real.png";
 
 export const HeroSection = () => {
+  const { t } = useLanguage();
   const scrollToForm = () => {
     document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -33,23 +35,20 @@ export const HeroSection = () => {
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6">
-              Decisões baseadas em <span className="text-primary">dados</span>.
-              <br />
-              Inteligência baseada em <span className="text-primary">RedData</span>.
+              {t('hero.title')} <span className="text-primary">{t('hero.titleHighlight')}</span>
             </h1>
             
             <p className="text-xl md:text-2xl text-muted-foreground mb-8 leading-relaxed">
-              A plataforma brasileira de Big Data e IA que transforma dados em estratégia com 
-              <strong className="text-foreground"> segurança, soberania e previsibilidade</strong>.
+              {t('hero.subtitle')}
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12">
               <Button size="lg" onClick={scrollToForm} className="group">
-                Solicitar Demonstração
+                {t('hero.cta')}
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
               <Button variant="outline" size="lg" onClick={scrollToDemo}>
-                Ver Dashboard ao Vivo
+                {t('hero.learnMore')}
               </Button>
             </div>
             
