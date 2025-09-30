@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, Building2, TrendingUp, Shield, BarChart3, Users, FileCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 import prefeituraDashboard from "@/assets/prefeitura-manaus-dashboard.png";
+import adsLogo from "@/assets/ads-logo.png";
 
 const CasosUsoGoverno = () => {
   return (
@@ -74,8 +75,12 @@ const CasosUsoGoverno = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="mb-12">
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 rounded-lg bg-primary/10">
-                <Users className="h-6 w-6 text-primary" />
+              <div className="rounded-lg overflow-hidden">
+                <img 
+                  src={adsLogo} 
+                  alt="Logo ADS - Agência de Desenvolvimento Sustentável do Amazonas" 
+                  className="h-16 w-auto"
+                />
               </div>
               <h2 className="text-3xl md:text-4xl font-bold">Case: ADS – Agência de Desenvolvimento Sustentável do Amazonas</h2>
             </div>
