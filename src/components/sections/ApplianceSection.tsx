@@ -108,7 +108,7 @@ export const ApplianceSection = () => {
               onClick={scrollToForm}
               className="border-primary-glow text-primary-glow hover:bg-primary-glow hover:text-white"
             >
-              Consultar Appliance
+              Consultar Modelos
             </Button>
           </div>
           
