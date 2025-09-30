@@ -165,133 +165,261 @@ const CasosUsoIndustria = () => {
         </div>
       </section>
 
-      {/* Dashboard Financeiro Section */}
-      <section className="py-16 bg-muted/30">
+      {/* Dashboard Unificado Section */}
+      <section className="py-16 bg-gradient-to-br from-muted/50 via-background to-muted/30">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Dashboard Financeiro <span className="text-primary">- Área Meio</span>
+          <div className="text-center mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+              Dashboard <span className="text-primary">Inteligente</span>
             </h2>
-            <p className="text-xl text-muted-foreground">
-              Visão consolidada de KPIs financeiros e operacionais
+            <p className="text-lg text-muted-foreground">
+              Visão consolidada em tempo real dos KPIs financeiros e operacionais
             </p>
           </div>
 
-          <div className="max-w-7xl mx-auto space-y-6">
-            {/* Fluxo de Caixa */}
-            <div className="grid md:grid-cols-2 gap-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Fluxo de Caixa (Projetado)</CardTitle>
-                  <CardDescription>Projeção de entrada e saída de caixa</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ResponsiveContainer width="100%" height={300}>
-                    <LineChart data={fluxoCaixaProjetado}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="dia" />
-                      <YAxis />
-                      <Tooltip formatter={(value) => `R$ ${Number(value).toLocaleString('pt-BR')}`} />
-                      <Legend />
-                      <Line type="monotone" dataKey="saldoFinal" stroke="#dc2626" name="Saldo Final Projetado" strokeWidth={2} />
-                      <Line type="monotone" dataKey="aReceber" stroke="#10b981" name="A Receber Projetado" strokeWidth={2} />
-                      <Line type="monotone" dataKey="aPagar" stroke="#f59e0b" name="A Pagar Projetado" strokeWidth={2} />
-                    </LineChart>
-                  </ResponsiveContainer>
-                </CardContent>
-              </Card>
+          {/* Dashboard Container Unificado */}
+          <div className="max-w-[1400px] mx-auto">
+            <Card className="border-2 shadow-2xl bg-card/95 backdrop-blur">
+              <CardHeader className="border-b bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 pb-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle className="text-2xl flex items-center gap-2">
+                      <BarChart3 className="h-6 w-6 text-primary" />
+                      Dashboard Financeiro - Área Meio
+                    </CardTitle>
+                    <CardDescription className="mt-2">
+                      Dados atualizados em tempo real | Período: Jan - Ago 2024
+                    </CardDescription>
+                  </div>
+                  <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 border border-primary/20">
+                    <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+                    <span className="text-sm font-medium text-primary">Ao Vivo</span>
+                  </div>
+                </div>
+              </CardHeader>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle>Fluxo de Caixa (Realizado)</CardTitle>
-                  <CardDescription>Valores efetivamente realizados</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ResponsiveContainer width="100%" height={300}>
-                    <LineChart data={fluxoCaixaRealizado}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="dia" />
-                      <YAxis />
-                      <Tooltip formatter={(value) => `R$ ${Number(value).toLocaleString('pt-BR')}`} />
-                      <Legend />
-                      <Line type="monotone" dataKey="saldoFinal" stroke="#3b82f6" name="Saldo Final Realizado" strokeWidth={2} />
-                      <Line type="monotone" dataKey="aReceber" stroke="#10b981" name="A Receber Realizado" strokeWidth={2} />
-                      <Line type="monotone" dataKey="aPagar" stroke="#f59e0b" name="A Pagar Realizado" strokeWidth={2} />
-                    </LineChart>
-                  </ResponsiveContainer>
-                </CardContent>
-              </Card>
-            </div>
+              <CardContent className="p-6 space-y-6">
+                {/* KPIs Header */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="bg-gradient-to-br from-primary/10 to-primary/5 p-4 rounded-xl border border-primary/20">
+                    <div className="flex items-center justify-between mb-2">
+                      <DollarSign className="h-5 w-5 text-primary" />
+                      <TrendingUp className="h-4 w-4 text-green-600" />
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-1">Saldo Final</p>
+                    <p className="text-2xl font-bold text-foreground">R$ 9,0M</p>
+                    <p className="text-xs text-green-600 mt-1">+12.5% vs. anterior</p>
+                  </div>
 
-            {/* Custos e Distribuição */}
-            <div className="grid md:grid-cols-3 gap-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Custos de Produção</CardTitle>
-                  <CardDescription>Custos por categoria (mil)</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ResponsiveContainer width="100%" height={250}>
-                    <BarChart data={custosProducao}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="mes" />
-                      <YAxis />
-                      <Tooltip />
-                      <Legend />
-                      <Bar dataKey="direto" fill="#3b82f6" name="Direto" />
-                      <Bar dataKey="onera" fill="#10b981" name="Oneração" />
-                      <Bar dataKey="indireta" fill="#f59e0b" name="Indireta" />
-                    </BarChart>
-                  </ResponsiveContainer>
-                </CardContent>
-              </Card>
+                  <div className="bg-gradient-to-br from-blue-500/10 to-blue-500/5 p-4 rounded-xl border border-blue-500/20">
+                    <div className="flex items-center justify-between mb-2">
+                      <Package className="h-5 w-5 text-blue-600" />
+                      <TrendingUp className="h-4 w-4 text-green-600" />
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-1">Custo Produção</p>
+                    <p className="text-2xl font-bold text-foreground">R$ 4,4M</p>
+                    <p className="text-xs text-green-600 mt-1">-8.2% redução</p>
+                  </div>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle>Distribuição de Despesas</CardTitle>
-                  <CardDescription>Por centro de custo</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ResponsiveContainer width="100%" height={250}>
-                    <PieChart>
-                      <Pie
-                        data={distribuicaoDespesas}
-                        cx="50%"
-                        cy="50%"
-                        labelLine={false}
-                        label={({ name, percent }) => `${name} ${(percent * 100).toFixed(1)}%`}
-                        outerRadius={80}
-                        fill="#8884d8"
-                        dataKey="value"
-                      >
-                        {distribuicaoDespesas.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.color} />
-                        ))}
-                      </Pie>
-                      <Tooltip />
-                    </PieChart>
-                  </ResponsiveContainer>
-                </CardContent>
-              </Card>
+                  <div className="bg-gradient-to-br from-amber-500/10 to-amber-500/5 p-4 rounded-xl border border-amber-500/20">
+                    <div className="flex items-center justify-between mb-2">
+                      <Factory className="h-5 w-5 text-amber-600" />
+                      <TrendingUp className="h-4 w-4 text-green-600" />
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-1">Eficiência</p>
+                    <p className="text-2xl font-bold text-foreground">94.7%</p>
+                    <p className="text-xs text-green-600 mt-1">+5.3% melhoria</p>
+                  </div>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle>Comparativo Mensal</CardTitle>
-                  <CardDescription>Total de despesas + custos (mil)</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ResponsiveContainer width="100%" height={250}>
-                    <BarChart data={comparativoMensal}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="mes" />
-                      <YAxis />
-                      <Tooltip formatter={(value) => `R$ ${Number(value).toLocaleString('pt-BR')}`} />
-                      <Bar dataKey="valor" fill="#3b82f6" />
-                    </BarChart>
-                  </ResponsiveContainer>
-                </CardContent>
-              </Card>
-            </div>
+                  <div className="bg-gradient-to-br from-green-500/10 to-green-500/5 p-4 rounded-xl border border-green-500/20">
+                    <div className="flex items-center justify-between mb-2">
+                      <Wrench className="h-5 w-5 text-green-600" />
+                      <TrendingUp className="h-4 w-4 text-green-600" />
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-1">Disponibilidade</p>
+                    <p className="text-2xl font-bold text-foreground">98.2%</p>
+                    <p className="text-xs text-green-600 mt-1">+3.1% uptime</p>
+                  </div>
+                </div>
+
+                {/* Main Charts Row */}
+                <div className="grid md:grid-cols-2 gap-6">
+                  {/* Fluxo de Caixa Consolidado */}
+                  <div className="bg-muted/30 p-5 rounded-xl border">
+                    <div className="mb-4">
+                      <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+                        <span className="h-8 w-1 bg-primary rounded-full" />
+                        Fluxo de Caixa - Projetado vs Realizado
+                      </h3>
+                      <p className="text-sm text-muted-foreground mt-1 ml-3">Análise comparativa mensal</p>
+                    </div>
+                    <ResponsiveContainer width="100%" height={320}>
+                      <LineChart data={fluxoCaixaProjetado}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                        <XAxis 
+                          dataKey="dia" 
+                          tick={{ fill: 'hsl(var(--muted-foreground))' }}
+                          label={{ value: 'Dia do Mês', position: 'insideBottom', offset: -5 }}
+                        />
+                        <YAxis 
+                          tick={{ fill: 'hsl(var(--muted-foreground))' }}
+                          tickFormatter={(value) => `R$ ${(value / 1000000).toFixed(1)}M`}
+                        />
+                        <Tooltip 
+                          formatter={(value) => `R$ ${Number(value).toLocaleString('pt-BR')}`}
+                          contentStyle={{ 
+                            backgroundColor: 'hsl(var(--card))', 
+                            border: '1px solid hsl(var(--border))',
+                            borderRadius: '8px'
+                          }}
+                        />
+                        <Legend />
+                        <Line 
+                          type="monotone" 
+                          dataKey="saldoFinal" 
+                          stroke="hsl(var(--primary))" 
+                          name="Saldo Final" 
+                          strokeWidth={3}
+                          dot={{ fill: 'hsl(var(--primary))', r: 4 }}
+                        />
+                        <Line 
+                          type="monotone" 
+                          dataKey="aReceber" 
+                          stroke="#10b981" 
+                          name="A Receber" 
+                          strokeWidth={2}
+                          strokeDasharray="5 5"
+                        />
+                        <Line 
+                          type="monotone" 
+                          dataKey="aPagar" 
+                          stroke="#f59e0b" 
+                          name="A Pagar" 
+                          strokeWidth={2}
+                          strokeDasharray="5 5"
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
+
+                  {/* Custos de Produção */}
+                  <div className="bg-muted/30 p-5 rounded-xl border">
+                    <div className="mb-4">
+                      <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+                        <span className="h-8 w-1 bg-blue-600 rounded-full" />
+                        Custos de Produção por Categoria
+                      </h3>
+                      <p className="text-sm text-muted-foreground mt-1 ml-3">Evolução trimestral (em milhares)</p>
+                    </div>
+                    <ResponsiveContainer width="100%" height={320}>
+                      <BarChart data={custosProducao}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                        <XAxis dataKey="mes" tick={{ fill: 'hsl(var(--muted-foreground))' }} />
+                        <YAxis tick={{ fill: 'hsl(var(--muted-foreground))' }} />
+                        <Tooltip 
+                          contentStyle={{ 
+                            backgroundColor: 'hsl(var(--card))', 
+                            border: '1px solid hsl(var(--border))',
+                            borderRadius: '8px'
+                          }}
+                        />
+                        <Legend />
+                        <Bar dataKey="direto" fill="hsl(var(--primary))" name="Custo Direto" radius={[8, 8, 0, 0]} />
+                        <Bar dataKey="onera" fill="#3b82f6" name="Oneração" radius={[8, 8, 0, 0]} />
+                        <Bar dataKey="indireta" fill="#10b981" name="Custo Indireto" radius={[8, 8, 0, 0]} />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
+
+                {/* Bottom Charts Row */}
+                <div className="grid md:grid-cols-3 gap-6">
+                  {/* Distribuição de Despesas */}
+                  <div className="bg-muted/30 p-5 rounded-xl border">
+                    <div className="mb-4">
+                      <h3 className="text-base font-semibold text-foreground flex items-center gap-2">
+                        <span className="h-6 w-1 bg-amber-600 rounded-full" />
+                        Distribuição de Despesas
+                      </h3>
+                      <p className="text-xs text-muted-foreground mt-1 ml-2">Por centro de custo (%)</p>
+                    </div>
+                    <ResponsiveContainer width="100%" height={240}>
+                      <PieChart>
+                        <Pie
+                          data={distribuicaoDespesas}
+                          cx="50%"
+                          cy="50%"
+                          labelLine={false}
+                          label={({ name, percent }) => `${name}\n${(percent * 100).toFixed(1)}%`}
+                          outerRadius={85}
+                          fill="#8884d8"
+                          dataKey="value"
+                        >
+                          {distribuicaoDespesas.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={entry.color} />
+                          ))}
+                        </Pie>
+                        <Tooltip 
+                          contentStyle={{ 
+                            backgroundColor: 'hsl(var(--card))', 
+                            border: '1px solid hsl(var(--border))',
+                            borderRadius: '8px'
+                          }}
+                        />
+                      </PieChart>
+                    </ResponsiveContainer>
+                  </div>
+
+                  {/* Comparativo Mensal */}
+                  <div className="md:col-span-2 bg-muted/30 p-5 rounded-xl border">
+                    <div className="mb-4">
+                      <h3 className="text-base font-semibold text-foreground flex items-center gap-2">
+                        <span className="h-6 w-1 bg-green-600 rounded-full" />
+                        Evolução Mensal de Despesas + Custos
+                      </h3>
+                      <p className="text-xs text-muted-foreground mt-1 ml-2">Tendência de redução (em milhares)</p>
+                    </div>
+                    <ResponsiveContainer width="100%" height={240}>
+                      <BarChart data={comparativoMensal}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                        <XAxis dataKey="mes" tick={{ fill: 'hsl(var(--muted-foreground))' }} />
+                        <YAxis tick={{ fill: 'hsl(var(--muted-foreground))' }} />
+                        <Tooltip 
+                          formatter={(value) => `R$ ${Number(value).toLocaleString('pt-BR')}`}
+                          contentStyle={{ 
+                            backgroundColor: 'hsl(var(--card))', 
+                            border: '1px solid hsl(var(--border))',
+                            borderRadius: '8px'
+                          }}
+                        />
+                        <Bar 
+                          dataKey="valor" 
+                          fill="hsl(var(--primary))" 
+                          radius={[8, 8, 0, 0]}
+                        >
+                          {comparativoMensal.map((entry, index) => (
+                            <Cell 
+                              key={`cell-${index}`} 
+                              fill={`hsl(var(--primary) / ${1 - (index * 0.08)})`} 
+                            />
+                          ))}
+                        </Bar>
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
+
+                {/* Footer Info */}
+                <div className="flex items-center justify-between pt-4 border-t">
+                  <p className="text-xs text-muted-foreground">
+                    Dashboard desenvolvido com RedData | Powered by RedMaxx
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    Última atualização: {new Date().toLocaleString('pt-BR')}
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
