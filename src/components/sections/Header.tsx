@@ -69,7 +69,7 @@ export const Header = () => {
 
           {/* Desktop Menu */}
           <nav className="hidden lg:flex items-center space-x-1">
-            {menuItems.map((item) => (
+            {menuItems.slice(0, 4).map((item) => (
               <button
                 key={item.href}
                 onClick={() => scrollToSection(item.href)}
@@ -105,6 +105,16 @@ export const Header = () => {
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
+            
+            {menuItems.slice(4).map((item) => (
+              <button
+                key={item.href}
+                onClick={() => scrollToSection(item.href)}
+                className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-accent"
+              >
+                {item.label}
+              </button>
+            ))}
           </nav>
 
           {/* CTA Button Desktop */}
