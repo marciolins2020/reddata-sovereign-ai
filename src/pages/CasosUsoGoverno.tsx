@@ -4,6 +4,7 @@ import { ArrowLeft, Building2, TrendingUp, Shield, BarChart3, Users, FileCheck }
 import { Link } from "react-router-dom";
 import prefeituraDashboard from "@/assets/prefeitura-manaus-dashboard.png";
 import adsLogo from "@/assets/ads-logo.png";
+import semefLogo from "@/assets/semef-logo.png";
 
 const CasosUsoGoverno = () => {
   return (
@@ -148,9 +149,13 @@ const CasosUsoGoverno = () => {
 
           {/* Case Study 2: Prefeitura de Manaus */}
           <div className="mb-12">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 rounded-lg bg-primary/10">
-                <FileCheck className="h-6 w-6 text-primary" />
+            <div className="flex items-center gap-4 mb-4">
+              <div className="rounded-lg overflow-hidden flex-shrink-0">
+                <img 
+                  src={semefLogo} 
+                  alt="Logo SEMEF - Secretaria Municipal da Fazenda de Manaus" 
+                  className="h-20 w-auto object-contain"
+                />
               </div>
               <h2 className="text-3xl md:text-4xl font-bold">Case: Prefeitura de Manaus – Modernização do ITBI e IPTU</h2>
             </div>
