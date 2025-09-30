@@ -100,7 +100,7 @@ export const VirtualMachinesSection = () => {
           {/* Right - Compatible Platforms */}
           <div>
             <h3 className="text-2xl font-bold text-foreground mb-8 text-center">
-              Compatível com:
+              Também pode ser Virtualizado em:
             </h3>
             
             <div className="grid grid-cols-3 gap-4">
