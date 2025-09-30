@@ -7,6 +7,7 @@ import {
   Bot,
   Shield
 } from "lucide-react";
+import reddataDemo from "@/assets/reddata-demo.mp4";
 
 const pillars = [
   {
@@ -74,6 +75,20 @@ export const HowItWorksSection = () => {
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full">
             <span className="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
             <span className="text-sm font-medium text-primary">6 pilares integrados em uma única plataforma</span>
+          </div>
+        </div>
+
+        <div className="mt-12 max-w-4xl mx-auto">
+          <div className="rounded-xl overflow-hidden border border-border shadow-lg bg-card/50 backdrop-blur-sm">
+            <video 
+              src={reddataDemo} 
+              autoPlay 
+              loop 
+              muted 
+              playsInline
+              className="w-full h-auto"
+              aria-label="Demonstração de como o RedData funciona"
+            />
           </div>
         </div>
       </div>
