@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, Building2, TrendingUp, Shield, BarChart3, Users, FileCheck } from "lucide-react";
 import { Link } from "react-router-dom";
+import prefeituraDashboard from "@/assets/prefeitura-manaus-dashboard.png";
 
 const CasosUsoGoverno = () => {
   return (
@@ -154,6 +155,14 @@ const CasosUsoGoverno = () => {
               o comportamento do contribuinte. A RedMaxx, com a plataforma RedData, implantou um modelo de governança 
               tributária orientada por dados.
             </p>
+            
+            <div className="mb-8 rounded-xl overflow-hidden border border-border shadow-lg">
+              <img 
+                src={prefeituraDashboard} 
+                alt="Dashboard do sistema OUV IPTU/ITBI da Prefeitura de Manaus mostrando mapa interativo com dados de imóveis" 
+                className="w-full h-auto"
+              />
+            </div>
           </div>
 
           {/* Results Prefeitura */}
