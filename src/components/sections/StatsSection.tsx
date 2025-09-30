@@ -1,6 +1,8 @@
 import { CheckCircle2, Building, Users, Award } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const StatsSection = () => {
+  const { t } = useLanguage();
   return (
     <section className="py-16 bg-gradient-subtle">
       <div className="container mx-auto px-4">
@@ -9,7 +11,7 @@ export const StatsSection = () => {
           <div className="flex items-center gap-4 text-center lg:text-left">
             <div className="w-4 h-4 bg-primary rounded-full flex-shrink-0"></div>
             <h2 className="text-xl md:text-2xl font-semibold text-foreground">
-              Mais de 100 implementações em órgãos públicos e empresas privadas de médio e grande porte
+              {t('stats.highlight')}
             </h2>
           </div>
           
@@ -21,7 +23,7 @@ export const StatsSection = () => {
               </div>
               <div className="text-center sm:text-left">
                 <div className="font-semibold text-lg">100+</div>
-                <div className="text-sm text-muted-foreground">Implementações</div>
+                <div className="text-sm text-muted-foreground">{t('stats.implementations')}</div>
               </div>
             </div>
             
@@ -31,7 +33,7 @@ export const StatsSection = () => {
               </div>
               <div className="text-center sm:text-left">
                 <div className="font-semibold text-lg">15+</div>
-                <div className="text-sm text-muted-foreground">Anos de Experiência</div>
+                <div className="text-sm text-muted-foreground">{t('stats.yearsExperience')}</div>
               </div>
             </div>
             
@@ -41,7 +43,7 @@ export const StatsSection = () => {
               </div>
               <div className="text-center sm:text-left">
                 <div className="font-semibold text-lg">ISO</div>
-                <div className="text-sm text-muted-foreground">27001 Certificada</div>
+                <div className="text-sm text-muted-foreground">27001 {t('stats.certified')}</div>
               </div>
             </div>
           </div>

@@ -1,8 +1,10 @@
 import { Separator } from "@/components/ui/separator";
+import { useLanguage } from "@/contexts/LanguageContext";
 import reddataLogo from "@/assets/reddata-logo.png";
 import redmaxxLogo from "@/assets/redmaxx-logo.png";
 
 export const Footer = () => {
+  const { t } = useLanguage();
   return (
     <footer className="bg-gradient-dark text-white py-16">
       <div className="container mx-auto px-4">
@@ -17,8 +19,7 @@ export const Footer = () => {
               />
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed">
-              A plataforma brasileira de Big Data e IA que transforma dados em estratégia 
-              com segurança, soberania e previsibilidade.
+              {t('footer.description')}
             </p>
             <div className="flex items-center mb-6">
               <img 
@@ -107,7 +108,7 @@ export const Footer = () => {
         
         <div className="text-center mt-8 pt-8 border-t border-gray-700">
           <p className="text-gray-400 text-sm">
-            © 2024 RedMaxx. Todos os direitos reservados. 
+            © 2024 RedMaxx. {t('footer.rights')}
             <span className="block mt-1">Powered by RedMaxx - Maxximizando Resultados</span>
           </p>
         </div>

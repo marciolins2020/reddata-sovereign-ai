@@ -7,51 +7,54 @@ import {
   Bot,
   Shield
 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import reddataDemo from "@/assets/reddata-demo.mp4";
 
-const pillars = [
-  {
-    icon: Server,
-    title: "Infraestrutura Flexível e Soberana",
-    description: "Roda em nuvem pública, privada, on-premises, em máquinas virtuais ou como appliance local."
-  },
-  {
-    icon: Globe,
-    title: "Conector Universal de Dados",
-    description: "Poderoso motor de Big Data Analytics que integra dados estruturados e não estruturados de qualquer fonte: ERPs, APIs, CRMs, planilhas, sensores, redes sociais, bancos de dados e sistemas legados. Compatível com Windows, Linux, Unix, macOS, AIX, Solaris e FreeBSD."
-  },
-  {
-    icon: Brain,
-    title: "Processamento com IA Preditiva",
-    description: "Machine Learning e modelos estatísticos transformam grandes volumes de dados em insights prontos para decisão."
-  },
-  {
-    icon: BarChart3,
-    title: "Dashboards Interativos em Tempo Real",
-    description: "Visualizações estratégicas personalizáveis, com alertas e relatórios acionáveis."
-  },
-  {
-    icon: Bot,
-    title: "IA Generativa Local (sem internet)",
-    description: "Assistente embarcado que opera offline e responde em linguagem natural, com diagnósticos automatizados."
-  },
-  {
-    icon: Shield,
-    title: "Segurança e Conformidade",
-    description: "Totalmente aderente à LGPD, GDPR e ISO 27001. Arquitetura blindada para ambientes críticos."
-  }
-];
-
 export const HowItWorksSection = () => {
+  const { t } = useLanguage();
+
+  const pillars = [
+    {
+      icon: Server,
+      title: t('howItWorks.pillar1Title'),
+      description: t('howItWorks.pillar1Desc')
+    },
+    {
+      icon: Globe,
+      title: t('howItWorks.pillar2Title'),
+      description: t('howItWorks.pillar2Desc')
+    },
+    {
+      icon: Brain,
+      title: t('howItWorks.pillar3Title'),
+      description: t('howItWorks.pillar3Desc')
+    },
+    {
+      icon: BarChart3,
+      title: t('howItWorks.pillar4Title'),
+      description: t('howItWorks.pillar4Desc')
+    },
+    {
+      icon: Bot,
+      title: t('howItWorks.pillar5Title'),
+      description: t('howItWorks.pillar5Desc')
+    },
+    {
+      icon: Shield,
+      title: t('howItWorks.pillar6Title'),
+      description: t('howItWorks.pillar6Desc')
+    }
+  ];
+  
   return (
     <section id="como-funciona" className="py-24 bg-gradient-tech">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Como Funciona o <span className="text-primary">RedData</span>
+            {t('howItWorks.title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Uma plataforma completa que conecta, processa e transforma seus dados em inteligência estratégica
+            {t('howItWorks.subtitle')}
           </p>
         </div>
         
@@ -74,13 +77,13 @@ export const HowItWorksSection = () => {
         <div className="text-center mt-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full">
             <span className="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
-            <span className="text-sm font-medium text-primary">6 pilares integrados em uma única plataforma</span>
+            <span className="text-sm font-medium text-primary">{t('howItWorks.integrated')}</span>
           </div>
         </div>
 
         <div className="mt-12 max-w-4xl mx-auto">
           <h3 className="text-2xl font-semibold text-center text-foreground mb-6">
-            KDD | Descoberta de Conhecimento em Bases de Dados
+            {t('howItWorks.kddTitle')}
           </h3>
           <div className="rounded-xl overflow-hidden border border-border shadow-lg bg-card/50 backdrop-blur-sm">
             <video 

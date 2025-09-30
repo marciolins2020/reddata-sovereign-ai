@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { Send, CheckCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface FormData {
   nome: string;
@@ -21,6 +22,7 @@ interface FormData {
 
 export const ContactFormSection = () => {
   const { toast } = useToast();
+  const { t } = useLanguage();
   const [formData, setFormData] = useState<FormData>({
     nome: "",
     email: "",
@@ -43,8 +45,8 @@ export const ContactFormSection = () => {
     // Basic validation
     if (!formData.nome || !formData.email || !formData.interesse) {
       toast({
-        title: "Campos obrigatórios",
-        description: "Por favor, preencha todos os campos obrigatórios.",
+        title: t('contact.errorMessage'),
+        description: t('contact.errorMessage'),
         variant: "destructive"
       });
       return;
@@ -63,8 +65,8 @@ export const ContactFormSection = () => {
       
       setIsSubmitted(true);
       toast({
-        title: "Formulário enviado com sucesso!",
-        description: "Nossa equipe entrará em contato em breve.",
+        title: t('contact.successMessage'),
+        description: t('contact.successMessage'),
       });
       
       // Reset form after success
@@ -84,8 +86,8 @@ export const ContactFormSection = () => {
     } catch (error: any) {
       console.error("Error sending form:", error);
       toast({
-        title: "Erro ao enviar formulário",
-        description: error.message || "Tente novamente ou entre em contato diretamente.",
+        title: t('contact.errorMessage'),
+        description: error.message || t('contact.errorMessage'),
         variant: "destructive"
       });
     } finally {
@@ -124,10 +126,10 @@ export const ContactFormSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Transforme seus <span className="text-primary">dados em estratégia</span>
+            {t('contact.title')}
           </h2>
           <p className="text-xl text-muted-foreground">
-            Solicite uma demonstração personalizada do RedData
+            {t('contact.subtitle')}
           </p>
         </div>
         
@@ -226,14 +228,8 @@ export const ContactFormSection = () => {
                 className="w-full" 
                 disabled={isSubmitting}
               >
-                {isSubmitting ? (
-                  "Enviando..."
-                ) : (
-                  <>
-                    Solicitar Demonstração
-                    <Send className="ml-2 h-4 w-4" />
-                  </>
-                )}
+                {isSubmitting ? t('contact.sending') : t('contact.send')}
+                {!isSubmitting && <Send className="ml-2 h-4 w-4" />}
               </Button>
               
               <p className="text-sm text-muted-foreground text-center">
