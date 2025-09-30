@@ -69,14 +69,8 @@ const CasosUsoIndustria = () => {
       <section className="py-20 bg-gradient-to-br from-primary/10 via-background to-background">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-4 px-4 py-3 bg-primary/10 rounded-full mb-6">
-              <div className="rounded-lg overflow-hidden">
-                <img 
-                  src={flexLogo} 
-                  alt="Logo Flex Industries" 
-                  className="h-12 w-auto object-contain"
-                />
-              </div>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">
+              <Factory className="h-5 w-5 text-primary" />
               <span className="text-sm font-medium text-primary">Caso de Uso: Indústria</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
@@ -440,9 +434,18 @@ const CasosUsoIndustria = () => {
                 <Package className="h-4 w-4 text-primary" />
                 <span className="text-sm font-medium text-primary">Case de Sucesso</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Case: <span className="text-primary">Flex</span>
-              </h2>
+              <div className="flex items-center justify-center gap-4 mb-4">
+                <div className="rounded-lg overflow-hidden flex-shrink-0">
+                  <img 
+                    src={flexLogo} 
+                    alt="Logo Flex Industries" 
+                    className="h-16 w-auto object-contain"
+                  />
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+                  Case: <span className="text-primary">Flex</span>
+                </h2>
+              </div>
             </div>
 
             <Card className="border-2">
