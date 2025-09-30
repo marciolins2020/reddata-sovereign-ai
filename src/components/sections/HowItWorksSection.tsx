@@ -87,6 +87,7 @@ export const HowItWorksSection = () => {
               muted 
               playsInline
               className="w-full h-auto"
+              style={{ filter: 'brightness(1.2) contrast(1.1)' }}
               aria-label="Demonstração de como o RedData funciona"
             />
           </div>
