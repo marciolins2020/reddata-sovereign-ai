@@ -24,6 +24,7 @@ const menuItems = [
 const casosUsoItems = [
   { label: "Energia", href: "/casos-uso/energia", description: "Transformação digital em operações energéticas" },
   { label: "Indústria", href: "/casos-uso/industria", description: "Evolução para Indústria 4.0 com Big Data e IA" },
+  { label: "Governo", href: "/casos-uso/governo", description: "Modernização da gestão pública com Big Data e IA" },
 ];
 
 export const Header = () => {
