@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, Factory, TrendingUp, Wrench, Package, DollarSign, BarChart3 } from "lucide-react";
 import { Link } from "react-router-dom";
+import flexLogo from "@/assets/flex-industries-logo.png";
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 const CasosUsoIndustria = () => {
@@ -68,8 +69,14 @@ const CasosUsoIndustria = () => {
       <section className="py-20 bg-gradient-to-br from-primary/10 via-background to-background">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">
-              <Factory className="h-5 w-5 text-primary" />
+            <div className="inline-flex items-center gap-4 px-4 py-3 bg-primary/10 rounded-full mb-6">
+              <div className="rounded-lg overflow-hidden">
+                <img 
+                  src={flexLogo} 
+                  alt="Logo Flex Industries" 
+                  className="h-12 w-auto object-contain"
+                />
+              </div>
               <span className="text-sm font-medium text-primary">Caso de Uso: Indústria</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">

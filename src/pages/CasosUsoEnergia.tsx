@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Zap, TrendingUp, Shield, BarChart3, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
 import enelDashboard from "@/assets/enel-dashboard.jpeg";
+import enelLogo from "@/assets/enel-logo.png";
 
 const CasosUsoEnergia = () => {
   return (
@@ -73,7 +74,16 @@ const CasosUsoEnergia = () => {
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Case: Enel (SP)</h2>
+            <div className="flex items-center gap-4 mb-4">
+              <div className="rounded-lg overflow-hidden flex-shrink-0">
+                <img 
+                  src={enelLogo} 
+                  alt="Logo Enel" 
+                  className="h-16 w-auto object-contain"
+                />
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold">Case: Enel (SP)</h2>
+            </div>
             <p className="text-lg text-muted-foreground mb-6">
               A Enel enfrentava o desafio de lidar com grandes volumes de dados dispersos, sem 
               visibilidade consolidada sobre a saúde da rede elétrica. A RedMaxx implementou o 
