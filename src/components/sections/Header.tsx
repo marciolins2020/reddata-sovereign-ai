@@ -15,7 +15,7 @@ import {
 const menuItems = [
   { label: "Início", href: "#hero" },
   { label: "Como Funciona", href: "#como-funciona" },
-  { label: "Aplicações Reais", href: "#applications" },
+  { label: "Aplicações Reais", href: "#casos-uso" },
   { label: "Dashboard", href: "#dashboard-demo" },
   { label: "FAQ", href: "#faq" },
   { label: "Contato", href: "#contact-form" },
