@@ -79,6 +79,9 @@ export const HowItWorksSection = () => {
         </div>
 
         <div className="mt-12 max-w-4xl mx-auto">
+          <h3 className="text-2xl font-semibold text-center text-foreground mb-6">
+            KDD | (Descoberta de Conhecimento em Bases de Dados)
+          </h3>
           <div className="rounded-xl overflow-hidden border border-border shadow-lg bg-card/50 backdrop-blur-sm">
             <video 
               src={reddataDemo} 
