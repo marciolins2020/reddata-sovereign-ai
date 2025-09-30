@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import prefeituraDashboard from "@/assets/prefeitura-manaus-dashboard.png";
 import adsLogo from "@/assets/ads-logo.png";
 import semefLogo from "@/assets/semef-logo.png";
+import adsDashboard from "@/assets/ads-dashboard.png";
 
 const CasosUsoGoverno = () => {
   return (
@@ -91,6 +92,14 @@ const CasosUsoGoverno = () => {
               Com o RedData, a RedMaxx estruturou um projeto de gestão inteligente, com foco em monitoramento 
               estratégico e governança baseada em dados.
             </p>
+
+            <div className="mb-8 rounded-xl overflow-hidden border border-border shadow-lg">
+              <img 
+                src={adsDashboard} 
+                alt="Dashboard do sistema RedData para ADS mostrando subvenção de Piaçava com controles e mapas" 
+                className="w-full h-auto"
+              />
+            </div>
           </div>
 
           {/* Results ADS */}
