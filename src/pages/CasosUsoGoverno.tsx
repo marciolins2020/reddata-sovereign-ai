@@ -74,12 +74,12 @@ const CasosUsoGoverno = () => {
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="mb-12">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="rounded-lg overflow-hidden">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="rounded-lg overflow-hidden flex-shrink-0">
                 <img 
                   src={adsLogo} 
                   alt="Logo ADS - Agência de Desenvolvimento Sustentável do Amazonas" 
-                  className="h-16 w-auto"
+                  className="h-20 w-auto object-contain"
                 />
               </div>
               <h2 className="text-3xl md:text-4xl font-bold">Case: ADS – Agência de Desenvolvimento Sustentável do Amazonas</h2>
