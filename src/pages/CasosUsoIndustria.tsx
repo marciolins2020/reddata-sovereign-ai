@@ -233,7 +233,7 @@ const CasosUsoIndustria = () => {
                         </div>
                         <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 border border-primary/20">
                           <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-                          <span className="text-sm font-medium text-primary">Ao Vivo</span>
+                          <span className="text-sm font-medium text-primary">{t('casosUsoIndustria.liveLabel')}</span>
                         </div>
                       </div>
                     </CardHeader>

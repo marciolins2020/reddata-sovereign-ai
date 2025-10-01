@@ -103,15 +103,14 @@ export const ContactFormSection = () => {
             <Card className="p-12 border-0 bg-card/50 backdrop-blur-sm">
               <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-6" />
               <h2 className="text-2xl font-bold text-foreground mb-4">
-                Obrigado pelo interesse no RedData!
+                {t('contact.successTitle')}
               </h2>
               <p className="text-muted-foreground mb-6">
-                Recebemos suas informações e nossa equipe técnica entrará em contato 
-                nas próximas 24 horas para agendar uma demonstração personalizada.
+                {t('contact.successMessage')}
               </p>
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full">
                 <span className="text-sm text-primary font-medium">
-                  Enviando material informativo por email...
+                  {t('contact.successSending')}
                 </span>
               </div>
             </Card>
@@ -138,24 +137,24 @@ export const ContactFormSection = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <Label htmlFor="nome">Nome Completo *</Label>
+                  <Label htmlFor="nome">{t('contact.nameLabel')}</Label>
                   <Input
                     id="nome"
                     value={formData.nome}
                     onChange={(e) => handleInputChange("nome", e.target.value)}
-                    placeholder="Seu nome completo"
+                    placeholder={t('contact.namePlaceholder')}
                     required
                   />
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="email">E-mail *</Label>
+                  <Label htmlFor="email">{t('contact.emailLabel')}</Label>
                   <Input
                     id="email"
                     type="email"
                     value={formData.email}
                     onChange={(e) => handleInputChange("email", e.target.value)}
-                    placeholder="seu@email.com"
+                    placeholder={t('contact.emailPlaceholder')}
                     required
                   />
                 </div>
@@ -163,61 +162,61 @@ export const ContactFormSection = () => {
               
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <Label htmlFor="telefone">Telefone</Label>
+                  <Label htmlFor="telefone">{t('contact.phoneLabel')}</Label>
                   <Input
                     id="telefone"
                     value={formData.telefone}
                     onChange={(e) => handleInputChange("telefone", e.target.value)}
-                    placeholder="(11) 99999-9999"
+                    placeholder={t('contact.phonePlaceholder')}
                   />
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="municipio">Município/Órgão</Label>
+                  <Label htmlFor="municipio">{t('contact.municipioLabel')}</Label>
                   <Input
                     id="municipio"
                     value={formData.municipio}
                     onChange={(e) => handleInputChange("municipio", e.target.value)}
-                    placeholder="Prefeitura de São Paulo"
+                    placeholder={t('contact.municipioPlaceholder')}
                   />
                 </div>
               </div>
               
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <Label htmlFor="cargo">Cargo</Label>
+                  <Label htmlFor="cargo">{t('contact.cargoLabel')}</Label>
                   <Input
                     id="cargo"
                     value={formData.cargo}
                     onChange={(e) => handleInputChange("cargo", e.target.value)}
-                    placeholder="Secretário, CIO, Analista..."
+                    placeholder={t('contact.cargoPlaceholder')}
                   />
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="interesse">Interesse *</Label>
+                  <Label htmlFor="interesse">{t('contact.interestLabel')}</Label>
                   <Select value={formData.interesse} onValueChange={(value) => handleInputChange("interesse", value)}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Selecione uma opção" />
+                      <SelectValue placeholder={t('contact.interestPlaceholder')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="implantacao">Implantação</SelectItem>
-                      <SelectItem value="parceria">Parceria</SelectItem>
-                      <SelectItem value="simulacao">Simulação</SelectItem>
-                      <SelectItem value="appliance">RedData Appliance</SelectItem>
-                      <SelectItem value="demonstracao">Demonstração</SelectItem>
+                      <SelectItem value="implantacao">{t('contact.interestImplantacao')}</SelectItem>
+                      <SelectItem value="parceria">{t('contact.interestParceria')}</SelectItem>
+                      <SelectItem value="simulacao">{t('contact.interestSimulacao')}</SelectItem>
+                      <SelectItem value="appliance">{t('contact.interestAppliance')}</SelectItem>
+                      <SelectItem value="demonstracao">{t('contact.interestDemonstracao')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="mensagem">Mensagem Adicional</Label>
+                <Label htmlFor="mensagem">{t('contact.messageLabel')}</Label>
                 <Textarea
                   id="mensagem"
                   value={formData.mensagem}
                   onChange={(e) => handleInputChange("mensagem", e.target.value)}
-                  placeholder="Conte-nos mais sobre suas necessidades..."
+                  placeholder={t('contact.messagePlaceholder')}
                   rows={4}
                 />
               </div>
@@ -233,8 +232,7 @@ export const ContactFormSection = () => {
               </Button>
               
               <p className="text-sm text-muted-foreground text-center">
-                Ao enviar este formulário, você concorda com nossa política de privacidade 
-                e autoriza o contato da RedMaxx.
+                {t('contact.privacyText')}
               </p>
             </form>
           </Card>
