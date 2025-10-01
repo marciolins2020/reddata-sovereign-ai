@@ -1,4 +1,6 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
+import ptTranslations from '@/translations/pt';
+import enTranslations from '@/translations/en';
 
 type Language = 'pt' | 'en';
 
@@ -8,6 +10,11 @@ interface LanguageContextType {
   t: (key: string) => string;
 }
 
+const translations = {
+  pt: ptTranslations,
+  en: enTranslations
+};
+
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -16,24 +23,15 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     return (saved === 'en' || saved === 'pt') ? saved : 'pt';
   });
 
-  const [translations, setTranslations] = useState<Record<string, any>>({});
-
-  useEffect(() => {
-    const loadTranslations = async () => {
-      const module = await import(`@/translations/${language}.ts`);
-      setTranslations(module.default);
-    };
-    loadTranslations();
-  }, [language]);
-
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
     localStorage.setItem('language', lang);
   };
 
   const t = (key: string): string => {
+    const currentTranslations = translations[language];
     const keys = key.split('.');
-    let value: any = translations;
+    let value: any = currentTranslations;
     
     for (const k of keys) {
       value = value?.[k];
@@ -43,8 +41,14 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     return value || key;
   };
 
+  const contextValue = {
+    language,
+    setLanguage,
+    t
+  };
+
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={contextValue}>
       {children}
     </LanguageContext.Provider>
   );
