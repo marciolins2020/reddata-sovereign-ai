@@ -17,23 +17,28 @@ const translations = {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguageState] = useState<Language>('pt');
-  const [isInitialized, setIsInitialized] = useState(false);
-
-  React.useEffect(() => {
+const getInitialLanguage = (): Language => {
+  try {
     const saved = localStorage.getItem('language');
-    const initialLanguage = (saved === 'en' || saved === 'pt') ? saved : 'pt';
-    setLanguageState(initialLanguage);
-    setIsInitialized(true);
+    return (saved === 'en' || saved === 'pt') ? saved : 'pt';
+  } catch {
+    return 'pt';
+  }
+};
+
+export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [language, setLanguageState] = useState<Language>(getInitialLanguage);
+
+  const setLanguage = React.useCallback((lang: Language) => {
+    setLanguageState(lang);
+    try {
+      localStorage.setItem('language', lang);
+    } catch (error) {
+      console.error('Failed to save language preference:', error);
+    }
   }, []);
 
-  const setLanguage = (lang: Language) => {
-    setLanguageState(lang);
-    localStorage.setItem('language', lang);
-  };
-
-  const t = (key: string): string => {
+  const t = React.useCallback((key: string): string => {
     const currentTranslations = translations[language];
     const keys = key.split('.');
     let value: any = currentTranslations;
@@ -44,17 +49,13 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
     
     return value || key;
-  };
+  }, [language]);
 
   const contextValue = React.useMemo(() => ({
     language,
     setLanguage,
     t
-  }), [language]);
-
-  if (!isInitialized) {
-    return null;
-  }
+  }), [language, setLanguage, t]);
 
   return (
     <LanguageContext.Provider value={contextValue}>
