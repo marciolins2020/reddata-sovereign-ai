@@ -173,6 +173,58 @@ export default {
     testimonial3Author: "Prefeitura",
     testimonial3Role: "Gestão Municipal"
   },
+  technicalArchitecture: {
+    title: "Componentes Técnicos Essenciais em Plataformas de Big Data & IA",
+    subtitle: "Uma plataforma de Big Data e Inteligência Artificial robusta deve ir além da coleta e análise de dados. Ela precisa garantir escala, confiabilidade, governança e inteligência contínua. Entre os componentes técnicos mais relevantes estão:",
+    dataArchitecture: {
+      title: "Arquitetura de Dados",
+      items: [
+        "Data Lake + Data Warehouse híbrido para lidar com dados estruturados, semi-estruturados e não estruturados.",
+        "Pipelines ETL/ELT resilientes para ingestão, transformação e enriquecimento de dados.",
+        "Suporte a processamento em lote e em tempo real (streaming/micro-batch)."
+      ]
+    },
+    aiMl: {
+      title: "Inteligência Artificial & Machine Learning",
+      items: [
+        "Modelos de ML/IA versionados e monitorados em produção (MLOps).",
+        "Detecção de drift para identificar perda de performance dos modelos.",
+        "Re-treinamento automático com base em novos dados."
+      ]
+    },
+    governance: {
+      title: "Governança e Segurança",
+      items: [
+        "Data Quality: validação, regras de consistência e perfilagem de dados.",
+        "Catálogo de metadados com rastreabilidade e auditoria de origem.",
+        "Controle de acesso e criptografia em repouso e em trânsito (LGPD, ISO 27001)."
+      ]
+    },
+    scalability: {
+      title: "Escalabilidade e Desempenho",
+      items: [
+        "Arquitetura distribuída com escalabilidade horizontal em clusters.",
+        "Balanceamento de carga e alta disponibilidade, com failover automático.",
+        "Camada de caching e otimização de consultas para reduzir latência."
+      ]
+    },
+    integration: {
+      title: "Integração e Flexibilidade",
+      items: [
+        "APIs e microsserviços para integração com sistemas externos (ERP, CRM, legados, apps).",
+        "Suporte a múltiplos bancos de dados (SQL, NoSQL, grafos, timeseries).",
+        "Infraestrutura híbrida: nuvem, on-premises ou appliance dedicado."
+      ]
+    },
+    continuousOps: {
+      title: "Operação Contínua",
+      items: [
+        "CI/CD para pipelines de dados e modelos de IA, garantindo evolução sem interrupção.",
+        "Monitoramento proativo de performance da plataforma e dos modelos.",
+        "Alertas inteligentes em caso de falhas, anomalias ou degradação de resultados."
+      ]
+    }
+  },
   faq: {
     title: "Perguntas Frequentes",
     subtitle: "Tire suas dúvidas sobre a plataforma RedData",

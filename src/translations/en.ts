@@ -173,6 +173,58 @@ export default {
     testimonial3Author: "City Hall",
     testimonial3Role: "Municipal Management"
   },
+  technicalArchitecture: {
+    title: "Essential Technical Components in Big Data & AI Platforms",
+    subtitle: "A robust Big Data and Artificial Intelligence platform must go beyond data collection and analysis. It needs to ensure scale, reliability, governance, and continuous intelligence. Among the most relevant technical components are:",
+    dataArchitecture: {
+      title: "Data Architecture",
+      items: [
+        "Hybrid Data Lake + Data Warehouse to handle structured, semi-structured, and unstructured data.",
+        "Resilient ETL/ELT pipelines for data ingestion, transformation, and enrichment.",
+        "Support for batch and real-time processing (streaming/micro-batch)."
+      ]
+    },
+    aiMl: {
+      title: "Artificial Intelligence & Machine Learning",
+      items: [
+        "Versioned and monitored ML/AI models in production (MLOps).",
+        "Drift detection to identify model performance degradation.",
+        "Automatic retraining based on new data."
+      ]
+    },
+    governance: {
+      title: "Governance and Security",
+      items: [
+        "Data Quality: validation, consistency rules, and data profiling.",
+        "Metadata catalog with traceability and origin auditing.",
+        "Access control and encryption at rest and in transit (LGPD, ISO 27001)."
+      ]
+    },
+    scalability: {
+      title: "Scalability and Performance",
+      items: [
+        "Distributed architecture with horizontal scalability in clusters.",
+        "Load balancing and high availability with automatic failover.",
+        "Caching layer and query optimization to reduce latency."
+      ]
+    },
+    integration: {
+      title: "Integration and Flexibility",
+      items: [
+        "APIs and microservices for integration with external systems (ERP, CRM, legacy, apps).",
+        "Support for multiple databases (SQL, NoSQL, graph, timeseries).",
+        "Hybrid infrastructure: cloud, on-premises, or dedicated appliance."
+      ]
+    },
+    continuousOps: {
+      title: "Continuous Operations",
+      items: [
+        "CI/CD for data pipelines and AI models, ensuring evolution without interruption.",
+        "Proactive monitoring of platform and model performance.",
+        "Intelligent alerts for failures, anomalies, or result degradation."
+      ]
+    }
+  },
   faq: {
     title: "Frequently Asked Questions",
     subtitle: "Get your questions answered about the RedData platform",
