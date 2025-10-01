@@ -31,6 +31,7 @@ export const Header = () => {
     { label: t('useCases.energy'), href: "/casos-uso/energia", description: t('useCases.energyDesc') },
     { label: t('useCases.industry'), href: "/casos-uso/industria", description: t('useCases.industryDesc') },
     { label: t('useCases.government'), href: "/casos-uso/governo", description: t('useCases.governmentDesc') },
+    { label: t('useCases.retail'), href: "/casos-uso/varejo", description: t('useCases.retailDesc') },
   ];
 
   useEffect(() => {
