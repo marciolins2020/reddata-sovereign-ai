@@ -129,7 +129,7 @@ const CasosUsoEnergia = () => {
           <div className="rounded-xl overflow-hidden border border-border shadow-2xl">
             <img 
               src={enelDashboard} 
-              alt="Dashboard RedData - Predição de Anomalias em Religadoras Automáticas - Projeto Enel"
+              alt="Dashboard RedData® - Predição de Anomalias em Religadoras Automáticas - Projeto Enel"
               className="w-full h-auto"
             />
           </div>

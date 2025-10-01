@@ -12,9 +12,9 @@ export const Footer = () => {
           {/* Logo and Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-4 mb-6">
-              <img 
-                src={reddataLogo} 
-                alt="RedData" 
+                <img 
+                  src={reddataLogo} 
+                  alt="RedData®"
                 className="h-8"
               />
             </div>

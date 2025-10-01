@@ -91,7 +91,7 @@ const CasosUsoGoverno = () => {
             <div className="mb-8 rounded-xl overflow-hidden border border-border shadow-lg">
               <img 
                 src={adsDashboard} 
-                alt="Dashboard do sistema RedData para ADS mostrando subvenção de Piaçava com controles e mapas" 
+                alt="Dashboard do sistema RedData® para ADS mostrando subvenção de Piaçava com controles e mapas"
                 className="w-full h-auto"
               />
             </div>

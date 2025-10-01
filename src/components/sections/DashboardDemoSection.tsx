@@ -28,7 +28,7 @@ export const DashboardDemoSection = () => {
               <iframe
                 src="https://bigdata.redmaxx.com.br/b/semed"
                 className="w-full h-full"
-                title="RedData Dashboard - SEMED Manaus"
+                title="RedData® Dashboard - SEMED Manaus"
                 frameBorder="0"
                 allow="fullscreen"
                 loading="lazy"

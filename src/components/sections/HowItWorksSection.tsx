@@ -94,7 +94,7 @@ export const HowItWorksSection = () => {
               playsInline
               className="w-full h-auto"
               style={{ filter: 'brightness(1.04) contrast(1.02)' }}
-              aria-label="Demonstração de como o RedData funciona"
+              aria-label="Demonstração de como o RedData® funciona"
             />
           </div>
         </div>

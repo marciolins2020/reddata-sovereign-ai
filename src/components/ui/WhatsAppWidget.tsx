@@ -7,7 +7,7 @@ export const WhatsAppWidget = () => {
   const whatsappNumber = "5511940764626"; // +55 11 94076-4626
   
   const openWhatsApp = () => {
-    const message = encodeURIComponent("Olá! Gostaria de saber mais sobre o RedData e solicitar uma demonstração.");
+    const message = encodeURIComponent("Olá! Gostaria de saber mais sobre o RedData® e solicitar uma demonstração.");
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
     window.open(whatsappUrl, '_blank');
   };
@@ -36,7 +36,7 @@ export const WhatsAppWidget = () => {
                     <MessageCircle className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="font-semibold">RedData Support</h3>
+                    <h3 className="font-semibold">RedData® Support</h3>
                     <p className="text-sm text-green-100">Online agora</p>
                   </div>
                 </div>
@@ -55,7 +55,7 @@ export const WhatsAppWidget = () => {
             <div className="p-4 space-y-4">
               <div className="bg-gray-100 rounded-lg p-3 text-sm">
                 <p className="text-gray-700">
-                  👋 Olá! Precisa de ajuda com o RedData?
+                  👋 Olá! Precisa de ajuda com o RedData®?
                 </p>
                 <p className="text-gray-600 mt-1">
                   Nossa equipe está pronta para esclarecer suas dúvidas e agendar uma demonstração personalizada.

@@ -118,9 +118,9 @@ export const ApplianceSection = () => {
           <div className="relative">
             <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden shadow-large">
               <div className="p-6">
-                <img 
-                  src={reddataApplianceServer}
-                  alt="Plataforma RedData Big Data Analytics - RedData BD Appliance Server"
+                  <img 
+                    src={reddataApplianceServer}
+                    alt="Plataforma RedData® Big Data Analytics - RedData® BD Appliance Server"
                   className="w-full h-auto object-contain"
                 />
               </div>
