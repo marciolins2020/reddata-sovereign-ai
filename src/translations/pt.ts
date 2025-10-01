@@ -347,7 +347,18 @@ export default {
     dashboardProjectTitle: "Dashboard do Projeto",
     dashboardProjectDesc: "Visão consolidada em tempo real dos KPIs financeiros e operacionais",
     financialDashboard: "Dashboard Financeiro - Área Meio",
-    realTimeMonitoring: "Monitoramento em tempo real de fluxo de caixa, custos e despesas"
+    realTimeMonitoring: "Monitoramento em tempo real de fluxo de caixa, custos e despesas",
+    flexResultsTitle: "Principais entregas e resultados:",
+    flexResult1: "Monitoramento em tempo real do desempenho das linhas de produção.",
+    flexResult2: "Manutenção preditiva aplicada a equipamentos críticos, reduzindo paradas não programadas.",
+    flexResult3: "Controle de qualidade avançado, com detecção de falhas e não conformidades ainda no processo produtivo.",
+    flexResult4: "Dashboards inteligentes para gestores, permitindo decisões rápidas e baseadas em dados.",
+    flexResult5: "Eficiência operacional ampliada, com redução de custos de manutenção e aumento da produtividade.",
+    flexConclusion: "Com o RedData, a Flex deu um passo decisivo rumo à Indústria 4.0, alcançando maior competitividade, eficiência e confiabilidade nos processos produtivos.",
+    dashboardFooter: "Dashboard desenvolvido com RedData | Powered by RedMaxx",
+    lastUpdate: "Última atualização:",
+    finalCtaTitle: "Pronto para transformar sua indústria?",
+    finalCtaSubtitle: "Entre em contato e descubra como o RedData pode impulsionar sua manufatura rumo à Indústria 4.0."
   },
   casosUsoGoverno: {
     backHome: "Voltar para Home",

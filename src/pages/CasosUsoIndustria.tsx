@@ -452,10 +452,10 @@ const CasosUsoIndustria = () => {
                       {/* Footer Info */}
                       <div className="flex items-center justify-between pt-4 border-t">
                         <p className="text-xs text-muted-foreground">
-                          Dashboard desenvolvido com RedData | Powered by RedMaxx
+                          {t('casosUsoIndustria.dashboardFooter')}
                         </p>
                         <p className="text-xs text-muted-foreground">
-                          Última atualização: {new Date().toLocaleString('pt-BR')}
+                          {t('casosUsoIndustria.lastUpdate')} {new Date().toLocaleString('pt-BR')}
                         </p>
                       </div>
                     </CardContent>
@@ -463,34 +463,34 @@ const CasosUsoIndustria = () => {
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-semibold mb-3">Principais entregas e resultados:</h3>
+                  <h3 className="text-xl font-semibold mb-3">{t('casosUsoIndustria.flexResultsTitle')}</h3>
                   <div className="space-y-3">
                     <div className="flex items-start gap-3">
                       <BarChart3 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                      <p className="text-muted-foreground">Monitoramento em tempo real do desempenho das linhas de produção.</p>
+                      <p className="text-muted-foreground">{t('casosUsoIndustria.flexResult1')}</p>
                     </div>
                     <div className="flex items-start gap-3">
                       <Wrench className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                      <p className="text-muted-foreground">Manutenção preditiva aplicada a equipamentos críticos, reduzindo paradas não programadas.</p>
+                      <p className="text-muted-foreground">{t('casosUsoIndustria.flexResult2')}</p>
                     </div>
                     <div className="flex items-start gap-3">
                       <TrendingUp className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                      <p className="text-muted-foreground">Controle de qualidade avançado, com detecção de falhas e não conformidades ainda no processo produtivo.</p>
+                      <p className="text-muted-foreground">{t('casosUsoIndustria.flexResult3')}</p>
                     </div>
                     <div className="flex items-start gap-3">
                       <BarChart3 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                      <p className="text-muted-foreground">Dashboards inteligentes para gestores, permitindo decisões rápidas e baseadas em dados.</p>
+                      <p className="text-muted-foreground">{t('casosUsoIndustria.flexResult4')}</p>
                     </div>
                     <div className="flex items-start gap-3">
                       <Package className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                      <p className="text-muted-foreground">Eficiência operacional ampliada, com redução de custos de manutenção e aumento da produtividade.</p>
+                      <p className="text-muted-foreground">{t('casosUsoIndustria.flexResult5')}</p>
                     </div>
                   </div>
                 </div>
 
                 <div className="pt-4 border-t">
                   <p className="text-lg font-medium text-foreground">
-                    Com o RedData, a Flex deu um passo decisivo rumo à Indústria 4.0, alcançando maior competitividade, eficiência e confiabilidade nos processos produtivos.
+                    {t('casosUsoIndustria.flexConclusion')}
                   </p>
                 </div>
               </CardContent>
@@ -504,13 +504,13 @@ const CasosUsoIndustria = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-              Pronto para transformar sua <span className="text-primary">indústria</span>?
+              {t('casosUsoIndustria.finalCtaTitle')}
             </h2>
             <p className="text-xl text-muted-foreground mb-8">
-              Entre em contato e descubra como o RedData pode impulsionar sua manufatura rumo à Indústria 4.0.
+              {t('casosUsoIndustria.finalCtaSubtitle')}
             </p>
             <Button size="lg" className="text-lg px-8" asChild>
-              <a href="/#contact">Solicitar Demonstração</a>
+              <Link to="/#contact-form">{t('casosUsoIndustria.requestDemo')}</Link>
             </Button>
           </div>
         </div>

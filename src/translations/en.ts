@@ -347,7 +347,18 @@ export default {
     dashboardProjectTitle: "Project Dashboard",
     dashboardProjectDesc: "Real-time consolidated view of financial and operational KPIs",
     financialDashboard: "Financial Dashboard - Back Office",
-    realTimeMonitoring: "Real-time monitoring of cash flow, costs and expenses"
+    realTimeMonitoring: "Real-time monitoring of cash flow, costs and expenses",
+    flexResultsTitle: "Key deliverables and results:",
+    flexResult1: "Real-time monitoring of production line performance.",
+    flexResult2: "Predictive maintenance applied to critical equipment, reducing unscheduled downtime.",
+    flexResult3: "Advanced quality control, with detection of failures and non-conformities within the production process.",
+    flexResult4: "Smart dashboards for managers, enabling fast data-driven decisions.",
+    flexResult5: "Enhanced operational efficiency, with reduced maintenance costs and increased productivity.",
+    flexConclusion: "With RedData, Flex took a decisive step towards Industry 4.0, achieving greater competitiveness, efficiency and reliability in production processes.",
+    dashboardFooter: "Dashboard developed with RedData | Powered by RedMaxx",
+    lastUpdate: "Last update:",
+    finalCtaTitle: "Ready to transform your industry?",
+    finalCtaSubtitle: "Get in touch and discover how RedData can drive your manufacturing towards Industry 4.0."
   },
   casosUsoGoverno: {
     backHome: "Back to Home",
