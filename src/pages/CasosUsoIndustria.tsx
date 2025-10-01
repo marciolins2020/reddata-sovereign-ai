@@ -364,9 +364,9 @@ const CasosUsoIndustria = () => {
                                 }}
                               />
                               <Legend />
-                              <Bar dataKey="direto" fill="hsl(var(--primary))" name="Custo Direto" radius={[8, 8, 0, 0]} />
-                              <Bar dataKey="onera" fill="#3b82f6" name="Oneração" radius={[8, 8, 0, 0]} />
-                              <Bar dataKey="indireta" fill="#10b981" name="Custo Indireto" radius={[8, 8, 0, 0]} />
+                              <Bar dataKey="direto" fill="hsl(var(--primary))" name={t('casosUsoIndustria.directCost')} radius={[8, 8, 0, 0]} />
+                              <Bar dataKey="onera" fill="#3b82f6" name={t('casosUsoIndustria.burden')} radius={[8, 8, 0, 0]} />
+                              <Bar dataKey="indireta" fill="#10b981" name={t('casosUsoIndustria.indirectCost')} radius={[8, 8, 0, 0]} />
                             </BarChart>
                           </ResponsiveContainer>
                         </div>
@@ -379,9 +379,9 @@ const CasosUsoIndustria = () => {
                           <div className="mb-4">
                             <h3 className="text-base font-semibold text-foreground flex items-center gap-2">
                               <span className="h-6 w-1 bg-amber-600 rounded-full" />
-                              Distribuição de Despesas
+                              {t('casosUsoIndustria.expensesDistributionTitle')}
                             </h3>
-                            <p className="text-xs text-muted-foreground mt-1 ml-2">Por centro de custo (%)</p>
+                            <p className="text-xs text-muted-foreground mt-1 ml-2">{t('casosUsoIndustria.expensesDistributionDesc')}</p>
                           </div>
                           <ResponsiveContainer width="100%" height={240}>
                             <PieChart>
@@ -415,9 +415,9 @@ const CasosUsoIndustria = () => {
                           <div className="mb-4">
                             <h3 className="text-base font-semibold text-foreground flex items-center gap-2">
                               <span className="h-6 w-1 bg-green-600 rounded-full" />
-                              Evolução Mensal de Despesas + Custos
+                              {t('casosUsoIndustria.monthlyEvolutionTitle')}
                             </h3>
-                            <p className="text-xs text-muted-foreground mt-1 ml-2">Tendência de redução (em milhares)</p>
+                            <p className="text-xs text-muted-foreground mt-1 ml-2">{t('casosUsoIndustria.monthlyEvolutionDesc')}</p>
                           </div>
                           <ResponsiveContainer width="100%" height={240}>
                             <BarChart data={comparativoMensal}>
