@@ -12,6 +12,7 @@ import CasosUsoGoverno from "./pages/CasosUsoGoverno";
 
 const queryClient = new QueryClient();
 
+// Bilingual app with LanguageProvider
 const App = () => (
   <LanguageProvider>
     <QueryClientProvider client={queryClient}>
