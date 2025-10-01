@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Cloud, Server, Settings } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const vmProviders = [
   { name: "Hyper-V", logo: "🖥️" },
@@ -15,6 +16,7 @@ const vmProviders = [
 ];
 
 export const VirtualMachinesSection = () => {
+  const { t } = useLanguage();
   const scrollToForm = () => {
     document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -25,16 +27,15 @@ export const VirtualMachinesSection = () => {
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">
             <Settings className="h-4 w-4 text-primary" />
-            <span className="text-sm font-medium text-primary">Máxima Flexibilidade</span>
+            <span className="text-sm font-medium text-primary">{t('virtualMachines.badge')}</span>
           </div>
           
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-            Execução em <span className="text-primary">Máquinas Virtuais</span>
+            {t('virtualMachines.title')}
           </h2>
           
           <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-            RedData roda em qualquer infraestrutura virtualizada existente, 
-            <strong className="text-foreground"> sem necessidade de mudanças técnicas ou aquisição de novos servidores</strong>.
+            {t('virtualMachines.subtitle')}
           </p>
         </div>
         
@@ -49,11 +50,10 @@ export const VirtualMachinesSection = () => {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-foreground mb-2">
-                      Aproveite sua infraestrutura atual
+                      {t('virtualMachines.benefit1Title')}
                     </h3>
                     <p className="text-muted-foreground">
-                      Não há necessidade de investir em novos servidores. 
-                      Use os recursos já disponíveis no seu datacenter.
+                      {t('virtualMachines.benefit1Desc')}
                     </p>
                   </div>
                 </div>
@@ -64,11 +64,10 @@ export const VirtualMachinesSection = () => {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-foreground mb-2">
-                      Implementação rápida
+                      {t('virtualMachines.benefit2Title')}
                     </h3>
                     <p className="text-muted-foreground">
-                      Deploy em minutos na sua plataforma de virtualização preferida, 
-                      seja on-premises ou na nuvem.
+                      {t('virtualMachines.benefit2Desc')}
                     </p>
                   </div>
                 </div>
@@ -79,11 +78,10 @@ export const VirtualMachinesSection = () => {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-foreground mb-2">
-                      Escalabilidade dinâmica
+                      {t('virtualMachines.benefit3Title')}
                     </h3>
                     <p className="text-muted-foreground">
-                      Ajuste recursos conforme a demanda, garantindo performance 
-                      otimizada para suas análises de dados.
+                      {t('virtualMachines.benefit3Desc')}
                     </p>
                   </div>
                 </div>
@@ -92,7 +90,7 @@ export const VirtualMachinesSection = () => {
             
             <div className="mt-8">
               <Button size="lg" onClick={scrollToForm}>
-                Simular Implementação
+                {t('virtualMachines.simulate')}
               </Button>
             </div>
           </div>
@@ -100,7 +98,7 @@ export const VirtualMachinesSection = () => {
           {/* Right - Compatible Platforms */}
           <div>
             <h3 className="text-2xl font-bold text-foreground mb-8 text-center">
-              Também pode ser Virtualizado em:
+              {t('virtualMachines.compatibleWith')}
             </h3>
             
             <div className="grid grid-cols-3 gap-4">
@@ -118,7 +116,7 @@ export const VirtualMachinesSection = () => {
             <div className="mt-8 text-center">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-muted rounded-full">
                 <span className="text-sm text-muted-foreground">
-                  E muitas outras plataformas de virtualização
+                  {t('virtualMachines.manyMore')}
                 </span>
               </div>
             </div>

@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Quote } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const testimonials = [
   {
@@ -23,15 +24,17 @@ const testimonials = [
 ];
 
 export const TestimonialsSection = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="py-24 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            O que nossos <span className="text-primary">clientes dizem</span>
+            {t('testimonials.title')}
           </h2>
           <p className="text-xl text-muted-foreground">
-            Resultados reais de quem já transformou sua gestão com RedData
+            {t('testimonials.subtitle')}
           </p>
         </div>
         
@@ -62,7 +65,7 @@ export const TestimonialsSection = () => {
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-muted rounded-full">
             <span className="w-2 h-2 bg-primary rounded-full"></span>
             <span className="text-sm text-muted-foreground">
-              Mais de 100 implementações em órgãos públicos e empresas
+              {t('testimonials.conclusion')}
             </span>
           </div>
         </div>

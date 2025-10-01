@@ -7,41 +7,44 @@ import {
   Zap,
   Shield
 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import reddataApplianceServer from "@/assets/reddata-appliance-server.png";
 
-const highlights = [
-  {
-    icon: Wifi,
-    title: "Operação offline",
-    description: "Ideal para ambientes sensíveis"
-  },
-  {
-    icon: HardDrive,
-    title: "SSD criptografado + GPU dedicada",
-    description: "Máxima performance e segurança"
-  },
-  {
-    icon: Zap,
-    title: "Plug & Play",
-    description: "Atualizações seguras"
-  },
-  {
-    icon: Lock,
-    title: "Controle físico e digital total",
-    description: "Seus dados, sua infraestrutura"
-  }
-];
-
-const useCases = [
-  "Saúde",
-  "Educação", 
-  "Segurança",
-  "Fazenda",
-  "Tribunais de Justiça",
-  "Tribunais de Contas"
-];
-
 export const ApplianceSection = () => {
+  const { t } = useLanguage();
+
+  const highlights = [
+    {
+      icon: Wifi,
+      title: t('appliance.highlight1Title'),
+      description: t('appliance.highlight1Desc')
+    },
+    {
+      icon: HardDrive,
+      title: t('appliance.highlight2Title'),
+      description: t('appliance.highlight2Desc')
+    },
+    {
+      icon: Zap,
+      title: t('appliance.highlight3Title'),
+      description: t('appliance.highlight3Desc')
+    },
+    {
+      icon: Lock,
+      title: t('appliance.highlight4Title'),
+      description: t('appliance.highlight4Desc')
+    }
+  ];
+
+  const useCases = [
+    "Saúde",
+    "Educação", 
+    "Segurança",
+    "Fazenda",
+    "Tribunais de Justiça",
+    "Tribunais de Contas"
+  ];
+
   const scrollToForm = () => {
     document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -60,18 +63,17 @@ export const ApplianceSection = () => {
           <div>
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/20 rounded-full mb-6">
               <Shield className="h-4 w-4 text-primary-glow" />
-              <span className="text-sm font-medium text-primary-glow">Máxima Segurança</span>
+              <span className="text-sm font-medium text-primary-glow">{t('appliance.badge')}</span>
             </div>
             
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              <span className="text-primary">RedData Appliance</span>
+              <span className="text-primary">{t('appliance.title')}</span>
               <br />
-              O poder do RedData, 100% dentro do seu datacenter.
+              {t('appliance.title2')}
             </h2>
             
             <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-              Para ambientes que exigem máxima segurança e controle total dos dados, 
-              o RedData Appliance oferece toda a potência da plataforma em hardware dedicado.
+              {t('appliance.description')}
             </p>
             
             <div className="grid sm:grid-cols-2 gap-4 mb-8">
@@ -89,7 +91,7 @@ export const ApplianceSection = () => {
             </div>
             
             <div className="mb-8">
-              <h4 className="font-semibold text-white mb-4">Ideal para:</h4>
+              <h4 className="font-semibold text-white mb-4">{t('appliance.idealFor')}</h4>
               <div className="flex flex-wrap gap-2">
                 {useCases.map((useCase, index) => (
                   <span 
@@ -108,7 +110,7 @@ export const ApplianceSection = () => {
               onClick={scrollToForm}
               className="border-primary-glow text-primary-glow hover:bg-primary-glow hover:text-white"
             >
-              Consultar Modelos
+              {t('appliance.consultModels')}
             </Button>
           </div>
           
