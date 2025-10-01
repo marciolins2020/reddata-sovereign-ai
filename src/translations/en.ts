@@ -255,7 +255,7 @@ export default {
     emailPlaceholder: "your@email.com",
     phoneLabel: "Phone",
     phonePlaceholder: "(00) 00000-0000",
-    municipioLabel: "City/Organization",
+    municipioLabel: "City/Organization/Company",
     municipioPlaceholder: "City of São Paulo",
     cargoLabel: "Position",
     cargoPlaceholder: "Secretary, CIO, Analyst...",

@@ -255,7 +255,7 @@ export default {
     emailPlaceholder: "seu@email.com",
     phoneLabel: "Telefone",
     phonePlaceholder: "(11) 99999-9999",
-    municipioLabel: "Município/Órgão",
+    municipioLabel: "Município/Órgão/Empresa",
     municipioPlaceholder: "Prefeitura de São Paulo",
     cargoLabel: "Cargo",
     cargoPlaceholder: "Secretário, CIO, Analista...",
