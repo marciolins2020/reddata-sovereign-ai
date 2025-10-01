@@ -28,9 +28,9 @@ export const Header = () => {
   ];
 
   const casosUsoItems = [
-    { label: t('applications.energy'), href: "/casos-uso/energia", description: t('applications.energyDesc') },
-    { label: t('applications.industry'), href: "/casos-uso/industria", description: t('applications.industryDesc') },
-    { label: t('applications.government'), href: "/casos-uso/governo", description: t('applications.governmentDesc') },
+    { label: t('useCases.energy'), href: "/casos-uso/energia", description: t('useCases.energyDesc') },
+    { label: t('useCases.industry'), href: "/casos-uso/industria", description: t('useCases.industryDesc') },
+    { label: t('useCases.government'), href: "/casos-uso/governo", description: t('useCases.governmentDesc') },
   ];
 
   useEffect(() => {

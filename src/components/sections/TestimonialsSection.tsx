@@ -2,29 +2,29 @@ import { Card } from "@/components/ui/card";
 import { Quote } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const testimonials = [
-  {
-    quote: "Com o RedData, conseguimos antever gargalos, melhorar a predição de manutenção e evitar prejuízos de milhões.",
-    author: "Empresa Geração e Distribuição de Energia",
-    role: "Setor Energético",
-    image: "👨‍💼"
-  },
-  {
-    quote: "Reduzimos em 40% o tempo de auditoria com IA local.",
-    author: "Tribunal de Contas Estadual",
-    role: "Controle Externo",
-    image: "👩‍⚖️"
-  },
-  {
-    quote: "Conseguimos prever nossa arrecadação com dados reais, além de aumentá-la promovendo a justiça fiscal.",
-    author: "Prefeitura",
-    role: "Gestão Municipal",
-    image: "🏛️"
-  }
-];
-
 export const TestimonialsSection = () => {
   const { t } = useLanguage();
+
+  const testimonials = [
+    {
+      quote: t('testimonials.testimonial1Quote'),
+      author: t('testimonials.testimonial1Author'),
+      role: t('testimonials.testimonial1Role'),
+      image: "👨‍💼"
+    },
+    {
+      quote: t('testimonials.testimonial2Quote'),
+      author: t('testimonials.testimonial2Author'),
+      role: t('testimonials.testimonial2Role'),
+      image: "👩‍⚖️"
+    },
+    {
+      quote: t('testimonials.testimonial3Quote'),
+      author: t('testimonials.testimonial3Author'),
+      role: t('testimonials.testimonial3Role'),
+      image: "🏛️"
+    }
+  ];
 
   return (
     <section className="py-24 bg-background">

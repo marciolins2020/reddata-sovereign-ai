@@ -5,64 +5,66 @@ import {
   GraduationCap,
   DollarSign
 } from "lucide-react";
-
-const applications = [
-  {
-    icon: Building,
-    sector: "Governo",
-    title: "Gestão Pública Inteligente",
-    description: "Combate a fraudes, auditoria automatizada e análise de políticas públicas com IA preditiva.",
-    benefits: [
-      "Detecção de anomalias em tempo real",
-      "Análise automatizada de contratos",
-      "Previsão de arrecadação tributária"
-    ]
-  },
-  {
-    icon: Heart,
-    sector: "Saúde",
-    title: "Saúde Baseada em Dados",
-    description: "Triagem inteligente, previsão de demanda e fila zero com IA generativa.",
-    benefits: [
-      "Triagem automatizada de pacientes",
-      "Previsão de demanda hospitalar",
-      "Otimização de recursos médicos"
-    ]
-  },
-  {
-    icon: GraduationCap,
-    sector: "Educação",
-    title: "Educação Personalizada",
-    description: "Análise de evasão, roteirização escolar e desempenho por região.",
-    benefits: [
-      "Identificação precoce de evasão",
-      "Otimização de rotas escolares",
-      "Análise de desempenho regional"
-    ]
-  },
-  {
-    icon: DollarSign,
-    sector: "Finanças",
-    title: "Inteligência Financeira",
-    description: "Previsão de arrecadação, compliance automatizado e análise de riscos tributários.",
-    benefits: [
-      "Projeções orçamentárias precisas",
-      "Compliance automatizado",
-      "Análise de riscos fiscais"
-    ]
-  }
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const ApplicationsSection = () => {
+  const { t } = useLanguage();
+
+  const applications = [
+    {
+      icon: Building,
+      sector: t('applications.government'),
+      title: t('applications.governmentTitle'),
+      description: t('applications.governmentDesc'),
+      benefits: [
+        t('applications.governmentBenefit1'),
+        t('applications.governmentBenefit2'),
+        t('applications.governmentBenefit3')
+      ]
+    },
+    {
+      icon: Heart,
+      sector: t('applications.health'),
+      title: t('applications.healthTitle'),
+      description: t('applications.healthDesc'),
+      benefits: [
+        t('applications.healthBenefit1'),
+        t('applications.healthBenefit2'),
+        t('applications.healthBenefit3')
+      ]
+    },
+    {
+      icon: GraduationCap,
+      sector: t('applications.education'),
+      title: t('applications.educationTitle'),
+      description: t('applications.educationDesc'),
+      benefits: [
+        t('applications.educationBenefit1'),
+        t('applications.educationBenefit2'),
+        t('applications.educationBenefit3')
+      ]
+    },
+    {
+      icon: DollarSign,
+      sector: t('applications.finance'),
+      title: t('applications.financeTitle'),
+      description: t('applications.financeDesc'),
+      benefits: [
+        t('applications.financeBenefit1'),
+        t('applications.financeBenefit2'),
+        t('applications.financeBenefit3')
+      ]
+    }
+  ];
   return (
     <section id="casos-uso" className="py-24 bg-gradient-tech">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            <span className="text-primary">Aplicações Reais</span> que Transformam Setores
+            <span className="text-primary">{t('applications.title')}</span> {t('applications.subtitle')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
-            Veja como o RedData está revolucionando a tomada de decisões em diferentes áreas
+            {t('applications.description')}
           </p>
         </div>
         
@@ -81,7 +83,7 @@ export const ApplicationsSection = () => {
               </div>
               
               <div className="space-y-3">
-                <h4 className="font-semibold text-foreground">Principais benefícios:</h4>
+                <h4 className="font-semibold text-foreground">{t('applications.mainBenefits')}</h4>
                 <ul className="space-y-2">
                   {app.benefits.map((benefit, benefitIndex) => (
                     <li key={benefitIndex} className="flex items-center gap-3">
@@ -97,8 +99,8 @@ export const ApplicationsSection = () => {
         
         <div className="text-center mt-12">
           <div className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 rounded-full">
-            <span className="text-primary font-semibold">+15 anos de experiência</span>
-            <span className="text-muted-foreground">em projetos de transformação digital</span>
+            <span className="text-primary font-semibold">{t('applications.experienceBadge')}</span>
+            <span className="text-muted-foreground">{t('applications.experienceText')}</span>
           </div>
         </div>
       </div>

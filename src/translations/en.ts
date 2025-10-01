@@ -70,9 +70,7 @@ export default {
     compatibleWith: "Can also be Virtualized on:",
     manyMore: "And many other virtualization platforms"
   },
-  applications: {
-    title: "Business Verticals",
-    subtitle: "Specialized solutions for different sectors",
+  useCases: {
     energy: "Energy",
     energyDesc: "Operations optimization and predictive maintenance in the energy sector",
     industry: "Industry",
@@ -115,10 +113,51 @@ export default {
     fixedPrice: "Fixed Annual Price",
     characteristics: "Characteristics"
   },
+  applications: {
+    title: "Real Applications",
+    subtitle: "Transforming Industries",
+    description: "See how RedData is revolutionizing decision-making across different sectors",
+    experienceBadge: "+15 years of experience",
+    experienceText: "in digital transformation projects",
+    mainBenefits: "Main benefits:",
+    government: "Government",
+    governmentTitle: "Intelligent Public Management",
+    governmentDesc: "Fraud prevention, automated auditing and public policy analysis with predictive AI.",
+    governmentBenefit1: "Real-time anomaly detection",
+    governmentBenefit2: "Automated contract analysis",
+    governmentBenefit3: "Tax revenue forecasting",
+    health: "Healthcare",
+    healthTitle: "Data-Driven Healthcare",
+    healthDesc: "Smart triage, demand forecasting and zero waiting with generative AI.",
+    healthBenefit1: "Automated patient triage",
+    healthBenefit2: "Hospital demand forecasting",
+    healthBenefit3: "Medical resource optimization",
+    education: "Education",
+    educationTitle: "Personalized Education",
+    educationDesc: "Dropout analysis, school routing and regional performance tracking.",
+    educationBenefit1: "Early dropout identification",
+    educationBenefit2: "School route optimization",
+    educationBenefit3: "Regional performance analysis",
+    finance: "Finance",
+    financeTitle: "Financial Intelligence",
+    financeDesc: "Revenue forecasting, automated compliance and tax risk analysis.",
+    financeBenefit1: "Accurate budget projections",
+    financeBenefit2: "Automated compliance",
+    financeBenefit3: "Fiscal risk analysis"
+  },
   testimonials: {
     title: "What Our Clients Say",
     subtitle: "Companies that transformed their business with RedData",
-    conclusion: "Over 100 successful implementations across various sectors"
+    conclusion: "Over 100 successful implementations across various sectors",
+    testimonial1Quote: "With RedData, we were able to anticipate bottlenecks, improve maintenance prediction and avoid millions in losses.",
+    testimonial1Author: "Energy Generation and Distribution Company",
+    testimonial1Role: "Energy Sector",
+    testimonial2Quote: "We reduced audit time by 40% with local AI.",
+    testimonial2Author: "State Court of Accounts",
+    testimonial2Role: "External Control",
+    testimonial3Quote: "We can now predict our revenue with real data, while increasing it and promoting tax fairness.",
+    testimonial3Author: "City Hall",
+    testimonial3Role: "Municipal Management"
   },
   faq: {
     title: "Frequently Asked Questions",
