@@ -95,7 +95,7 @@ export default {
   },
   dashboardDemo: {
     badge: "Demonstração",
-    title: "Dashboard em Ação",
+    title: "RedData em ação",
     subtitle: "Veja como a RedData transforma dados complexos em insights visuais",
     realDashboard: "Dashboard real da Secretaria de Educação Municipal de Manaus",
     pocProduction: "Projeto PoC em produção",

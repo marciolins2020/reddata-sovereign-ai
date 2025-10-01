@@ -95,7 +95,7 @@ export default {
   },
   dashboardDemo: {
     badge: "Demo",
-    title: "Dashboard in Action",
+    title: "RedData in Action",
     subtitle: "See how RedData transforms complex data into visual insights",
     realDashboard: "Real dashboard from Manaus Municipal Education Department",
     pocProduction: "PoC project in production",
