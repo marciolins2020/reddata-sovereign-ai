@@ -138,8 +138,7 @@ const CasosUsoGoverno = () => {
 
           <div className="p-6 bg-muted/50 rounded-lg border border-border mb-16">
             <p className="text-lg font-medium text-center">
-              Com o RedData, a ADS passou a operar com inteligência analítica, monitorando em tempo real 
-              suas políticas públicas e decisões estratégicas.
+              {t('casosUsoGoverno.conclusionAds')}
             </p>
           </div>
 

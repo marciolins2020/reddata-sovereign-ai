@@ -96,25 +96,25 @@ const CasosUsoIndustria = () => {
                   <div className="p-2 rounded-lg bg-primary/10">
                     <DollarSign className="h-6 w-6 text-primary" />
                   </div>
-                  <CardTitle className="text-2xl">Área Meio (Gestão e Suporte)</CardTitle>
+                  <CardTitle className="text-2xl">{t('casosUsoIndustria.areaMeioTitle')}</CardTitle>
                 </div>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex items-start gap-3">
                   <div className="mt-1 h-2 w-2 rounded-full bg-primary flex-shrink-0" />
-                  <p className="text-muted-foreground">Integração de dados financeiros, contábeis e de suprimentos.</p>
+                  <p className="text-muted-foreground">{t('casosUsoIndustria.areaMeio1')}</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="mt-1 h-2 w-2 rounded-full bg-primary flex-shrink-0" />
-                  <p className="text-muted-foreground">Monitoramento de desempenho de fornecedores e contratos.</p>
+                  <p className="text-muted-foreground">{t('casosUsoIndustria.areaMeio2')}</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="mt-1 h-2 w-2 rounded-full bg-primary flex-shrink-0" />
-                  <p className="text-muted-foreground">Dashboards gerenciais para tomada de decisão estratégica.</p>
+                  <p className="text-muted-foreground">{t('casosUsoIndustria.areaMeio3')}</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="mt-1 h-2 w-2 rounded-full bg-primary flex-shrink-0" />
-                  <p className="text-muted-foreground">Compliance com normas e auditorias mais rápidas.</p>
+                  <p className="text-muted-foreground">{t('casosUsoIndustria.areaMeio4')}</p>
                 </div>
               </CardContent>
             </Card>
@@ -126,25 +126,25 @@ const CasosUsoIndustria = () => {
                   <div className="p-2 rounded-lg bg-primary/10">
                     <Wrench className="h-6 w-6 text-primary" />
                   </div>
-                  <CardTitle className="text-2xl">Área Fim (Produção e Operação)</CardTitle>
+                  <CardTitle className="text-2xl">{t('casosUsoIndustria.areaFimTitle')}</CardTitle>
                 </div>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex items-start gap-3">
                   <div className="mt-1 h-2 w-2 rounded-full bg-primary flex-shrink-0" />
-                  <p className="text-muted-foreground">Manutenção preditiva de máquinas, evitando paradas não programadas.</p>
+                  <p className="text-muted-foreground">{t('casosUsoIndustria.areaFim1')}</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="mt-1 h-2 w-2 rounded-full bg-primary flex-shrink-0" />
-                  <p className="text-muted-foreground">Controle de qualidade inteligente com detecção de falhas em tempo real.</p>
+                  <p className="text-muted-foreground">{t('casosUsoIndustria.areaFim2')}</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="mt-1 h-2 w-2 rounded-full bg-primary flex-shrink-0" />
-                  <p className="text-muted-foreground">Otimização de insumos e redução de desperdícios.</p>
+                  <p className="text-muted-foreground">{t('casosUsoIndustria.areaFim3')}</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="mt-1 h-2 w-2 rounded-full bg-primary flex-shrink-0" />
-                  <p className="text-muted-foreground">Previsão de demanda e logística integrada, garantindo eficiência na cadeia produtiva.</p>
+                  <p className="text-muted-foreground">{t('casosUsoIndustria.areaFim4')}</p>
                 </div>
               </CardContent>
             </Card>
@@ -156,9 +156,9 @@ const CasosUsoIndustria = () => {
                 <div className="flex items-start gap-3">
                   <TrendingUp className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="font-semibold text-lg mb-2">Resultado</h3>
+                    <h3 className="font-semibold text-lg mb-2">{t('casosUsoIndustria.resultLabel')}</h3>
                     <p className="text-muted-foreground">
-                      Aumento da produtividade, redução de custos e maior competitividade global.
+                      {t('casosUsoIndustria.resultText')}
                     </p>
                   </div>
                 </div>
@@ -176,7 +176,7 @@ const CasosUsoIndustria = () => {
             <div className="text-center mb-12">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-4">
                 <Package className="h-4 w-4 text-primary" />
-                <span className="text-sm font-medium text-primary">Case de Sucesso</span>
+                <span className="text-sm font-medium text-primary">{t('casosUsoIndustria.caseSuccessBadge')}</span>
               </div>
               <div className="flex items-center justify-center gap-4 mb-4">
                 <div className="rounded-lg overflow-hidden flex-shrink-0">
@@ -195,16 +195,16 @@ const CasosUsoIndustria = () => {
             <Card className="border-2">
               <CardContent className="p-8 space-y-6">
                 <div>
-                  <h3 className="text-xl font-semibold mb-3">O Desafio</h3>
+                  <h3 className="text-xl font-semibold mb-3">{t('casosUsoIndustria.flexChallengeTitle')}</h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    A Flex, indústria referência no setor eletroeletrônico, buscava evoluir para um modelo de Indústria 4.0, mas enfrentava desafios na integração de informações de chão de fábrica com sistemas de gestão e na utilização estratégica dos dados disponíveis.
+                    {t('casosUsoIndustria.flexChallengeText')}
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-semibold mb-3">A Solução</h3>
+                  <h3 className="text-xl font-semibold mb-3">{t('casosUsoIndustria.flexSolutionTitle')}</h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    A RedMaxx implementou o RedData como núcleo central de Big Data e Inteligência Artificial, consolidando dados de sensores IoT, linhas de produção, ERPs e cadeia logística em uma única plataforma analítica.
+                    {t('casosUsoIndustria.flexSolutionText')}
                   </p>
                 </div>
 
@@ -212,10 +212,10 @@ const CasosUsoIndustria = () => {
                 <div className="my-8 -mx-8 p-8 bg-gradient-to-br from-muted/50 via-background to-muted/30">
                   <div className="text-center mb-6">
                     <h3 className="text-2xl font-bold text-foreground mb-2">
-                      Dashboard <span className="text-primary">do Projeto</span>
+                      {t('casosUsoIndustria.dashboardProjectTitle')}
                     </h3>
                     <p className="text-muted-foreground">
-                      Visão consolidada em tempo real dos KPIs financeiros e operacionais
+                      {t('casosUsoIndustria.dashboardProjectDesc')}
                     </p>
                   </div>
 
@@ -225,10 +225,10 @@ const CasosUsoIndustria = () => {
                         <div>
                           <CardTitle className="text-2xl flex items-center gap-2">
                             <BarChart3 className="h-6 w-6 text-primary" />
-                            Dashboard Financeiro - Área Meio
+                            {t('casosUsoIndustria.financialDashboard')}
                           </CardTitle>
                           <CardDescription className="mt-2">
-                            Dados atualizados em tempo real | Período: Jan - Ago 2024
+                            {t('casosUsoIndustria.realTimeMonitoring')}
                           </CardDescription>
                         </div>
                         <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 border border-primary/20">

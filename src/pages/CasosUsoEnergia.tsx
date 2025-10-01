@@ -136,8 +136,7 @@ const CasosUsoEnergia = () => {
 
           <div className="mt-8 p-6 bg-muted/50 rounded-lg border border-border">
             <p className="text-lg font-medium text-center">
-              Com o RedData, a Enel passou a atuar de forma proativa e orientada por dados, 
-              garantindo maior eficiência, segurança e sustentabilidade em suas operações.
+              {t('casosUsoEnergia.conclusionEnel')}
             </p>
           </div>
 
