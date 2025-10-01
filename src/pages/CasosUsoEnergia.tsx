@@ -1,10 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Zap, TrendingUp, Shield, BarChart3, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 import enelDashboard from "@/assets/enel-dashboard.jpeg";
 import enelLogo from "@/assets/enel-logo.png";
 
 const CasosUsoEnergia = () => {
+  const { t } = useLanguage();
+  
   return (
     <div className="min-h-screen bg-background">
       {/* Header with Back Button */}
@@ -13,7 +16,7 @@ const CasosUsoEnergia = () => {
           <Link to="/">
             <Button variant="ghost" className="gap-2">
               <ArrowLeft className="h-4 w-4" />
-              Voltar para página principal
+              {t('casosUsoEnergia.backHome')}
             </Button>
           </Link>
         </div>
@@ -26,17 +29,11 @@ const CasosUsoEnergia = () => {
             <div className="p-3 rounded-lg bg-primary/10">
               <Zap className="h-8 w-8 text-primary" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold">Energia</h1>
+            <h1 className="text-4xl md:text-5xl font-bold">{t('casosUsoEnergia.badge')}</h1>
           </div>
           
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Nesta vertical de negócios, a RedMaxx, por meio da plataforma proprietária RedData, 
-            realiza a transformação digital das operações energéticas com foco em confiabilidade, 
-            prevenção de falhas e eficiência operacional. O RedData integra dados de sensores, 
-            sistemas legados e operações em tempo real, aplicando Big Data e Inteligência Artificial 
-            para gerar insights preditivos, dashboards inteligentes e automação de processos críticos, 
-            permitindo que empresas de energia reduzam custos, aumentem a disponibilidade da rede e 
-            assegurem maior segurança para seus clientes.
+            {t('casosUsoEnergia.intro')}
           </p>
         </div>
       </section>
@@ -47,23 +44,23 @@ const CasosUsoEnergia = () => {
           <div className="grid md:grid-cols-3 gap-6">
             <div className="p-6 rounded-lg bg-background border border-border">
               <TrendingUp className="h-10 w-10 text-primary mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Eficiência Operacional</h3>
+              <h3 className="text-xl font-semibold mb-2">{t('casosUsoEnergia.benefit1Title')}</h3>
               <p className="text-muted-foreground">
-                Otimização de recursos e redução de custos com manutenção corretiva
+                {t('casosUsoEnergia.benefit1Desc')}
               </p>
             </div>
             <div className="p-6 rounded-lg bg-background border border-border">
               <Shield className="h-10 w-10 text-primary mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Maior Confiabilidade</h3>
+              <h3 className="text-xl font-semibold mb-2">{t('casosUsoEnergia.benefit2Title')}</h3>
               <p className="text-muted-foreground">
-                Manutenção preditiva que antecipa falhas e reduz tempo de indisponibilidade
+                {t('casosUsoEnergia.benefit2Desc')}
               </p>
             </div>
             <div className="p-6 rounded-lg bg-background border border-border">
               <BarChart3 className="h-10 w-10 text-primary mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Insights em Tempo Real</h3>
+              <h3 className="text-xl font-semibold mb-2">{t('casosUsoEnergia.benefit3Title')}</h3>
               <p className="text-muted-foreground">
-                Dashboards inteligentes para tomada de decisão orientada por dados
+                {t('casosUsoEnergia.benefit3Desc')}
               </p>
             </div>
           </div>
@@ -82,26 +79,23 @@ const CasosUsoEnergia = () => {
                   className="h-16 w-auto object-contain"
                 />
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold">Case: Enel (SP)</h2>
+              <h2 className="text-3xl md:text-4xl font-bold">{t('casosUsoEnergia.caseTitle')}</h2>
             </div>
             <p className="text-lg text-muted-foreground mb-6">
-              A Enel enfrentava o desafio de lidar com grandes volumes de dados dispersos, sem 
-              visibilidade consolidada sobre a saúde da rede elétrica. A RedMaxx implementou o 
-              RedData como plataforma central de análise e monitoramento, conectando múltiplas 
-              fontes de dados e aplicando algoritmos preditivos para antecipar falhas.
+              {t('casosUsoEnergia.challengeText')}
             </p>
           </div>
 
           {/* Results */}
           <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-8 mb-12 border border-primary/20">
-            <h3 className="text-2xl font-semibold mb-6">Principais entregas e resultados:</h3>
+            <h3 className="text-2xl font-semibold mb-6">{t('casosUsoEnergia.resultsTitle')}</h3>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="flex gap-3">
                 <div className="mt-1">
                   <div className="h-2 w-2 rounded-full bg-primary" />
                 </div>
                 <p className="text-foreground">
-                  Dashboards em tempo real para acompanhamento da rede elétrica
+                  {t('casosUsoEnergia.result1')}
                 </p>
               </div>
               <div className="flex gap-3">
@@ -109,7 +103,7 @@ const CasosUsoEnergia = () => {
                   <div className="h-2 w-2 rounded-full bg-primary" />
                 </div>
                 <p className="text-foreground">
-                  Manutenção preditiva, reduzindo falhas operacionais e tempo de indisponibilidade
+                  {t('casosUsoEnergia.result2')}
                 </p>
               </div>
               <div className="flex gap-3">
@@ -117,7 +111,7 @@ const CasosUsoEnergia = () => {
                   <div className="h-2 w-2 rounded-full bg-primary" />
                 </div>
                 <p className="text-foreground">
-                  Aumento da confiabilidade no fornecimento de energia, com melhoria significativa nos indicadores de continuidade
+                  {t('casosUsoEnergia.result3')}
                 </p>
               </div>
               <div className="flex gap-3">
@@ -125,7 +119,7 @@ const CasosUsoEnergia = () => {
                   <div className="h-2 w-2 rounded-full bg-primary" />
                 </div>
                 <p className="text-foreground">
-                  Otimização dos recursos técnicos, reduzindo custos de manutenção corretiva
+                  {t('casosUsoEnergia.result4')}
                 </p>
               </div>
             </div>
@@ -154,10 +148,9 @@ const CasosUsoEnergia = () => {
                 <FileText className="h-8 w-8 text-primary" />
               </div>
               <div className="flex-1">
-                <h3 className="text-xl font-semibold mb-2">Artigo Científico</h3>
+                <h3 className="text-xl font-semibold mb-2">{t('casosUsoEnergia.scientificArticle')}</h3>
                 <p className="text-muted-foreground mb-4">
-                  Este projeto gerou um artigo científico desenvolvido a pedido da própria Enel, 
-                  documentando os resultados e metodologias aplicadas na predição de falhas em religadoras automáticas.
+                  {t('casosUsoEnergia.articleDesc')}
                 </p>
                 <a 
                   href="/enel-scientific-article.pdf" 
@@ -167,7 +160,7 @@ const CasosUsoEnergia = () => {
                 >
                   <Button variant="default" className="gap-2">
                     <FileText className="h-4 w-4" />
-                    Baixar Artigo Científico
+                    {t('casosUsoEnergia.downloadArticle')}
                   </Button>
                 </a>
               </div>
@@ -180,14 +173,14 @@ const CasosUsoEnergia = () => {
       <section className="py-16 px-4 bg-primary/5">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-3xl font-bold mb-4">
-            Transforme suas operações energéticas
+            {t('casosUsoEnergia.ctaTitle')}
           </h2>
           <p className="text-lg text-muted-foreground mb-8">
-            Descubra como o RedData pode revolucionar a gestão da sua empresa
+            {t('casosUsoEnergia.ctaSubtitle')}
           </p>
           <Link to="/#contact-form">
             <Button size="lg" className="gap-2">
-              Solicitar Demonstração
+              {t('casosUsoEnergia.requestDemo')}
             </Button>
           </Link>
         </div>

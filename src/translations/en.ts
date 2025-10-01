@@ -54,7 +54,13 @@ export default {
     highlight4Title: "Total physical and digital control",
     highlight4Desc: "Your data, your infrastructure",
     idealFor: "Ideal for:",
-    consultModels: "Consult Models"
+    consultModels: "Consult Models",
+    health: "Healthcare",
+    education: "Education",
+    security: "Security",
+    finance: "Finance Department",
+    justiceCourtis: "Justice Courts",
+    accountCourtis: "Audit Courts"
   },
   virtualMachines: {
     badge: "Maximum Flexibility",
@@ -207,7 +213,24 @@ export default {
     documentation: "Documentation",
     contact: "Contact",
     faq: "FAQ",
-    rights: "All rights reserved."
+    rights: "All rights reserved.",
+    companyInfo: "RedMaxx",
+    experience: "15+ years of experience",
+    nationalTech: "100% national technology",
+    certified: "ISO 27001 certified",
+    methodology: "Data Driven Government Methodology",
+    addresses: "Addresses",
+    headquarters: "Headquarters",
+    branch: "Branch",
+    joinville: "Joinville - SC",
+    manaus: "Manaus - AM",
+    saoPaulo: "São Paulo - SP",
+    weekSchedule: "Mon-Fri: 8am – 5pm",
+    privacyPolicy: "Privacy Policy",
+    lgpd: "LGPD",
+    copyright: "Copyright",
+    nationalTechBadge: "National Technology",
+    poweredBy: "Powered by RedMaxx - Maximizing Results"
   },
   casosUsoEnergia: {
     backHome: "Back to Home",

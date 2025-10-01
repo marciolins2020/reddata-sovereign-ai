@@ -54,7 +54,13 @@ export default {
     highlight4Title: "Controle físico e digital total",
     highlight4Desc: "Seus dados, sua infraestrutura",
     idealFor: "Ideal para:",
-    consultModels: "Consultar Modelos"
+    consultModels: "Consultar Modelos",
+    health: "Saúde",
+    education: "Educação",
+    security: "Segurança",
+    finance: "Fazenda",
+    justiceCourtis: "Tribunais de Justiça",
+    accountCourtis: "Tribunais de Contas"
   },
   virtualMachines: {
     badge: "Máxima Flexibilidade",
@@ -207,7 +213,24 @@ export default {
     documentation: "Documentação",
     contact: "Contato",
     faq: "FAQ",
-    rights: "Todos os direitos reservados."
+    rights: "Todos os direitos reservados.",
+    companyInfo: "RedMaxx",
+    experience: "15+ anos de experiência",
+    nationalTech: "100% tecnologia nacional",
+    certified: "ISO 27001 certificada",
+    methodology: "Metodologia Data Driven Government",
+    addresses: "Endereços",
+    headquarters: "Matriz",
+    branch: "Filial",
+    joinville: "Joinville - SC",
+    manaus: "Manaus - AM",
+    saoPaulo: "São Paulo - SP",
+    weekSchedule: "Seg-Sex: 8h – 17h",
+    privacyPolicy: "Política de Privacidade",
+    lgpd: "LGPD",
+    copyright: "Direitos Autorais",
+    nationalTechBadge: "Tecnologia Nacional",
+    poweredBy: "Powered by RedMaxx - Maxximizando Resultados"
   },
   casosUsoEnergia: {
     backHome: "Voltar para Home",

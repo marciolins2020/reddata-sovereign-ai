@@ -37,12 +37,12 @@ export const ApplianceSection = () => {
   ];
 
   const useCases = [
-    "Saúde",
-    "Educação", 
-    "Segurança",
-    "Fazenda",
-    "Tribunais de Justiça",
-    "Tribunais de Contas"
+    t('appliance.health'),
+    t('appliance.education'),
+    t('appliance.security'),
+    t('appliance.finance'),
+    t('appliance.justiceCourtis'),
+    t('appliance.accountCourtis')
   ];
 
   const scrollToForm = () => {

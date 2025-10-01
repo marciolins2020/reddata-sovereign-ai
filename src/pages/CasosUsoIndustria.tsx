@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, Factory, TrendingUp, Wrench, Package, DollarSign, BarChart3 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 import flexLogo from "@/assets/flex-industries-logo.png";
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
@@ -50,6 +51,7 @@ const CasosUsoIndustria = () => {
   ];
 
   const COLORS = ["#3b82f6", "#06b6d4", "#dc2626"];
+  const { t } = useLanguage();
 
   return (
     <div className="min-h-screen bg-background">
@@ -59,7 +61,7 @@ const CasosUsoIndustria = () => {
           <Link to="/">
             <Button variant="ghost" size="sm">
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Voltar para página principal
+              {t('casosUsoIndustria.backHome')}
             </Button>
           </Link>
         </div>
@@ -71,13 +73,13 @@ const CasosUsoIndustria = () => {
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">
               <Factory className="h-5 w-5 text-primary" />
-              <span className="text-sm font-medium text-primary">Caso de Uso: Indústria</span>
+              <span className="text-sm font-medium text-primary">{t('casosUsoIndustria.badge')}</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Indústria de Manufatura (Eletroeletrônico)
+              {t('casosUsoIndustria.title')}
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Nesta vertical, a RedMaxx, com a plataforma RedData, apoia a evolução da Indústria 4.0 ao integrar dados de chão de fábrica, ERP, sensores IoT e cadeia de suprimentos, aplicando Big Data e Inteligência Artificial para transformar tanto a área meio quanto a área fim.
+              {t('casosUsoIndustria.intro')}
             </p>
           </div>
         </div>

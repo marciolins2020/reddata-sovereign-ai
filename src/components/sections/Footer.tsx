@@ -32,21 +32,21 @@ export const Footer = () => {
           
           {/* Company Info */}
           <div>
-            <h4 className="font-semibold text-white mb-4">RedMaxx</h4>
+            <h4 className="font-semibold text-white mb-4">{t('footer.companyInfo')}</h4>
             <ul className="space-y-2 text-gray-300 text-sm">
-              <li>15+ anos de experiência</li>
-              <li>100% tecnologia nacional</li>
-              <li>ISO 27001 certificada</li>
-              <li>Metodologia Data Driven Government</li>
+              <li>{t('footer.experience')}</li>
+              <li>{t('footer.nationalTech')}</li>
+              <li>{t('footer.certified')}</li>
+              <li>{t('footer.methodology')}</li>
             </ul>
           </div>
           
           {/* Contact */}
           <div>
-            <h4 className="font-semibold text-white mb-4">Endereços</h4>
+            <h4 className="font-semibold text-white mb-4">{t('footer.addresses')}</h4>
             <div className="space-y-4 text-gray-300 text-sm">
               <div>
-                <p className="font-medium text-white">Joinville - SC (Matriz)</p>
+                <p className="font-medium text-white">{t('footer.joinville')} ({t('footer.headquarters')})</p>
                 <p>R. Dona Francisca, 801 - Andar 1</p>
                 <p>Sala 05 e 06 - Saguaçu</p>
                 <p>89221-006 - Joinville - SC</p>
@@ -54,7 +54,7 @@ export const Footer = () => {
               </div>
               
               <div>
-                <p className="font-medium text-white">Manaus - AM (Filial)</p>
+                <p className="font-medium text-white">{t('footer.manaus')} ({t('footer.branch')})</p>
                 <p>R. Rio Purús, 458, Cj.Vieiralves</p>
                 <p>Nossa Sra. das Graças</p>
                 <p>69053-050 - Manaus/AM</p>
@@ -62,7 +62,7 @@ export const Footer = () => {
               </div>
               
               <div>
-                <p className="font-medium text-white">São Paulo - SP (Filial)</p>
+                <p className="font-medium text-white">{t('footer.saoPaulo')} ({t('footer.branch')})</p>
                 <p>Av. Eng. Luiz Carlos Berrini, 1140</p>
                 <p>7° Andar - Sala 201/202</p>
                 <p>04571-000 - São Paulo - SP</p>
@@ -74,7 +74,7 @@ export const Footer = () => {
                 <p>Site: <a href="http://www.redmaxx.com.br" target="_blank" rel="noopener noreferrer" className="text-primary-glow hover:text-white transition-colors">www.redmaxx.com.br</a></p>
                 <p>Instagram: <a href="https://www.instagram.com/redmaxxbr" target="_blank" rel="noopener noreferrer" className="text-primary-glow hover:text-white transition-colors">@redmaxxbr</a></p>
                 <p>LinkedIn: <a href="https://www.linkedin.com/company/redmaxx/" target="_blank" rel="noopener noreferrer" className="text-primary-glow hover:text-white transition-colors">redmaxx</a></p>
-                <p>Seg-Sex: 8h – 17h</p>
+                <p>{t('footer.weekSchedule')}</p>
               </div>
             </div>
           </div>
@@ -84,9 +84,9 @@ export const Footer = () => {
         
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex flex-wrap items-center gap-6 text-sm text-gray-400">
-            <a href="#" className="hover:text-white transition-colors">Política de Privacidade</a>
-            <a href="#" className="hover:text-white transition-colors">LGPD</a>
-            <a href="#" className="hover:text-white transition-colors">Direitos Autorais</a>
+            <a href="#" className="hover:text-white transition-colors">{t('footer.privacyPolicy')}</a>
+            <a href="#" className="hover:text-white transition-colors">{t('footer.lgpd')}</a>
+            <a href="#" className="hover:text-white transition-colors">{t('footer.copyright')}</a>
           </div>
           
           <div className="flex items-center gap-4">
@@ -101,7 +101,7 @@ export const Footer = () => {
               <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center">
                 🇧🇷
               </div>
-              <span className="text-xs text-gray-400">Tecnologia Nacional</span>
+              <span className="text-xs text-gray-400">{t('footer.nationalTechBadge')}</span>
             </div>
           </div>
         </div>
@@ -109,7 +109,7 @@ export const Footer = () => {
         <div className="text-center mt-8 pt-8 border-t border-gray-700">
           <p className="text-gray-400 text-sm">
             © 2024 RedMaxx. {t('footer.rights')}
-            <span className="block mt-1">Powered by RedMaxx - Maxximizando Resultados</span>
+            <span className="block mt-1">{t('footer.poweredBy')}</span>
           </p>
         </div>
       </div>
