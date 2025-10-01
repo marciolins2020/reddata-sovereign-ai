@@ -246,9 +246,9 @@ const CasosUsoIndustria = () => {
                             <DollarSign className="h-5 w-5 text-primary" />
                             <TrendingUp className="h-4 w-4 text-green-600" />
                           </div>
-                          <p className="text-sm text-muted-foreground mb-1">Saldo Final</p>
+                          <p className="text-sm text-muted-foreground mb-1">{t('casosUsoIndustria.kpiFinalBalance')}</p>
                           <p className="text-2xl font-bold text-foreground">R$ 9,0M</p>
-                          <p className="text-xs text-green-600 mt-1">+12.5% vs. anterior</p>
+                          <p className="text-xs text-green-600 mt-1">+12.5% {t('casosUsoIndustria.vsPrevious')}</p>
                         </div>
 
                         <div className="bg-gradient-to-br from-blue-500/10 to-blue-500/5 p-4 rounded-xl border border-blue-500/20">
@@ -256,9 +256,9 @@ const CasosUsoIndustria = () => {
                             <Package className="h-5 w-5 text-blue-600" />
                             <TrendingUp className="h-4 w-4 text-green-600" />
                           </div>
-                          <p className="text-sm text-muted-foreground mb-1">Custo Produção</p>
+                          <p className="text-sm text-muted-foreground mb-1">{t('casosUsoIndustria.kpiProductionCost')}</p>
                           <p className="text-2xl font-bold text-foreground">R$ 4,4M</p>
-                          <p className="text-xs text-green-600 mt-1">-8.2% redução</p>
+                          <p className="text-xs text-green-600 mt-1">-8.2% {t('casosUsoIndustria.reduction')}</p>
                         </div>
 
                         <div className="bg-gradient-to-br from-amber-500/10 to-amber-500/5 p-4 rounded-xl border border-amber-500/20">
@@ -266,9 +266,9 @@ const CasosUsoIndustria = () => {
                             <Factory className="h-5 w-5 text-amber-600" />
                             <TrendingUp className="h-4 w-4 text-green-600" />
                           </div>
-                          <p className="text-sm text-muted-foreground mb-1">Eficiência</p>
+                          <p className="text-sm text-muted-foreground mb-1">{t('casosUsoIndustria.kpiEfficiency')}</p>
                           <p className="text-2xl font-bold text-foreground">94.7%</p>
-                          <p className="text-xs text-green-600 mt-1">+5.3% melhoria</p>
+                          <p className="text-xs text-green-600 mt-1">+5.3% {t('casosUsoIndustria.improvement')}</p>
                         </div>
 
                         <div className="bg-gradient-to-br from-green-500/10 to-green-500/5 p-4 rounded-xl border border-green-500/20">
@@ -276,9 +276,9 @@ const CasosUsoIndustria = () => {
                             <Wrench className="h-5 w-5 text-green-600" />
                             <TrendingUp className="h-4 w-4 text-green-600" />
                           </div>
-                          <p className="text-sm text-muted-foreground mb-1">Disponibilidade</p>
+                          <p className="text-sm text-muted-foreground mb-1">{t('casosUsoIndustria.kpiAvailability')}</p>
                           <p className="text-2xl font-bold text-foreground">98.2%</p>
-                          <p className="text-xs text-green-600 mt-1">+3.1% uptime</p>
+                          <p className="text-xs text-green-600 mt-1">+3.1% {t('casosUsoIndustria.uptime')}</p>
                         </div>
                       </div>
 
@@ -289,9 +289,9 @@ const CasosUsoIndustria = () => {
                           <div className="mb-4">
                             <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
                               <span className="h-8 w-1 bg-primary rounded-full" />
-                              Fluxo de Caixa - Projetado vs Realizado
+                              {t('casosUsoIndustria.cashFlowTitle')}
                             </h3>
-                            <p className="text-sm text-muted-foreground mt-1 ml-3">Análise comparativa mensal</p>
+                            <p className="text-sm text-muted-foreground mt-1 ml-3">{t('casosUsoIndustria.cashFlowDesc')}</p>
                           </div>
                           <ResponsiveContainer width="100%" height={320}>
                             <LineChart data={fluxoCaixaProjetado}>
@@ -299,7 +299,7 @@ const CasosUsoIndustria = () => {
                               <XAxis 
                                 dataKey="dia" 
                                 tick={{ fill: 'hsl(var(--muted-foreground))' }}
-                                label={{ value: 'Dia do Mês', position: 'insideBottom', offset: -5 }}
+                                label={{ value: t('casosUsoIndustria.dayOfMonth'), position: 'insideBottom', offset: -5 }}
                               />
                               <YAxis 
                                 tick={{ fill: 'hsl(var(--muted-foreground))' }}
@@ -318,7 +318,7 @@ const CasosUsoIndustria = () => {
                                 type="monotone" 
                                 dataKey="saldoFinal" 
                                 stroke="hsl(var(--primary))" 
-                                name="Saldo Final" 
+                                name={t('casosUsoIndustria.finalBalanceLabel')}
                                 strokeWidth={3}
                                 dot={{ fill: 'hsl(var(--primary))', r: 4 }}
                               />
@@ -326,7 +326,7 @@ const CasosUsoIndustria = () => {
                                 type="monotone" 
                                 dataKey="aReceber" 
                                 stroke="#10b981" 
-                                name="A Receber" 
+                                name={t('casosUsoIndustria.toReceive')}
                                 strokeWidth={2}
                                 strokeDasharray="5 5"
                               />
@@ -334,7 +334,7 @@ const CasosUsoIndustria = () => {
                                 type="monotone" 
                                 dataKey="aPagar" 
                                 stroke="#f59e0b" 
-                                name="A Pagar" 
+                                name={t('casosUsoIndustria.toPay')}
                                 strokeWidth={2}
                                 strokeDasharray="5 5"
                               />
@@ -347,9 +347,9 @@ const CasosUsoIndustria = () => {
                           <div className="mb-4">
                             <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
                               <span className="h-8 w-1 bg-blue-600 rounded-full" />
-                              Custos de Produção por Categoria
+                              {t('casosUsoIndustria.productionCostsTitle')}
                             </h3>
-                            <p className="text-sm text-muted-foreground mt-1 ml-3">Evolução trimestral (em milhares)</p>
+                            <p className="text-sm text-muted-foreground mt-1 ml-3">{t('casosUsoIndustria.productionCostsDesc')}</p>
                           </div>
                           <ResponsiveContainer width="100%" height={320}>
                             <BarChart data={custosProducao}>
