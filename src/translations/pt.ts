@@ -174,8 +174,8 @@ export default {
     testimonial3Role: "Gestão Municipal"
   },
   technicalArchitecture: {
-    title: "Componentes Técnicos Essenciais em Plataformas de Big Data & IA",
-    subtitle: "Uma plataforma de Big Data e Inteligência Artificial robusta deve ir além da coleta e análise de dados. Ela precisa garantir escala, confiabilidade, governança e inteligência contínua. Entre os componentes técnicos mais relevantes estão:",
+    title: "Arquitetura RedData",
+    subtitle: "O RedData vai além da coleta e análise de dados. Ele garante escala, confiabilidade, governança e inteligência contínua. Entre os componentes técnicos mais relevantes estão:",
     dataArchitecture: {
       title: "Arquitetura de Dados",
       items: [

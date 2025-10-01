@@ -174,8 +174,8 @@ export default {
     testimonial3Role: "Municipal Management"
   },
   technicalArchitecture: {
-    title: "Essential Technical Components in Big Data & AI Platforms",
-    subtitle: "A robust Big Data and Artificial Intelligence platform must go beyond data collection and analysis. It needs to ensure scale, reliability, governance, and continuous intelligence. Among the most relevant technical components are:",
+    title: "RedData Architecture",
+    subtitle: "RedData goes beyond data collection and analysis. It ensures scale, reliability, governance, and continuous intelligence. Among the most relevant technical components are:",
     dataArchitecture: {
       title: "Data Architecture",
       items: [
