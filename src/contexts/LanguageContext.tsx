@@ -18,10 +18,15 @@ const translations = {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguageState] = useState<Language>(() => {
+  const [language, setLanguageState] = useState<Language>('pt');
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  React.useEffect(() => {
     const saved = localStorage.getItem('language');
-    return (saved === 'en' || saved === 'pt') ? saved : 'pt';
-  });
+    const initialLanguage = (saved === 'en' || saved === 'pt') ? saved : 'pt';
+    setLanguageState(initialLanguage);
+    setIsInitialized(true);
+  }, []);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
@@ -41,11 +46,15 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     return value || key;
   };
 
-  const contextValue = {
+  const contextValue = React.useMemo(() => ({
     language,
     setLanguage,
     t
-  };
+  }), [language]);
+
+  if (!isInitialized) {
+    return null;
+  }
 
   return (
     <LanguageContext.Provider value={contextValue}>
