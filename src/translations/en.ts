@@ -14,7 +14,13 @@ export default {
     titleHighlight: "Big Data and AI",
     subtitle: "Transform data into strategy with security, sovereignty and predictability",
     cta: "Request Demo",
-    learnMore: "Learn More"
+    learnMore: "Learn More",
+    feature1Title: "100% National",
+    feature1Desc: "Digital Sovereignty",
+    feature2Title: "Offline AI",
+    feature2Desc: "No Dependencies",
+    feature3Title: "100+ Implementations",
+    feature3Desc: "Public Agencies and Private Companies"
   },
   stats: {
     highlight: "Over 100 implementations completed",

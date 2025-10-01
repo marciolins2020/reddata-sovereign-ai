@@ -14,7 +14,13 @@ export default {
     titleHighlight: "Big Data e IA",
     subtitle: "Transforme dados em estratégia com segurança, soberania e previsibilidade",
     cta: "Solicitar Demonstração",
-    learnMore: "Saiba Mais"
+    learnMore: "Saiba Mais",
+    feature1Title: "100% Nacional",
+    feature1Desc: "Soberania Digital",
+    feature2Title: "IA Offline",
+    feature2Desc: "Sem Dependência",
+    feature3Title: "100+ Implementações",
+    feature3Desc: "Órgãos Públicos e Empresas Privadas"
   },
   stats: {
     highlight: "Mais de 100 implementações realizadas",

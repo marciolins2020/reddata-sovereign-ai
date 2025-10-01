@@ -58,8 +58,8 @@ export const HeroSection = () => {
                   <Shield className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <div className="font-semibold">100% Nacional</div>
-                  <div className="text-sm text-muted-foreground">Soberania Digital</div>
+                  <div className="font-semibold">{t('hero.feature1Title')}</div>
+                  <div className="text-sm text-muted-foreground">{t('hero.feature1Desc')}</div>
                 </div>
               </div>
               
@@ -68,8 +68,8 @@ export const HeroSection = () => {
                   <Zap className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <div className="font-semibold">IA Offline</div>
-                  <div className="text-sm text-muted-foreground">Sem Dependência</div>
+                  <div className="font-semibold">{t('hero.feature2Title')}</div>
+                  <div className="text-sm text-muted-foreground">{t('hero.feature2Desc')}</div>
                 </div>
               </div>
               
@@ -78,8 +78,8 @@ export const HeroSection = () => {
                   <Database className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <div className="font-semibold">100+ Implementações</div>
-                  <div className="text-sm text-muted-foreground">Órgãos Públicos e Empresas Privadas</div>
+                  <div className="font-semibold">{t('hero.feature3Title')}</div>
+                  <div className="text-sm text-muted-foreground">{t('hero.feature3Desc')}</div>
                 </div>
               </div>
             </div>
