@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, ShoppingCart, TrendingUp, MapPin, BarChart3, Target, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import amancoLogo from "@/assets/amanco-logo.png";
+import amancoDashboard from "@/assets/amanco-dashboard.png";
 
 const CasosUsoVarejo = () => {
   const { t } = useLanguage();
@@ -70,14 +72,21 @@ const CasosUsoVarejo = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="mb-12">
             <div className="flex items-center gap-4 mb-4">
-              <div className="p-3 rounded-lg bg-primary/10">
-                <ShoppingCart className="h-12 w-12 text-primary" />
-              </div>
+              <img src={amancoLogo} alt="Amanco Wavin Logo" className="h-16 w-auto" />
               <h2 className="text-3xl md:text-4xl font-bold">{t('casosUsoVarejo.caseTitle')}</h2>
             </div>
             <p className="text-lg text-muted-foreground mb-6">
               {t('casosUsoVarejo.challengeText')}
             </p>
+          </div>
+
+          {/* Dashboard Image */}
+          <div className="mb-12 rounded-xl overflow-hidden border border-border shadow-lg">
+            <img 
+              src={amancoDashboard} 
+              alt="Dashboard Amanco - Análise de Lojas" 
+              className="w-full h-auto"
+            />
           </div>
 
           {/* Challenge Details */}
