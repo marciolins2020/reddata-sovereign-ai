@@ -38,6 +38,8 @@ export const ApplianceSection = () => {
   ];
 
   const useCases = [
+    t('appliance.retail'),
+    t('appliance.industry'),
     t('appliance.health'),
     t('appliance.education'),
     t('appliance.security'),

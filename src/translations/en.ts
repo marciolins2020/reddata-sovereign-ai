@@ -61,6 +61,8 @@ export default {
     highlight4Desc: "Your data, your infrastructure",
     idealFor: "Ideal for:",
     consultModels: "Consult Models",
+    retail: "Retail",
+    industry: "Industries",
     health: "Healthcare",
     education: "Education",
     security: "Security",
