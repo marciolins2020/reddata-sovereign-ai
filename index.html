@@ -171,19 +171,31 @@
 
   <body>
     <div id="root"></div>
+    <!-- Defer main script loading with async module loading -->
     <script>
-      // Async CSS loading to prevent render blocking
+      // Make CSS non-blocking by deferring load
       (function() {
-        const links = document.getElementsByTagName('link');
-        for (let i = 0; i < links.length; i++) {
-          const link = links[i];
-          if (link.rel === 'stylesheet' && link.href.includes('/assets/')) {
-            link.media = 'print';
-            link.onload = function() {
-              this.media = 'all';
-            };
-          }
-        }
+        const loadCSS = function(href) {
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = href;
+          link.media = 'print';
+          link.onload = function() { this.media = 'all'; };
+          document.head.appendChild(link);
+        };
+        
+        // Watch for stylesheets added by module script
+        const observer = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            mutation.addedNodes.forEach(function(node) {
+              if (node.tagName === 'LINK' && node.rel === 'stylesheet' && node.href.includes('/assets/')) {
+                node.media = 'print';
+                node.onload = function() { this.media = 'all'; };
+              }
+            });
+          });
+        });
+        observer.observe(document.head, { childList: true, subtree: false });
       })();
     </script>
     <script type="module" src="/src/main.tsx"></script>
