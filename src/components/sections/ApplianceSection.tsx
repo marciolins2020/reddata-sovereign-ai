@@ -46,7 +46,13 @@ export const ApplianceSection = () => {
   ];
 
   const scrollToForm = () => {
-    document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
+    const element = document.getElementById('contact-form');
+    if (element) {
+      requestAnimationFrame(() => {
+        const top = element.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top, behavior: 'smooth' });
+      });
+    }
   };
 
   return (

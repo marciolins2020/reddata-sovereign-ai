@@ -7,11 +7,23 @@ import reddataDashboardReal from "@/assets/reddata-dashboard-real.png";
 export const HeroSection = () => {
   const { t } = useLanguage();
   const scrollToForm = () => {
-    document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
+    const element = document.getElementById('contact-form');
+    if (element) {
+      requestAnimationFrame(() => {
+        const top = element.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top, behavior: 'smooth' });
+      });
+    }
   };
 
   const scrollToDemo = () => {
-    document.getElementById('dashboard-demo')?.scrollIntoView({ behavior: 'smooth' });
+    const element = document.getElementById('dashboard-demo');
+    if (element) {
+      requestAnimationFrame(() => {
+        const top = element.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top, behavior: 'smooth' });
+      });
+    }
   };
 
   return (

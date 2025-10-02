@@ -54,7 +54,10 @@ export const Header = () => {
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      requestAnimationFrame(() => {
+        const top = element.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top, behavior: "smooth" });
+      });
       setIsMobileMenuOpen(false);
     }
   };
