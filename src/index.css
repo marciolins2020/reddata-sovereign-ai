@@ -15,10 +15,10 @@
     --popover-foreground: 0 0% 9%;
 
     /* RedMaxx Brand Colors */
-    --primary: 355 85% 49%;  /* RedMaxx Red #D92027 */
+    --primary: 355 85% 40%;  /* Darkened for WCAG AA contrast on white backgrounds */
     --primary-foreground: 0 0% 100%;
     --primary-glow: 355 85% 65%;
-    --primary-dark: 355 85% 35%;
+    --primary-dark: 355 85% 30%;
 
     --secondary: 210 16% 93%;
     --secondary-foreground: 0 0% 15%;
@@ -79,7 +79,7 @@
     --popover: 220 15% 10%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 355 85% 49%;
+    --primary: 355 85% 40%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 220 15% 15%;
