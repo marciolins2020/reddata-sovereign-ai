@@ -114,7 +114,13 @@ export const Footer = () => {
         
         <div className="text-center mt-8 pt-8 border-t border-gray-700">
           <p className="text-gray-400 text-sm">
-            © 2024 RedMaxx. {t('footer.rights')}
+            © 2025 RedMaxx. {t('footer.rights')}
+            <span className="block mt-2 text-muted-foreground">
+              Transforme dados em estratégia com segurança, soberania e previsibilidade.
+            </span>
+            <span className="block mt-1 text-xs text-muted-foreground">
+              100+ Implementações | Empresas Privadas e Órgãos Públicos
+            </span>
             <span className="block mt-1">{t('footer.poweredBy')}</span>
           </p>
         </div>

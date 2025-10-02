@@ -9,7 +9,7 @@ export default {
     requestDemo: "Solicitar Demonstração"
   },
   hero: {
-    badge: "Plataforma 100% Brasileira",
+    badge: "Plataforma 100% Brasileira | Plataforma Data Driven Business",
     title: "A Plataforma Brasileira de",
     titleHighlight: "Big Data e IA",
     subtitle: "Transforme dados em estratégia com segurança, soberania e previsibilidade",
