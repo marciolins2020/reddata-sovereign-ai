@@ -3,6 +3,9 @@ import { Header } from "@/components/sections/Header";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { StatsSection } from "@/components/sections/StatsSection";
 import { WhatsAppWidget } from "@/components/ui/WhatsAppWidget";
+import { Footer } from "@/components/sections/Footer";
+import { FAQSection } from "@/components/sections/FAQSection";
+import { ContactFormSection } from "@/components/sections/ContactFormSection";
 
 // Lazy load below-the-fold sections
 const HowItWorksSection = lazy(() => import("@/components/sections/HowItWorksSection").then(m => ({ default: m.HowItWorksSection })));
@@ -13,9 +16,6 @@ const TechnicalArchitectureSection = lazy(() => import("@/components/sections/Te
 const TestimonialsSection = lazy(() => import("@/components/sections/TestimonialsSection").then(m => ({ default: m.TestimonialsSection })));
 const ComparisonSection = lazy(() => import("@/components/sections/ComparisonSection").then(m => ({ default: m.ComparisonSection })));
 const DashboardDemoSection = lazy(() => import("@/components/sections/DashboardDemoSection").then(m => ({ default: m.DashboardDemoSection })));
-const FAQSection = lazy(() => import("@/components/sections/FAQSection").then(m => ({ default: m.FAQSection })));
-const ContactFormSection = lazy(() => import("@/components/sections/ContactFormSection").then(m => ({ default: m.ContactFormSection })));
-const Footer = lazy(() => import("@/components/sections/Footer").then(m => ({ default: m.Footer })));
 
 const Index = () => {
   return (
@@ -32,10 +32,10 @@ const Index = () => {
         <DashboardDemoSection />
         <ComparisonSection />
         <TestimonialsSection />
-        <FAQSection />
-        <ContactFormSection />
-        <Footer />
       </Suspense>
+      <FAQSection />
+      <ContactFormSection />
+      <Footer />
       <WhatsAppWidget />
     </main>
   );
