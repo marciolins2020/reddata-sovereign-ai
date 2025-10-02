@@ -168,6 +168,21 @@
 
   <body>
     <div id="root"></div>
+    <script>
+      // Async CSS loading to prevent render blocking
+      (function() {
+        const links = document.getElementsByTagName('link');
+        for (let i = 0; i < links.length; i++) {
+          const link = links[i];
+          if (link.rel === 'stylesheet' && link.href.includes('/assets/')) {
+            link.media = 'print';
+            link.onload = function() {
+              this.media = 'all';
+            };
+          }
+        }
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
