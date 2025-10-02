@@ -136,4 +136,29 @@
   body {
     position: relative;
   }
+
+  /* Performance optimizations to limit reflow scope */
+  section {
+    contain: layout style paint;
+    content-visibility: auto;
+  }
+
+  /* Optimize interactive elements that cause reflows */
+  [role="menu"],
+  [role="dialog"],
+  [role="listbox"],
+  [data-radix-popper-content-wrapper] {
+    contain: layout style;
+    will-change: transform, opacity;
+  }
+
+  /* Limit reflow scope in navigation */
+  nav {
+    contain: layout style;
+  }
+
+  /* Optimize cards and grid items */
+  [class*="grid"] > * {
+    contain: layout style paint;
+  }
 }
