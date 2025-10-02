@@ -89,7 +89,7 @@ export const ApplianceSection = () => {
                     <highlight.icon className="h-5 w-5 text-primary-glow" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-white mb-1">{highlight.title}</h4>
+                    <h3 className="font-semibold text-white mb-1">{highlight.title}</h3>
                     <p className="text-sm text-gray-400">{highlight.description}</p>
                   </div>
                 </div>
@@ -97,7 +97,7 @@ export const ApplianceSection = () => {
             </div>
             
             <div className="mb-8">
-              <h4 className="font-semibold text-white mb-4">{t('appliance.idealFor')}</h4>
+              <h3 className="font-semibold text-white mb-4">{t('appliance.idealFor')}</h3>
               <div className="flex flex-wrap gap-2">
                 {useCases.map((useCase, index) => (
                   <span 

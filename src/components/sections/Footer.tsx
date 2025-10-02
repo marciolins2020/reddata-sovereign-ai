@@ -32,7 +32,7 @@ export const Footer = () => {
           
           {/* Company Info */}
           <div>
-            <h4 className="font-semibold text-white mb-4">{t('footer.companyInfo')}</h4>
+            <h3 className="font-semibold text-white mb-4">{t('footer.companyInfo')}</h3>
             <ul className="space-y-2 text-gray-300 text-sm">
               <li>{t('footer.experience')}</li>
               <li>{t('footer.nationalTech')}</li>
@@ -43,7 +43,7 @@ export const Footer = () => {
           
           {/* Contact */}
           <div>
-            <h4 className="font-semibold text-white mb-4">{t('footer.addresses')}</h4>
+            <h3 className="font-semibold text-white mb-4">{t('footer.addresses')}</h3>
             <div className="space-y-4 text-gray-300 text-sm">
               <div>
                 <p className="font-medium text-white">{t('footer.joinville')} ({t('footer.headquarters')})</p>
