@@ -72,7 +72,7 @@ export const Header = () => {
             <img
               src={redmaxxLogo}
               alt="RedMaxx"
-              className="h-8 md:h-10 cursor-pointer"
+              className="h-8 md:h-10 w-auto cursor-pointer"
               onClick={() => scrollToSection("#hero")}
               width="320"
               height="128"
