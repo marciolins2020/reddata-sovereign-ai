@@ -74,6 +74,9 @@ export const Header = () => {
               alt="RedMaxx"
               className="h-8 md:h-10 cursor-pointer"
               onClick={() => scrollToSection("#hero")}
+              width="320"
+              height="128"
+              loading="eager"
             />
           </div>
 

@@ -24,7 +24,10 @@ export const HeroSection = () => {
                 <img 
                   src={reddataLogo} 
                   alt="RedData® - Plataforma de Big Data e IA"
-                className="h-12 md:h-16"
+                  className="h-12 md:h-16"
+                  width="600"
+                  height="96"
+                  loading="eager"
               />
             </div>
             
