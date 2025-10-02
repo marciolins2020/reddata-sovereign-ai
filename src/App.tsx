@@ -4,12 +4,15 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import { lazy, Suspense } from "react";
 import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import CasosUsoEnergia from "./pages/CasosUsoEnergia";
-import CasosUsoIndustria from "./pages/CasosUsoIndustria";
-import CasosUsoGoverno from "./pages/CasosUsoGoverno";
-import CasosUsoVarejo from "./pages/CasosUsoVarejo";
+
+// Lazy load non-home page routes to reduce initial bundle size
+const NotFound = lazy(() => import("./pages/NotFound"));
+const CasosUsoEnergia = lazy(() => import("./pages/CasosUsoEnergia"));
+const CasosUsoIndustria = lazy(() => import("./pages/CasosUsoIndustria"));
+const CasosUsoGoverno = lazy(() => import("./pages/CasosUsoGoverno"));
+const CasosUsoVarejo = lazy(() => import("./pages/CasosUsoVarejo"));
 
 const queryClient = new QueryClient();
 
@@ -21,15 +24,17 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/casos-uso/energia" element={<CasosUsoEnergia />} />
-            <Route path="/casos-uso/industria" element={<CasosUsoIndustria />} />
-            <Route path="/casos-uso/governo" element={<CasosUsoGoverno />} />
-            <Route path="/casos-uso/varejo" element={<CasosUsoVarejo />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <Suspense fallback={<div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>}>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/casos-uso/energia" element={<CasosUsoEnergia />} />
+              <Route path="/casos-uso/industria" element={<CasosUsoIndustria />} />
+              <Route path="/casos-uso/governo" element={<CasosUsoGoverno />} />
+              <Route path="/casos-uso/varejo" element={<CasosUsoVarejo />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
