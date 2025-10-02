@@ -45,6 +45,23 @@
         background: linear-gradient(135deg, #ffffff 0%, #f8f9fb 100%);
       }
       
+      /* Critical H1 styles for LCP element - MUST render immediately */
+      h1 {
+        font-size: 2.25rem;
+        font-weight: 700;
+        line-height: 1.2;
+        color: #1a1a1a;
+        margin-bottom: 1.5rem;
+      }
+      
+      @media (min-width: 768px) {
+        h1 { font-size: 3rem; }
+      }
+      
+      @media (min-width: 1024px) {
+        h1 { font-size: 3.75rem; }
+      }
+      
       /* Ensure LCP image container has proper aspect ratio */
       .hero-image-container {
         aspect-ratio: 16/9;
@@ -59,7 +76,7 @@
       }
       
       /* Prevent FOUT (Flash of Unstyled Text) */
-      h1, h2, h3, h4, h5, h6 {
+      h2, h3, h4, h5, h6 {
         font-weight: 700;
         line-height: 1.2;
       }
