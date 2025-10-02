@@ -20,9 +20,19 @@
         font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         line-height: 1.5;
         -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
         color: #1a1a1a;
+        background: #fff;
       }
       #root { min-height: 100vh; background: #fff; }
+      
+      /* Container and layout critical styles */
+      .container { 
+        width: 100%; 
+        max-width: 1280px; 
+        margin: 0 auto; 
+        padding: 0 1rem; 
+      }
       
       /* Header critical styles - sempre visível, fixo e translúcido */
       header {
@@ -37,7 +47,18 @@
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         transform: translateZ(0);
         will-change: transform;
+        padding: 1rem;
       }
+      
+      /* Navigation critical styles */
+      nav { display: flex; align-items: center; justify-content: space-between; }
+      nav a { 
+        text-decoration: none; 
+        color: #1a1a1a; 
+        font-weight: 500;
+        transition: color 0.2s;
+      }
+      nav a:hover { color: #0066cc; }
       
       /* Hero section critical styles to prevent layout shift */
       #hero {
@@ -45,6 +66,7 @@
         display: flex;
         align-items: center;
         padding-top: 5rem;
+        padding-bottom: 3rem;
         background: linear-gradient(135deg, #ffffff 0%, #f8f9fb 100%);
       }
       
@@ -59,29 +81,51 @@
       
       @media (min-width: 768px) {
         h1 { font-size: 3rem; }
+        .container { padding: 0 2rem; }
       }
       
       @media (min-width: 1024px) {
         h1 { font-size: 3.75rem; }
       }
       
+      /* Typography critical styles */
+      p { margin-bottom: 1rem; line-height: 1.6; }
+      h2 { font-size: 1.875rem; font-weight: 700; line-height: 1.2; margin-bottom: 1rem; }
+      h3 { font-size: 1.5rem; font-weight: 700; line-height: 1.3; margin-bottom: 0.75rem; }
+      h4, h5, h6 { font-weight: 700; line-height: 1.2; }
+      
       /* Ensure LCP image container has proper aspect ratio */
       .hero-image-container {
         aspect-ratio: 16/9;
         width: 100%;
         max-width: 100%;
+        overflow: hidden;
+        border-radius: 0.5rem;
       }
       
       /* Button critical styles */
       button {
         font-family: inherit;
         cursor: pointer;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 0.5rem;
+        transition: all 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
       }
       
-      /* Prevent FOUT (Flash of Unstyled Text) */
-      h2, h3, h4, h5, h6 {
-        font-weight: 700;
-        line-height: 1.2;
+      /* Primary button styles */
+      .btn-primary {
+        background: #0066cc;
+        color: #fff;
+      }
+      .btn-primary:hover {
+        background: #0052a3;
+        transform: translateY(-2px);
       }
       
       /* Image loading optimization */
@@ -90,6 +134,26 @@
         height: auto;
         display: block;
       }
+      
+      /* Flexbox utilities for layout */
+      .flex { display: flex; }
+      .flex-col { flex-direction: column; }
+      .items-center { align-items: center; }
+      .justify-center { justify-content: center; }
+      .gap-4 { gap: 1rem; }
+      .gap-6 { gap: 1.5rem; }
+      
+      /* Grid utilities */
+      .grid { display: grid; }
+      
+      /* Spacing utilities */
+      .mt-4 { margin-top: 1rem; }
+      .mb-4 { margin-bottom: 1rem; }
+      .py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+      
+      /* Text utilities */
+      .text-center { text-align: center; }
+      .font-bold { font-weight: 700; }
     </style>
 
     <meta property="og:title" content="RedData - Plataforma Brasileira de Big Data e IA" />
