@@ -3,7 +3,6 @@ import { ArrowRight, Shield, Zap, Database } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { scrollToElement } from "@/lib/scroll";
 import reddataLogo from "@/assets/reddata-logo.png";
-import reddataDashboardReal from "@/assets/reddata-dashboard-real-optimized.webp";
 
 export const HeroSection = () => {
   const { t } = useLanguage();
@@ -87,7 +86,7 @@ export const HeroSection = () => {
             <div className="relative bg-card border border-border rounded-2xl overflow-hidden shadow-large hero-image-container">
               <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-primary rounded-full opacity-20 blur-xl"></div>
               <img 
-                src={reddataDashboardReal}
+                src="/reddata-dashboard-hero.webp"
                 alt="RedData® Dashboard - Ministério Público do Amazonas"
                 className="w-full h-auto object-cover"
                 width="800"
