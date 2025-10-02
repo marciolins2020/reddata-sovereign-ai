@@ -128,5 +128,12 @@
     left: 0 !important;
     right: 0 !important;
     z-index: 100 !important;
+    transform: translate3d(0, 0, 0) !important;
+    -webkit-transform: translate3d(0, 0, 0) !important;
+  }
+  
+  /* Prevent body scroll from affecting header */
+  body {
+    position: relative;
   }
 }
