@@ -97,7 +97,7 @@ export default {
     badge: "Demonstração",
     title: "RedData® em ação",
     subtitle: "Veja como a RedData® transforma dados complexos em insights visuais",
-    realDashboard: "Dashboard real da Secretaria de Educação Municipal de Manaus",
+    realDashboard: "Dashboard real da Secretaria de Municipal de Educação de Manaus (AM)",
     pocProduction: "Projeto PoC em produção",
     liveLabel: "Dashboard ao vivo",
     openNewTab: "Abrir em nova aba",
