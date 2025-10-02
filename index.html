@@ -14,14 +14,27 @@
     <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
     <style>
       /* Critical CSS for immediate rendering and LCP optimization */
-      * { box-sizing: border-box; }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
       body { 
         margin: 0; 
         font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         line-height: 1.5;
         -webkit-font-smoothing: antialiased;
+        color: #1a1a1a;
       }
       #root { min-height: 100vh; background: #fff; }
+      
+      /* Header critical styles */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
       
       /* Hero section critical styles to prevent layout shift */
       #hero {
@@ -37,6 +50,25 @@
         aspect-ratio: 16/9;
         width: 100%;
         max-width: 100%;
+      }
+      
+      /* Button critical styles */
+      button {
+        font-family: inherit;
+        cursor: pointer;
+      }
+      
+      /* Prevent FOUT (Flash of Unstyled Text) */
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: 700;
+        line-height: 1.2;
+      }
+      
+      /* Image loading optimization */
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
       }
     </style>
 
