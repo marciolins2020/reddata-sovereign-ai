@@ -80,12 +80,16 @@ export const HeroSection = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row items-center gap-3">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
                   <TrendingUp className="h-6 w-6 text-primary" />
                 </div>
-                <div>
-                  <div className="font-semibold">{t('hero.feature4Title')}</div>
-                  <div className="text-sm text-muted-foreground">{t('hero.feature4Desc')}</div>
+                <div className="flex flex-col leading-tight">
+                  <div className="font-semibold text-sm">Plataforma</div>
+                  <div className="font-semibold text-sm">Data Driven</div>
+                  <div className="font-semibold text-sm">Business</div>
+                  <div className="text-xs text-muted-foreground mt-1">Decisões</div>
+                  <div className="text-xs text-muted-foreground">Baseadas</div>
+                  <div className="text-xs text-muted-foreground">em Dados</div>
                 </div>
               </div>
             </div>
