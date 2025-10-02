@@ -81,13 +81,16 @@ export const HeroSection = () => {
           
           {/* Right Content - Real Dashboard Preview */}
           <div className="relative">
-            <div className="relative bg-card border border-border rounded-2xl overflow-hidden shadow-large">
+            <div className="relative bg-card border border-border rounded-2xl overflow-hidden shadow-large hero-image-container">
               <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-primary rounded-full opacity-20 blur-xl"></div>
               <img 
                 src={reddataDashboardReal}
                 alt="RedData® Dashboard - Ministério Público do Amazonas"
                 className="w-full h-auto object-cover"
+                width="800"
+                height="457"
                 fetchPriority="high"
+                loading="eager"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
               <div className="absolute bottom-4 left-4 right-4">
