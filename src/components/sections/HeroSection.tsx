@@ -1,30 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, Zap, Database } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { scrollToElement } from "@/lib/scroll";
 import reddataLogo from "@/assets/reddata-logo.png";
 import reddataDashboardReal from "@/assets/reddata-dashboard-real.webp";
 
 export const HeroSection = () => {
   const { t } = useLanguage();
-  const scrollToForm = () => {
-    const element = document.getElementById('contact-form');
-    if (element) {
-      requestAnimationFrame(() => {
-        const top = element.getBoundingClientRect().top + window.scrollY;
-        window.scrollTo({ top, behavior: 'smooth' });
-      });
-    }
-  };
-
-  const scrollToDemo = () => {
-    const element = document.getElementById('dashboard-demo');
-    if (element) {
-      requestAnimationFrame(() => {
-        const top = element.getBoundingClientRect().top + window.scrollY;
-        window.scrollTo({ top, behavior: 'smooth' });
-      });
-    }
-  };
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center bg-gradient-hero overflow-hidden pt-20">
@@ -55,11 +37,11 @@ export const HeroSection = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12">
-              <Button size="lg" onClick={scrollToForm} className="group">
+              <Button size="lg" onClick={() => scrollToElement('#contact-form')} className="group">
                 {t('hero.cta')}
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
-              <Button variant="outline" size="lg" onClick={scrollToDemo}>
+              <Button variant="outline" size="lg" onClick={() => scrollToElement('#dashboard-demo')}>
                 {t('hero.learnMore')}
               </Button>
             </div>

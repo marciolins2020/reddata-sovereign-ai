@@ -8,6 +8,7 @@ import {
   Shield
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { scrollToElement } from "@/lib/scroll";
 import reddataApplianceServer from "@/assets/reddata-appliance-server.webp";
 
 export const ApplianceSection = () => {
@@ -44,16 +45,6 @@ export const ApplianceSection = () => {
     t('appliance.justiceCourtis'),
     t('appliance.accountCourtis')
   ];
-
-  const scrollToForm = () => {
-    const element = document.getElementById('contact-form');
-    if (element) {
-      requestAnimationFrame(() => {
-        const top = element.getBoundingClientRect().top + window.scrollY;
-        window.scrollTo({ top, behavior: 'smooth' });
-      });
-    }
-  };
 
   return (
     <section className="py-24 bg-gradient-dark text-white relative overflow-hidden">
@@ -113,7 +104,7 @@ export const ApplianceSection = () => {
             <Button 
               size="lg" 
               variant="outline" 
-              onClick={scrollToForm}
+              onClick={() => scrollToElement('#contact-form')}
               className="border-primary-glow text-primary-glow hover:bg-primary-glow hover:text-white"
             >
               {t('appliance.consultModels')}

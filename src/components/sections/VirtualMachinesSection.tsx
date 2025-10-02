@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Cloud, Server, Settings } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { scrollToElement } from "@/lib/scroll";
 
 const vmProviders = [
   { name: "Hyper-V", logo: "🖥️" },
@@ -17,15 +18,6 @@ const vmProviders = [
 
 export const VirtualMachinesSection = () => {
   const { t } = useLanguage();
-  const scrollToForm = () => {
-    const element = document.getElementById('contact-form');
-    if (element) {
-      requestAnimationFrame(() => {
-        const top = element.getBoundingClientRect().top + window.scrollY;
-        window.scrollTo({ top, behavior: 'smooth' });
-      });
-    }
-  };
 
   return (
     <section className="py-24 bg-background">
@@ -95,7 +87,7 @@ export const VirtualMachinesSection = () => {
             </Card>
             
             <div className="mt-8">
-              <Button size="lg" onClick={scrollToForm}>
+              <Button size="lg" onClick={() => scrollToElement('#contact-form')}>
                 {t('virtualMachines.simulate')}
               </Button>
             </div>
