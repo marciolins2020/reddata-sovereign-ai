@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { scrollToElement } from "@/lib/scroll";
-import reddataApplianceServer from "@/assets/reddata-appliance-server.webp";
+import reddataApplianceServer from "@/assets/reddata-appliance-server-optimized.webp";
 
 export const ApplianceSection = () => {
   const { t } = useLanguage();
