@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Shield, Zap, Database } from "lucide-react";
+import { ArrowRight, Shield, Zap, Database, TrendingUp } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { scrollToElement } from "@/lib/scroll";
 import reddataLogo from "@/assets/reddata-logo.png";
@@ -48,7 +48,7 @@ export const HeroSection = () => {
               </Button>
             </div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center lg:text-left">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center lg:text-left">
               <div className="flex flex-col sm:flex-row items-center gap-3">
                 <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
                   <Shield className="h-6 w-6 text-primary" />
@@ -76,6 +76,16 @@ export const HeroSection = () => {
                 <div>
                   <div className="font-semibold">{t('hero.feature3Title')}</div>
                   <div className="text-sm text-muted-foreground">{t('hero.feature3Desc')}</div>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row items-center gap-3">
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                  <TrendingUp className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <div className="font-semibold">{t('hero.feature4Title')}</div>
+                  <div className="text-sm text-muted-foreground">{t('hero.feature4Desc')}</div>
                 </div>
               </div>
             </div>

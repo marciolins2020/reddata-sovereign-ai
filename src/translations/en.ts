@@ -9,7 +9,7 @@ export default {
     requestDemo: "Request Demo"
   },
   hero: {
-    badge: "100% Brazilian Platform",
+    badge: "100% Brazilian Platform | Data Driven Business Platform",
     title: "The Brazilian Platform for",
     titleHighlight: "Big Data and AI",
     subtitle: "Transform data into strategy with security, sovereignty and predictability",
@@ -20,7 +20,9 @@ export default {
     feature2Title: "Offline AI",
     feature2Desc: "No Dependencies",
     feature3Title: "100+ Implementations",
-    feature3Desc: "Public Agencies and Private Companies"
+    feature3Desc: "Public Agencies and Private Companies",
+    feature4Title: "Data Driven Business Platform",
+    feature4Desc: "Data-Based Decisions"
   },
   stats: {
     highlight: "Over 100 implementations completed",
