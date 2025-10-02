@@ -244,6 +244,8 @@ export default {
     a7: "Investment varies according to modality (SaaS, VM or Appliance) and data volume. We offer personalized simulations and flexible payment models. Contact us for a customized proposal for your needs.",
     q8: "Does RedData® replace existing tools?",
     a8: "RedData® complements and enhances your current tools. It can integrate with existing systems or replace traditional BI solutions, offering advanced AI capabilities that other tools don't have.",
+    q9: "Since when has RedData existed?",
+    a9: "RedData began to be developed by RedMaxx in 2018, based on accumulated experience in Big Data and Artificial Intelligence projects with market software (BigTechs). After two years of validation and improvement in real environments, it was officially launched in 2020. Since then, it has been continuously evolving and today is a consolidated platform, used by governments and private companies throughout Brazil.",
     stillHaveQuestions: "Still have questions? Contact us"
   },
   contact: {

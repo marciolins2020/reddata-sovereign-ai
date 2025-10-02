@@ -244,6 +244,8 @@ export default {
     a7: "O investimento varia conforme a modalidade (SaaS, VM ou Appliance) e volume de dados. Oferecemos simulações personalizadas e modelos de pagamento flexíveis. Entre em contato para uma proposta customizada para sua necessidade.",
     q8: "RedData® substitui ferramentas existentes?",
     a8: "O RedData® complementa e potencializa suas ferramentas atuais. Pode integrar com sistemas existentes ou substituir soluções de BI tradicionais, oferecendo capacidades avançadas de IA que outras ferramentas não possuem.",
+    q9: "Desde quando o RedData existe?",
+    a9: "O RedData começou a ser desenvolvido pela RedMaxx em 2018, a partir da experiência acumulada em projetos de Big Data e Inteligência Artificial com softwares de mercados (BigTechs). Após dois anos de validação e aprimoramento em ambientes reais, foi lançado oficialmente em 2020. Desde então, evolui continuamente e hoje é uma plataforma consolidada, utilizada por governos e empresas privadas em todo o Brasil.",
     stillHaveQuestions: "Ainda tem dúvidas? Entre em contato conosco"
   },
   contact: {
