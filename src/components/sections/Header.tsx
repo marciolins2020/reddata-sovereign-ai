@@ -4,7 +4,7 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { scrollToElement } from "@/lib/scroll";
-import redmaxxLogo from "@/assets/redmaxx-logo-optimized.png";
+import redmaxxLogo from "@/assets/redmaxx-logo.png";
 import {
   NavigationMenu,
   NavigationMenuContent,
