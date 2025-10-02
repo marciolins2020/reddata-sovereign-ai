@@ -279,7 +279,7 @@ export default {
     errorMessage: "Erro ao enviar mensagem. Tente novamente."
   },
   footer: {
-    description: "Plataforma brasileira de Big Data e IA para transformação digital empresarial",
+    description: "RedData® – A Plataforma Brasileira de Big Data & Inteligência Artificial para a transformação digital de organizações públicas e privadas.",
     product: "Produto",
     howItWorks: "Como Funciona",
     solutions: "Soluções",
