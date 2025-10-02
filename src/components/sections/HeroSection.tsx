@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, Zap, Database } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import reddataLogo from "@/assets/reddata-logo.png";
-import reddataDashboardReal from "@/assets/reddata-dashboard-real.png";
+import reddataDashboardReal from "@/assets/reddata-dashboard-real.webp";
 
 export const HeroSection = () => {
   const { t } = useLanguage();
