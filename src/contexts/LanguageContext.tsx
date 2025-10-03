@@ -18,17 +18,14 @@ const translations = {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  console.log('LanguageProvider: Initializing');
-  
   const [language, setLanguageState] = useState<Language>('pt');
 
   const setLanguage = (lang: Language) => {
-    console.log('LanguageProvider: Setting language to', lang);
     setLanguageState(lang);
     try {
       localStorage?.setItem('language', lang);
-    } catch (e) {
-      console.warn('LanguageProvider: Could not save to localStorage', e);
+    } catch {
+      // Silently fail
     }
   };
 
@@ -44,8 +41,6 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     
     return value || key;
   };
-
-  console.log('LanguageProvider: Rendering with language', language);
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t }}>

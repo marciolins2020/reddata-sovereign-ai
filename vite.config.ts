@@ -17,15 +17,7 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     cssCodeSplit: true,
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-        pure_funcs: ['console.log', 'console.info', 'console.debug'],
-        passes: 2,
-      },
-    },
+    minify: 'esbuild',
     rollupOptions: {
       output: {
         manualChunks: (id) => {
@@ -34,10 +26,7 @@ export default defineConfig(({ mode }) => ({
             return 'react-vendor';
           }
           
-          // Radix UI components - split by category
-          if (id.includes('@radix-ui/react-select') || id.includes('@radix-ui/react-label')) {
-            return 'form-ui';
-          }
+          // Radix UI components
           if (id.includes('@radix-ui')) {
             return 'ui-vendor';
           }
@@ -47,7 +36,7 @@ export default defineConfig(({ mode }) => ({
             return 'form-vendor';
           }
           
-          // Lucide icons - separate chunk
+          // Lucide icons
           if (id.includes('lucide-react')) {
             return 'icons';
           }
