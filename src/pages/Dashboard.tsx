@@ -36,6 +36,7 @@ export default function Dashboard() {
   const [activeTab, setActiveTab] = useState<"upload" | "dashboards" | "files">("upload");
   const [userFiles, setUserFiles] = useState<any[]>([]);
   const [fileToDelete, setFileToDelete] = useState<string | null>(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -141,8 +142,11 @@ export default function Dashboard() {
 
       // Refresh profile and files
       if (user) {
-        fetchProfile(user.id);
+        await fetchProfile(user.id);
       }
+      
+      // Close dropdown to show updated list
+      setDropdownOpen(false);
     } catch (error: any) {
       toast({
         title: "Erro ao excluir",
@@ -186,7 +190,7 @@ export default function Dashboard() {
           </div>
           
           <div className="flex items-center gap-4">
-            <DropdownMenu>
+            <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
               <DropdownMenuTrigger asChild>
                 <button className="text-right hidden sm:block hover:opacity-80 transition-opacity cursor-pointer">
                   <p className="text-sm font-medium text-foreground">{profile.full_name || user.email}</p>
