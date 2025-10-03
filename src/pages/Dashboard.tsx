@@ -47,11 +47,8 @@ export default function Dashboard() {
         setUser(session?.user ?? null);
         
         if (!session) {
+          setProfile(null);
           navigate("/auth");
-        } else {
-          setTimeout(() => {
-            fetchProfile(session.user.id);
-          }, 0);
         }
       }
     );
@@ -69,6 +66,12 @@ export default function Dashboard() {
     return () => subscription.unsubscribe();
   }, [navigate]);
 
+  useEffect(() => {
+    if (user) {
+      fetchProfile(user.id);
+    }
+  }, [user]);
+
   const fetchProfile = async (userId: string) => {
     const { data, error } = await supabase
       .from("profiles")
@@ -77,7 +80,9 @@ export default function Dashboard() {
       .maybeSingle();
 
     if (error) {
-      console.error("Error fetching profile:", error);
+      if (import.meta.env.DEV) {
+        console.error("Error fetching profile:", error);
+      }
       return;
     }
 
@@ -103,7 +108,9 @@ export default function Dashboard() {
       .order("created_at", { ascending: false });
 
     if (error) {
-      console.error("Error fetching files:", error);
+      if (import.meta.env.DEV) {
+        console.error("Error fetching files:", error);
+      }
       return;
     }
 
@@ -164,10 +171,12 @@ export default function Dashboard() {
         await fetchProfile(user.id);
       }
     } catch (error: any) {
-      console.error("Delete error:", error);
+      if (import.meta.env.DEV) {
+        console.error("Delete error:", error);
+      }
       toast({
         title: "Erro ao excluir",
-        description: error.message,
+        description: "Não foi possível excluir o arquivo. Tente novamente.",
         variant: "destructive",
       });
     }

@@ -140,9 +140,12 @@ export function UploadSection({ userId, profile, onUploadSuccess, onViewDashboar
       setFile(null);
       onUploadSuccess();
     } catch (error: any) {
+      if (import.meta.env.DEV) {
+        console.error("Upload error:", error);
+      }
       toast({
         title: "Erro no upload",
-        description: error.message,
+        description: "Não foi possível fazer o upload. Tente novamente.",
         variant: "destructive",
       });
     } finally {

@@ -16,6 +16,18 @@ interface ContactFormData {
   mensagem: string;
 }
 
+// HTML sanitization function to prevent XSS attacks
+const sanitizeHtml = (dirty: string): string => {
+  if (!dirty) return '';
+  return dirty
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;')
+    .replace(/\//g, '&#x2F;');
+};
+
 const sendEmail = async (to: string[], subject: string, html: string, from: string = "RedData Website <onboarding@resend.dev>") => {
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -75,25 +87,49 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
+    // Validate field lengths server-side
+    if (formData.nome.length > 100 || formData.email.length > 255 || 
+        (formData.telefone && formData.telefone.length > 20) ||
+        (formData.mensagem && formData.mensagem.length > 2000)) {
+      return new Response(
+        JSON.stringify({ error: "Dados inválidos - campos muito longos" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    // Sanitize all user inputs before embedding in HTML
+    const sanitizedData = {
+      nome: sanitizeHtml(formData.nome),
+      email: sanitizeHtml(formData.email),
+      telefone: sanitizeHtml(formData.telefone || 'Não informado'),
+      municipio: sanitizeHtml(formData.municipio || 'Não informado'),
+      cargo: sanitizeHtml(formData.cargo || 'Não informado'),
+      interesse: sanitizeHtml(formData.interesse),
+      mensagem: formData.mensagem ? sanitizeHtml(formData.mensagem) : null,
+    };
+
     // Send notification email to RedMaxx
     const notificationEmail = await sendEmail(
       ["marcio.lins@redmaxx.com.br"],
-      `Novo interesse em RedData - ${formData.interesse}`,
+      `Novo interesse em RedData - ${sanitizedData.interesse}`,
       `
         <h2>Nova solicitação de demonstração do RedData</h2>
         <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
           <h3>Dados do Interessado:</h3>
-          <p><strong>Nome:</strong> ${formData.nome}</p>
-          <p><strong>E-mail:</strong> ${formData.email}</p>
-          <p><strong>Telefone:</strong> ${formData.telefone || 'Não informado'}</p>
-          <p><strong>Município/Órgão:</strong> ${formData.municipio || 'Não informado'}</p>
-          <p><strong>Cargo:</strong> ${formData.cargo || 'Não informado'}</p>
-          <p><strong>Interesse:</strong> ${formData.interesse}</p>
+          <p><strong>Nome:</strong> ${sanitizedData.nome}</p>
+          <p><strong>E-mail:</strong> ${sanitizedData.email}</p>
+          <p><strong>Telefone:</strong> ${sanitizedData.telefone}</p>
+          <p><strong>Município/Órgão:</strong> ${sanitizedData.municipio}</p>
+          <p><strong>Cargo:</strong> ${sanitizedData.cargo}</p>
+          <p><strong>Interesse:</strong> ${sanitizedData.interesse}</p>
         </div>
-        ${formData.mensagem ? `
+        ${sanitizedData.mensagem ? `
           <div style="background: #fff; padding: 20px; border-left: 4px solid #0066cc; margin: 20px 0;">
             <h3>Mensagem:</h3>
-            <p>${formData.mensagem}</p>
+            <p>${sanitizedData.mensagem}</p>
           </div>
         ` : ''}
         <p><em>Enviado através do formulário do site RedData</em></p>
@@ -108,9 +144,9 @@ const handler = async (req: Request): Promise<Response> => {
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #0066cc;">Obrigado pelo interesse no RedData!</h2>
           
-          <p>Olá ${formData.nome},</p>
+          <p>Olá ${sanitizedData.nome},</p>
           
-          <p>Recebemos sua solicitação sobre <strong>${formData.interesse}</strong> e nossa equipe técnica entrará em contato nas próximas 24 horas para agendar uma demonstração personalizada.</p>
+          <p>Recebemos sua solicitação sobre <strong>${sanitizedData.interesse}</strong> e nossa equipe técnica entrará em contato nas próximas 24 horas para agendar uma demonstração personalizada.</p>
           
           <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
             <h3 style="margin-top: 0; color: #0066cc;">O que acontece agora?</h3>

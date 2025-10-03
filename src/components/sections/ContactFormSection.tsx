@@ -9,6 +9,17 @@ import { useToast } from "@/hooks/use-toast";
 import { Send, CheckCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { z } from "zod";
+
+const contactFormSchema = z.object({
+  nome: z.string().trim().min(2, "Nome deve ter pelo menos 2 caracteres").max(100, "Nome deve ter no máximo 100 caracteres"),
+  email: z.string().trim().email("Email inválido").max(255, "Email deve ter no máximo 255 caracteres"),
+  telefone: z.string().trim().max(20, "Telefone deve ter no máximo 20 caracteres").optional(),
+  municipio: z.string().trim().max(100, "Município deve ter no máximo 100 caracteres").optional(),
+  cargo: z.string().trim().max(100, "Cargo deve ter no máximo 100 caracteres").optional(),
+  interesse: z.string().min(1, "Selecione uma opção de interesse"),
+  mensagem: z.string().trim().max(2000, "Mensagem deve ter no máximo 2000 caracteres").optional(),
+});
 
 interface FormData {
   nome: string;
@@ -42,13 +53,17 @@ export const ContactFormSection = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Basic validation
-    if (!formData.nome || !formData.email || !formData.interesse) {
-      toast({
-        title: t('contact.errorMessage'),
-        description: t('contact.errorMessage'),
-        variant: "destructive"
-      });
+    // Comprehensive validation with zod
+    try {
+      contactFormSchema.parse(formData);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        toast({
+          title: "Erro de validação",
+          description: error.errors[0].message,
+          variant: "destructive"
+        });
+      }
       return;
     }
 
@@ -84,10 +99,12 @@ export const ContactFormSection = () => {
       }, 3000);
       
     } catch (error: any) {
-      console.error("Error sending form:", error);
+      if (import.meta.env.DEV) {
+        console.error("Error sending form:", error);
+      }
       toast({
         title: t('contact.errorMessage'),
-        description: error.message || t('contact.errorMessage'),
+        description: "Tente novamente ou entre em contato diretamente.",
         variant: "destructive"
       });
     } finally {
