@@ -1,13 +1,18 @@
 import { MessageCircle, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const WhatsAppWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useLanguage();
   const whatsappNumber = "5511940764626"; // +55 11 94076-4626
   
   const openWhatsApp = () => {
-    const message = encodeURIComponent("Olá! Gostaria de saber mais sobre o RedData® e solicitar uma demonstração.");
+    const defaultMessage = t('whatsappWidget.greeting').includes("Hello") 
+      ? "Hello! I would like to know more about RedData® and request a demonstration."
+      : "Olá! Gostaria de saber mais sobre o RedData® e solicitar uma demonstração.";
+    const message = encodeURIComponent(defaultMessage);
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
     window.open(whatsappUrl, '_blank');
   };
@@ -36,8 +41,8 @@ export const WhatsAppWidget = () => {
                     <MessageCircle className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="font-semibold">RedData® Support</h3>
-                    <p className="text-sm text-green-100">Online agora</p>
+                    <h3 className="font-semibold">{t('whatsappWidget.supportTitle')}</h3>
+                    <p className="text-sm text-green-100">{t('whatsappWidget.onlineNow')}</p>
                   </div>
                 </div>
                 <Button
@@ -55,20 +60,20 @@ export const WhatsAppWidget = () => {
             <div className="p-4 space-y-4">
               <div className="bg-gray-100 rounded-lg p-3 text-sm">
                 <p className="text-gray-700">
-                  👋 Olá! Precisa de ajuda com o RedData®?
+                  {t('whatsappWidget.greeting')}
                 </p>
                 <p className="text-gray-600 mt-1">
-                  Nossa equipe está pronta para esclarecer suas dúvidas e agendar uma demonstração personalizada.
+                  {t('whatsappWidget.description')}
                 </p>
               </div>
               
               <div className="space-y-2">
-                <p className="text-sm font-medium text-gray-700">📞 Atendimento especializado:</p>
+                <p className="text-sm font-medium text-gray-700">{t('whatsappWidget.servicesTitle')}</p>
                 <ul className="text-sm text-gray-600 space-y-1">
-                  <li>• Demonstrações técnicas</li>
-                  <li>• Simulação de implementação</li>
-                  <li>• Consultoria em Big Data e IA</li>
-                  <li>• Suporte pré e pós-venda</li>
+                  <li>{t('whatsappWidget.service1')}</li>
+                  <li>{t('whatsappWidget.service2')}</li>
+                  <li>{t('whatsappWidget.service3')}</li>
+                  <li>{t('whatsappWidget.service4')}</li>
                 </ul>
               </div>
               
@@ -77,11 +82,11 @@ export const WhatsAppWidget = () => {
                 className="w-full bg-green-500 hover:bg-green-600 text-white"
               >
                 <MessageCircle className="mr-2 h-4 w-4" />
-                Iniciar conversa no WhatsApp
+                {t('whatsappWidget.startChat')}
               </Button>
               
               <p className="text-xs text-gray-500 text-center">
-                Horário de atendimento: Segunda a Sexta, 8h às 18h
+                {t('whatsappWidget.schedule')}
               </p>
             </div>
           </div>

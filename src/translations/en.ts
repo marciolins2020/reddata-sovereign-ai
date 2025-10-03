@@ -282,6 +282,19 @@ export default {
     privacyText: "By submitting this form, you agree to our privacy policy and authorize contact from RedMaxx.",
     errorMessage: "Error sending message. Please try again."
   },
+  whatsappWidget: {
+    supportTitle: "RedData® Support",
+    onlineNow: "Online now",
+    greeting: "👋 Hello! Need help with RedData®?",
+    description: "Our team is ready to answer your questions and schedule a personalized demo.",
+    servicesTitle: "📞 Specialized service:",
+    service1: "• Technical demonstrations",
+    service2: "• Implementation simulation",
+    service3: "• Big Data and AI consulting",
+    service4: "• Pre and post-sales support",
+    startChat: "Start WhatsApp conversation",
+    schedule: "Business hours: Monday to Friday, 8am to 6pm"
+  },
   footer: {
     description: "Brazilian Big Data and AI platform for enterprise digital transformation",
     product: "Product",

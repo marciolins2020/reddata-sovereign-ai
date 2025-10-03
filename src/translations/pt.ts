@@ -282,6 +282,19 @@ export default {
     privacyText: "Ao enviar este formulário, você concorda com nossa política de privacidade e autoriza o contato da RedMaxx.",
     errorMessage: "Erro ao enviar mensagem. Tente novamente."
   },
+  whatsappWidget: {
+    supportTitle: "RedData® Support",
+    onlineNow: "Online agora",
+    greeting: "👋 Olá! Precisa de ajuda com o RedData®?",
+    description: "Nossa equipe está pronta para esclarecer suas dúvidas e agendar uma demonstração personalizada.",
+    servicesTitle: "📞 Atendimento especializado:",
+    service1: "• Demonstrações técnicas",
+    service2: "• Simulação de implementação",
+    service3: "• Consultoria em Big Data e IA",
+    service4: "• Suporte pré e pós-venda",
+    startChat: "Iniciar conversa no WhatsApp",
+    schedule: "Horário de atendimento: Segunda a Sexta, 8h às 18h"
+  },
   footer: {
     description: "RedData® – A Plataforma Brasileira de Big Data & Inteligência Artificial para a transformação digital de organizações públicas e privadas.",
     product: "Produto",
