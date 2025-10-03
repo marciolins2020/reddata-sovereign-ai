@@ -120,6 +120,16 @@ export default function Dashboard() {
 
       if (fileError) throw fileError;
 
+      // Delete associated dashboards first
+      const { error: dashboardError } = await supabase
+        .from("dashboards")
+        .delete()
+        .eq("file_id", fileId);
+
+      if (dashboardError) {
+        console.error("Error deleting dashboards:", dashboardError);
+      }
+
       // Delete from storage
       const { error: storageError } = await supabase.storage
         .from("user-files")
@@ -140,7 +150,7 @@ export default function Dashboard() {
 
       toast({
         title: "Arquivo excluído",
-        description: "O arquivo foi excluído com sucesso",
+        description: "O arquivo e seus dashboards foram excluídos com sucesso",
       });
 
       // Refresh profile to update storage usage
@@ -314,8 +324,8 @@ export default function Dashboard() {
           <AlertDialogHeader>
             <AlertDialogTitle>Excluir arquivo?</AlertDialogTitle>
             <AlertDialogDescription>
-              Esta ação não pode ser desfeita. O arquivo será permanentemente excluído
-              e todos os dashboards associados serão afetados.
+              Esta ação não pode ser desfeita. O arquivo e todos os dashboards associados 
+              serão permanentemente excluídos.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
