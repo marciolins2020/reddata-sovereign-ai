@@ -17,46 +17,22 @@ const translations = {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-const getInitialLanguage = (): Language => {
-  try {
-    if (typeof window === 'undefined') return 'pt';
-    if (typeof localStorage === 'undefined') return 'pt';
-    
-    const saved = localStorage.getItem('language');
-    if (saved === 'en' || saved === 'pt') return saved;
-    
-    const browserLang = navigator?.language?.toLowerCase() || '';
-    if (browserLang.startsWith('en')) return 'en';
-  } catch {
-    // Silently fail and return default
-  }
-  
-  return 'pt';
-};
-
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  console.log('LanguageProvider: Initializing');
+  
   const [language, setLanguageState] = useState<Language>('pt');
 
-  // Initialize language after mount to avoid SSR issues
-  React.useEffect(() => {
-    const initialLang = getInitialLanguage();
-    if (initialLang !== language) {
-      setLanguageState(initialLang);
-    }
-  }, []);
-
-  const setLanguage = React.useCallback((lang: Language) => {
+  const setLanguage = (lang: Language) => {
+    console.log('LanguageProvider: Setting language to', lang);
     setLanguageState(lang);
     try {
-      if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
-        localStorage.setItem('language', lang);
-      }
-    } catch {
-      // Silently fail
+      localStorage?.setItem('language', lang);
+    } catch (e) {
+      console.warn('LanguageProvider: Could not save to localStorage', e);
     }
-  }, []);
+  };
 
-  const t = React.useCallback((key: string): string => {
+  const t = (key: string): string => {
     const currentTranslations = translations[language];
     const keys = key.split('.');
     let value: any = currentTranslations;
@@ -67,16 +43,12 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
     
     return value || key;
-  }, [language]);
+  };
 
-  const contextValue = React.useMemo(() => ({
-    language,
-    setLanguage,
-    t
-  }), [language, setLanguage, t]);
+  console.log('LanguageProvider: Rendering with language', language);
 
   return (
-    <LanguageContext.Provider value={contextValue}>
+    <LanguageContext.Provider value={{ language, setLanguage, t }}>
       {children}
     </LanguageContext.Provider>
   );
