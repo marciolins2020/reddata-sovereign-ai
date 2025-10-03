@@ -7,6 +7,19 @@ import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 import { Upload, FileSpreadsheet, Loader2 } from "lucide-react";
 
+// Helper function to generate slug
+const generateSlug = async (title: string): Promise<string> => {
+  const baseSlug = title
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .trim()
+    .substring(0, 50);
+  
+  const randomSuffix = Math.random().toString(36).substring(2, 10);
+  return `${baseSlug}-${randomSuffix}`;
+};
+
 interface UploadSectionProps {
   userId: string;
   profile: any;
@@ -85,18 +98,33 @@ export function UploadSection({ userId, profile, onUploadSuccess, onViewDashboar
 
       if (dbError) throw dbError;
 
-      // Create a dashboard automatically
-      const { error: dashboardError } = await supabase
+      // Create a dashboard automatically with slug
+      const dashboardTitle = file.name.replace(/\.[^/.]+$/, ""); // Remove extension
+      const { data: dashboardData, error: dashboardError } = await supabase
         .from("dashboards")
         .insert({
           user_id: userId,
           file_id: fileData.id,
-          title: file.name.replace(/\.[^/.]+$/, ""), // Remove extension
+          title: dashboardTitle,
           description: `Dashboard criado automaticamente para ${file.name}`,
           chart_config: {},
-        });
+        })
+        .select()
+        .single();
 
       if (dashboardError) throw dashboardError;
+
+      // Generate slug using SQL function
+      if (dashboardData) {
+        const { error: slugError } = await supabase
+          .from("dashboards")
+          .update({ 
+            slug: await generateSlug(dashboardTitle) 
+          })
+          .eq("id", dashboardData.id);
+
+        if (slugError) console.error("Error generating slug:", slugError);
+      }
 
       // Update storage used
       await supabase

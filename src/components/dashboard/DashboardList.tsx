@@ -130,7 +130,7 @@ export function DashboardList({ userId, refreshTrigger }: DashboardListProps) {
 
             <Button
               className="w-full"
-              onClick={() => navigate(`/view/${dashboard.id}`)}
+              onClick={() => navigate(dashboard.slug ? `/dashboard/${dashboard.slug}` : `/view/${dashboard.id}`)}
             >
               <Eye className="h-4 w-4 mr-2" />
               Visualizar

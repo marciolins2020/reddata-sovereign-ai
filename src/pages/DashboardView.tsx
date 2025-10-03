@@ -38,7 +38,7 @@ interface SheetData {
 }
 
 export default function DashboardView() {
-  const { id } = useParams();
+  const { id, slug } = useParams();
   const navigate = useNavigate();
   const [dashboard, setDashboard] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -54,22 +54,36 @@ export default function DashboardView() {
 
   useEffect(() => {
     fetchDashboard();
-  }, [id]);
+  }, [id, slug]);
 
   const fetchDashboard = async () => {
-    if (!id) return;
+    if (!id && !slug) return;
 
-    const { data, error } = await supabase
-      .from("dashboards")
-      .select("*")
-      .eq("id", id)
-      .single();
+    // Try to fetch by slug first, then by id
+    let query = supabase.from("dashboards").select("*");
+    
+    if (slug) {
+      query = query.eq("slug", slug);
+    } else if (id) {
+      query = query.eq("id", id);
+    }
+
+    const { data, error } = await query.maybeSingle();
 
     if (error) {
       console.error("Error fetching dashboard:", error);
       toast({
         title: "Erro ao carregar dashboard",
         description: error.message,
+        variant: "destructive",
+      });
+      navigate("/dashboard");
+      return;
+    }
+
+    if (!data) {
+      toast({
+        title: "Dashboard não encontrado",
         variant: "destructive",
       });
       navigate("/dashboard");
@@ -247,7 +261,7 @@ export default function DashboardView() {
   };
 
   const handleSaveDashboard = async () => {
-    if (!id) return;
+    if (!dashboard?.id) return;
 
     setSaving(true);
     try {
@@ -257,7 +271,7 @@ export default function DashboardView() {
           chart_config: charts as any,
           updated_at: new Date().toISOString(),
         })
-        .eq("id", id);
+        .eq("id", dashboard.id);
 
       if (error) throw error;
 
@@ -402,7 +416,7 @@ export default function DashboardView() {
         <ShareDashboardDialog
           isOpen={shareDialogOpen}
           onClose={() => setShareDialogOpen(false)}
-          dashboardId={id || ""}
+          dashboardId={dashboard?.id || ""}
           isPublic={dashboard?.is_public || false}
           publicToken={dashboard?.public_share_token || null}
           onUpdate={fetchDashboard}
