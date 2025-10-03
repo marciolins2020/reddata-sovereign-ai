@@ -10,8 +10,8 @@ export default {
   },
   hero: {
     badge: "100% Brazilian Platform | Data Driven Business Platform",
-    title: "The Brazilian Platform for",
-    titleHighlight: "Big Data and AI",
+    title: "Secure, Scalable, and Sovereign:",
+    titleHighlight: "Big Data & AI Platform",
     subtitle: "Transform data into strategy with security, sovereignty and predictability",
     cta: "Request Demo",
     learnMore: "Learn More",
