@@ -16,6 +16,8 @@ import { DashboardContent } from "@/components/dashboard/DashboardContent";
 import { DashboardToolbar } from "@/components/dashboard/DashboardToolbar";
 import { TemplateGallery } from "@/components/dashboard/TemplateGallery";
 import { ShareDashboardDialog } from "@/components/dashboard/ShareDashboardDialog";
+import { ThemeConfigModal, DashboardTheme } from "@/components/dashboard/ThemeConfigModal";
+import { PreviewModal } from "@/components/dashboard/PreviewModal";
 import { DashboardFiltersProvider } from "@/contexts/DashboardFiltersContext";
 import { dashboardTemplates, DashboardTemplate } from "@/data/dashboardTemplates";
 import * as XLSX from "xlsx";
@@ -51,6 +53,15 @@ export default function DashboardView() {
   const [showGrid, setShowGrid] = useState(true);
   const [templateGalleryOpen, setTemplateGalleryOpen] = useState(false);
   const [shareDialogOpen, setShareDialogOpen] = useState(false);
+  const [themeModalOpen, setThemeModalOpen] = useState(false);
+  const [previewModalOpen, setPreviewModalOpen] = useState(false);
+  const [dashboardTheme, setDashboardTheme] = useState<DashboardTheme>({
+    name: "Padrão",
+    colors: ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884D8"],
+    backgroundColor: "#ffffff",
+  });
+  const [history, setHistory] = useState<ChartConfig[][]>([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
 
   useEffect(() => {
     fetchDashboard();
@@ -94,7 +105,11 @@ export default function DashboardView() {
 
     // Load existing chart configs
     if (data.chart_config && Array.isArray(data.chart_config)) {
-      setCharts(data.chart_config as unknown as ChartConfig[]);
+      const loadedCharts = data.chart_config as unknown as ChartConfig[];
+      setCharts(loadedCharts);
+      // Initialize history with loaded charts
+      setHistory([loadedCharts]);
+      setHistoryIndex(0);
     }
 
     // Load file data
@@ -183,10 +198,13 @@ export default function DashboardView() {
   const handleSaveChart = (config: any) => {
     const newChart: ChartConfig = {
       id: `chart-${Date.now()}`,
+      chartType: pendingChartType,
       ...config,
     };
 
-    setCharts((prev) => [...prev, newChart]);
+    const newCharts = [...charts, newChart];
+    setCharts(newCharts);
+    addToHistory(newCharts);
     
     toast({
       title: "Gráfico adicionado!",
@@ -201,7 +219,9 @@ export default function DashboardView() {
       ...config,
     };
 
-    setCharts((prev) => [...prev, newFilter]);
+    const newCharts = [...charts, newFilter];
+    setCharts(newCharts);
+    addToHistory(newCharts);
     
     toast({
       title: "Filtro adicionado!",
@@ -249,6 +269,7 @@ export default function DashboardView() {
     });
 
     setCharts(newCharts);
+    addToHistory(newCharts);
 
     toast({
       title: "Template aplicado!",
@@ -257,7 +278,9 @@ export default function DashboardView() {
   };
 
   const handleDeleteChart = (chartId: string) => {
-    setCharts((prev) => prev.filter((c) => c.id !== chartId));
+    const newCharts = charts.filter((c) => c.id !== chartId);
+    setCharts(newCharts);
+    addToHistory(newCharts);
   };
 
   const handleSaveDashboard = async () => {
@@ -292,6 +315,28 @@ export default function DashboardView() {
 
   const handleShare = () => {
     setShareDialogOpen(true);
+  };
+
+  // Undo/Redo functionality
+  const addToHistory = (newCharts: ChartConfig[]) => {
+    const newHistory = history.slice(0, historyIndex + 1);
+    newHistory.push(newCharts);
+    setHistory(newHistory);
+    setHistoryIndex(newHistory.length - 1);
+  };
+
+  const handleUndo = () => {
+    if (historyIndex > 0) {
+      setHistoryIndex(historyIndex - 1);
+      setCharts(history[historyIndex - 1]);
+    }
+  };
+
+  const handleRedo = () => {
+    if (historyIndex < history.length - 1) {
+      setHistoryIndex(historyIndex + 1);
+      setCharts(history[historyIndex + 1]);
+    }
   };
 
   if (loading) {
@@ -373,19 +418,22 @@ export default function DashboardView() {
           <DashboardToolbar
             showGrid={showGrid}
             onToggleGrid={() => setShowGrid(!showGrid)}
-            onPreview={() => toast({ title: "Pré-visualização", description: "Em desenvolvimento" })}
+            onUndo={handleUndo}
+            onRedo={handleRedo}
+            onPreview={() => setPreviewModalOpen(true)}
             onSettings={() => setTemplateGalleryOpen(true)}
-            onTheme={() => toast({ title: "Temas", description: "Em desenvolvimento" })}
+            onTheme={() => setThemeModalOpen(true)}
           />
           
           <div className="flex-1 flex">
             <ChartWidgetsSidebar />
             <DashboardCanvas isEmpty={charts.length === 0}>
-              <DashboardContent
-                charts={charts}
-                sheets={sheets}
-                onDeleteChart={handleDeleteChart}
-              />
+            <DashboardContent
+              charts={charts}
+              sheets={sheets}
+              onDeleteChart={handleDeleteChart}
+              themeColors={dashboardTheme.colors}
+            />
             </DashboardCanvas>
           </div>
         </div>
@@ -422,6 +470,32 @@ export default function DashboardView() {
           dashboardSlug={dashboard?.slug || null}
           onUpdate={fetchDashboard}
         />
+
+        <ThemeConfigModal
+          isOpen={themeModalOpen}
+          onClose={() => setThemeModalOpen(false)}
+          onSave={(theme) => {
+            setDashboardTheme(theme);
+            toast({
+              title: "Tema aplicado!",
+              description: `Tema ${theme.name} foi aplicado ao dashboard`,
+            });
+          }}
+          currentTheme={dashboardTheme}
+        />
+
+        <PreviewModal
+          isOpen={previewModalOpen}
+          onClose={() => setPreviewModalOpen(false)}
+        >
+          <DashboardContent
+            charts={charts}
+            sheets={sheets}
+            onDeleteChart={() => {}}
+            readOnly
+            themeColors={dashboardTheme.colors}
+          />
+        </PreviewModal>
       </div>
       </DndContext>
     </DashboardFiltersProvider>

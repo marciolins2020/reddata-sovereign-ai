@@ -45,7 +45,16 @@ export function ChartConfigModal({
 
   useEffect(() => {
     if (isOpen) {
-      setTitle(`Novo Gráfico ${chartType === "bar" ? "de Barras" : chartType === "line" ? "de Linhas" : chartType === "pie" ? "de Pizza" : ""}`);
+      const chartTitles: Record<string, string> = {
+        bar: "de Barras",
+        line: "de Linhas",
+        pie: "de Pizza",
+        area: "de Área",
+        scatter: "de Dispersão",
+        radar: "Radar",
+        composed: "Composto",
+      };
+      setTitle(`Novo Gráfico ${chartTitles[chartType] || ""}`);
       setSelectedSheet(sheets.length > 0 ? sheets[0].name : "");
       setXAxis("");
       setYAxis("");

@@ -10,6 +10,14 @@ import {
   Pie,
   AreaChart,
   Area,
+  ScatterChart,
+  Scatter,
+  RadarChart,
+  Radar,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  ComposedChart,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -17,6 +25,7 @@ import {
   Legend,
   ResponsiveContainer,
   Cell,
+  ZAxis,
 } from "recharts";
 
 interface ChartWidgetProps {
@@ -31,11 +40,13 @@ interface ChartWidgetProps {
   data: any[];
   onDelete: (id: string) => void;
   readOnly?: boolean;
+  themeColors?: string[];
 }
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8'];
+const DEFAULT_COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8'];
 
-export function ChartWidget({ id, config, data, onDelete, readOnly }: ChartWidgetProps) {
+export function ChartWidget({ id, config, data, onDelete, readOnly, themeColors }: ChartWidgetProps) {
+  const COLORS = themeColors || DEFAULT_COLORS;
   const renderChart = () => {
     if (!data || data.length === 0) {
       return (
@@ -55,7 +66,7 @@ export function ChartWidget({ id, config, data, onDelete, readOnly }: ChartWidge
               <YAxis />
               <Tooltip />
               <Legend />
-              <Bar dataKey={config.yAxis} fill="#8884d8" />
+              <Bar dataKey={config.yAxis} fill={COLORS[0]} />
             </BarChart>
           </ResponsiveContainer>
         );
@@ -69,7 +80,7 @@ export function ChartWidget({ id, config, data, onDelete, readOnly }: ChartWidge
               <YAxis />
               <Tooltip />
               <Legend />
-              <Line type="monotone" dataKey={config.yAxis} stroke="#8884d8" />
+              <Line type="monotone" dataKey={config.yAxis} stroke={COLORS[0]} />
             </LineChart>
           </ResponsiveContainer>
         );
@@ -106,8 +117,52 @@ export function ChartWidget({ id, config, data, onDelete, readOnly }: ChartWidge
               <YAxis />
               <Tooltip />
               <Legend />
-              <Area type="monotone" dataKey={config.yAxis} stroke="#8884d8" fill="#8884d8" />
+              <Area type="monotone" dataKey={config.yAxis} stroke={COLORS[0]} fill={COLORS[0]} fillOpacity={0.6} />
             </AreaChart>
+          </ResponsiveContainer>
+        );
+
+      case "scatter":
+        return (
+          <ResponsiveContainer width="100%" height={300}>
+            <ScatterChart>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey={config.xAxis} name={config.xAxis} />
+              <YAxis dataKey={config.yAxis} name={config.yAxis} />
+              <ZAxis range={[60, 400]} />
+              <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+              <Legend />
+              <Scatter name={config.title} data={data} fill={COLORS[0]} />
+            </ScatterChart>
+          </ResponsiveContainer>
+        );
+
+      case "radar":
+        return (
+          <ResponsiveContainer width="100%" height={300}>
+            <RadarChart data={data}>
+              <PolarGrid />
+              <PolarAngleAxis dataKey={config.xAxis} />
+              <PolarRadiusAxis />
+              <Radar name={config.yAxis} dataKey={config.yAxis} stroke={COLORS[0]} fill={COLORS[0]} fillOpacity={0.6} />
+              <Tooltip />
+              <Legend />
+            </RadarChart>
+          </ResponsiveContainer>
+        );
+
+      case "composed":
+        return (
+          <ResponsiveContainer width="100%" height={300}>
+            <ComposedChart data={data}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey={config.xAxis} />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey={config.yAxis} fill={COLORS[0]} />
+              <Line type="monotone" dataKey={config.yAxis} stroke={COLORS[1]} />
+            </ComposedChart>
           </ResponsiveContainer>
         );
 

@@ -10,6 +10,9 @@ import {
   Gauge,
   Filter,
   Search,
+  ScatterChart as ScatterIcon,
+  Radar as RadarIcon,
+  GitCompareArrows,
 } from "lucide-react";
 
 const chartCategories = [
@@ -20,7 +23,9 @@ const chartCategories = [
       { id: "line", name: "Gráfico de Linhas", icon: LineChart, color: "text-green-500" },
       { id: "pie", name: "Gráfico de Pizza", icon: PieChart, color: "text-purple-500" },
       { id: "area", name: "Gráfico de Área", icon: Activity, color: "text-orange-500" },
-      { id: "composed", name: "Gráfico Composto", icon: TrendingUp, color: "text-pink-500" },
+      { id: "scatter", name: "Gráfico de Dispersão", icon: ScatterIcon, color: "text-indigo-500" },
+      { id: "radar", name: "Gráfico Radar", icon: RadarIcon, color: "text-rose-500" },
+      { id: "composed", name: "Gráfico Composto", icon: GitCompareArrows, color: "text-pink-500" },
     ],
   },
   {
