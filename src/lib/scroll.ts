@@ -1,6 +1,6 @@
 /**
  * Smoothly scrolls to an element with offset for fixed header
- * Includes retry logic to handle elements that haven't rendered yet
+ * Optimized to avoid forced reflows by batching DOM reads
  */
 export const scrollToElement = (selector: string, retries = 3) => {
   // Remove # if present
@@ -10,15 +10,19 @@ export const scrollToElement = (selector: string, retries = 3) => {
     const element = document.getElementById(id);
     
     if (element) {
-      // Use requestAnimationFrame to ensure layout is complete
+      // Double requestAnimationFrame to ensure all pending layout work is complete
       requestAnimationFrame(() => {
-        const headerOffset = 100; // Height of fixed header + padding
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+        requestAnimationFrame(() => {
+          // Now safe to read layout properties - browser has finished all pending updates
+          const headerOffset = 100;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.scrollY - headerOffset;
 
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
+          // Batch the write operation
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
         });
       });
     } else if (attemptsLeft > 0) {
