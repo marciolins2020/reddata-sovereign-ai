@@ -20,21 +20,7 @@ export default defineConfig(({ mode }) => ({
     assetsDir: "assets",
     rollupOptions: {
       output: {
-        manualChunks: (id) => {
-          // Separate vendor chunks for better caching and code splitting
-          if (id.includes('node_modules')) {
-            if (id.includes('@supabase')) {
-              return 'supabase';
-            }
-            if (id.includes('react') || id.includes('react-dom')) {
-              return 'react-vendor';
-            }
-            if (id.includes('lucide-react')) {
-              return 'icons';
-            }
-            return 'vendor';
-          }
-        },
+        manualChunks: undefined,
       },
     },
   },
