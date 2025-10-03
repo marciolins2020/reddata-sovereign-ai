@@ -3,19 +3,39 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { User, Session } from "@supabase/supabase-js";
 import { Button } from "@/components/ui/button";
-import { LogOut, Upload, LayoutDashboard, FileSpreadsheet } from "lucide-react";
+import { LogOut, Upload, LayoutDashboard, FileSpreadsheet, Trash2, File } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import reddataIcon from "@/assets/reddata-icon.png";
 import { UploadSection } from "@/components/dashboard/UploadSection";
 import { DashboardList } from "@/components/dashboard/DashboardList";
 import { FileManager } from "@/components/dashboard/FileManager";
 import { DashboardFooter } from "@/components/dashboard/DashboardFooter";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 export default function Dashboard() {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [profile, setProfile] = useState<any>(null);
   const [activeTab, setActiveTab] = useState<"upload" | "dashboards" | "files">("upload");
+  const [userFiles, setUserFiles] = useState<any[]>([]);
+  const [fileToDelete, setFileToDelete] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -68,6 +88,69 @@ export default function Dashboard() {
         variant: "destructive",
       });
     }
+
+    // Fetch user files
+    fetchUserFiles(userId);
+  };
+
+  const fetchUserFiles = async (userId: string) => {
+    const { data, error } = await supabase
+      .from("uploaded_files")
+      .select("*")
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("Error fetching files:", error);
+      return;
+    }
+
+    setUserFiles(data || []);
+  };
+
+  const handleDeleteFile = async (fileId: string) => {
+    try {
+      // Get file info
+      const { data: fileInfo, error: fileError } = await supabase
+        .from("uploaded_files")
+        .select("*")
+        .eq("id", fileId)
+        .single();
+
+      if (fileError) throw fileError;
+
+      // Delete from storage
+      const { error: storageError } = await supabase.storage
+        .from("user-files")
+        .remove([fileInfo.storage_path]);
+
+      if (storageError) throw storageError;
+
+      // Delete from database
+      const { error: dbError } = await supabase
+        .from("uploaded_files")
+        .delete()
+        .eq("id", fileId);
+
+      if (dbError) throw dbError;
+
+      toast({
+        title: "Arquivo excluído",
+        description: "O arquivo foi excluído com sucesso",
+      });
+
+      // Refresh profile and files
+      if (user) {
+        fetchProfile(user.id);
+      }
+    } catch (error: any) {
+      toast({
+        title: "Erro ao excluir",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
+    setFileToDelete(null);
   };
 
   const handleSignOut = async () => {
@@ -103,12 +186,53 @@ export default function Dashboard() {
           </div>
           
           <div className="flex items-center gap-4">
-            <div className="text-right hidden sm:block">
-              <p className="text-sm font-medium text-foreground">{profile.full_name || user.email}</p>
-              <p className="text-xs text-muted-foreground">
-                {profile.storage_used_mb?.toFixed(2) || 0} / {profile.storage_limit_mb || 10} MB usado
-              </p>
-            </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="text-right hidden sm:block hover:opacity-80 transition-opacity cursor-pointer">
+                  <p className="text-sm font-medium text-foreground">{profile.full_name || user.email}</p>
+                  <p className="text-xs text-muted-foreground">
+                    {profile.storage_used_mb?.toFixed(2) || 0} / {profile.storage_limit_mb || 10} MB usado
+                  </p>
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-80">
+                <DropdownMenuLabel>Meus Arquivos</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                {userFiles.length === 0 ? (
+                  <div className="px-2 py-4 text-sm text-muted-foreground text-center">
+                    Nenhum arquivo carregado
+                  </div>
+                ) : (
+                  <div className="max-h-60 overflow-y-auto">
+                    {userFiles.map((file) => (
+                      <DropdownMenuItem
+                        key={file.id}
+                        className="flex items-center justify-between gap-2 cursor-default"
+                        onSelect={(e) => e.preventDefault()}
+                      >
+                        <div className="flex items-center gap-2 flex-1 min-w-0">
+                          <File className="h-4 w-4 flex-shrink-0 text-muted-foreground" />
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm truncate">{file.file_name}</p>
+                            <p className="text-xs text-muted-foreground">
+                              {file.file_size_mb?.toFixed(2)} MB
+                            </p>
+                          </div>
+                        </div>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 flex-shrink-0"
+                          onClick={() => setFileToDelete(file.id)}
+                        >
+                          <Trash2 className="h-4 w-4 text-destructive" />
+                        </Button>
+                      </DropdownMenuItem>
+                    ))}
+                  </div>
+                )}
+              </DropdownMenuContent>
+            </DropdownMenu>
             <Button variant="outline" size="sm" onClick={handleSignOut}>
               <LogOut className="h-4 w-4 mr-2" />
               Sair
@@ -179,6 +303,28 @@ export default function Dashboard() {
 
       {/* Footer */}
       <DashboardFooter />
+
+      {/* Delete Confirmation Dialog */}
+      <AlertDialog open={!!fileToDelete} onOpenChange={() => setFileToDelete(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Excluir arquivo?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Esta ação não pode ser desfeita. O arquivo será permanentemente excluído
+              e todos os dashboards associados serão afetados.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => fileToDelete && handleDeleteFile(fileToDelete)}
+              className="bg-destructive hover:bg-destructive/90"
+            >
+              Excluir
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
