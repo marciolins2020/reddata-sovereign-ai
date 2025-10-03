@@ -150,7 +150,10 @@ export default function Dashboard() {
           <UploadSection 
             userId={user.id} 
             profile={profile}
-            onUploadSuccess={() => fetchProfile(user.id)}
+            onUploadSuccess={() => {
+              fetchProfile(user.id);
+              setActiveTab("dashboards");
+            }}
           />
         )}
         {activeTab === "dashboards" && <DashboardList userId={user.id} />}
