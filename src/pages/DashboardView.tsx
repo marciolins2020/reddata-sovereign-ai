@@ -14,7 +14,9 @@ import { FilterWidget } from "@/components/dashboard/FilterWidget";
 import { FilterConfigModal } from "@/components/dashboard/FilterConfigModal";
 import { DashboardContent } from "@/components/dashboard/DashboardContent";
 import { DashboardToolbar } from "@/components/dashboard/DashboardToolbar";
-import { DashboardFiltersProvider, useDashboardFilters } from "@/contexts/DashboardFiltersContext";
+import { TemplateGallery } from "@/components/dashboard/TemplateGallery";
+import { DashboardFiltersProvider } from "@/contexts/DashboardFiltersContext";
+import { dashboardTemplates, DashboardTemplate } from "@/data/dashboardTemplates";
 import * as XLSX from "xlsx";
 
 interface ChartConfig {
@@ -46,6 +48,7 @@ export default function DashboardView() {
   const [pendingChartType, setPendingChartType] = useState("");
   const [saving, setSaving] = useState(false);
   const [showGrid, setShowGrid] = useState(true);
+  const [templateGalleryOpen, setTemplateGalleryOpen] = useState(false);
 
   useEffect(() => {
     fetchDashboard();
@@ -190,6 +193,53 @@ export default function DashboardView() {
     });
   };
 
+  const handleApplyTemplate = (template: DashboardTemplate) => {
+    if (sheets.length === 0) {
+      toast({
+        title: "Sem dados disponíveis",
+        description: "Faça upload de um arquivo antes de usar templates",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const defaultSheet = sheets[0].name;
+    const defaultColumns = sheets[0].columns;
+
+    // Create widgets based on template
+    const newCharts: ChartConfig[] = template.widgets.map((widget, index) => {
+      const baseConfig = {
+        id: `template-${template.id}-${index}-${Date.now()}`,
+        title: `${widget.type.charAt(0).toUpperCase() + widget.type.slice(1)} ${index + 1}`,
+        chartType: widget.type,
+        sheetName: defaultSheet,
+      };
+
+      // For filters, add column config
+      if (widget.type === "dropdown" || widget.type === "search") {
+        return {
+          ...baseConfig,
+          filterType: widget.type,
+          column: defaultColumns[0] || "",
+        };
+      }
+
+      // For charts, add xAxis and yAxis
+      return {
+        ...baseConfig,
+        xAxis: defaultColumns[0] || "",
+        yAxis: defaultColumns[1] || defaultColumns[0] || "",
+      };
+    });
+
+    setCharts(newCharts);
+
+    toast({
+      title: "Template aplicado!",
+      description: `${template.name} foi adicionado ao dashboard. Configure os widgets conforme necessário.`,
+    });
+  };
+
   const handleDeleteChart = (chartId: string) => {
     setCharts((prev) => prev.filter((c) => c.id !== chartId));
   };
@@ -312,7 +362,7 @@ export default function DashboardView() {
             showGrid={showGrid}
             onToggleGrid={() => setShowGrid(!showGrid)}
             onPreview={() => toast({ title: "Pré-visualização", description: "Em desenvolvimento" })}
-            onSettings={() => toast({ title: "Configurações", description: "Em desenvolvimento" })}
+            onSettings={() => setTemplateGalleryOpen(true)}
             onTheme={() => toast({ title: "Temas", description: "Em desenvolvimento" })}
           />
           
@@ -343,6 +393,12 @@ export default function DashboardView() {
           onSave={handleSaveFilter}
           filterType={pendingChartType}
           sheets={sheets}
+        />
+
+        <TemplateGallery
+          isOpen={templateGalleryOpen}
+          onClose={() => setTemplateGalleryOpen(false)}
+          onSelectTemplate={handleApplyTemplate}
         />
       </div>
       </DndContext>

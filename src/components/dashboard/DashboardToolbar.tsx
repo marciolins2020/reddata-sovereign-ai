@@ -7,7 +7,7 @@ import {
   Settings,
   Palette,
   Grid3x3,
-  Layout,
+  LayoutTemplate,
 } from "lucide-react";
 
 interface DashboardToolbarProps {
@@ -62,8 +62,8 @@ export function DashboardToolbar({
       </Button>
 
       <Button variant="ghost" size="sm" onClick={onSettings}>
-        <Settings className="h-4 w-4 mr-2" />
-        Configurações
+        <LayoutTemplate className="h-4 w-4 mr-2" />
+        Templates
       </Button>
     </div>
   );
