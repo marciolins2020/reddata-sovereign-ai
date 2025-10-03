@@ -46,17 +46,17 @@ export function ShareDashboardDialog({
         .from("dashboards")
         .select("slug")
         .eq("id", dashboardId)
-        .single();
+        .maybeSingle();
       
-      if (data) {
+      if (data?.slug) {
         setCurrentSlug(data.slug);
       }
     };
     
-    if (isOpen && !currentSlug) {
+    if (isOpen) {
       fetchDashboard();
     }
-  }, [dashboardId, isOpen, currentSlug]);
+  }, [dashboardId, isOpen]);
 
   const shareUrl = currentSlug
     ? `${window.location.origin}/dashboard/${currentSlug}`
