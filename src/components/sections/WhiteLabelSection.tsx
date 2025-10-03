@@ -71,16 +71,16 @@ export const WhiteLabelSection = () => {
           })}
         </div>
 
-        <div className="bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 rounded-2xl p-8 md:p-12 text-center">
-          <h3 className="text-3xl font-bold mb-4">
+        <div className="bg-pink-100/80 rounded-2xl p-8 md:p-12 text-center">
+          <h3 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
             {t("whiteLabel.ctaTitle")}
           </h3>
-          <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-muted-foreground/80 mb-8 max-w-2xl mx-auto leading-relaxed">
             {t("whiteLabel.ctaDesc")}
           </p>
           <Button 
             size="lg" 
-            className="text-lg px-8"
+            className="bg-primary hover:bg-primary/90 text-white text-base md:text-lg px-8 py-6 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all"
             onClick={() => scrollToElement("#contato")}
           >
             {t("whiteLabel.ctaButton")}
