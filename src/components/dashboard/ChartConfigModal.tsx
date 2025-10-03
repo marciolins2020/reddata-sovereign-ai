@@ -90,23 +90,21 @@ export function ChartConfigModal({
             />
           </div>
 
-          {sheets.length > 1 && (
-            <div>
-              <Label htmlFor="sheet">Aba da Planilha</Label>
-              <Select value={selectedSheet} onValueChange={setSelectedSheet}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Selecione uma aba" />
-                </SelectTrigger>
-                <SelectContent>
-                  {sheets.map((sheet) => (
-                    <SelectItem key={sheet.name} value={sheet.name}>
-                      {sheet.name} ({sheet.data.length} linhas)
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          )}
+          <div>
+            <Label htmlFor="sheet">Aba da Planilha</Label>
+            <Select value={selectedSheet} onValueChange={setSelectedSheet}>
+              <SelectTrigger>
+                <SelectValue placeholder="Selecione uma aba" />
+              </SelectTrigger>
+              <SelectContent>
+                {sheets.map((sheet) => (
+                  <SelectItem key={sheet.name} value={sheet.name}>
+                    {sheet.name} ({sheet.data.length} linhas)
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
 
           <div>
             <Label htmlFor="xAxis">Eixo X (Categoria)</Label>
