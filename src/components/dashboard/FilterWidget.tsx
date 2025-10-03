@@ -22,9 +22,10 @@ interface FilterWidgetProps {
   };
   data: any[];
   onDelete: (id: string) => void;
+  readOnly?: boolean;
 }
 
-export function FilterWidget({ id, config, data, onDelete }: FilterWidgetProps) {
+export function FilterWidget({ id, config, data, onDelete, readOnly }: FilterWidgetProps) {
   const { setFilter } = useDashboardFilters();
   const [selectedValue, setSelectedValue] = useState<string>("");
   const [searchValue, setSearchValue] = useState<string>("");
@@ -111,9 +112,11 @@ export function FilterWidget({ id, config, data, onDelete }: FilterWidgetProps) 
           <Filter className="h-4 w-4 text-primary" />
           <h4 className="font-semibold text-foreground text-sm">{config.title}</h4>
         </div>
-        <Button variant="ghost" size="icon" onClick={() => onDelete(id)}>
-          <Trash2 className="h-4 w-4" />
-        </Button>
+        {!readOnly && (
+          <Button variant="ghost" size="icon" onClick={() => onDelete(id)}>
+            <Trash2 className="h-4 w-4" />
+          </Button>
+        )}
       </div>
       {renderFilterControl()}
     </Card>

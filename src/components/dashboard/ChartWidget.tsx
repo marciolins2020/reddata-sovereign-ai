@@ -30,11 +30,12 @@ interface ChartWidgetProps {
   };
   data: any[];
   onDelete: (id: string) => void;
+  readOnly?: boolean;
 }
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8'];
 
-export function ChartWidget({ id, config, data, onDelete }: ChartWidgetProps) {
+export function ChartWidget({ id, config, data, onDelete, readOnly }: ChartWidgetProps) {
   const renderChart = () => {
     if (!data || data.length === 0) {
       return (
@@ -119,11 +120,13 @@ export function ChartWidget({ id, config, data, onDelete }: ChartWidgetProps) {
     <Card className="p-4">
       <div className="flex items-center justify-between mb-3">
         <h4 className="font-semibold text-foreground">{config.title}</h4>
-        <div className="flex gap-2">
-          <Button variant="ghost" size="icon" onClick={() => onDelete(id)}>
-            <Trash2 className="h-4 w-4" />
-          </Button>
-        </div>
+        {!readOnly && (
+          <div className="flex gap-2">
+            <Button variant="ghost" size="icon" onClick={() => onDelete(id)}>
+              <Trash2 className="h-4 w-4" />
+            </Button>
+          </div>
+        )}
       </div>
       {renderChart()}
     </Card>

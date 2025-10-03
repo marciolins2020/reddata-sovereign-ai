@@ -197,6 +197,7 @@ export default function PublicDashboard() {
                   charts={charts}
                   sheets={sheets}
                   onDeleteChart={() => {}}
+                  readOnly={true}
                 />
               </div>
             )}

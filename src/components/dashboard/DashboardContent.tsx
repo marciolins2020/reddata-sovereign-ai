@@ -23,9 +23,10 @@ interface DashboardContentProps {
   charts: ChartConfig[];
   sheets: SheetData[];
   onDeleteChart: (id: string) => void;
+  readOnly?: boolean;
 }
 
-export function DashboardContent({ charts, sheets, onDeleteChart }: DashboardContentProps) {
+export function DashboardContent({ charts, sheets, onDeleteChart, readOnly }: DashboardContentProps) {
   const { filters } = useDashboardFilters();
 
   const applyFilters = (data: any[], chart: ChartConfig) => {
@@ -79,6 +80,7 @@ export function DashboardContent({ charts, sheets, onDeleteChart }: DashboardCon
               }}
               data={rawData}
               onDelete={onDeleteChart}
+              readOnly={readOnly}
             />
           );
         }
@@ -99,6 +101,7 @@ export function DashboardContent({ charts, sheets, onDeleteChart }: DashboardCon
             }}
             data={filteredData}
             onDelete={onDeleteChart}
+            readOnly={readOnly}
           />
         );
       })}
