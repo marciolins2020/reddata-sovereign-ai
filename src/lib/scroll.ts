@@ -2,14 +2,14 @@
  * Smoothly scrolls to an element with offset for fixed header
  */
 export const scrollToElement = (selector: string) => {
-  const element = typeof selector === 'string' 
-    ? document.querySelector(`#${selector}`) || document.getElementById(selector.replace('#', ''))
-    : selector;
+  // Remove # if present
+  const id = selector.replace('#', '');
+  const element = document.getElementById(id);
     
   if (element) {
-    const headerOffset = 80; // Height of fixed header
+    const headerOffset = 100; // Height of fixed header + padding
     const elementPosition = element.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    const offsetPosition = elementPosition + window.scrollY - headerOffset;
 
     window.scrollTo({
       top: offsetPosition,
