@@ -48,9 +48,10 @@ export const HeroSection = () => {
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
               <Button 
-                variant="outline" 
+                variant="ghost" 
                 size="lg" 
                 onClick={() => scrollToElement('#contact-form')}
+                className="bg-muted/20 hover:bg-muted/30 border border-muted-foreground/20 backdrop-blur-sm"
               >
                 {t('hero.cta')}
               </Button>
