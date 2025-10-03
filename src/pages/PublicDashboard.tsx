@@ -44,12 +44,11 @@ export default function PublicDashboard() {
 
     setLoading(true);
     try {
-      // Fetch dashboard by public token
+      // Fetch dashboard by public token using secure view
       const { data, error } = await supabase
-        .from("dashboards")
+        .from("public_dashboards_view")
         .select("*")
         .eq("public_share_token", token)
-        .eq("is_public", true)
         .single();
 
       if (error || !data) {
