@@ -50,8 +50,8 @@ export const HeroSection = () => {
               <Button 
                 variant="ghost" 
                 size="lg" 
-                onClick={() => scrollToElement('#contact-form')}
-                className="bg-muted/20 hover:bg-muted/30 border border-muted-foreground/20 backdrop-blur-sm"
+                onClick={() => scrollToElement('contact-form')}
+                className="bg-black/40 hover:bg-black/60 text-white border border-white/20 backdrop-blur-sm transition-all duration-300"
               >
                 {t('hero.cta')}
               </Button>
