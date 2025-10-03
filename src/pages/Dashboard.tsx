@@ -3,18 +3,19 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { User, Session } from "@supabase/supabase-js";
 import { Button } from "@/components/ui/button";
-import { LogOut, Upload, LayoutDashboard } from "lucide-react";
+import { LogOut, Upload, LayoutDashboard, FileSpreadsheet } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import reddataIcon from "@/assets/reddata-icon.png";
 import { UploadSection } from "@/components/dashboard/UploadSection";
 import { DashboardList } from "@/components/dashboard/DashboardList";
+import { FileManager } from "@/components/dashboard/FileManager";
 import { DashboardFooter } from "@/components/dashboard/DashboardFooter";
 
 export default function Dashboard() {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [profile, setProfile] = useState<any>(null);
-  const [activeTab, setActiveTab] = useState<"upload" | "dashboards">("upload");
+  const [activeTab, setActiveTab] = useState<"upload" | "dashboards" | "files">("upload");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -131,6 +132,17 @@ export default function Dashboard() {
             Upload de Arquivo
           </button>
           <button
+            onClick={() => setActiveTab("files")}
+            className={`px-4 py-2 font-medium transition-colors ${
+              activeTab === "files"
+                ? "border-b-2 border-primary text-primary"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <FileSpreadsheet className="h-4 w-4 inline mr-2" />
+            Meus Arquivos
+          </button>
+          <button
             onClick={() => setActiveTab("dashboards")}
             className={`px-4 py-2 font-medium transition-colors ${
               activeTab === "dashboards"
@@ -154,6 +166,12 @@ export default function Dashboard() {
               fetchProfile(user.id);
               setActiveTab("dashboards");
             }}
+          />
+        )}
+        {activeTab === "files" && (
+          <FileManager 
+            userId={user.id}
+            onFileDeleted={() => fetchProfile(user.id)}
           />
         )}
         {activeTab === "dashboards" && <DashboardList userId={user.id} />}
