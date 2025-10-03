@@ -4,6 +4,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -120,6 +121,9 @@ export function DashboardSettingsModal({
       <DialogContent className="max-w-6xl h-[85vh] flex flex-col p-0">
         <DialogHeader className="px-6 pt-6 pb-0">
           <DialogTitle className="text-xl">Configurações do Dashboard</DialogTitle>
+          <DialogDescription className="sr-only">
+            Configure as opções de tamanho, tema, cores e exportação do dashboard
+          </DialogDescription>
         </DialogHeader>
 
         <Tabs defaultValue="size-theme" className="flex-1 flex flex-col overflow-hidden">

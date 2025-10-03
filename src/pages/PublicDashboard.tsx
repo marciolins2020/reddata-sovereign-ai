@@ -197,6 +197,7 @@ export default function PublicDashboard() {
                 sheets={sheets}
                 onDeleteChart={() => {}}
                 readOnly={true}
+                themeColors={["#1e40af", "#3b82f6", "#60a5fa", "#93c5fd"]}
               />
             )}
           </div>
