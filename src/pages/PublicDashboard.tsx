@@ -27,7 +27,7 @@ interface SheetData {
 }
 
 export default function PublicDashboard() {
-  const { token } = useParams();
+  const { slug } = useParams();
   const navigate = useNavigate();
   const [dashboard, setDashboard] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -37,19 +37,20 @@ export default function PublicDashboard() {
 
   useEffect(() => {
     fetchPublicDashboard();
-  }, [token]);
+  }, [slug]);
 
   const fetchPublicDashboard = async () => {
-    if (!token) return;
+    if (!slug) return;
 
     setLoading(true);
     try {
-      // Fetch dashboard by public token using secure view
+      // Fetch dashboard by slug using secure view
       const { data, error } = await supabase
         .from("public_dashboards_view")
         .select("*")
-        .eq("public_share_token", token)
-        .single();
+        .eq("slug", slug)
+        .eq("is_public", true)
+        .maybeSingle();
 
       if (error || !data) {
         setAccessDenied(true);
@@ -83,9 +84,9 @@ export default function PublicDashboard() {
         .from("uploaded_files")
         .select("*")
         .eq("id", fileId)
-        .single();
+        .maybeSingle();
 
-      if (fileError) throw fileError;
+      if (fileError || !fileInfo) throw fileError;
 
       // Download file from storage
       const { data: fileBlob, error: downloadError } = await supabase.storage
