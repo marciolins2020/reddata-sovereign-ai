@@ -135,18 +135,18 @@ export default function Dashboard() {
 
       if (dbError) throw dbError;
 
+      // Update local state immediately
+      setUserFiles(prev => prev.filter(file => file.id !== fileId));
+
       toast({
         title: "Arquivo excluído",
         description: "O arquivo foi excluído com sucesso",
       });
 
-      // Refresh profile and files
+      // Refresh profile to update storage usage
       if (user) {
         await fetchProfile(user.id);
       }
-      
-      // Close dropdown to show updated list
-      setDropdownOpen(false);
     } catch (error: any) {
       toast({
         title: "Erro ao excluir",
