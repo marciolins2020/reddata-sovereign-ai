@@ -11,9 +11,10 @@ interface UploadSectionProps {
   userId: string;
   profile: any;
   onUploadSuccess: () => void;
+  onViewDashboards: () => void;
 }
 
-export function UploadSection({ userId, profile, onUploadSuccess }: UploadSectionProps) {
+export function UploadSection({ userId, profile, onUploadSuccess, onViewDashboards }: UploadSectionProps) {
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
 
@@ -166,6 +167,16 @@ export function UploadSection({ userId, profile, onUploadSuccess }: UploadSectio
                 Fazer Upload
               </>
             )}
+          </Button>
+
+          <Button
+            variant="outline"
+            onClick={onViewDashboards}
+            className="w-full"
+            size="lg"
+          >
+            <FileSpreadsheet className="mr-2 h-5 w-5" />
+            Ver Dashboards Existentes
           </Button>
         </div>
 

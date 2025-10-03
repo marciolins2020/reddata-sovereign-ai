@@ -7,16 +7,17 @@ import { useNavigate } from "react-router-dom";
 
 interface DashboardListProps {
   userId: string;
+  refreshTrigger?: number;
 }
 
-export function DashboardList({ userId }: DashboardListProps) {
+export function DashboardList({ userId, refreshTrigger }: DashboardListProps) {
   const [dashboards, setDashboards] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchDashboards();
-  }, [userId]);
+  }, [userId, refreshTrigger]);
 
   const fetchDashboards = async () => {
     setLoading(true);

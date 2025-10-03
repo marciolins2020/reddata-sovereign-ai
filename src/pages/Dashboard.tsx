@@ -37,6 +37,7 @@ export default function Dashboard() {
   const [userFiles, setUserFiles] = useState<any[]>([]);
   const [fileToDelete, setFileToDelete] = useState<string | null>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [dashboardRefreshTrigger, setDashboardRefreshTrigger] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -147,6 +148,9 @@ export default function Dashboard() {
 
       // Update local state immediately
       setUserFiles(prev => prev.filter(file => file.id !== fileId));
+
+      // Trigger dashboard refresh
+      setDashboardRefreshTrigger(prev => prev + 1);
 
       toast({
         title: "Arquivo excluído",
@@ -304,6 +308,7 @@ export default function Dashboard() {
               fetchProfile(user.id);
               setActiveTab("dashboards");
             }}
+            onViewDashboards={() => setActiveTab("dashboards")}
           />
         )}
         {activeTab === "files" && (
@@ -312,7 +317,12 @@ export default function Dashboard() {
             onFileDeleted={() => fetchProfile(user.id)}
           />
         )}
-        {activeTab === "dashboards" && <DashboardList userId={user.id} />}
+        {activeTab === "dashboards" && (
+          <DashboardList 
+            userId={user.id} 
+            refreshTrigger={dashboardRefreshTrigger}
+          />
+        )}
       </div>
 
       {/* Footer */}
