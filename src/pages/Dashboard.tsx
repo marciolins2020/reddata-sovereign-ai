@@ -129,6 +129,7 @@ export default function Dashboard() {
 
       if (dashboardError) {
         console.error("Error deleting dashboards:", dashboardError);
+        throw dashboardError;
       }
 
       // Delete from storage
@@ -149,7 +150,8 @@ export default function Dashboard() {
       // Update local state immediately
       setUserFiles(prev => prev.filter(file => file.id !== fileId));
 
-      // Trigger dashboard refresh
+      // Force close dropdown and trigger dashboard refresh immediately
+      setDropdownOpen(false);
       setDashboardRefreshTrigger(prev => prev + 1);
 
       toast({
@@ -162,6 +164,7 @@ export default function Dashboard() {
         await fetchProfile(user.id);
       }
     } catch (error: any) {
+      console.error("Delete error:", error);
       toast({
         title: "Erro ao excluir",
         description: error.message,
