@@ -2,7 +2,7 @@ export default {
   header: {
     mainNav: "Principal",
     howItWorks: "Como Funciona",
-    solutions: "Soluções",
+    solutions: "Aplicações",
     cases: "Casos de Uso",
     faq: "FAQ",
     contact: "Contato",
