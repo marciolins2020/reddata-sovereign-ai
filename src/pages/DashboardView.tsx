@@ -16,8 +16,8 @@ import { DashboardContent } from "@/components/dashboard/DashboardContent";
 import { DashboardToolbar } from "@/components/dashboard/DashboardToolbar";
 import { TemplateGallery } from "@/components/dashboard/TemplateGallery";
 import { ShareDashboardDialog } from "@/components/dashboard/ShareDashboardDialog";
-import { ThemeConfigModal, DashboardTheme } from "@/components/dashboard/ThemeConfigModal";
 import { PreviewModal } from "@/components/dashboard/PreviewModal";
+import { DashboardSettingsModal, DashboardSettings } from "@/components/dashboard/DashboardSettingsModal";
 import { DashboardFiltersProvider } from "@/contexts/DashboardFiltersContext";
 import { dashboardTemplates, DashboardTemplate } from "@/data/dashboardTemplates";
 import * as XLSX from "xlsx";
@@ -53,11 +53,16 @@ export default function DashboardView() {
   const [showGrid, setShowGrid] = useState(true);
   const [templateGalleryOpen, setTemplateGalleryOpen] = useState(false);
   const [shareDialogOpen, setShareDialogOpen] = useState(false);
-  const [themeModalOpen, setThemeModalOpen] = useState(false);
+  const [settingsModalOpen, setSettingsModalOpen] = useState(false);
   const [previewModalOpen, setPreviewModalOpen] = useState(false);
-  const [dashboardTheme, setDashboardTheme] = useState<DashboardTheme>({
-    name: "Padrão",
-    colors: ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884D8"],
+  const [dashboardSettings, setDashboardSettings] = useState<DashboardSettings>({
+    layout: "screen",
+    resizeMode: "none",
+    orientation: "landscape",
+    displayAs: "auto",
+    theme: "Blue Light",
+    colorScheme: ["#1e40af", "#3b82f6", "#60a5fa", "#93c5fd"],
+    font: "Open Sans",
     backgroundColor: "#ffffff",
   });
   const [history, setHistory] = useState<ChartConfig[][]>([]);
@@ -421,8 +426,8 @@ export default function DashboardView() {
             onUndo={handleUndo}
             onRedo={handleRedo}
             onPreview={() => setPreviewModalOpen(true)}
-            onSettings={() => setTemplateGalleryOpen(true)}
-            onTheme={() => setThemeModalOpen(true)}
+            onSettings={() => setSettingsModalOpen(true)}
+            onTheme={() => setTemplateGalleryOpen(true)}
           />
           
           <div className="flex-1 flex">
@@ -432,7 +437,7 @@ export default function DashboardView() {
               charts={charts}
               sheets={sheets}
               onDeleteChart={handleDeleteChart}
-              themeColors={dashboardTheme.colors}
+              themeColors={dashboardSettings.colorScheme}
             />
             </DashboardCanvas>
           </div>
@@ -471,17 +476,17 @@ export default function DashboardView() {
           onUpdate={fetchDashboard}
         />
 
-        <ThemeConfigModal
-          isOpen={themeModalOpen}
-          onClose={() => setThemeModalOpen(false)}
-          onSave={(theme) => {
-            setDashboardTheme(theme);
+        <DashboardSettingsModal
+          isOpen={settingsModalOpen}
+          onClose={() => setSettingsModalOpen(false)}
+          onSave={(settings) => {
+            setDashboardSettings(settings);
             toast({
-              title: "Tema aplicado!",
-              description: `Tema ${theme.name} foi aplicado ao dashboard`,
+              title: "Configurações aplicadas!",
+              description: `Tema ${settings.theme} foi aplicado ao dashboard`,
             });
           }}
-          currentTheme={dashboardTheme}
+          currentSettings={dashboardSettings}
         />
 
         <PreviewModal
@@ -493,7 +498,7 @@ export default function DashboardView() {
             sheets={sheets}
             onDeleteChart={() => {}}
             readOnly
-            themeColors={dashboardTheme.colors}
+            themeColors={dashboardSettings.colorScheme}
           />
         </PreviewModal>
       </div>

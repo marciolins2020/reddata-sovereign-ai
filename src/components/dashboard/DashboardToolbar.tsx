@@ -56,12 +56,12 @@ export function DashboardToolbar({
 
       <Separator orientation="vertical" className="h-6 mx-2" />
 
-      <Button variant="ghost" size="sm" onClick={onTheme}>
-        <Palette className="h-4 w-4 mr-2" />
-        Tema
+      <Button variant="ghost" size="sm" onClick={onSettings}>
+        <Settings className="h-4 w-4 mr-2" />
+        Configurações
       </Button>
 
-      <Button variant="ghost" size="sm" onClick={onSettings}>
+      <Button variant="ghost" size="sm" onClick={onTheme}>
         <LayoutTemplate className="h-4 w-4 mr-2" />
         Templates
       </Button>
