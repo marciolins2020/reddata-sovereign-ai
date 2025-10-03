@@ -15,6 +15,7 @@ export default {
     subtitle: "Transform data into strategy with security, sovereignty and predictability",
     cta: "Request Demo",
     learnMore: "Learn More",
+    freeTrial: "Free 30-Day Trial",
     noCreditCard: "No credit card • Full access • Cancel anytime",
     feature1Title: "100% National",
     feature1Desc: "Digital Sovereignty",

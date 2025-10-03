@@ -44,7 +44,7 @@ export const HeroSection = () => {
                 onClick={() => window.location.href = '/auth'} 
                 className="bg-primary hover:bg-primary-dark text-primary-foreground shadow-primary hover:shadow-lg transition-all duration-300 group"
               >
-                Teste Grátis por 30 Dias
+                {t('hero.freeTrial')}
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
               <Button 

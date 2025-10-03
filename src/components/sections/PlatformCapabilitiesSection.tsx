@@ -17,37 +17,37 @@ export const PlatformCapabilitiesSection = () => {
       icon: Database,
       titleKey: "platformCapabilities.connectTitle",
       descKey: "platformCapabilities.connectDesc",
-      gradient: "from-blue-500/20 to-cyan-500/20"
+      gradient: "from-muted/50 to-muted/30"
     },
     {
       icon: Shield,
       titleKey: "platformCapabilities.storeTitle",
       descKey: "platformCapabilities.storeDesc",
-      gradient: "from-purple-500/20 to-pink-500/20"
+      gradient: "from-primary/10 to-primary/5"
     },
     {
       icon: Zap,
       titleKey: "platformCapabilities.processTitle",
       descKey: "platformCapabilities.processDesc",
-      gradient: "from-orange-500/20 to-red-500/20"
+      gradient: "from-muted/40 to-muted/20"
     },
     {
       icon: BarChart3,
       titleKey: "platformCapabilities.analyzeTitle",
       descKey: "platformCapabilities.analyzeDesc",
-      gradient: "from-green-500/20 to-emerald-500/20"
+      gradient: "from-primary/10 to-primary/5"
     },
     {
       icon: Workflow,
       titleKey: "platformCapabilities.visualizeTitle",
       descKey: "platformCapabilities.visualizeDesc",
-      gradient: "from-indigo-500/20 to-blue-500/20"
+      gradient: "from-muted/50 to-muted/30"
     },
     {
       icon: Bell,
       titleKey: "platformCapabilities.automateTitle",
       descKey: "platformCapabilities.automateDesc",
-      gradient: "from-yellow-500/20 to-orange-500/20"
+      gradient: "from-primary/10 to-primary/5"
     }
   ];
 
