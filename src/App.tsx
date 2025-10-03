@@ -37,7 +37,7 @@ const App = () => (
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/dashboard/:slug" element={<DashboardView />} />
                 <Route path="/view/:id" element={<DashboardView />} />
-                <Route path="/public/:token" element={<PublicDashboard />} />
+                <Route path="/dashboard/public/:slug" element={<PublicDashboard />} />
                 <Route path="/casos-uso/energia" element={<CasosUsoEnergia />} />
                 <Route path="/casos-uso/industria" element={<CasosUsoIndustria />} />
                 <Route path="/casos-uso/governo" element={<CasosUsoGoverno />} />

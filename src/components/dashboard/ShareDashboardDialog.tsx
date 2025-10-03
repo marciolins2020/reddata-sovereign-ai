@@ -61,7 +61,7 @@ export function ShareDashboardDialog({
   // Use custom domain for share URLs
   const baseUrl = "http://reddata.redmaxx.com.br";
   const shareUrl = currentSlug
-    ? `${baseUrl}/dashboard/${currentSlug}`
+    ? `${baseUrl}/dashboard/public/${currentSlug}`
     : "";
 
   const handleTogglePublic = async (checked: boolean) => {
