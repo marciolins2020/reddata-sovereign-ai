@@ -18,23 +18,49 @@ const translations = {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 const getInitialLanguage = (): Language => {
+  if (typeof window === 'undefined') return 'pt';
+  
   try {
     const saved = localStorage.getItem('language');
-    return (saved === 'en' || saved === 'pt') ? saved : 'pt';
-  } catch {
-    return 'pt';
+    if (saved === 'en' || saved === 'pt') return saved;
+  } catch (error) {
+    // localStorage may not be available (private browsing, etc.)
+    if (import.meta.env.DEV) {
+      console.warn('localStorage not available:', error);
+    }
   }
+  
+  // Fallback to browser language detection
+  try {
+    const browserLang = navigator.language.toLowerCase();
+    if (browserLang.startsWith('en')) return 'en';
+  } catch {
+    // ignore errors
+  }
+  
+  return 'pt';
 };
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguageState] = useState<Language>(getInitialLanguage);
+  const [language, setLanguageState] = useState<Language>(() => {
+    try {
+      return getInitialLanguage();
+    } catch {
+      return 'pt';
+    }
+  });
 
   const setLanguage = React.useCallback((lang: Language) => {
     setLanguageState(lang);
-    try {
-      localStorage.setItem('language', lang);
-    } catch (error) {
-      console.error('Failed to save language preference:', error);
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem('language', lang);
+      } catch (error) {
+        // localStorage may fail in private browsing or with strict security settings
+        if (import.meta.env.DEV) {
+          console.warn('Failed to save language preference:', error);
+        }
+      }
     }
   }, []);
 
