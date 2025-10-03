@@ -18,8 +18,12 @@ export default defineConfig(({ mode }) => ({
   build: {
     cssCodeSplit: true,
     minify: 'esbuild',
+    assetsInlineLimit: 0,
     rollupOptions: {
       output: {
+        assetFileNames: 'assets/[name]-[hash][extname]',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js',
         manualChunks: (id) => {
           // Core React libraries
           if (id.includes('node_modules/react') || id.includes('node_modules/react-dom') || id.includes('node_modules/react-router-dom')) {
