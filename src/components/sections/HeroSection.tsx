@@ -58,7 +58,7 @@ export const HeroSection = () => {
             </div>
             
             <p className="text-center lg:text-left text-sm text-muted-foreground mb-12">
-              Sem cartão de crédito • Acesso completo • Cancele quando quiser
+              {t('hero.noCreditCard')}
             </p>
             
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center lg:text-left">

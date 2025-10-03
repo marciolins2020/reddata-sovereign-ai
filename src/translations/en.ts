@@ -15,6 +15,7 @@ export default {
     subtitle: "Transform data into strategy with security, sovereignty and predictability",
     cta: "Request Demo",
     learnMore: "Learn More",
+    noCreditCard: "No credit card • Full access • Cancel anytime",
     feature1Title: "100% National",
     feature1Desc: "Digital Sovereignty",
     feature2Title: "Offline AI",

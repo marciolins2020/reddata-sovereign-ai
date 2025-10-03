@@ -15,6 +15,7 @@ export default {
     subtitle: "Transforme dados em estratégia com segurança, soberania e previsibilidade",
     cta: "Solicitar Demonstração",
     learnMore: "Saiba Mais",
+    noCreditCard: "Sem cartão de crédito • Acesso completo • Cancele quando quiser",
     feature1Title: "100% Nacional",
     feature1Desc: "Soberania Digital",
     feature2Title: "IA Offline",
