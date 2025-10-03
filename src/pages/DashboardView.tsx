@@ -419,6 +419,7 @@ export default function DashboardView() {
           dashboardId={dashboard?.id || ""}
           isPublic={dashboard?.is_public || false}
           publicToken={dashboard?.public_share_token || null}
+          dashboardSlug={dashboard?.slug || null}
           onUpdate={fetchDashboard}
         />
       </div>

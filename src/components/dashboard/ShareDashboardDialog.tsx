@@ -21,6 +21,7 @@ interface ShareDashboardDialogProps {
   dashboardId: string;
   isPublic: boolean;
   publicToken: string | null;
+  dashboardSlug?: string | null;
   onUpdate: () => void;
 }
 
@@ -30,68 +31,48 @@ export function ShareDashboardDialog({
   dashboardId,
   isPublic,
   publicToken,
+  dashboardSlug,
   onUpdate,
 }: ShareDashboardDialogProps) {
   const [isPublicState, setIsPublicState] = useState(isPublic);
   const [saving, setSaving] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [currentToken, setCurrentToken] = useState(publicToken);
-  const [dashboardTitle, setDashboardTitle] = useState("");
+  const [currentSlug, setCurrentSlug] = useState(dashboardSlug);
 
-  // Fetch dashboard title on mount
+  // Fetch dashboard slug on mount
   useEffect(() => {
     const fetchDashboard = async () => {
       const { data } = await supabase
         .from("dashboards")
-        .select("title")
+        .select("slug")
         .eq("id", dashboardId)
         .single();
       
       if (data) {
-        setDashboardTitle(data.title);
+        setCurrentSlug(data.slug);
       }
     };
     
-    if (isOpen) {
+    if (isOpen && !currentSlug) {
       fetchDashboard();
     }
-  }, [dashboardId, isOpen]);
+  }, [dashboardId, isOpen, currentSlug]);
 
-  const shareUrl = currentToken
-    ? `${window.location.origin}/dashboard/${currentToken}`
+  const shareUrl = currentSlug
+    ? `${window.location.origin}/dashboard/${currentSlug}`
     : "";
-
-  const generateSlug = (title: string) => {
-    return title
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "") // Remove accents
-      .replace(/[^a-z0-9]+/g, "-") // Replace non-alphanumeric with hyphens
-      .replace(/^-+|-+$/g, ""); // Remove leading/trailing hyphens
-  };
 
   const handleTogglePublic = async (checked: boolean) => {
     setIsPublicState(checked);
-    
-    // Generate token immediately when toggling to public
-    if (checked && !currentToken) {
-      const slug = generateSlug(dashboardTitle || "dashboard");
-      const timestamp = Date.now().toString(36);
-      const newToken = `${slug}-${timestamp}`;
-      setCurrentToken(newToken);
-    }
   };
 
   const handleSave = async () => {
     setSaving(true);
     try {
-      const token = isPublicState ? currentToken : null;
-
       const { error } = await supabase
         .from("dashboards")
         .update({
           is_public: isPublicState,
-          public_share_token: token,
         })
         .eq("id", dashboardId);
 
