@@ -13,6 +13,8 @@ const CasosUsoEnergia = lazy(() => import("./pages/CasosUsoEnergia"));
 const CasosUsoIndustria = lazy(() => import("./pages/CasosUsoIndustria"));
 const CasosUsoGoverno = lazy(() => import("./pages/CasosUsoGoverno"));
 const CasosUsoVarejo = lazy(() => import("./pages/CasosUsoVarejo"));
+const Auth = lazy(() => import("./pages/Auth"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
 
 const queryClient = new QueryClient();
 
@@ -27,6 +29,8 @@ const App = () => (
           <Suspense fallback={<div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>}>
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/casos-uso/energia" element={<CasosUsoEnergia />} />
               <Route path="/casos-uso/industria" element={<CasosUsoIndustria />} />
               <Route path="/casos-uso/governo" element={<CasosUsoGoverno />} />
