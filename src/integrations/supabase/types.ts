@@ -23,6 +23,7 @@ export type Database = {
           id: string
           is_public: boolean
           public_share_token: string | null
+          slug: string | null
           title: string
           updated_at: string
           user_id: string
@@ -35,6 +36,7 @@ export type Database = {
           id?: string
           is_public?: boolean
           public_share_token?: string | null
+          slug?: string | null
           title: string
           updated_at?: string
           user_id: string
@@ -47,6 +49,7 @@ export type Database = {
           id?: string
           is_public?: boolean
           public_share_token?: string | null
+          slug?: string | null
           title?: string
           updated_at?: string
           user_id?: string
@@ -150,6 +153,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      generate_slug: {
+        Args: { title: string }
+        Returns: string
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
