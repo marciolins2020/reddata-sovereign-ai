@@ -12,7 +12,7 @@
     <!-- Preload LCP image to eliminate load delay -->
     <link rel="preload" as="image" href="/reddata-dashboard-hero.webp" fetchpriority="high">
     <!-- Preload critical JavaScript to reduce chain length -->
-    <link rel="modulepreload" href="/src/main">
+    <link rel="modulepreload" href="/src/main.tsx">
     <!-- Load only essential font weights with display=swap for immediate text rendering -->
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
@@ -192,6 +192,6 @@
 
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main"></script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
