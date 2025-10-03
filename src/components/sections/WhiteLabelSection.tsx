@@ -32,35 +32,35 @@ export const WhiteLabelSection = () => {
   ];
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-background via-primary/5 to-background">
+    <section className="py-12 md:py-20 px-4 bg-gradient-to-b from-background via-primary/5 to-background">
       <div className="container mx-auto max-w-7xl">
-        <div className="text-center mb-12">
-          <Badge className="mb-4 text-lg px-6 py-2 bg-gradient-to-r from-primary to-primary/60">
+        <div className="text-center mb-8 md:mb-12">
+          <Badge className="mb-4 text-sm md:text-lg px-4 md:px-6 py-1.5 md:py-2 bg-gradient-to-r from-primary to-primary/60">
             {t("whiteLabel.badge")}
           </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 px-2">
             {t("whiteLabel.title")}
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto px-2">
             {t("whiteLabel.subtitle")}
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
+        <div className="grid md:grid-cols-2 gap-4 md:gap-8 mb-8 md:mb-12">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
-              <Card key={index} className="border-2 hover:shadow-xl transition-all duration-300 hover:scale-105">
-                <CardContent className="p-8">
-                  <div className="flex items-start gap-6">
-                    <div className="p-4 rounded-2xl bg-primary/10 shrink-0">
-                      <Icon className="w-10 h-10 text-primary" />
+              <Card key={index} className="border-2 hover:shadow-xl transition-all duration-300 md:hover:scale-105">
+                <CardContent className="p-4 md:p-8">
+                  <div className="flex items-start gap-3 md:gap-6">
+                    <div className="p-2 md:p-4 rounded-xl md:rounded-2xl bg-primary/10 shrink-0">
+                      <Icon className="w-6 h-6 md:w-10 md:h-10 text-primary" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold mb-3">
+                      <h3 className="text-lg md:text-2xl font-bold mb-2 md:mb-3">
                         {t(feature.titleKey)}
                       </h3>
-                      <p className="text-muted-foreground leading-relaxed">
+                      <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
                         {t(feature.descKey)}
                       </p>
                     </div>
@@ -71,16 +71,16 @@ export const WhiteLabelSection = () => {
           })}
         </div>
 
-        <div className="bg-pink-100/80 rounded-2xl p-8 md:p-12 text-center">
-          <h3 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
+        <div className="bg-pink-100/80 rounded-xl md:rounded-2xl p-6 md:p-12 text-center">
+          <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 text-foreground px-2">
             {t("whiteLabel.ctaTitle")}
           </h3>
-          <p className="text-base md:text-lg text-muted-foreground/80 mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm md:text-base lg:text-lg text-muted-foreground/80 mb-6 md:mb-8 max-w-2xl mx-auto leading-relaxed px-2">
             {t("whiteLabel.ctaDesc")}
           </p>
           <Button 
             size="lg" 
-            className="bg-primary hover:bg-primary/90 text-white text-base md:text-lg px-8 py-6 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all"
+            className="bg-primary hover:bg-primary/90 text-white text-sm md:text-base lg:text-lg px-6 md:px-8 py-5 md:py-6 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all w-full md:w-auto"
             onClick={() => scrollToElement("#contato")}
           >
             {t("whiteLabel.ctaButton")}
