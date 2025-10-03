@@ -104,14 +104,14 @@ export const Header = () => {
             ))}
             
             {/* Casos de Uso Dropdown */}
-            <NavigationMenu>
+            <NavigationMenu className="z-[150]">
               <NavigationMenuList>
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="h-auto px-4 py-2 text-sm font-medium">
                     {t('header.cases')}
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4">
+                  <NavigationMenuContent className="z-[150]">
+                    <ul className="grid w-[400px] gap-3 p-4 bg-background">
                       {casosUsoItems.map((item) => (
                         <li key={item.href}>
                           <Link to={item.href}>

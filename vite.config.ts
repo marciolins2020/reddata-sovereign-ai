@@ -16,43 +16,17 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    cssCodeSplit: true,
-    minify: 'esbuild',
-    assetsInlineLimit: 0,
     rollupOptions: {
       output: {
-        assetFileNames: 'assets/[name]-[hash][extname]',
-        chunkFileNames: 'assets/[name]-[hash].js',
-        entryFileNames: 'assets/[name]-[hash].js',
         manualChunks: (id) => {
-          // Core React libraries
-          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom') || id.includes('node_modules/react-router-dom')) {
+          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
             return 'react-vendor';
           }
-          
-          // Radix UI components
           if (id.includes('@radix-ui')) {
             return 'ui-vendor';
           }
-          
-          // Form libraries
-          if (id.includes('react-hook-form') || id.includes('@hookform') || id.includes('zod')) {
-            return 'form-vendor';
-          }
-          
-          // Lucide icons
           if (id.includes('lucide-react')) {
             return 'icons';
-          }
-          
-          // Supabase
-          if (id.includes('@supabase')) {
-            return 'supabase';
-          }
-          
-          // Query vendor
-          if (id.includes('@tanstack/react-query')) {
-            return 'query-vendor';
           }
         },
       },
