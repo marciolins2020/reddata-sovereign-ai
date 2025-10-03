@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -35,30 +35,63 @@ export function ShareDashboardDialog({
   const [isPublicState, setIsPublicState] = useState(isPublic);
   const [saving, setSaving] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [currentToken, setCurrentToken] = useState(publicToken);
+  const [dashboardTitle, setDashboardTitle] = useState("");
 
-  const shareUrl = publicToken
-    ? `${window.location.origin}/public/${publicToken}`
+  // Fetch dashboard title on mount
+  useEffect(() => {
+    const fetchDashboard = async () => {
+      const { data } = await supabase
+        .from("dashboards")
+        .select("title")
+        .eq("id", dashboardId)
+        .single();
+      
+      if (data) {
+        setDashboardTitle(data.title);
+      }
+    };
+    
+    if (isOpen) {
+      fetchDashboard();
+    }
+  }, [dashboardId, isOpen]);
+
+  const shareUrl = currentToken
+    ? `${window.location.origin}/dashboard/${currentToken}`
     : "";
+
+  const generateSlug = (title: string) => {
+    return title
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "") // Remove accents
+      .replace(/[^a-z0-9]+/g, "-") // Replace non-alphanumeric with hyphens
+      .replace(/^-+|-+$/g, ""); // Remove leading/trailing hyphens
+  };
 
   const handleTogglePublic = async (checked: boolean) => {
     setIsPublicState(checked);
+    
+    // Generate token immediately when toggling to public
+    if (checked && !currentToken) {
+      const slug = generateSlug(dashboardTitle || "dashboard");
+      const timestamp = Date.now().toString(36);
+      const newToken = `${slug}-${timestamp}`;
+      setCurrentToken(newToken);
+    }
   };
 
   const handleSave = async () => {
     setSaving(true);
     try {
-      let token = publicToken;
-
-      // Generate new token if making public and doesn't have one
-      if (isPublicState && !token) {
-        token = crypto.randomUUID();
-      }
+      const token = isPublicState ? currentToken : null;
 
       const { error } = await supabase
         .from("dashboards")
         .update({
           is_public: isPublicState,
-          public_share_token: isPublicState ? token : null,
+          public_share_token: token,
         })
         .eq("id", dashboardId);
 
