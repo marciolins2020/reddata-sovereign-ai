@@ -15,6 +15,7 @@ import { FilterConfigModal } from "@/components/dashboard/FilterConfigModal";
 import { DashboardContent } from "@/components/dashboard/DashboardContent";
 import { DashboardToolbar } from "@/components/dashboard/DashboardToolbar";
 import { TemplateGallery } from "@/components/dashboard/TemplateGallery";
+import { ShareDashboardDialog } from "@/components/dashboard/ShareDashboardDialog";
 import { DashboardFiltersProvider } from "@/contexts/DashboardFiltersContext";
 import { dashboardTemplates, DashboardTemplate } from "@/data/dashboardTemplates";
 import * as XLSX from "xlsx";
@@ -49,6 +50,7 @@ export default function DashboardView() {
   const [saving, setSaving] = useState(false);
   const [showGrid, setShowGrid] = useState(true);
   const [templateGalleryOpen, setTemplateGalleryOpen] = useState(false);
+  const [shareDialogOpen, setShareDialogOpen] = useState(false);
 
   useEffect(() => {
     fetchDashboard();
@@ -275,11 +277,7 @@ export default function DashboardView() {
   };
 
   const handleShare = () => {
-    toast({
-      title: "Link copiado!",
-      description: "Link do dashboard copiado para a área de transferência",
-    });
-    navigator.clipboard.writeText(window.location.href);
+    setShareDialogOpen(true);
   };
 
   if (loading) {
@@ -399,6 +397,15 @@ export default function DashboardView() {
           isOpen={templateGalleryOpen}
           onClose={() => setTemplateGalleryOpen(false)}
           onSelectTemplate={handleApplyTemplate}
+        />
+
+        <ShareDashboardDialog
+          isOpen={shareDialogOpen}
+          onClose={() => setShareDialogOpen(false)}
+          dashboardId={id || ""}
+          isPublic={dashboard?.is_public || false}
+          publicToken={dashboard?.public_share_token || null}
+          onUpdate={fetchDashboard}
         />
       </div>
       </DndContext>

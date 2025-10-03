@@ -16,6 +16,7 @@ const CasosUsoVarejo = lazy(() => import("./pages/CasosUsoVarejo"));
 const Auth = lazy(() => import("./pages/Auth"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const DashboardView = lazy(() => import("./pages/DashboardView"));
+const PublicDashboard = lazy(() => import("./pages/PublicDashboard"));
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
               <Route path="/auth" element={<Auth />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/view/:id" element={<DashboardView />} />
+              <Route path="/public/:token" element={<PublicDashboard />} />
               <Route path="/casos-uso/energia" element={<CasosUsoEnergia />} />
               <Route path="/casos-uso/industria" element={<CasosUsoIndustria />} />
               <Route path="/casos-uso/governo" element={<CasosUsoGoverno />} />
