@@ -18,49 +18,41 @@ const translations = {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 const getInitialLanguage = (): Language => {
-  if (typeof window === 'undefined') return 'pt';
-  
   try {
+    if (typeof window === 'undefined') return 'pt';
+    if (typeof localStorage === 'undefined') return 'pt';
+    
     const saved = localStorage.getItem('language');
     if (saved === 'en' || saved === 'pt') return saved;
-  } catch (error) {
-    // localStorage may not be available (private browsing, etc.)
-    if (import.meta.env.DEV) {
-      console.warn('localStorage not available:', error);
-    }
-  }
-  
-  // Fallback to browser language detection
-  try {
-    const browserLang = navigator.language.toLowerCase();
+    
+    const browserLang = navigator?.language?.toLowerCase() || '';
     if (browserLang.startsWith('en')) return 'en';
   } catch {
-    // ignore errors
+    // Silently fail and return default
   }
   
   return 'pt';
 };
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguageState] = useState<Language>(() => {
-    try {
-      return getInitialLanguage();
-    } catch {
-      return 'pt';
+  const [language, setLanguageState] = useState<Language>('pt');
+
+  // Initialize language after mount to avoid SSR issues
+  React.useEffect(() => {
+    const initialLang = getInitialLanguage();
+    if (initialLang !== language) {
+      setLanguageState(initialLang);
     }
-  });
+  }, []);
 
   const setLanguage = React.useCallback((lang: Language) => {
     setLanguageState(lang);
-    if (typeof window !== 'undefined') {
-      try {
+    try {
+      if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
         localStorage.setItem('language', lang);
-      } catch (error) {
-        // localStorage may fail in private browsing or with strict security settings
-        if (import.meta.env.DEV) {
-          console.warn('Failed to save language preference:', error);
-        }
       }
+    } catch {
+      // Silently fail
     }
   }, []);
 
