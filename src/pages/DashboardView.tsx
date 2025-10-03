@@ -10,6 +10,7 @@ import { ChartWidgetsSidebar } from "@/components/dashboard/ChartWidgetsSidebar"
 import { DashboardCanvas } from "@/components/dashboard/DashboardCanvas";
 import { ChartConfigModal } from "@/components/dashboard/ChartConfigModal";
 import { ChartWidget } from "@/components/dashboard/ChartWidget";
+import { DashboardToolbar } from "@/components/dashboard/DashboardToolbar";
 import * as XLSX from "xlsx";
 
 interface ChartConfig {
@@ -37,6 +38,7 @@ export default function DashboardView() {
   const [configModalOpen, setConfigModalOpen] = useState(false);
   const [pendingChartType, setPendingChartType] = useState("");
   const [saving, setSaving] = useState(false);
+  const [showGrid, setShowGrid] = useState(true);
 
   useEffect(() => {
     fetchDashboard();
@@ -276,22 +278,32 @@ export default function DashboardView() {
         </header>
 
         {/* Main Content */}
-        <div className="flex-1 flex">
-          <ChartWidgetsSidebar />
-          <DashboardCanvas isEmpty={charts.length === 0}>
-            {charts.map((chart) => {
-              const sheetData = sheets.find(s => s.name === chart.sheetName);
-              return (
-                <ChartWidget
-                  key={chart.id}
-                  id={chart.id}
-                  config={chart}
-                  data={sheetData?.data || []}
-                  onDelete={handleDeleteChart}
-                />
-              );
-            })}
-          </DashboardCanvas>
+        <div className="flex-1 flex flex-col">
+          <DashboardToolbar
+            showGrid={showGrid}
+            onToggleGrid={() => setShowGrid(!showGrid)}
+            onPreview={() => toast({ title: "Pré-visualização", description: "Em desenvolvimento" })}
+            onSettings={() => toast({ title: "Configurações", description: "Em desenvolvimento" })}
+            onTheme={() => toast({ title: "Temas", description: "Em desenvolvimento" })}
+          />
+          
+          <div className="flex-1 flex">
+            <ChartWidgetsSidebar />
+            <DashboardCanvas isEmpty={charts.length === 0}>
+              {charts.map((chart) => {
+                const sheetData = sheets.find(s => s.name === chart.sheetName);
+                return (
+                  <ChartWidget
+                    key={chart.id}
+                    id={chart.id}
+                    config={chart}
+                    data={sheetData?.data || []}
+                    onDelete={handleDeleteChart}
+                  />
+                );
+              })}
+            </DashboardCanvas>
+          </div>
         </div>
 
         {/* Config Modal */}

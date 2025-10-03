@@ -15,9 +15,13 @@ export function DashboardCanvas({ children, isEmpty }: DashboardCanvasProps) {
   return (
     <div
       ref={setNodeRef}
-      className={`flex-1 p-6 min-h-[600px] transition-colors ${
+      className={`flex-1 p-6 min-h-[600px] transition-colors relative ${
         isOver ? "bg-primary/5" : "bg-muted/30"
       }`}
+      style={{
+        backgroundImage: 'radial-gradient(circle, hsl(var(--muted-foreground) / 0.1) 1px, transparent 1px)',
+        backgroundSize: '20px 20px'
+      }}
     >
       {isEmpty ? (
         <Card className="h-full flex items-center justify-center border-2 border-dashed">
