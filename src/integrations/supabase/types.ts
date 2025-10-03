@@ -150,7 +150,53 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      public_dashboards_view: {
+        Row: {
+          chart_config: Json | null
+          created_at: string | null
+          description: string | null
+          file_id: string | null
+          id: string | null
+          is_public: boolean | null
+          public_share_token: string | null
+          slug: string | null
+          title: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          chart_config?: Json | null
+          created_at?: string | null
+          description?: string | null
+          file_id?: string | null
+          id?: string | null
+          is_public?: boolean | null
+          public_share_token?: string | null
+          slug?: string | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          chart_config?: Json | null
+          created_at?: string | null
+          description?: string | null
+          file_id?: string | null
+          id?: string | null
+          is_public?: boolean | null
+          public_share_token?: string | null
+          slug?: string | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "dashboards_file_id_fkey"
+            columns: ["file_id"]
+            isOneToOne: false
+            referencedRelation: "uploaded_files"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
       generate_slug: {
