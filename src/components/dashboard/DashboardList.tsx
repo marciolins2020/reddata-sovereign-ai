@@ -21,6 +21,22 @@ export function DashboardList({ userId, refreshTrigger }: DashboardListProps) {
 
   const fetchDashboards = async () => {
     setLoading(true);
+    
+    // Fetch existing files first
+    const { data: filesData, error: filesError } = await supabase
+      .from("uploaded_files")
+      .select("id")
+      .eq("user_id", userId);
+
+    if (filesError) {
+      console.error("Error fetching files:", filesError);
+      setLoading(false);
+      return;
+    }
+
+    const validFileIds = new Set(filesData?.map(f => f.id) || []);
+
+    // Fetch all dashboards
     const { data, error } = await supabase
       .from("dashboards")
       .select("*")
@@ -29,9 +45,36 @@ export function DashboardList({ userId, refreshTrigger }: DashboardListProps) {
 
     if (error) {
       console.error("Error fetching dashboards:", error);
-    } else {
-      setDashboards(data || []);
+      setLoading(false);
+      return;
     }
+
+    // Filter out orphaned dashboards and delete them
+    const validDashboards = [];
+    const orphanedDashboardIds = [];
+
+    for (const dashboard of data || []) {
+      if (dashboard.file_id && validFileIds.has(dashboard.file_id)) {
+        validDashboards.push(dashboard);
+      } else if (dashboard.file_id === null || !validFileIds.has(dashboard.file_id)) {
+        orphanedDashboardIds.push(dashboard.id);
+      }
+    }
+
+    // Delete orphaned dashboards in the background
+    if (orphanedDashboardIds.length > 0) {
+      supabase
+        .from("dashboards")
+        .delete()
+        .in("id", orphanedDashboardIds)
+        .then(({ error }) => {
+          if (error) {
+            console.error("Error deleting orphaned dashboards:", error);
+          }
+        });
+    }
+
+    setDashboards(validDashboards);
     setLoading(false);
   };
 
