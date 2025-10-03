@@ -17,12 +17,18 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 
+interface SheetData {
+  name: string;
+  data: any[];
+  columns: string[];
+}
+
 interface ChartConfigModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSave: (config: any) => void;
   chartType: string;
-  columns: string[];
+  sheets: SheetData[];
 }
 
 export function ChartConfigModal({
@@ -30,29 +36,35 @@ export function ChartConfigModal({
   onClose,
   onSave,
   chartType,
-  columns,
+  sheets,
 }: ChartConfigModalProps) {
   const [title, setTitle] = useState("");
+  const [selectedSheet, setSelectedSheet] = useState("");
   const [xAxis, setXAxis] = useState("");
   const [yAxis, setYAxis] = useState("");
 
   useEffect(() => {
     if (isOpen) {
       setTitle(`Novo Gráfico ${chartType === "bar" ? "de Barras" : chartType === "line" ? "de Linhas" : chartType === "pie" ? "de Pizza" : ""}`);
+      setSelectedSheet(sheets.length > 0 ? sheets[0].name : "");
       setXAxis("");
       setYAxis("");
     }
-  }, [isOpen, chartType]);
+  }, [isOpen, chartType, sheets]);
+
+  const currentSheet = sheets.find(s => s.name === selectedSheet);
+  const columns = currentSheet?.columns || [];
 
   const handleSave = () => {
-    if (!xAxis || !yAxis) {
-      alert("Selecione as colunas para os eixos");
+    if (!selectedSheet || !xAxis || !yAxis) {
+      alert("Selecione a aba e as colunas para os eixos");
       return;
     }
 
     onSave({
       title,
       chartType,
+      sheetName: selectedSheet,
       xAxis,
       yAxis,
     });
@@ -77,6 +89,24 @@ export function ChartConfigModal({
               placeholder="Digite o título"
             />
           </div>
+
+          {sheets.length > 1 && (
+            <div>
+              <Label htmlFor="sheet">Aba da Planilha</Label>
+              <Select value={selectedSheet} onValueChange={setSelectedSheet}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Selecione uma aba" />
+                </SelectTrigger>
+                <SelectContent>
+                  {sheets.map((sheet) => (
+                    <SelectItem key={sheet.name} value={sheet.name}>
+                      {sheet.name} ({sheet.data.length} linhas)
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          )}
 
           <div>
             <Label htmlFor="xAxis">Eixo X (Categoria)</Label>

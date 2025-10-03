@@ -18,6 +18,13 @@ interface ChartConfig {
   chartType: string;
   xAxis: string;
   yAxis: string;
+  sheetName: string;
+}
+
+interface SheetData {
+  name: string;
+  data: any[];
+  columns: string[];
 }
 
 export default function DashboardView() {
@@ -25,8 +32,7 @@ export default function DashboardView() {
   const navigate = useNavigate();
   const [dashboard, setDashboard] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [fileData, setFileData] = useState<any[]>([]);
-  const [columns, setColumns] = useState<string[]>([]);
+  const [sheets, setSheets] = useState<SheetData[]>([]);
   const [charts, setCharts] = useState<ChartConfig[]>([]);
   const [configModalOpen, setConfigModalOpen] = useState(false);
   const [pendingChartType, setPendingChartType] = useState("");
@@ -92,14 +98,31 @@ export default function DashboardView() {
       // Parse Excel file
       const arrayBuffer = await fileBlob.arrayBuffer();
       const workbook = XLSX.read(arrayBuffer, { type: "array" });
-      const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
-      const jsonData = XLSX.utils.sheet_to_json(firstSheet);
 
-      setFileData(jsonData);
+      // Read ALL sheets
+      const allSheets: SheetData[] = [];
+      
+      workbook.SheetNames.forEach((sheetName) => {
+        const worksheet = workbook.Sheets[sheetName];
+        const jsonData = XLSX.utils.sheet_to_json(worksheet);
+        
+        if (jsonData.length > 0) {
+          const columns = Object.keys(jsonData[0]);
+          allSheets.push({
+            name: sheetName,
+            data: jsonData,
+            columns: columns,
+          });
+        }
+      });
 
-      // Extract columns
-      if (jsonData.length > 0) {
-        setColumns(Object.keys(jsonData[0]));
+      setSheets(allSheets);
+
+      if (allSheets.length > 0) {
+        toast({
+          title: "Arquivo carregado!",
+          description: `${allSheets.length} aba(s) encontrada(s) com dados`,
+        });
       }
     } catch (error: any) {
       console.error("Error loading file:", error);
@@ -256,15 +279,18 @@ export default function DashboardView() {
         <div className="flex-1 flex">
           <ChartWidgetsSidebar />
           <DashboardCanvas isEmpty={charts.length === 0}>
-            {charts.map((chart) => (
-              <ChartWidget
-                key={chart.id}
-                id={chart.id}
-                config={chart}
-                data={fileData}
-                onDelete={handleDeleteChart}
-              />
-            ))}
+            {charts.map((chart) => {
+              const sheetData = sheets.find(s => s.name === chart.sheetName);
+              return (
+                <ChartWidget
+                  key={chart.id}
+                  id={chart.id}
+                  config={chart}
+                  data={sheetData?.data || []}
+                  onDelete={handleDeleteChart}
+                />
+              );
+            })}
           </DashboardCanvas>
         </div>
 
@@ -274,7 +300,7 @@ export default function DashboardView() {
           onClose={() => setConfigModalOpen(false)}
           onSave={handleSaveChart}
           chartType={pendingChartType}
-          columns={columns}
+          sheets={sheets}
         />
       </div>
     </DndContext>
