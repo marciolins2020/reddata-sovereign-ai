@@ -17,13 +17,50 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     cssCodeSplit: true,
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info', 'console.debug'],
+        passes: 2,
+      },
+    },
     rollupOptions: {
       output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'ui-vendor': ['@radix-ui/react-dialog', '@radix-ui/react-accordion', '@radix-ui/react-tabs'],
-          'form-vendor': ['react-hook-form', '@hookform/resolvers', 'zod'],
-          'query-vendor': ['@tanstack/react-query'],
+        manualChunks: (id) => {
+          // Core React libraries
+          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom') || id.includes('node_modules/react-router-dom')) {
+            return 'react-vendor';
+          }
+          
+          // Radix UI components - split by category
+          if (id.includes('@radix-ui/react-select') || id.includes('@radix-ui/react-label')) {
+            return 'form-ui';
+          }
+          if (id.includes('@radix-ui')) {
+            return 'ui-vendor';
+          }
+          
+          // Form libraries
+          if (id.includes('react-hook-form') || id.includes('@hookform') || id.includes('zod')) {
+            return 'form-vendor';
+          }
+          
+          // Lucide icons - separate chunk
+          if (id.includes('lucide-react')) {
+            return 'icons';
+          }
+          
+          // Supabase
+          if (id.includes('@supabase')) {
+            return 'supabase';
+          }
+          
+          // Query vendor
+          if (id.includes('@tanstack/react-query')) {
+            return 'query-vendor';
+          }
         },
       },
     },
