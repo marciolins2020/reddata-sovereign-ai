@@ -47,10 +47,10 @@ export function DashboardList({ userId }: DashboardListProps) {
       <Card className="p-12 text-center max-w-2xl mx-auto">
         <BarChart3 className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
         <h3 className="text-xl font-semibold text-foreground mb-2">
-          Nenhum dashboard criado
+          Nenhum dashboard ainda
         </h3>
-        <p className="text-muted-foreground">
-          Faça upload de um arquivo para começar a criar seus dashboards interativos
+        <p className="text-muted-foreground mb-4">
+          Faça upload de um arquivo na aba "Upload de Arquivo" para criar seu primeiro dashboard automaticamente
         </p>
       </Card>
     );

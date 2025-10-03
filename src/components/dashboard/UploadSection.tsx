@@ -70,7 +70,7 @@ export function UploadSection({ userId, profile, onUploadSuccess }: UploadSectio
       if (uploadError) throw uploadError;
 
       // Save file metadata
-      const { error: dbError } = await supabase
+      const { data: fileData, error: dbError } = await supabase
         .from("uploaded_files")
         .insert({
           user_id: userId,
@@ -78,9 +78,24 @@ export function UploadSection({ userId, profile, onUploadSuccess }: UploadSectio
           file_type: file.type,
           file_size_mb: fileSizeMB,
           storage_path: fileName,
-        });
+        })
+        .select()
+        .single();
 
       if (dbError) throw dbError;
+
+      // Create a dashboard automatically
+      const { error: dashboardError } = await supabase
+        .from("dashboards")
+        .insert({
+          user_id: userId,
+          file_id: fileData.id,
+          title: file.name.replace(/\.[^/.]+$/, ""), // Remove extension
+          description: `Dashboard criado automaticamente para ${file.name}`,
+          chart_config: {},
+        });
+
+      if (dashboardError) throw dashboardError;
 
       // Update storage used
       await supabase
@@ -89,8 +104,8 @@ export function UploadSection({ userId, profile, onUploadSuccess }: UploadSectio
         .eq("id", userId);
 
       toast({
-        title: "Upload concluído!",
-        description: "Arquivo enviado com sucesso. Processando dados...",
+        title: "Dashboard criado!",
+        description: "Arquivo enviado e dashboard criado com sucesso.",
       });
 
       setFile(null);
