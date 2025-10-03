@@ -192,14 +192,12 @@ export default function PublicDashboard() {
                 </p>
               </Card>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <DashboardContent
-                  charts={charts}
-                  sheets={sheets}
-                  onDeleteChart={() => {}}
-                  readOnly={true}
-                />
-              </div>
+              <DashboardContent
+                charts={charts}
+                sheets={sheets}
+                onDeleteChart={() => {}}
+                readOnly={true}
+              />
             )}
           </div>
         </div>

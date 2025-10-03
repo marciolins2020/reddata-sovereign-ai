@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "@/hooks/use-toast";
-import { Copy, Globe, Lock, Check } from "lucide-react";
+import { Copy, Globe, Lock, Check, ExternalLink } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 interface ShareDashboardDialogProps {
@@ -143,12 +143,22 @@ export function ShareDashboardDialog({
                   variant="outline"
                   onClick={handleCopyLink}
                   disabled={!shareUrl}
+                  title="Copiar link"
                 >
                   {copied ? (
                     <Check className="h-4 w-4 text-green-500" />
                   ) : (
                     <Copy className="h-4 w-4" />
                   )}
+                </Button>
+                <Button
+                  size="icon"
+                  variant="outline"
+                  onClick={() => window.open(shareUrl, '_blank')}
+                  disabled={!shareUrl}
+                  title="Abrir em nova janela"
+                >
+                  <ExternalLink className="h-4 w-4" />
                 </Button>
               </div>
               <p className="text-xs text-muted-foreground flex items-center gap-1">
