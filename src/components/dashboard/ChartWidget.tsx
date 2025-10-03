@@ -26,6 +26,7 @@ interface ChartWidgetProps {
     chartType: string;
     xAxis: string;
     yAxis: string;
+    sheetName?: string;
   };
   data: any[];
   onDelete: (id: string) => void;

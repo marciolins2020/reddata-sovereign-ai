@@ -10,15 +10,21 @@ import { ChartWidgetsSidebar } from "@/components/dashboard/ChartWidgetsSidebar"
 import { DashboardCanvas } from "@/components/dashboard/DashboardCanvas";
 import { ChartConfigModal } from "@/components/dashboard/ChartConfigModal";
 import { ChartWidget } from "@/components/dashboard/ChartWidget";
+import { FilterWidget } from "@/components/dashboard/FilterWidget";
+import { FilterConfigModal } from "@/components/dashboard/FilterConfigModal";
+import { DashboardContent } from "@/components/dashboard/DashboardContent";
 import { DashboardToolbar } from "@/components/dashboard/DashboardToolbar";
+import { DashboardFiltersProvider, useDashboardFilters } from "@/contexts/DashboardFiltersContext";
 import * as XLSX from "xlsx";
 
 interface ChartConfig {
   id: string;
   title: string;
   chartType: string;
-  xAxis: string;
-  yAxis: string;
+  xAxis?: string;
+  yAxis?: string;
+  column?: string;
+  filterType?: string;
   sheetName: string;
 }
 
@@ -36,6 +42,7 @@ export default function DashboardView() {
   const [sheets, setSheets] = useState<SheetData[]>([]);
   const [charts, setCharts] = useState<ChartConfig[]>([]);
   const [configModalOpen, setConfigModalOpen] = useState(false);
+  const [filterConfigModalOpen, setFilterConfigModalOpen] = useState(false);
   const [pendingChartType, setPendingChartType] = useState("");
   const [saving, setSaving] = useState(false);
   const [showGrid, setShowGrid] = useState(true);
@@ -143,7 +150,13 @@ export default function DashboardView() {
       const chartType = active.data.current?.type;
       if (chartType) {
         setPendingChartType(chartType);
-        setConfigModalOpen(true);
+        
+        // Check if it's a filter widget
+        if (chartType === "dropdown" || chartType === "search") {
+          setFilterConfigModalOpen(true);
+        } else {
+          setConfigModalOpen(true);
+        }
       }
     }
   };
@@ -158,6 +171,21 @@ export default function DashboardView() {
     
     toast({
       title: "Gráfico adicionado!",
+      description: "Não esqueça de salvar o dashboard",
+    });
+  };
+
+  const handleSaveFilter = (config: any) => {
+    const newFilter: ChartConfig = {
+      id: `filter-${Date.now()}`,
+      chartType: config.filterType,
+      ...config,
+    };
+
+    setCharts((prev) => [...prev, newFilter]);
+    
+    toast({
+      title: "Filtro adicionado!",
       description: "Não esqueça de salvar o dashboard",
     });
   };
@@ -226,8 +254,9 @@ export default function DashboardView() {
   }
 
   return (
-    <DndContext onDragEnd={handleDragEnd}>
-      <div className="min-h-screen bg-background flex flex-col">
+    <DashboardFiltersProvider>
+      <DndContext onDragEnd={handleDragEnd}>
+        <div className="min-h-screen bg-background flex flex-col">
         {/* Header */}
         <header className="border-b bg-card sticky top-0 z-50">
           <div className="container mx-auto px-4 py-3">
@@ -290,23 +319,16 @@ export default function DashboardView() {
           <div className="flex-1 flex">
             <ChartWidgetsSidebar />
             <DashboardCanvas isEmpty={charts.length === 0}>
-              {charts.map((chart) => {
-                const sheetData = sheets.find(s => s.name === chart.sheetName);
-                return (
-                  <ChartWidget
-                    key={chart.id}
-                    id={chart.id}
-                    config={chart}
-                    data={sheetData?.data || []}
-                    onDelete={handleDeleteChart}
-                  />
-                );
-              })}
+              <DashboardContent
+                charts={charts}
+                sheets={sheets}
+                onDeleteChart={handleDeleteChart}
+              />
             </DashboardCanvas>
           </div>
         </div>
 
-        {/* Config Modal */}
+        {/* Config Modals */}
         <ChartConfigModal
           isOpen={configModalOpen}
           onClose={() => setConfigModalOpen(false)}
@@ -314,7 +336,16 @@ export default function DashboardView() {
           chartType={pendingChartType}
           sheets={sheets}
         />
+
+        <FilterConfigModal
+          isOpen={filterConfigModalOpen}
+          onClose={() => setFilterConfigModalOpen(false)}
+          onSave={handleSaveFilter}
+          filterType={pendingChartType}
+          sheets={sheets}
+        />
       </div>
-    </DndContext>
+      </DndContext>
+    </DashboardFiltersProvider>
   );
 }

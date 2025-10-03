@@ -8,6 +8,8 @@ import {
   Activity,
   Table,
   Gauge,
+  Filter,
+  Search,
 } from "lucide-react";
 
 const chartCategories = [
@@ -19,6 +21,13 @@ const chartCategories = [
       { id: "pie", name: "Gráfico de Pizza", icon: PieChart, color: "text-purple-500" },
       { id: "area", name: "Gráfico de Área", icon: Activity, color: "text-orange-500" },
       { id: "composed", name: "Gráfico Composto", icon: TrendingUp, color: "text-pink-500" },
+    ],
+  },
+  {
+    name: "Filtros",
+    items: [
+      { id: "dropdown", name: "Filtro Dropdown", icon: Filter, color: "text-amber-500" },
+      { id: "search", name: "Filtro Busca", icon: Search, color: "text-emerald-500" },
     ],
   },
   {
