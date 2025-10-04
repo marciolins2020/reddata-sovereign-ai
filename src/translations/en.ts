@@ -306,12 +306,12 @@ export default {
     subtitle: "Native integrations with Brazilian government systems, national and international ERPs, databases and APIs",
     sourcesTitle: "Data Sources",
     sourcesDesc: "Ready-to-use intelligent connectors",
-    governmentAPIs: "Brazilian Government APIs",
-    databases: "Databases",
-    erps: "National ERPs",
-    files: "Files and Spreadsheets",
-    iot: "IoT and Sensors",
-    apis: "APIs and Webhooks",
+    files: "📂 Files and Spreadsheets",
+    iot: "📡 IoT and Sensors",
+    apis: "🔗 APIs and Webhooks",
+    governmentAPIs: "🏛️ Brazilian Government APIs",
+    databases: "🗄️ Databases",
+    erps: "🏢 National / International ERPs",
     footer: "And hundreds of other customizable connectors for your specific needs"
   },
   automationAlerts: {

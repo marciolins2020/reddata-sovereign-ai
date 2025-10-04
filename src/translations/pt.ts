@@ -306,12 +306,12 @@ export default {
     subtitle: "Integrações nativas com sistemas governamentais brasileiros, ERPs nacionais e internacionais, bancos de dados e APIs",
     sourcesTitle: "Fontes de Dados",
     sourcesDesc: "Conectores inteligentes prontos",
-    governmentAPIs: "APIs Governamentais BR",
-    databases: "Bancos de Dados",
-    erps: "ERPs Nacionais",
-    files: "Arquivos e Planilhas",
-    iot: "IoT e Sensores",
-    apis: "APIs e Webhooks",
+    files: "📂 Arquivos e Planilhas",
+    iot: "📡 IoT e Sensores",
+    apis: "🔗 APIs e Webhooks",
+    governmentAPIs: "🏛️ APIs Governamentais BR",
+    databases: "🗄️ Bancos de Dados",
+    erps: "🏢 ERPs Nacionais / Internacionais",
     footer: "E centenas de outros conectores personalizáveis para sua necessidade específica"
   },
   automationAlerts: {

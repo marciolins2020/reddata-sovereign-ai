@@ -8,34 +8,34 @@ export const DataConnectorsSection = () => {
 
   const connectorCategories = [
     {
-      icon: Building2,
-      titleKey: "dataConnectors.governmentAPIs",
-      examples: ["Portal da Transparência", "SICONV", "e-CAC", "SIAFI"]
-    },
-    {
-      icon: Database,
-      titleKey: "dataConnectors.databases",
-      examples: ["PostgreSQL", "MySQL", "Oracle", "SQL Server", "MongoDB"]
-    },
-    {
-      icon: Cloud,
-      titleKey: "dataConnectors.erps",
-      examples: ["SAP", "TOTVS", "Oracle ERP", "Microsiga", "Senior"]
-    },
-    {
       icon: FileSpreadsheet,
       titleKey: "dataConnectors.files",
-      examples: ["Excel", "CSV", "JSON", "XML", "PDF"]
+      examples: ["Excel", "CSV", "JSON", "XML", "PDF", "Google Sheets", "Parquet", "Avro", "Feather", "TXT/TSV"]
     },
     {
       icon: Wifi,
       titleKey: "dataConnectors.iot",
-      examples: ["MQTT", "OPC-UA", "Modbus", "BACnet"]
+      examples: ["MQTT", "OPC-UA", "Modbus", "BACnet", "Zigbee", "LoRaWAN", "OPC-DA", "KNX", "CANbus"]
     },
     {
       icon: Code,
       titleKey: "dataConnectors.apis",
-      examples: ["REST", "GraphQL", "SOAP", "Webhooks"]
+      examples: ["REST", "GraphQL", "SOAP", "Webhooks", "gRPC", "OData", "WebSockets", "JSON-RPC"]
+    },
+    {
+      icon: Building2,
+      titleKey: "dataConnectors.governmentAPIs",
+      examples: ["Portal da Transparência", "SICONV", "e-CAC", "SIAFI", "Gov.br", "IBGE (SIDRA)", "Datasus (SUS APIs)", "Receita Federal (CNPJ/NF-e)", "ComprasNet/TCU"]
+    },
+    {
+      icon: Database,
+      titleKey: "dataConnectors.databases",
+      examples: ["PostgreSQL", "MySQL", "Oracle", "SQL Server", "MongoDB", "MariaDB", "DB2", "Firebird", "Cassandra", "Redis", "Elasticsearch", "Snowflake", "BigQuery"]
+    },
+    {
+      icon: Cloud,
+      titleKey: "dataConnectors.erps",
+      examples: ["SAP", "TOTVS", "Oracle ERP", "RM", "Senior", "Protheus", "Sankhya", "Benner", "Linx", "Bling", "NetSuite", "Oracle PeopleSoft", "Workday"]
     }
   ];
 
