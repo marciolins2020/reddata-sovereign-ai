@@ -371,10 +371,9 @@ export default function DashboardView() {
   return (
     <DashboardFiltersProvider>
       <DndContext onDragEnd={handleDragEnd}>
-        <div className="h-screen bg-background flex flex-col overflow-hidden">
-        {/* Header + Toolbar - Fixed at top (always visible) */}
-        <div className="flex-none z-50 bg-background shadow-sm">
-          <header className="bg-card border-b">
+        <div className="h-screen bg-background flex flex-col">
+          {/* Header com Logo e Botões */}
+          <header className="flex-none bg-card border-b z-50">
             <div className="px-4 py-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
@@ -422,8 +421,8 @@ export default function DashboardView() {
             </div>
           </header>
 
-          {/* Toolbar - Below header with guaranteed space */}
-          <div className="min-h-[60px] bg-background border-b">
+          {/* Toolbar - Barra de Ferramentas */}
+          <div className="flex-none bg-background border-b z-40">
             <DashboardToolbar
               showGrid={showGrid}
               onToggleGrid={() => setShowGrid(!showGrid)}
@@ -434,7 +433,6 @@ export default function DashboardView() {
               onTheme={() => setTemplateGalleryOpen(true)}
             />
           </div>
-        </div>
 
         {/* Main Content - Scrollable area below fixed header */}
         <div className="flex-1 flex overflow-hidden">
