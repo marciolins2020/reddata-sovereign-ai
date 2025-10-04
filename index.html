@@ -1,24 +1,6 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-05RNJZLRD1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-05RNJZLRD1');
-    </script>
-
-    <!-- Microsoft Clarity -->
-    <script type="text/javascript">
-      (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", "tkwvo0o02z");
-    </script>
     
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.png" type="image/png" />
@@ -26,23 +8,20 @@
     <title>RedData - Plataforma Brasileira de Big Data e IA</title>
     <meta name="description" content="RedData® – A Plataforma Brasileira de Big Data & Inteligência Artificial para a transformação digital de organizações públicas e privadas." />
     <meta name="author" content="RedMaxx" />
+    
+    <!-- Performance Optimization: Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="image" href="/reddata-dashboard-hero.webp" fetchpriority="high">
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://scripts.clarity.ms">
     
-    <!-- CSS Loading Optimization: Load CSS asynchronously to prevent render blocking -->
-    <script>
-      (function() {
-        var link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = '/src/index.css';
-        link.media = 'print';
-        link.onload = function() { this.media = 'all'; };
-        document.head.appendChild(link);
-      })();
-    </script>
+    <!-- Preload critical resources -->
+    <link rel="preload" as="image" href="/reddata-dashboard-hero.webp" fetchpriority="high">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+    
+    <!-- Load fonts asynchronously -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
     
     <meta property="og:title" content="RedData - Plataforma Brasileira de Big Data e IA" />
     <meta property="og:description" content="RedData® – A Plataforma Brasileira de Big Data & Inteligência Artificial para a transformação digital de organizações públicas e privadas." />
@@ -57,5 +36,24 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Analytics scripts moved to end and deferred for better FCP -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-05RNJZLRD1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-05RNJZLRD1');
+    </script>
+
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "tkwvo0o02z");
+    </script>
   </body>
 </html>
