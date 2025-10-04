@@ -46,7 +46,7 @@ export const AutomationAlertsSection = () => {
   ];
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-muted/50 to-background">
+    <section className="py-10 px-4 bg-gradient-to-b from-muted/50 to-background">
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-12">
           <Badge className="mb-4 text-lg px-6 py-2" variant="secondary">

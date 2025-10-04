@@ -32,7 +32,7 @@ export const WhiteLabelSection = () => {
   ];
 
   return (
-    <section className="py-12 md:py-20 px-4 bg-gradient-to-b from-background via-primary/5 to-background">
+    <section className="py-6 md:py-10 px-4 bg-gradient-to-b from-background via-primary/5 to-background">
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-8 md:mb-12">
           <Badge className="mb-4 text-sm md:text-lg px-4 md:px-6 py-1.5 md:py-2 bg-gradient-to-r from-primary to-primary/60">

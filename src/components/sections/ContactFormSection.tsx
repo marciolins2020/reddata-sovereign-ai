@@ -114,7 +114,7 @@ export const ContactFormSection = () => {
 
   if (isSubmitted) {
     return (
-      <section id="contact-form" className="py-24 bg-gradient-hero">
+      <section id="contact-form" className="py-12 bg-gradient-hero">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto text-center">
             <Card className="p-12 border-0 bg-card/50 backdrop-blur-sm">
@@ -138,7 +138,7 @@ export const ContactFormSection = () => {
   }
 
   return (
-    <section id="contact-form" className="py-24 bg-gradient-hero">
+    <section id="contact-form" className="py-12 bg-gradient-hero">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">

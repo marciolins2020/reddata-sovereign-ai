@@ -20,7 +20,7 @@ export const VirtualMachinesSection = () => {
   const { t } = useLanguage();
 
   return (
-    <section className="py-24 bg-background">
+    <section className="py-12 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">
