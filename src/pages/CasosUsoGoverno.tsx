@@ -95,6 +95,12 @@ const CasosUsoGoverno = () => {
                 className="w-full h-auto"
               />
             </div>
+
+            <div className="mb-8 p-6 bg-muted/30 rounded-lg border border-border">
+              <p className="text-lg leading-relaxed text-foreground">
+                Com o RedData, a ADS passou a contar não apenas com dashboards e relatórios de gestão, mas também com módulos de Inteligência Artificial preditiva, que identificam padrões de execução e antecipam riscos financeiros e operacionais. A IA foi aplicada na análise de séries históricas de projetos, permitindo simular cenários futuros, otimizar a alocação de recursos e apoiar decisões estratégicas da agência. Esse uso de IA reduziu retrabalhos, aumentou a assertividade no planejamento e garantiu maior eficiência na execução dos programas apoiados pela ADS.
+              </p>
+            </div>
           </div>
 
           {/* Results ADS */}
