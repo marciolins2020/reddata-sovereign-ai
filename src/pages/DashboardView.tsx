@@ -371,9 +371,9 @@ export default function DashboardView() {
   return (
     <DashboardFiltersProvider>
       <DndContext onDragEnd={handleDragEnd}>
-        <div className="h-screen bg-background flex flex-col">
-          {/* Header com Logo e Botões */}
-          <header className="flex-none bg-card border-b z-50">
+        <div className="min-h-screen bg-background flex flex-col">
+          {/* Header com Logo e Botões - FIXO NO TOPO */}
+          <header className="sticky top-0 bg-card border-b z-50 shadow-sm">
             <div className="px-4 py-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
@@ -421,8 +421,8 @@ export default function DashboardView() {
             </div>
           </header>
 
-          {/* Toolbar - Barra de Ferramentas */}
-          <div className="flex-none bg-muted/50 border-b z-40 h-16">
+          {/* Toolbar - SEMPRE VISÍVEL ABAIXO DO HEADER */}
+          <div className="sticky top-[73px] bg-muted/80 backdrop-blur-sm border-b z-40 h-14 shadow-sm">
             <DashboardToolbar
               showGrid={showGrid}
               onToggleGrid={() => setShowGrid(!showGrid)}
@@ -434,8 +434,8 @@ export default function DashboardView() {
             />
           </div>
 
-        {/* Main Content - Scrollable area below fixed header */}
-        <div className="flex-1 flex overflow-hidden">
+        {/* Main Content - Area scrollável */}
+        <div className="flex flex-1">
           <ChartWidgetsSidebar />
           <div className="flex-1 overflow-auto">
             <DashboardCanvas isEmpty={charts.length === 0}>
