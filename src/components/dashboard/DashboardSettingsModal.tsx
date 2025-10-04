@@ -17,7 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Check, Monitor, Image, Smartphone, Palette, Download, Loader } from "lucide-react";
+import { Check, Monitor, Image, Smartphone, Palette, Download, Loader, Layers, Code } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export interface DashboardSettings {
@@ -29,6 +29,9 @@ export interface DashboardSettings {
   colorScheme: string[];
   font: string;
   backgroundColor: string;
+  stackedSequence: "default" | "custom";
+  loadingPanel: boolean;
+  customCSS: string;
 }
 
 interface DashboardSettingsModalProps {
@@ -96,6 +99,9 @@ export function DashboardSettingsModal({
       colorScheme: predefinedThemes[0].colors,
       font: "Open Sans",
       backgroundColor: "#ffffff",
+      stackedSequence: "default",
+      loadingPanel: true,
+      customCSS: "",
     }
   );
 
@@ -151,11 +157,11 @@ export function DashboardSettingsModal({
                 Mobile Display
               </TabsTrigger>
               <TabsTrigger
-                value="colors"
+                value="stacked"
                 className="data-[state=active]:bg-background gap-2"
               >
-                <Palette className="h-4 w-4" />
-                Color Scheme
+                <Layers className="h-4 w-4" />
+                Stacked Sequence
               </TabsTrigger>
               <TabsTrigger
                 value="export"
@@ -163,6 +169,20 @@ export function DashboardSettingsModal({
               >
                 <Download className="h-4 w-4" />
                 Print & Export
+              </TabsTrigger>
+              <TabsTrigger
+                value="loading"
+                className="data-[state=active]:bg-background gap-2"
+              >
+                <Loader className="h-4 w-4" />
+                Loading Panel
+              </TabsTrigger>
+              <TabsTrigger
+                value="css"
+                className="data-[state=active]:bg-background gap-2"
+              >
+                <Code className="h-4 w-4" />
+                Custom CSS
               </TabsTrigger>
             </TabsList>
           </div>
@@ -367,41 +387,35 @@ export function DashboardSettingsModal({
                   </div>
                 </TabsContent>
 
-                <TabsContent value="colors" className="mt-0 space-y-6">
+                <TabsContent value="stacked" className="mt-0 space-y-6">
                   <div>
-                    <h3 className="text-base font-semibold mb-2">Color Scheme</h3>
+                    <h3 className="text-base font-semibold mb-2">Stacked Sequence</h3>
                     <p className="text-sm text-muted-foreground mb-4">
-                      Choose from predefined color schemes
+                      Control the stacking order and layering of widgets
                     </p>
                   </div>
 
-                  <div className="grid grid-cols-1 gap-3">
-                    {predefinedThemes.map((theme) => (
-                      <Card
-                        key={theme.name}
-                        className={cn(
-                          "p-4 cursor-pointer transition-all hover:shadow-md",
-                          settings.theme === theme.name && "border-2 border-primary"
-                        )}
-                        onClick={() => handleThemeChange(theme.name)}
+                  <div className="space-y-4">
+                    <div>
+                      <Label className="text-sm mb-2 block">Sequence Mode</Label>
+                      <Select
+                        value={settings.stackedSequence}
+                        onValueChange={(value: any) =>
+                          setSettings({ ...settings, stackedSequence: value })
+                        }
                       >
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="font-medium text-sm">{theme.name}</span>
-                          {settings.theme === theme.name && (
-                            <Check className="h-4 w-4 text-primary" />
-                          )}
-                        </div>
-                        <div className="flex gap-1">
-                          {theme.colors.map((color, index) => (
-                            <div
-                              key={index}
-                              className="flex-1 h-6 rounded"
-                              style={{ backgroundColor: color }}
-                            />
-                          ))}
-                        </div>
-                      </Card>
-                    ))}
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="default">Default (Auto)</SelectItem>
+                          <SelectItem value="custom">Custom Order</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <p className="text-xs text-muted-foreground">
+                      Default mode automatically manages widget layering. Custom mode allows manual control.
+                    </p>
                   </div>
                 </TabsContent>
 
@@ -441,6 +455,61 @@ export function DashboardSettingsModal({
                         </SelectContent>
                       </Select>
                     </div>
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="loading" className="mt-0 space-y-6">
+                  <div>
+                    <h3 className="text-base font-semibold mb-2">Loading Panel</h3>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      Configure loading behavior and indicators
+                    </p>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <Label className="text-sm">Show Loading Panel</Label>
+                        <p className="text-xs text-muted-foreground">
+                          Display loading indicator while data loads
+                        </p>
+                      </div>
+                      <Button
+                        variant={settings.loadingPanel ? "default" : "outline"}
+                        size="sm"
+                        onClick={() =>
+                          setSettings({ ...settings, loadingPanel: !settings.loadingPanel })
+                        }
+                      >
+                        {settings.loadingPanel ? "Enabled" : "Disabled"}
+                      </Button>
+                    </div>
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="css" className="mt-0 space-y-6">
+                  <div>
+                    <h3 className="text-base font-semibold mb-2">Custom CSS</h3>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      Add custom CSS to style your dashboard
+                    </p>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div>
+                      <Label className="text-sm mb-2 block">CSS Code</Label>
+                      <textarea
+                        value={settings.customCSS}
+                        onChange={(e) =>
+                          setSettings({ ...settings, customCSS: e.target.value })
+                        }
+                        className="w-full h-48 p-3 text-xs font-mono border rounded-lg bg-background resize-none focus:outline-none focus:ring-2 focus:ring-primary"
+                        placeholder="/* Add your custom CSS here */&#10;.dashboard-widget {&#10;  border-radius: 8px;&#10;}"
+                      />
+                    </div>
+                    <p className="text-xs text-muted-foreground">
+                      Advanced: Use CSS to customize dashboard appearance beyond standard options.
+                    </p>
                   </div>
                 </TabsContent>
               </div>

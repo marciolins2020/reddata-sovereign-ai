@@ -64,6 +64,9 @@ export default function DashboardView() {
     colorScheme: ["#1e40af", "#3b82f6", "#60a5fa", "#93c5fd"],
     font: "Open Sans",
     backgroundColor: "#ffffff",
+    stackedSequence: "default",
+    loadingPanel: true,
+    customCSS: "",
   });
   const [history, setHistory] = useState<ChartConfig[][]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
