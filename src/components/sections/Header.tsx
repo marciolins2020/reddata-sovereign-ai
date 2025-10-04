@@ -135,15 +135,18 @@ export const Header = () => {
               {t('header.modules')}
             </Link>
             
-            {menuItems.slice(4).map((item) => (
-              <button
-                key={item.href}
-                onClick={() => scrollToSection(item.href)}
-                className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-accent"
-              >
-                {item.label}
-              </button>
-            ))}
+            <button
+              onClick={() => scrollToSection(menuItems[4].href)}
+              className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-accent"
+            >
+              {menuItems[4].label}
+            </button>
+            <button
+              onClick={() => scrollToSection(menuItems[5].href)}
+              className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-accent"
+            >
+              {menuItems[5].label}
+            </button>
           </nav>
 
           {/* Language Switcher & CTA Button Desktop */}
@@ -180,7 +183,7 @@ export const Header = () => {
         {isMobileMenuOpen && (
           <div className="lg:hidden py-4 border-t border-border bg-background/80 backdrop-blur-xl">
             <nav className="flex flex-col space-y-2">
-              {menuItems.map((item) => (
+              {menuItems.slice(0, 4).map((item) => (
                 <button
                   key={item.href}
                   onClick={() => scrollToSection(item.href)}
@@ -213,6 +216,19 @@ export const Header = () => {
               >
                 {t('header.modules')}
               </Link>
+              
+              <button
+                onClick={() => scrollToSection(menuItems[4].href)}
+                className="px-4 py-3 text-left text-sm font-medium text-foreground hover:text-primary hover:bg-accent transition-colors rounded-md"
+              >
+                {menuItems[4].label}
+              </button>
+              <button
+                onClick={() => scrollToSection(menuItems[5].href)}
+                className="px-4 py-3 text-left text-sm font-medium text-foreground hover:text-primary hover:bg-accent transition-colors rounded-md"
+              >
+                {menuItems[5].label}
+              </button>
               
               <div className="px-4 pt-2 space-y-2">
                 <Button
