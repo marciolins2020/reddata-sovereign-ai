@@ -339,7 +339,8 @@ export default {
   },
   whiteLabel: {
     badge: "Sovereign Cloud & Appliance",
-    title: "National White Label Solution (for business partners only)",
+    title: "National White Label Solution",
+    titleSuffix: "(for business partners only)",
     subtitle: "The Brazilian equivalent to white label BI: total control, digital sovereignty and proprietary infrastructure",
     applianceTitle: "RedData® Appliance",
     applianceDesc: "Dedicated hardware with the entire embedded platform. Operates 100% offline, ideal for critical and confidential environments. Your data never leaves your datacenter.",
