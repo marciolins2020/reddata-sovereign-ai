@@ -422,7 +422,7 @@ export default function DashboardView() {
           </header>
 
           {/* Toolbar - SEMPRE VISÍVEL ABAIXO DO HEADER */}
-          <div className="sticky top-[73px] bg-muted/80 backdrop-blur-sm border-b z-40 h-14 shadow-sm">
+          <div className="sticky top-[73px] bg-card/95 backdrop-blur-md border-b z-50 h-14 shadow-md">
             <DashboardToolbar
               showGrid={showGrid}
               onToggleGrid={() => setShowGrid(!showGrid)}

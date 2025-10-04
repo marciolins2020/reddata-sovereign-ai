@@ -172,7 +172,7 @@ export function ChartWidget({ id, config, data, onDelete, readOnly, themeColors 
   };
 
   return (
-    <Card className="p-4">
+    <Card className="p-4 relative z-0">
       <div className="flex items-center justify-between mb-3">
         <h4 className="font-semibold text-foreground">{config.title}</h4>
         {!readOnly && (
