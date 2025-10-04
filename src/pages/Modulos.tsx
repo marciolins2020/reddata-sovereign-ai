@@ -51,21 +51,9 @@ const Modulos = () => {
             <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
               {t("modules.title")}
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               {t("modules.subtitle")}
             </p>
-            
-            {/* Dashboard Image */}
-            <div className="mt-12">
-              <img 
-                src={dashboardManaus} 
-                alt="Dashboard Prefeitura de Manaus" 
-                className="w-full rounded-lg shadow-2xl border border-border"
-              />
-              <p className="text-xs text-muted-foreground mt-1">
-                Tela Principal do Projeto da Prefeitura de Manaus (AM).
-              </p>
-            </div>
           </div>
         </div>
       </section>
@@ -75,63 +63,90 @@ const Modulos = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="grid grid-cols-1 gap-8">
             {modules.map((module) => (
-              <Card 
-                key={module.id} 
-                className={`group hover:shadow-xl transition-all duration-300 bg-gradient-to-br ${module.gradient} border-2`}
-              >
-                <CardHeader>
-                  <Badge className="w-fit mb-4" variant="secondary">
-                    {module.category}
-                  </Badge>
-                  <CardTitle className="text-2xl">{module.title}</CardTitle>
-                  <CardDescription className="text-base">
-                    {module.description}
-                  </CardDescription>
-                </CardHeader>
+              <div key={module.id}>
+                <Card 
+                  className={`group hover:shadow-xl transition-all duration-300 bg-gradient-to-br ${module.gradient} border-2`}
+                >
+                  <CardHeader>
+                    <Badge className="w-fit mb-4" variant="secondary">
+                      {module.category}
+                    </Badge>
+                    <CardTitle className="text-2xl">{module.title}</CardTitle>
+                    <CardDescription className="text-base">
+                      {module.description}
+                    </CardDescription>
+                  </CardHeader>
 
-                <CardContent>
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    {/* Left Column - Features */}
-                    <div>
-                      <h4 className="font-semibold mb-3 text-foreground">
-                        {t("modules.featuresTitle")}
-                      </h4>
-                      <div className="grid grid-cols-1 gap-3">
-                        {module.features.map((feature, idx) => (
-                          <div key={idx} className="flex items-start gap-3 p-3 rounded-lg bg-background/30 hover:bg-background/50 transition-colors">
-                            <feature.icon className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                            <span className="text-sm text-muted-foreground">{feature.text}</span>
-                          </div>
-                        ))}
+                  <CardContent>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                      {/* Left Column - Features */}
+                      <div>
+                        <h4 className="font-semibold mb-3 text-foreground">
+                          {t("modules.featuresTitle")}
+                        </h4>
+                        <div className="grid grid-cols-1 gap-3">
+                          {module.features.map((feature, idx) => (
+                            <div key={idx} className="flex items-start gap-3 p-3 rounded-lg bg-background/30 hover:bg-background/50 transition-colors">
+                              <feature.icon className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                              <span className="text-sm text-muted-foreground">{feature.text}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Right Column - Results */}
+                      <div className="space-y-6">
+                        <div className="bg-background/50 rounded-lg p-4">
+                          <h4 className="font-semibold mb-3 text-foreground">
+                            {t("modules.resultsTitle")}
+                          </h4>
+                          <ul className="space-y-2">
+                            {module.benefits.map((benefit, idx) => (
+                              <li key={idx} className="text-sm text-muted-foreground flex items-start gap-2">
+                                <span className="text-primary text-lg">✓</span>
+                                <span>{benefit}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <Button 
+                          className="w-full group-hover:scale-105 transition-transform"
+                          onClick={() => window.open(module.link, '_blank')}
+                        >
+                          {t("modules.learnMore")}
+                        </Button>
                       </div>
                     </div>
+                  </CardContent>
+                </Card>
 
-                    {/* Right Column - Results */}
-                    <div className="space-y-6">
-                      <div className="bg-background/50 rounded-lg p-4">
-                        <h4 className="font-semibold mb-3 text-foreground">
-                          {t("modules.resultsTitle")}
-                        </h4>
-                        <ul className="space-y-2">
-                          {module.benefits.map((benefit, idx) => (
-                            <li key={idx} className="text-sm text-muted-foreground flex items-start gap-2">
-                              <span className="text-primary text-lg">✓</span>
-                              <span>{benefit}</span>
-                            </li>
-                          ))}
-                        </ul>
+                {/* Dashboard Preview - Abaixo do Card */}
+                <div className="relative mt-8">
+                  <div className="absolute -inset-4 bg-gradient-to-br from-primary/30 via-blue-500/20 to-cyan-500/30 rounded-2xl blur-2xl opacity-75" />
+                  <div className="relative bg-gradient-to-br from-background/60 via-background/40 to-background/60 backdrop-blur-xl rounded-xl border-2 border-primary/30 shadow-2xl overflow-hidden">
+                    <div className="bg-gradient-to-r from-primary/10 to-blue-500/10 p-3 border-b border-primary/20">
+                      <h4 className="font-semibold text-foreground flex items-center gap-2">
+                        <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+                        Dashboard ao Vivo
+                      </h4>
+                    </div>
+                    <div className="p-4">
+                      <div className="aspect-video w-full rounded-lg overflow-hidden shadow-inner bg-muted/20">
+                        <iframe
+                          src={module.link}
+                          className="w-full h-full border-0"
+                          title={`${module.title} Dashboard Preview`}
+                          loading="lazy"
+                        />
                       </div>
-
-                      <Button 
-                        className="w-full group-hover:scale-105 transition-transform"
-                        onClick={() => window.open(module.link, '_blank')}
-                      >
-                        {t("modules.learnMore")}
-                      </Button>
+                      <p className="text-xs text-muted-foreground mt-2 text-center">
+                        Tela Principal do Projeto da Prefeitura de Manaus (AM).
+                      </p>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             ))}
           </div>
         </div>
