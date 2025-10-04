@@ -33,7 +33,7 @@ interface FormData {
 
 export const ContactFormSection = () => {
   const { toast } = useToast();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [formData, setFormData] = useState<FormData>({
     nome: "",
     email: "",
@@ -71,7 +71,7 @@ export const ContactFormSection = () => {
 
     try {
       const { data, error } = await supabase.functions.invoke('send-contact-email', {
-        body: formData
+        body: { ...formData, language }
       });
 
       if (error) {

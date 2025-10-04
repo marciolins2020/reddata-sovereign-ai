@@ -256,6 +256,7 @@ export default {
     stillHaveQuestions: "Still have questions? Contact us"
   },
   contact: {
+    language: "en",
     title: "Request a Demo",
     subtitle: "Fill out the form and our team will contact you",
     nameLabel: "Full Name *",

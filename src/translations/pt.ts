@@ -256,6 +256,7 @@ export default {
     stillHaveQuestions: "Ainda tem dúvidas? Entre em contato conosco"
   },
   contact: {
+    language: "pt",
     title: "Solicite uma Demonstração",
     subtitle: "Preencha o formulário e nossa equipe entrará em contato",
     nameLabel: "Nome Completo *",
