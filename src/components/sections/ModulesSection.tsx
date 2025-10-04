@@ -42,74 +42,81 @@ export const ModulesSection = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {modules.map((module) => (
-            <Card 
-              key={module.id} 
-              className={`group hover:shadow-xl transition-all duration-300 bg-gradient-to-br ${module.gradient} border-2`}
-            >
-              <CardHeader>
-                <Badge className="w-fit mb-4" variant="secondary">
-                  {module.category}
-                </Badge>
-                <CardTitle className="text-2xl">{module.title}</CardTitle>
-                <CardDescription className="text-base">
-                  {module.description}
-                </CardDescription>
-              </CardHeader>
+            <div key={module.id} className="space-y-8">
+              <Card 
+                className={`group hover:shadow-xl transition-all duration-300 bg-gradient-to-br ${module.gradient} border-2`}
+              >
+                <CardHeader>
+                  <Badge className="w-fit mb-4" variant="secondary">
+                    {module.category}
+                  </Badge>
+                  <CardTitle className="text-2xl">{module.title}</CardTitle>
+                  <CardDescription className="text-base">
+                    {module.description}
+                  </CardDescription>
+                </CardHeader>
 
-              <CardContent className="space-y-6">
-                <div>
-                  <h4 className="font-semibold mb-3 text-foreground">
-                    {t("modules.featuresTitle")}
-                  </h4>
-                  <div className="grid grid-cols-2 gap-3">
-                    {module.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-start gap-2">
-                        <feature.icon className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                        <span className="text-sm text-muted-foreground">{feature.text}</span>
-                      </div>
-                    ))}
+                <CardContent className="space-y-6">
+                  <div>
+                    <h4 className="font-semibold mb-3 text-foreground">
+                      {t("modules.featuresTitle")}
+                    </h4>
+                    <div className="grid grid-cols-2 gap-3">
+                      {module.features.map((feature, idx) => (
+                        <div key={idx} className="flex items-start gap-2">
+                          <feature.icon className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                          <span className="text-sm text-muted-foreground">{feature.text}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="bg-background/50 rounded-lg p-4">
+                    <h4 className="font-semibold mb-2 text-foreground">
+                      {t("modules.resultsTitle")}
+                    </h4>
+                    <ul className="space-y-1">
+                      {module.benefits.map((benefit, idx) => (
+                        <li key={idx} className="text-sm text-muted-foreground flex items-center gap-2">
+                          <span className="text-primary">✓</span>
+                          {benefit}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <Button 
+                    className="w-full group-hover:scale-105 transition-transform"
+                    onClick={() => window.open(module.link, '_blank')}
+                  >
+                    {t("modules.learnMore")}
+                  </Button>
+                </CardContent>
+              </Card>
+
+              {/* Dashboard Preview - Abaixo do Card */}
+              <div className="relative">
+                <div className="absolute -inset-4 bg-gradient-to-br from-primary/30 via-blue-500/20 to-cyan-500/30 rounded-2xl blur-2xl opacity-75" />
+                <div className="relative bg-gradient-to-br from-background/60 via-background/40 to-background/60 backdrop-blur-xl rounded-xl border-2 border-primary/30 shadow-2xl overflow-hidden">
+                  <div className="bg-gradient-to-r from-primary/10 to-blue-500/10 p-3 border-b border-primary/20">
+                    <h4 className="font-semibold text-foreground flex items-center gap-2">
+                      <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+                      Dashboard ao Vivo
+                    </h4>
+                  </div>
+                  <div className="p-4">
+                    <div className="aspect-video w-full rounded-lg overflow-hidden shadow-inner bg-muted/20">
+                      <iframe
+                        src={module.link}
+                        className="w-full h-full border-0"
+                        title={`${module.title} Dashboard Preview`}
+                        loading="lazy"
+                      />
+                    </div>
                   </div>
                 </div>
-
-                <div className="bg-background/50 rounded-lg p-4">
-                  <h4 className="font-semibold mb-2 text-foreground">
-                    {t("modules.resultsTitle")}
-                  </h4>
-                  <ul className="space-y-1">
-                    {module.benefits.map((benefit, idx) => (
-                      <li key={idx} className="text-sm text-muted-foreground flex items-center gap-2">
-                        <span className="text-primary">✓</span>
-                        {benefit}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <Button 
-                  className="w-full group-hover:scale-105 transition-transform"
-                  onClick={() => window.open(module.link, '_blank')}
-                >
-                  {t("modules.learnMore")}
-                </Button>
-
-                {/* Dashboard Preview */}
-                <div className="mt-6 relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-blue-500/20 rounded-lg blur-xl" />
-                  <Card className="relative bg-background/40 backdrop-blur-md border-2 border-primary/20 overflow-hidden">
-                    <CardContent className="p-4">
-                      <div className="aspect-video w-full rounded-lg overflow-hidden shadow-2xl">
-                        <iframe
-                          src={module.link}
-                          className="w-full h-full border-0"
-                          title={`${module.title} Dashboard Preview`}
-                          loading="lazy"
-                        />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
       </div>
