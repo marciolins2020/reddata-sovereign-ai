@@ -62,7 +62,7 @@ const Modulos = () => {
                 alt="Dashboard Prefeitura de Manaus" 
                 className="w-full rounded-lg shadow-2xl border border-border"
               />
-              <p className="text-xs text-muted-foreground mt-2">
+              <p className="text-xs text-muted-foreground mt-1">
                 Tela Principal do Projeto da Prefeitura de Manaus (AM).
               </p>
             </div>
@@ -71,7 +71,7 @@ const Modulos = () => {
       </section>
 
       {/* Modules Grid */}
-      <section className="py-12 px-4">
+      <section className="pt-4 pb-12 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {modules.map((module) => (
