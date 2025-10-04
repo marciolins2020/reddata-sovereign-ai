@@ -71,7 +71,7 @@ const Modulos = () => {
       </section>
 
       {/* Modules Grid */}
-      <section className="pt-4 pb-12 px-4">
+      <section className="pt-0 pb-12 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {modules.map((module) => (
