@@ -131,10 +131,8 @@ export const Header = () => {
             </NavigationMenu>
             
             {/* Módulos Link */}
-            <Link to="/modulos">
-              <button className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-accent">
-                {t('header.modules')}
-              </button>
+            <Link to="/modulos" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-accent inline-block">
+              {t('header.modules')}
             </Link>
             
             {menuItems.slice(4).map((item) => (
@@ -211,10 +209,9 @@ export const Header = () => {
               <Link
                 to="/modulos"
                 onClick={() => setIsMobileMenuOpen(false)}
+                className="block px-4 py-3 text-left text-sm font-medium text-foreground hover:text-primary hover:bg-accent transition-colors rounded-md mx-4"
               >
-                <button className="px-4 py-3 text-left text-sm font-medium text-foreground hover:text-primary hover:bg-accent transition-colors rounded-md w-full">
-                  {t('header.modules')}
-                </button>
+                {t('header.modules')}
               </Link>
               
               <div className="px-4 pt-2 space-y-2">
