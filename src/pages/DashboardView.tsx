@@ -373,7 +373,7 @@ export default function DashboardView() {
       <DndContext onDragEnd={handleDragEnd}>
         <div className="h-screen bg-background flex flex-col overflow-hidden">
         {/* Header + Toolbar - Fixed at top (always visible) */}
-        <div className="flex-none z-50 bg-background shadow-sm border-b">
+        <div className="flex-none z-50 bg-background shadow-sm">
           <header className="bg-card border-b">
             <div className="px-4 py-3">
               <div className="flex items-center justify-between">
@@ -422,16 +422,18 @@ export default function DashboardView() {
             </div>
           </header>
 
-          {/* Toolbar - Below header */}
-          <DashboardToolbar
-            showGrid={showGrid}
-            onToggleGrid={() => setShowGrid(!showGrid)}
-            onUndo={handleUndo}
-            onRedo={handleRedo}
-            onPreview={() => setPreviewModalOpen(true)}
-            onSettings={() => setSettingsModalOpen(true)}
-            onTheme={() => setTemplateGalleryOpen(true)}
-          />
+          {/* Toolbar - Below header with guaranteed space */}
+          <div className="min-h-[60px] bg-background border-b">
+            <DashboardToolbar
+              showGrid={showGrid}
+              onToggleGrid={() => setShowGrid(!showGrid)}
+              onUndo={handleUndo}
+              onRedo={handleRedo}
+              onPreview={() => setPreviewModalOpen(true)}
+              onSettings={() => setSettingsModalOpen(true)}
+              onTheme={() => setTemplateGalleryOpen(true)}
+            />
+          </div>
         </div>
 
         {/* Main Content - Scrollable area below fixed header */}
