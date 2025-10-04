@@ -600,7 +600,7 @@ export default {
     featuresTitle: "Principais Recursos:",
     resultsTitle: "Resultados Comprovados:",
     learnMore: "Saiba Mais",
-    ctaTitle: "Quer conhecer nossos módulos especializados?",
+    ctaTitle: "Quer conhecer mais detalhes sobre nossos módulos especializados?",
     ctaSubtitle: "Entre em contato e descubra como podemos ajudar sua organização",
     requestDemo: "Solicitar Demonstração",
     tetoMac: {
