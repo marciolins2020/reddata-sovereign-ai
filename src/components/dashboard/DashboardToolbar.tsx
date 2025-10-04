@@ -30,7 +30,7 @@ export function DashboardToolbar({
   onToggleGrid,
 }: DashboardToolbarProps) {
   return (
-    <div className="flex items-center gap-2 px-4 py-4 bg-muted/30">
+    <div className="flex items-center gap-2 px-4 py-5 bg-card/50 h-full">
       <Button variant="ghost" size="sm" onClick={onUndo} title="Desfazer">
         <Undo className="h-4 w-4" />
       </Button>
