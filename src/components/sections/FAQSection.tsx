@@ -40,6 +40,7 @@ export const FAQSection = () => {
                 key={index} 
                 value={`item-${index}`}
                 className="bg-card/50 backdrop-blur-sm border-0 rounded-lg px-6 shadow-subtle"
+                style={{ contentVisibility: 'auto', contain: 'layout' }}
               >
                 <AccordionTrigger className="text-left font-semibold text-foreground hover:text-primary hover:no-underline">
                   {faq.question}

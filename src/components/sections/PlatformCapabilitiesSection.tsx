@@ -70,12 +70,12 @@ export const PlatformCapabilitiesSection = () => {
           }}
           className="w-full max-w-6xl mx-auto"
         >
-          <CarouselContent>
+          <CarouselContent className="[contain:layout]">
             {capabilities.map((capability, index) => {
               const Icon = capability.icon;
               return (
-                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                  <Card className={`h-full border-2 hover:shadow-xl transition-all duration-300 hover:scale-105 bg-gradient-to-br ${capability.gradient}`}>
+                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3" style={{ contentVisibility: 'auto' }}>
+                  <Card className={`h-full border-2 hover:shadow-xl transition-all duration-300 hover:scale-105 bg-gradient-to-br ${capability.gradient} [transform:translateZ(0)]`}>
                     <CardContent className="p-8">
                       <div className="flex flex-col items-center text-center space-y-4">
                         <div className="p-4 rounded-2xl bg-primary/10">
