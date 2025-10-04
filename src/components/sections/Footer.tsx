@@ -8,87 +8,77 @@ export const Footer = () => {
   return (
     <footer className="bg-gradient-dark text-white py-16">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-4 gap-8 mb-12">
-          {/* Logo and Brand */}
-          <div className="md:col-span-2">
+        <div className="grid md:grid-cols-3 gap-8 mb-12">
+          {/* Logo and Company Info */}
+          <div>
             <div className="flex items-center gap-4 mb-6">
-                <img 
-                  src={reddataLogo} 
-                  alt="RedData®"
-                  className="h-8 w-auto"
-                  width="200"
-                  height="32"
-                  loading="lazy"
-              />
-            </div>
-            <p className="text-gray-300 mb-6 leading-relaxed">
-              {t('footer.description')}
-            </p>
-            <div className="flex items-center mb-6">
               <img 
                 src={redmaxxLogo} 
                 alt="RedMaxx - Maxximizando Resultados" 
-                className="h-12 md:h-16 w-auto"
+                className="h-12 w-auto"
                 width="160"
-                height="64"
+                height="48"
                 loading="lazy"
               />
             </div>
-          </div>
-          
-          {/* Company Info */}
-          <div>
-            <h3 className="font-semibold text-white mb-4">{t('footer.companyInfo')}</h3>
-            <ul className="space-y-2 text-gray-300 text-sm">
+            
+            <ul className="space-y-2 text-gray-300 text-sm mb-6">
               <li>{t('footer.experience')}</li>
               <li>{t('footer.nationalTech')}</li>
               <li>{t('footer.certified')}</li>
               <li>{t('footer.methodology')}</li>
             </ul>
+            
+            <p className="text-gray-300 text-sm leading-relaxed">
+              RedData® – A Plataforma Brasileira de Big Data & Inteligência Artificial para a transformação digital de organizações públicas e privadas.
+            </p>
           </div>
           
-          {/* Contact */}
-          <div>
+          {/* Addresses - Grid 2x2 */}
+          <div className="md:col-span-2">
             <h3 className="font-semibold text-white mb-4">{t('footer.addresses')}</h3>
-            <div className="space-y-4 text-gray-300 text-sm">
-              <div>
-                <p className="font-medium text-white">{t('footer.joinville')} ({t('footer.headquarters')})</p>
+            
+            {/* Grid 2x2 for addresses */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div className="text-gray-300 text-sm">
+                <p className="font-medium text-white mb-1">{t('footer.joinville')} ({t('footer.headquarters')})</p>
                 <p>R. Dona Francisca, 801 - Andar 1</p>
                 <p>Sala 05 e 06 - Saguaçu</p>
                 <p>89221-006 - Joinville - SC</p>
                 <p>(11) 94076-4626</p>
               </div>
               
-              <div>
-                <p className="font-medium text-white">{t('footer.manaus')} ({t('footer.branch')})</p>
+              <div className="text-gray-300 text-sm">
+                <p className="font-medium text-white mb-1">{t('footer.manaus')} ({t('footer.branch')})</p>
                 <p>R. Rio Purús, 458, Cj.Vieiralves</p>
                 <p>Nossa Sra. das Graças</p>
                 <p>69053-050 - Manaus/AM</p>
                 <p>(92) 98223-6695</p>
               </div>
               
-              <div>
-                <p className="font-medium text-white">{t('footer.saoPaulo')} ({t('footer.branch')})</p>
+              <div className="text-gray-300 text-sm">
+                <p className="font-medium text-white mb-1">{t('footer.saoPaulo')} ({t('footer.branch')})</p>
                 <p>Av. Eng. Luiz Carlos Berrini, 1140</p>
                 <p>7° Andar - Sala 201/202</p>
                 <p>04571-000 - São Paulo - SP</p>
                 <p>(11) 2391-0597</p>
               </div>
               
-              <div>
-                <p className="font-medium text-white">{t('footer.orlando')} ({t('footer.internationalOffice')}) 🇺🇸</p>
+              <div className="text-gray-300 text-sm">
+                <p className="font-medium text-white mb-1">{t('footer.orlando')} ({t('footer.internationalOffice')}) 🇺🇸</p>
                 <p>7620 Sutherton Lane</p>
                 <p>Orlando - FL 34786 - USA</p>
                 <p>+1 (407) 714-6552</p>
               </div>
-              
-              <div className="pt-2 border-t border-gray-600">
-                <p>E-mail: contato@redmaxx.com.br</p>
-                <p>Site: <a href="http://www.redmaxx.com.br" target="_blank" rel="noopener noreferrer" className="text-primary-glow hover:text-white transition-colors">www.redmaxx.com.br</a></p>
-                <p>Instagram: <a href="https://www.instagram.com/redmaxxbr" target="_blank" rel="noopener noreferrer" className="text-primary-glow hover:text-white transition-colors">@redmaxxbr</a></p>
-                <p>LinkedIn: <a href="https://www.linkedin.com/company/redmaxx/" target="_blank" rel="noopener noreferrer" className="text-primary-glow hover:text-white transition-colors">redmaxx</a></p>
-                <p>{t('footer.weekSchedule')}</p>
-              </div>
+            </div>
+            
+            {/* Contact Info */}
+            <div className="text-gray-300 text-sm space-y-1 pt-4 border-t border-gray-600">
+              <p>E-mail: contato@redmaxx.com.br</p>
+              <p>Site: <a href="http://www.redmaxx.com.br" target="_blank" rel="noopener noreferrer" className="text-primary-glow hover:text-white transition-colors">www.redmaxx.com.br</a></p>
+              <p>Instagram: <a href="https://www.instagram.com/redmaxxbr" target="_blank" rel="noopener noreferrer" className="text-primary-glow hover:text-white transition-colors">@redmaxxbr</a></p>
+              <p>LinkedIn: <a href="https://www.linkedin.com/company/redmaxx/" target="_blank" rel="noopener noreferrer" className="text-primary-glow hover:text-white transition-colors">redmaxx</a></p>
+              <p>{t('footer.weekSchedule')}</p>
             </div>
           </div>
         </div>
