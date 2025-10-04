@@ -373,8 +373,8 @@ export default function DashboardView() {
       <DndContext onDragEnd={handleDragEnd}>
         <div className="min-h-screen bg-background flex flex-col">
         {/* Header + Toolbar - Fixed at top */}
-        <div className="sticky top-0 z-50 bg-background shadow-sm">
-          <header className="border-b bg-card">
+        <div className="sticky top-0 z-50 bg-background shadow-sm border-b">
+          <header className="bg-card">
             <div className="px-4 py-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
@@ -423,15 +423,17 @@ export default function DashboardView() {
           </header>
 
           {/* Toolbar - Below header, same sticky container */}
-          <DashboardToolbar
-            showGrid={showGrid}
-            onToggleGrid={() => setShowGrid(!showGrid)}
-            onUndo={handleUndo}
-            onRedo={handleRedo}
-            onPreview={() => setPreviewModalOpen(true)}
-            onSettings={() => setSettingsModalOpen(true)}
-            onTheme={() => setTemplateGalleryOpen(true)}
-          />
+          <div className="bg-background">
+            <DashboardToolbar
+              showGrid={showGrid}
+              onToggleGrid={() => setShowGrid(!showGrid)}
+              onUndo={handleUndo}
+              onRedo={handleRedo}
+              onPreview={() => setPreviewModalOpen(true)}
+              onSettings={() => setSettingsModalOpen(true)}
+              onTheme={() => setTemplateGalleryOpen(true)}
+            />
+          </div>
         </div>
 
         {/* Main Content - Below sticky header */}
