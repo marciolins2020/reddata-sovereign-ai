@@ -30,11 +30,11 @@ export function DashboardToolbar({
   onToggleGrid,
 }: DashboardToolbarProps) {
   return (
-    <div className="flex items-center gap-2 px-4 py-2 border-b bg-card">
-      <Button variant="ghost" size="sm" onClick={onUndo}>
+    <div className="flex items-center gap-2 px-4 py-3 border-b bg-background shadow-sm">
+      <Button variant="ghost" size="sm" onClick={onUndo} title="Desfazer">
         <Undo className="h-4 w-4" />
       </Button>
-      <Button variant="ghost" size="sm" onClick={onRedo}>
+      <Button variant="ghost" size="sm" onClick={onRedo} title="Refazer">
         <Redo className="h-4 w-4" />
       </Button>
 
@@ -44,24 +44,25 @@ export function DashboardToolbar({
         variant={showGrid ? "secondary" : "ghost"}
         size="sm"
         onClick={onToggleGrid}
+        title="Mostrar/Ocultar Grade"
       >
         <Grid3x3 className="h-4 w-4 mr-2" />
         Grade
       </Button>
 
-      <Button variant="ghost" size="sm" onClick={onPreview}>
+      <Button variant="ghost" size="sm" onClick={onPreview} title="Pré-visualizar">
         <Eye className="h-4 w-4 mr-2" />
         Pré-visualizar
       </Button>
 
       <Separator orientation="vertical" className="h-6 mx-2" />
 
-      <Button variant="ghost" size="sm" onClick={onSettings}>
+      <Button variant="ghost" size="sm" onClick={onSettings} title="Configurações">
         <Settings className="h-4 w-4 mr-2" />
         Configurações
       </Button>
 
-      <Button variant="ghost" size="sm" onClick={onTheme}>
+      <Button variant="ghost" size="sm" onClick={onTheme} title="Templates">
         <LayoutTemplate className="h-4 w-4 mr-2" />
         Templates
       </Button>
