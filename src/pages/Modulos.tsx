@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import dashboardManaus from "@/assets/dashboard-manaus.png";
 
 const Modulos = () => {
   const { t } = useLanguage();
@@ -50,9 +51,21 @@ const Modulos = () => {
             <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
               {t("modules.title")}
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
               {t("modules.subtitle")}
             </p>
+            
+            {/* Dashboard Image */}
+            <div className="mt-12">
+              <img 
+                src={dashboardManaus} 
+                alt="Dashboard Prefeitura de Manaus" 
+                className="w-full rounded-lg shadow-2xl border border-border"
+              />
+              <p className="text-xs text-muted-foreground mt-2">
+                Tela Principal do Projeto da Prefeitura de Manaus (AM).
+              </p>
+            </div>
           </div>
         </div>
       </section>
