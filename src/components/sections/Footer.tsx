@@ -75,6 +75,13 @@ export const Footer = () => {
                 <p>(11) 2391-0597</p>
               </div>
               
+              <div>
+                <p className="font-medium text-white">{t('footer.orlando')} ({t('footer.internationalOffice')}) 🇺🇸</p>
+                <p>7620 Sutherton Lane</p>
+                <p>Orlando - FL 34786 - USA</p>
+                <p>+1 (407) 714-6552</p>
+              </div>
+              
               <div className="pt-2 border-t border-gray-600">
                 <p>E-mail: contato@redmaxx.com.br</p>
                 <p>Site: <a href="http://www.redmaxx.com.br" target="_blank" rel="noopener noreferrer" className="text-primary-glow hover:text-white transition-colors">www.redmaxx.com.br</a></p>

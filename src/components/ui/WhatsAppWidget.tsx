@@ -1,12 +1,28 @@
 import { MessageCircle, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export const WhatsAppWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [whatsappNumber, setWhatsappNumber] = useState("5511940764626"); // +55 11 94076-4626
   const { t } = useLanguage();
-  const whatsappNumber = "5511940764626"; // +55 11 94076-4626
+  
+  // Detect country and set appropriate WhatsApp number
+  useEffect(() => {
+    fetch('https://ipapi.co/json/')
+      .then(response => response.json())
+      .then(data => {
+        const country = data.country_code;
+        if (country !== 'BR') {
+          setWhatsappNumber("14077146552"); // +1 (407) 714-6552 (USA)
+        }
+      })
+      .catch(err => {
+        console.error('Error detecting country:', err);
+        // Keep Brazilian number as default on error
+      });
+  }, []);
   
   const openWhatsApp = () => {
     const defaultMessage = t('whatsappWidget.greeting').includes("Hello") 

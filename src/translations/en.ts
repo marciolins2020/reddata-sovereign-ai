@@ -394,6 +394,8 @@ export default {
     joinville: "Joinville - SC",
     manaus: "Manaus - AM",
     saoPaulo: "São Paulo - SP",
+    orlando: "Orlando - FL",
+    internationalOffice: "International Office",
     weekSchedule: "Mon-Fri: 8am – 5pm",
     privacyPolicy: "Privacy Policy",
     lgpd: "LGPD",
