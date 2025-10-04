@@ -73,7 +73,7 @@ const Modulos = () => {
       {/* Modules Grid */}
       <section className="-mt-8 pb-12 px-4">
         <div className="container mx-auto max-w-6xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 gap-8">
             {modules.map((module) => (
               <Card 
                 key={module.id} 
@@ -89,41 +89,47 @@ const Modulos = () => {
                   </CardDescription>
                 </CardHeader>
 
-                <CardContent className="space-y-6">
-                  <div>
-                    <h4 className="font-semibold mb-3 text-foreground">
-                      {t("modules.featuresTitle")}
-                    </h4>
-                    <div className="grid grid-cols-2 gap-3">
-                      {module.features.map((feature, idx) => (
-                        <div key={idx} className="flex items-start gap-2">
-                          <feature.icon className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                          <span className="text-sm text-muted-foreground">{feature.text}</span>
-                        </div>
-                      ))}
+                <CardContent>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    {/* Left Column - Features */}
+                    <div>
+                      <h4 className="font-semibold mb-3 text-foreground">
+                        {t("modules.featuresTitle")}
+                      </h4>
+                      <div className="grid grid-cols-1 gap-3">
+                        {module.features.map((feature, idx) => (
+                          <div key={idx} className="flex items-start gap-3 p-3 rounded-lg bg-background/30 hover:bg-background/50 transition-colors">
+                            <feature.icon className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                            <span className="text-sm text-muted-foreground">{feature.text}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Right Column - Results */}
+                    <div className="space-y-6">
+                      <div className="bg-background/50 rounded-lg p-4">
+                        <h4 className="font-semibold mb-3 text-foreground">
+                          {t("modules.resultsTitle")}
+                        </h4>
+                        <ul className="space-y-2">
+                          {module.benefits.map((benefit, idx) => (
+                            <li key={idx} className="text-sm text-muted-foreground flex items-start gap-2">
+                              <span className="text-primary text-lg">✓</span>
+                              <span>{benefit}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <Button 
+                        className="w-full group-hover:scale-105 transition-transform"
+                        onClick={() => window.open(module.link, '_blank')}
+                      >
+                        {t("modules.learnMore")}
+                      </Button>
                     </div>
                   </div>
-
-                  <div className="bg-background/50 rounded-lg p-4">
-                    <h4 className="font-semibold mb-2 text-foreground">
-                      {t("modules.resultsTitle")}
-                    </h4>
-                    <ul className="space-y-1">
-                      {module.benefits.map((benefit, idx) => (
-                        <li key={idx} className="text-sm text-muted-foreground flex items-center gap-2">
-                          <span className="text-primary">✓</span>
-                          {benefit}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <Button 
-                    className="w-full group-hover:scale-105 transition-transform"
-                    onClick={() => window.open(module.link, '_blank')}
-                  >
-                    {t("modules.learnMore")}
-                  </Button>
                 </CardContent>
               </Card>
             ))}
