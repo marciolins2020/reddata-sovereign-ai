@@ -422,7 +422,7 @@ export default function DashboardView() {
           </header>
 
           {/* Toolbar - Barra de Ferramentas */}
-          <div className="flex-none bg-background border-b z-40 min-h-[72px]">
+          <div className="flex-none bg-muted/50 border-b z-40 h-16">
             <DashboardToolbar
               showGrid={showGrid}
               onToggleGrid={() => setShowGrid(!showGrid)}
