@@ -14,7 +14,6 @@ const AutomationAlertsSection = lazy(() => import("@/components/sections/Automat
 const ApplicationsSection = lazy(() => import("@/components/sections/ApplicationsSection").then(m => ({ default: m.ApplicationsSection })));
 const TechnicalArchitectureSection = lazy(() => import("@/components/sections/TechnicalArchitectureSection"));
 const TestimonialsSection = lazy(() => import("@/components/sections/TestimonialsSection").then(m => ({ default: m.TestimonialsSection })));
-const ModulesSection = lazy(() => import("@/components/sections/ModulesSection").then(m => ({ default: m.ModulesSection })));
 const ComparisonSection = lazy(() => import("@/components/sections/ComparisonSection").then(m => ({ default: m.ComparisonSection })));
 const DashboardDemoSection = lazy(() => import("@/components/sections/DashboardDemoSection").then(m => ({ default: m.DashboardDemoSection })));
 const FAQSection = lazy(() => import("@/components/sections/FAQSection").then(m => ({ default: m.FAQSection })));
@@ -39,7 +38,6 @@ const Index = () => {
         <TechnicalArchitectureSection />
         <ApplicationsSection />
         <DashboardDemoSection />
-        <ModulesSection />
         <ComparisonSection />
         <TestimonialsSection />
         <FAQSection />
