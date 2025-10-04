@@ -373,56 +373,56 @@ export default function DashboardView() {
       <DndContext onDragEnd={handleDragEnd}>
         <div className="min-h-screen bg-background flex flex-col">
         {/* Header */}
-        <header className="border-b bg-card sticky top-0 z-50">
-          <div className="container mx-auto px-4 py-3">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => navigate("/dashboard")}
-                >
-                  <ArrowLeft className="h-4 w-4 mr-2" />
-                  Voltar
-                </Button>
-                <img src={reddataIcon} alt="RedData" className="h-8" />
-                <div>
-                  <h1 className="text-lg font-bold text-foreground">{dashboard.title}</h1>
-                  {dashboard.description && (
-                    <p className="text-sm text-muted-foreground">{dashboard.description}</p>
-                  )}
+        <div className="sticky top-0 z-50 bg-background">
+          <header className="border-b bg-card">
+            <div className="container mx-auto px-4 py-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => navigate("/dashboard")}
+                  >
+                    <ArrowLeft className="h-4 w-4 mr-2" />
+                    Voltar
+                  </Button>
+                  <img src={reddataIcon} alt="RedData" className="h-8" />
+                  <div>
+                    <h1 className="text-lg font-bold text-foreground">{dashboard.title}</h1>
+                    {dashboard.description && (
+                      <p className="text-sm text-muted-foreground">{dashboard.description}</p>
+                    )}
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="default"
+                    size="sm"
+                    onClick={handleSaveDashboard}
+                    disabled={saving}
+                  >
+                    {saving ? (
+                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    ) : (
+                      <Save className="h-4 w-4 mr-2" />
+                    )}
+                    Salvar
+                  </Button>
+                  <Button variant="outline" size="sm" onClick={handleShare}>
+                    <Share2 className="h-4 w-4 mr-2" />
+                    Compartilhar
+                  </Button>
+                  <Button variant="outline" size="sm">
+                    <Download className="h-4 w-4 mr-2" />
+                    Exportar
+                  </Button>
                 </div>
               </div>
-
-              <div className="flex items-center gap-2">
-                <Button
-                  variant="default"
-                  size="sm"
-                  onClick={handleSaveDashboard}
-                  disabled={saving}
-                >
-                  {saving ? (
-                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  ) : (
-                    <Save className="h-4 w-4 mr-2" />
-                  )}
-                  Salvar
-                </Button>
-                <Button variant="outline" size="sm" onClick={handleShare}>
-                  <Share2 className="h-4 w-4 mr-2" />
-                  Compartilhar
-                </Button>
-                <Button variant="outline" size="sm">
-                  <Download className="h-4 w-4 mr-2" />
-                  Exportar
-                </Button>
-              </div>
             </div>
-          </div>
-        </header>
+          </header>
 
-        {/* Main Content */}
-        <div className="flex-1 flex flex-col">
+          {/* Toolbar */}
           <DashboardToolbar
             showGrid={showGrid}
             onToggleGrid={() => setShowGrid(!showGrid)}
@@ -432,6 +432,10 @@ export default function DashboardView() {
             onSettings={() => setSettingsModalOpen(true)}
             onTheme={() => setTemplateGalleryOpen(true)}
           />
+        </div>
+
+        {/* Main Content */}
+        <div className="flex-1 flex flex-col">
           
           <div className="flex-1 flex">
             <ChartWidgetsSidebar />
