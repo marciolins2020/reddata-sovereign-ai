@@ -22,7 +22,7 @@ export const VirtualMachinesSection = () => {
   return (
     <section className="py-12 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">
             <Settings className="h-4 w-4 text-primary" />
             <span className="text-sm font-medium text-primary">{t('virtualMachines.badge')}</span>
@@ -37,7 +37,7 @@ export const VirtualMachinesSection = () => {
           </p>
         </div>
         
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 items-center">
           {/* Left - Benefits */}
           <div>
             <Card className="p-8 bg-gradient-tech border-0">

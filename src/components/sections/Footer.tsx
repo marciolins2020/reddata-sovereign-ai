@@ -6,7 +6,7 @@ import redmaxxLogo from "@/assets/redmaxx-logo.png";
 export const Footer = () => {
   const { t } = useLanguage();
   return (
-    <footer className="bg-gradient-dark text-white py-16">
+    <footer className="bg-gradient-dark text-white py-8">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-3 gap-8 mb-12">
           {/* Logo and Company Info */}

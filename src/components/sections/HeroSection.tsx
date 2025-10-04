@@ -15,8 +15,8 @@ export const HeroSection = () => {
         <div className="absolute bottom-1/4 -left-32 w-96 h-96 bg-primary/3 rounded-full blur-3xl"></div>
       </div>
       
-      <div className="container relative z-10 mx-auto px-4 py-20">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className="container relative z-10 mx-auto px-4 py-10">
+        <div className="grid lg:grid-cols-2 gap-8 items-center">
           {/* Left Content */}
           <div className="text-center lg:text-left">
             <div className="flex items-center justify-center lg:justify-start mb-8">

@@ -4,9 +4,9 @@ import { useLanguage } from "@/contexts/LanguageContext";
 export const StatsSection = () => {
   const { t } = useLanguage();
   return (
-    <section className="py-16 bg-gradient-subtle">
+    <section className="py-8 bg-gradient-subtle">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-8">
           {/* Main Highlight */}
           <div className="flex items-center gap-4 text-center lg:text-left">
             <div className="w-4 h-4 bg-primary rounded-full flex-shrink-0"></div>

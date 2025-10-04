@@ -29,9 +29,9 @@ export const ModulesSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-gradient-to-b from-background to-muted/30">
+    <section className="py-12 bg-gradient-to-b from-background to-muted/30">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-8">
           <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
             {t("modules.title")}
           </h2>
