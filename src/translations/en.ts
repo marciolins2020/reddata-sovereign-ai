@@ -4,6 +4,7 @@ export default {
     howItWorks: "How It Works",
     solutions: "Applications",
     cases: "Use Cases",
+    modules: "Modules",
     faq: "FAQ",
     contact: "Contact",
     requestDemo: "Request Demo"
@@ -602,6 +603,8 @@ export default {
     tetoMac: {
       category: "Public Health",
       title: "MAC Ceiling - Federal Resource Management",
+      menuTitle: "Teto Mac - Health | Gov",
+      menuDescription: "Strategic management of National Health Fund resources",
       description: "Complete system for managing and maximizing resources from the National Health Fund (FNS). Specialized solution for municipal and state health departments.",
       features: {
         bigData: "Big Data Diagnosis",

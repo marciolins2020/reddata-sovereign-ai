@@ -35,6 +35,10 @@ export const Header = () => {
     { label: t('useCases.retail'), href: "/casos-uso/varejo", description: t('useCases.retailDesc') },
   ];
 
+  const modulesItems = [
+    { label: t('modules.tetoMac.menuTitle'), href: "http://tetomac.redmaxx.com.br", description: t('modules.tetoMac.menuDescription') },
+  ];
+
   useEffect(() => {
     // Use Intersection Observer instead of scroll listener to avoid forced reflows
     const sentinel = document.createElement('div');
@@ -130,6 +134,33 @@ export const Header = () => {
               </NavigationMenuList>
             </NavigationMenu>
             
+            {/* Módulos Dropdown */}
+            <NavigationMenu className="z-[150]">
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="h-auto px-4 py-2 text-sm font-medium">
+                    {t('header.modules')}
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent className="z-[150]">
+                    <ul className="grid w-[400px] gap-3 p-4 bg-background">
+                      {modulesItems.map((item) => (
+                        <li key={item.href}>
+                          <a href={item.href} target="_blank" rel="noopener noreferrer">
+                            <NavigationMenuLink className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+                              <div className="text-sm font-medium leading-none">{item.label}</div>
+                              <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                                {item.description}
+                              </p>
+                            </NavigationMenuLink>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+            
             {menuItems.slice(4).map((item) => (
               <button
                 key={item.href}
@@ -197,6 +228,23 @@ export const Header = () => {
                   >
                     {item.label}
                   </Link>
+                ))}
+              </div>
+              
+              {/* Mobile Módulos Submenu */}
+              <div className="px-4 py-2">
+                <div className="text-sm font-medium text-muted-foreground mb-2">{t('header.modules')}</div>
+                {modulesItems.map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block px-4 py-3 text-left text-sm text-foreground hover:text-primary hover:bg-accent transition-colors rounded-md"
+                  >
+                    {item.label}
+                  </a>
                 ))}
               </div>
               

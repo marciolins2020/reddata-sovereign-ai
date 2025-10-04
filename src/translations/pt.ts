@@ -4,6 +4,7 @@ export default {
     howItWorks: "Como Funciona",
     solutions: "Aplicações",
     cases: "Casos de Uso",
+    modules: "Módulos",
     faq: "FAQ",
     contact: "Contato",
     requestDemo: "Solicitar Demonstração"
@@ -602,6 +603,8 @@ export default {
     tetoMac: {
       category: "Saúde Pública",
       title: "Teto MAC - Gestão de Recursos Federais",
+      menuTitle: "Teto Mac - Saúde | Gov",
+      menuDescription: "Gestão estratégica de recursos do Fundo Nacional de Saúde",
       description: "Sistema completo para gestão e maximização dos recursos do Fundo Nacional de Saúde (FNS). Solução especializada para secretarias municipais e estaduais de saúde.",
       features: {
         bigData: "Diagnóstico com Big Data",
