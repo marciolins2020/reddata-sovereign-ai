@@ -600,6 +600,9 @@ export default {
     featuresTitle: "Key Features:",
     resultsTitle: "Proven Results:",
     learnMore: "Learn More",
+    ctaTitle: "Want to learn about our specialized modules?",
+    ctaSubtitle: "Contact us and discover how we can help your organization",
+    requestDemo: "Request Demo",
     tetoMac: {
       category: "Public Health",
       title: "MAC Ceiling - Federal Resource Management",

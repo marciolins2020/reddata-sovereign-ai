@@ -14,6 +14,7 @@ const CasosUsoEnergia = lazy(() => import("./pages/CasosUsoEnergia"));
 const CasosUsoIndustria = lazy(() => import("./pages/CasosUsoIndustria"));
 const CasosUsoGoverno = lazy(() => import("./pages/CasosUsoGoverno"));
 const CasosUsoVarejo = lazy(() => import("./pages/CasosUsoVarejo"));
+const Modulos = lazy(() => import("./pages/Modulos"));
 const Auth = lazy(() => import("./pages/Auth"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const DashboardView = lazy(() => import("./pages/DashboardView"));
@@ -42,6 +43,7 @@ const App = () => (
                 <Route path="/casos-uso/industria" element={<CasosUsoIndustria />} />
                 <Route path="/casos-uso/governo" element={<CasosUsoGoverno />} />
                 <Route path="/casos-uso/varejo" element={<CasosUsoVarejo />} />
+                <Route path="/modulos" element={<Modulos />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
