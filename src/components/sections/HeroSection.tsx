@@ -102,8 +102,8 @@ export const HeroSection = () => {
                 src="/reddata-dashboard-hero.webp"
                 alt="RedData® Dashboard - Ministério Público do Amazonas"
                 className="w-full h-auto object-cover"
-                width="800"
-                height="457"
+                width="618"
+                height="353"
                 fetchPriority="high"
                 loading="eager"
               />

@@ -121,8 +121,8 @@ export const ApplianceSection = () => {
                     src={reddataApplianceServer}
                     alt="Plataforma RedData® Big Data Analytics - RedData® BD Appliance Server"
                     className="w-full h-auto object-contain"
-                    width="800"
-                    height="457"
+                    width="570"
+                    height="325"
                     loading="lazy"
                 />
               </div>

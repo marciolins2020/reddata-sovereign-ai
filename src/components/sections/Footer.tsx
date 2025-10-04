@@ -16,8 +16,8 @@ export const Footer = () => {
                   src={reddataLogo} 
                   alt="RedData®"
                   className="h-8 w-auto"
-                  width="600"
-                  height="96"
+                  width="200"
+                  height="32"
                   loading="lazy"
               />
             </div>
@@ -29,8 +29,8 @@ export const Footer = () => {
                 src={redmaxxLogo} 
                 alt="RedMaxx - Maxximizando Resultados" 
                 className="h-12 md:h-16 w-auto"
-                width="320"
-                height="128"
+                width="160"
+                height="64"
                 loading="lazy"
               />
             </div>
