@@ -29,6 +29,17 @@ export const Footer = () => {
               <li>{t('footer.methodology')}</li>
             </ul>
             
+            <div className="mb-4">
+              <img 
+                src={reddataLogo} 
+                alt="RedData®"
+                className="h-8 w-auto mb-3"
+                width="200"
+                height="32"
+                loading="lazy"
+              />
+            </div>
+            
             <p className="text-gray-300 text-sm leading-relaxed">
               RedData® – A Plataforma Brasileira de Big Data & Inteligência Artificial para a transformação digital de organizações públicas e privadas.
             </p>
