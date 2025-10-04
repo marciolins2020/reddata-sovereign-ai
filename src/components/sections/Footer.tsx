@@ -41,7 +41,7 @@ export const Footer = () => {
             {/* Grid 2x2 for addresses */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div className="text-gray-300 text-sm">
-                <p className="font-medium text-white mb-1">{t('footer.joinville')} ({t('footer.headquarters')})</p>
+                <p className="font-medium text-white mb-1">{t('footer.joinville')} ({t('footer.headquarters')}) 🇧🇷</p>
                 <p>R. Dona Francisca, 801 - Andar 1</p>
                 <p>Sala 05 e 06 - Saguaçu</p>
                 <p>89221-006 - Joinville - SC</p>
@@ -49,7 +49,7 @@ export const Footer = () => {
               </div>
               
               <div className="text-gray-300 text-sm">
-                <p className="font-medium text-white mb-1">{t('footer.manaus')} ({t('footer.branch')})</p>
+                <p className="font-medium text-white mb-1">{t('footer.manaus')} ({t('footer.branch')}) 🇧🇷</p>
                 <p>R. Rio Purús, 458, Cj.Vieiralves</p>
                 <p>Nossa Sra. das Graças</p>
                 <p>69053-050 - Manaus/AM</p>
@@ -57,7 +57,7 @@ export const Footer = () => {
               </div>
               
               <div className="text-gray-300 text-sm">
-                <p className="font-medium text-white mb-1">{t('footer.saoPaulo')} ({t('footer.branch')})</p>
+                <p className="font-medium text-white mb-1">{t('footer.saoPaulo')} ({t('footer.branch')}) 🇧🇷</p>
                 <p>Av. Eng. Luiz Carlos Berrini, 1140</p>
                 <p>7° Andar - Sala 201/202</p>
                 <p>04571-000 - São Paulo - SP</p>
