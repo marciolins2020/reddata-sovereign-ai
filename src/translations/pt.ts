@@ -339,7 +339,7 @@ export default {
   },
   whiteLabel: {
     badge: "Nuvem Soberana & Appliance",
-    title: "Solução White Label Nacional",
+    title: "Solução White Label Nacional (somente para parceiros de negócio)",
     subtitle: "O equivalente brasileiro ao BI de marca branca: total controle, soberania digital e infraestrutura própria",
     applianceTitle: "RedData® Appliance",
     applianceDesc: "Hardware dedicado com toda a plataforma embarcada. Opera 100% offline, ideal para ambientes críticos e sigilosos. Seus dados nunca saem do seu datacenter.",
