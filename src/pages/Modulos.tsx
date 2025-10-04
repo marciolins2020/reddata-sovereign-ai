@@ -128,16 +128,15 @@ const Modulos = () => {
                     <div className="bg-gradient-to-r from-primary/10 to-blue-500/10 p-3 border-b border-primary/20">
                       <h4 className="font-semibold text-foreground flex items-center gap-2">
                         <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                        Dashboard ao Vivo
+                        Dashboard Preview
                       </h4>
                     </div>
                     <div className="p-4">
-                      <div className="aspect-video w-full rounded-lg overflow-hidden shadow-inner bg-muted/20">
-                        <iframe
-                          src={module.link}
-                          className="w-full h-full border-0"
-                          title={`${module.title} Dashboard Preview`}
-                          loading="lazy"
+                      <div className="rounded-lg overflow-hidden shadow-inner">
+                        <img 
+                          src={dashboardManaus} 
+                          alt="Dashboard Prefeitura de Manaus" 
+                          className="w-full h-auto"
                         />
                       </div>
                       <p className="text-xs text-muted-foreground mt-2 text-center">
