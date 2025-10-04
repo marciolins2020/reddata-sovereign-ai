@@ -371,10 +371,10 @@ export default function DashboardView() {
   return (
     <DashboardFiltersProvider>
       <DndContext onDragEnd={handleDragEnd}>
-        <div className="min-h-screen bg-background flex flex-col">
-        {/* Header + Toolbar - Fixed at top */}
-        <div className="sticky top-0 z-50 bg-background shadow-sm border-b">
-          <header className="bg-card">
+        <div className="h-screen bg-background flex flex-col overflow-hidden">
+        {/* Header + Toolbar - Fixed at top (always visible) */}
+        <div className="flex-none z-50 bg-background shadow-sm border-b">
+          <header className="bg-card border-b">
             <div className="px-4 py-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
@@ -422,25 +422,22 @@ export default function DashboardView() {
             </div>
           </header>
 
-          {/* Toolbar - Below header, same sticky container */}
-          <div className="bg-background">
-            <DashboardToolbar
-              showGrid={showGrid}
-              onToggleGrid={() => setShowGrid(!showGrid)}
-              onUndo={handleUndo}
-              onRedo={handleRedo}
-              onPreview={() => setPreviewModalOpen(true)}
-              onSettings={() => setSettingsModalOpen(true)}
-              onTheme={() => setTemplateGalleryOpen(true)}
-            />
-          </div>
+          {/* Toolbar - Below header */}
+          <DashboardToolbar
+            showGrid={showGrid}
+            onToggleGrid={() => setShowGrid(!showGrid)}
+            onUndo={handleUndo}
+            onRedo={handleRedo}
+            onPreview={() => setPreviewModalOpen(true)}
+            onSettings={() => setSettingsModalOpen(true)}
+            onTheme={() => setTemplateGalleryOpen(true)}
+          />
         </div>
 
-        {/* Main Content - Below sticky header */}
+        {/* Main Content - Scrollable area below fixed header */}
         <div className="flex-1 flex overflow-hidden">
-          
-          <div className="flex-1 flex">
-            <ChartWidgetsSidebar />
+          <ChartWidgetsSidebar />
+          <div className="flex-1 overflow-auto">
             <DashboardCanvas isEmpty={charts.length === 0}>
             <DashboardContent
               charts={charts}
