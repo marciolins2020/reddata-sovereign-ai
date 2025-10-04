@@ -68,22 +68,15 @@ export const DataConnectorsSection = () => {
             return (
               <Card key={index} className="hover:shadow-xl transition-all duration-300 hover:scale-105 border-2">
                 <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-xl bg-primary/10 shrink-0">
-                      <Icon className="w-8 h-8 text-primary" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold mb-3">
-                        {t(category.titleKey)}
-                      </h3>
-                      <div className="flex flex-wrap gap-2">
-                        {category.examples.map((example, idx) => (
-                          <Badge key={idx} variant="outline" className="text-xs">
-                            {example}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
+                  <h3 className="text-xl font-bold mb-3">
+                    {t(category.titleKey)}
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {category.examples.map((example, idx) => (
+                      <Badge key={idx} variant="outline" className="text-xs">
+                        {example}
+                      </Badge>
+                    ))}
                   </div>
                 </CardContent>
               </Card>
