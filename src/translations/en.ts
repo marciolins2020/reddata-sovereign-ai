@@ -593,6 +593,28 @@ export default {
     ctaSubtitle: "Discover how RedData® can transform public administration with data intelligence",
     requestDemo: "Request Demo"
   },
+  modules: {
+    title: "Specialized Modules",
+    subtitle: "Specific solutions for different areas of expertise",
+    featuresTitle: "Key Features:",
+    resultsTitle: "Proven Results:",
+    learnMore: "Learn More",
+    tetoMac: {
+      category: "Public Health",
+      title: "MAC Ceiling - Federal Resource Management",
+      description: "Complete system for managing and maximizing resources from the National Health Fund (FNS). Specialized solution for municipal and state health departments.",
+      features: {
+        bigData: "Big Data Diagnosis",
+        reports: "Automated official reports",
+        sei: "SEI/Process Support",
+        consulting: "Specialized consulting",
+      },
+      benefits: {
+        increase: "Average increase of +150% in MAC ceiling",
+        approval: "95% approval rate with FNS",
+      },
+    },
+  },
   casosUsoVarejo: {
     backHome: "Back to Home",
     badge: "Retail",

@@ -593,6 +593,28 @@ export default {
     ctaSubtitle: "Descubra como a RedData® pode transformar a administração pública com inteligência de dados",
     requestDemo: "Solicitar Demonstração"
   },
+  modules: {
+    title: "Módulos Especializados",
+    subtitle: "Soluções específicas para diferentes áreas de atuação",
+    featuresTitle: "Principais Recursos:",
+    resultsTitle: "Resultados Comprovados:",
+    learnMore: "Saiba Mais",
+    tetoMac: {
+      category: "Saúde Pública",
+      title: "Teto MAC - Gestão de Recursos Federais",
+      description: "Sistema completo para gestão e maximização dos recursos do Fundo Nacional de Saúde (FNS). Solução especializada para secretarias municipais e estaduais de saúde.",
+      features: {
+        bigData: "Diagnóstico com Big Data",
+        reports: "Relatórios oficiais automatizados",
+        sei: "Suporte SEI/Processo",
+        consulting: "Consultoria especializada",
+      },
+      benefits: {
+        increase: "Aumento médio de +150% no teto MAC",
+        approval: "Taxa de aprovação de 95% junto ao FNS",
+      },
+    },
+  },
   casosUsoVarejo: {
     backHome: "Voltar para Home",
     badge: "Varejo",
