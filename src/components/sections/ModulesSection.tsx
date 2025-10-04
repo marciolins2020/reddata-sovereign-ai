@@ -91,6 +91,23 @@ export const ModulesSection = () => {
                 >
                   {t("modules.learnMore")}
                 </Button>
+
+                {/* Dashboard Preview */}
+                <div className="mt-6 relative">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-blue-500/20 rounded-lg blur-xl" />
+                  <Card className="relative bg-background/40 backdrop-blur-md border-2 border-primary/20 overflow-hidden">
+                    <CardContent className="p-4">
+                      <div className="aspect-video w-full rounded-lg overflow-hidden shadow-2xl">
+                        <iframe
+                          src={module.link}
+                          className="w-full h-full border-0"
+                          title={`${module.title} Dashboard Preview`}
+                          loading="lazy"
+                        />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
               </CardContent>
             </Card>
           ))}
