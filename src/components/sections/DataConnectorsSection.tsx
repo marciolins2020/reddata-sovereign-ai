@@ -13,16 +13,6 @@ export const DataConnectorsSection = () => {
       examples: ["Excel", "CSV", "JSON", "XML", "PDF", "Google Sheets", "Parquet", "Avro", "Feather", "TXT/TSV"]
     },
     {
-      icon: Wifi,
-      titleKey: "dataConnectors.iot",
-      examples: ["MQTT", "OPC-UA", "Modbus", "BACnet", "Zigbee", "LoRaWAN", "OPC-DA", "KNX", "CANbus"]
-    },
-    {
-      icon: Code,
-      titleKey: "dataConnectors.apis",
-      examples: ["REST", "GraphQL", "SOAP", "Webhooks", "gRPC", "OData", "WebSockets", "JSON-RPC"]
-    },
-    {
       icon: Building2,
       titleKey: "dataConnectors.governmentAPIs",
       examples: ["Portal da Transparência", "SICONV", "e-CAC", "SIAFI", "Gov.br", "IBGE (SIDRA)", "Datasus (SUS APIs)", "Receita Federal (CNPJ/NF-e)", "ComprasNet/TCU"]
@@ -36,6 +26,16 @@ export const DataConnectorsSection = () => {
       icon: Cloud,
       titleKey: "dataConnectors.erps",
       examples: ["SAP", "TOTVS", "Oracle ERP", "RM", "Senior", "Protheus", "Sankhya", "Benner", "Linx", "Bling", "NetSuite", "Oracle PeopleSoft", "Workday"]
+    },
+    {
+      icon: Wifi,
+      titleKey: "dataConnectors.iot",
+      examples: ["MQTT", "OPC-UA", "Modbus", "BACnet", "Zigbee", "LoRaWAN", "OPC-DA", "KNX", "CANbus"]
+    },
+    {
+      icon: Code,
+      titleKey: "dataConnectors.apis",
+      examples: ["REST", "GraphQL", "SOAP", "Webhooks", "gRPC", "OData", "WebSockets", "JSON-RPC"]
     }
   ];
 
