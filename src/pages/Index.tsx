@@ -33,7 +33,7 @@ const Index = () => {
         <HowItWorksSection />
         <ApplianceSection />
         <VirtualMachinesSection />
-        <WhiteLabelSection />
+        {/* <WhiteLabelSection /> */}
         <AutomationAlertsSection />
         <TechnicalArchitectureSection />
         <ApplicationsSection />
