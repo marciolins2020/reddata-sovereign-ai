@@ -38,7 +38,7 @@ export const WhiteLabelSection = () => {
           <Badge className="mb-4 text-sm md:text-lg px-4 md:px-6 py-1.5 md:py-2 bg-gradient-to-r from-primary to-primary/60">
             {t("whiteLabel.badge")}
           </Badge>
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 px-2">
+          <h2 className="text-2xl md:text-4xl lg:text-4xl font-bold mb-3 md:mb-4 px-2">
             {t("whiteLabel.title")}
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto px-2">
