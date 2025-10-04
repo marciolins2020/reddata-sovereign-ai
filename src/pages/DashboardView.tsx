@@ -372,10 +372,10 @@ export default function DashboardView() {
     <DashboardFiltersProvider>
       <DndContext onDragEnd={handleDragEnd}>
         <div className="min-h-screen bg-background flex flex-col">
-        {/* Header */}
-        <div className="sticky top-0 z-50 bg-background">
+        {/* Header + Toolbar - Fixed at top */}
+        <div className="sticky top-0 z-50 bg-background shadow-sm">
           <header className="border-b bg-card">
-            <div className="container mx-auto px-4 py-3">
+            <div className="px-4 py-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   <Button
@@ -422,7 +422,7 @@ export default function DashboardView() {
             </div>
           </header>
 
-          {/* Toolbar */}
+          {/* Toolbar - Below header, same sticky container */}
           <DashboardToolbar
             showGrid={showGrid}
             onToggleGrid={() => setShowGrid(!showGrid)}
@@ -434,8 +434,8 @@ export default function DashboardView() {
           />
         </div>
 
-        {/* Main Content */}
-        <div className="flex-1 flex flex-col">
+        {/* Main Content - Below sticky header */}
+        <div className="flex-1 flex overflow-hidden">
           
           <div className="flex-1 flex">
             <ChartWidgetsSidebar />
