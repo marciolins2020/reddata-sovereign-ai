@@ -70,6 +70,12 @@ export const ApplianceSection = () => {
               <br />
               {t('appliance.title2')}
             </h2>
+
+            {/* IaaS + SaaS Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/30 to-primary-glow/30 border border-primary-glow/50 rounded-lg mb-6">
+              <span className="text-white font-bold text-sm">IaaS + SaaS</span>
+              <span className="text-gray-300 text-sm">Infraestrutura e Software em um único equipamento</span>
+            </div>
             
             <p className="text-xl text-gray-300 mb-8 leading-relaxed">
               {t('appliance.description')}
@@ -146,6 +152,14 @@ export const ApplianceSection = () => {
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-green-400 rounded-full"></div>
                   <span className="text-white font-medium">IA Integrada</span>
+                </div>
+              </div>
+              
+              {/* IaaS + SaaS Highlight */}
+              <div className="mt-4 pt-4 border-t border-white/20">
+                <div className="flex items-center justify-center gap-2">
+                  <span className="text-primary-glow font-bold text-sm">IaaS + SaaS</span>
+                  <span className="text-gray-300 text-xs">Modelo Híbrido Completo</span>
                 </div>
               </div>
             </div>

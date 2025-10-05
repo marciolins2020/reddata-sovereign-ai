@@ -6,7 +6,8 @@ import {
   Shield,
   TrendingUp,
   Gauge,
-  Server
+  Server,
+  Layers
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { scrollToElement } from "@/lib/scroll";
@@ -15,6 +16,11 @@ export const TechnicalDifferentialSection = () => {
   const { t } = useLanguage();
 
   const technicalPoints = [
+    {
+      icon: Layers,
+      title: "Modelo IaaS + SaaS: Infraestrutura e Software integrados em um único equipamento",
+      highlight: true
+    },
     {
       icon: Cpu,
       title: "GPU NVIDIA otimizada para cargas de IA e machine learning",
@@ -63,9 +69,31 @@ export const TechnicalDifferentialSection = () => {
             </p>
           </div>
 
+          {/* IaaS + SaaS Highlight Card - Full Width */}
+          <Card className="border-2 border-primary bg-gradient-to-r from-primary/5 to-primary/10 mb-6">
+            <CardContent className="p-6">
+              <div className="flex items-start gap-4">
+                <div className="w-14 h-14 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Layers className="h-8 w-8 text-primary" />
+                </div>
+                <div className="flex-1">
+                  <div className="inline-flex items-center gap-2 mb-2">
+                    <span className="px-3 py-1 bg-primary text-white text-xs font-bold rounded-full">IaaS + SaaS</span>
+                  </div>
+                  <p className="text-gray-900 font-bold text-lg leading-relaxed">
+                    Modelo Híbrido Completo: Infraestrutura e Software integrados em um único equipamento
+                  </p>
+                  <p className="text-gray-600 text-sm mt-2">
+                    Combine o poder da infraestrutura dedicada com a facilidade de uso do software como serviço
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
           {/* Technical Points Grid */}
           <div className="grid md:grid-cols-2 gap-6 mb-12">
-            {technicalPoints.map((point, index) => (
+            {technicalPoints.slice(1).map((point, index) => (
               <Card key={index} className="border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
