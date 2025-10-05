@@ -623,6 +623,23 @@ export default {
         approval: "Taxa de aprovação de 95% junto ao FNS",
       },
     },
+    audit: {
+      category: "Controle e Auditoria",
+      title: "RedData.Audit - IA para Tribunais de Contas",
+      menuTitle: "RedData.Audit - Controle",
+      menuDescription: "Auditoria inteligente com IA e Big Data",
+      description: "Sistema avançado de auditoria pública com Inteligência Artificial e Big Data para Tribunais de Contas e órgãos de controle. Automatiza análise de processos, gera pré-relatórios e identifica riscos com alta precisão.",
+      features: {
+        ai: "Análise de documentos com IA",
+        jurisprudence: "Jurisprudência inteligente",
+        risks: "Detecção automática de riscos",
+        predictive: "Análise preditiva de auditoria",
+      },
+      benefits: {
+        efficiency: "Redução de 60% no tempo de instrução",
+        precision: "Acurácia de 94% na identificação de riscos",
+      },
+    },
   },
   casosUsoVarejo: {
     backHome: "Voltar para Home",

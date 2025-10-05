@@ -623,6 +623,23 @@ export default {
         approval: "95% approval rate with FNS",
       },
     },
+    audit: {
+      category: "Audit & Control",
+      title: "RedData.Audit - AI for Audit Courts",
+      menuTitle: "RedData.Audit - Control",
+      menuDescription: "Intelligent auditing with AI and Big Data",
+      description: "Advanced public audit system with Artificial Intelligence and Big Data for Audit Courts and control agencies. Automates process analysis, generates pre-reports and identifies risks with high precision.",
+      features: {
+        ai: "Document analysis with AI",
+        jurisprudence: "Smart jurisprudence",
+        risks: "Automatic risk detection",
+        predictive: "Predictive audit analysis",
+      },
+      benefits: {
+        efficiency: "60% reduction in instruction time",
+        precision: "94% accuracy in risk identification",
+      },
+    },
   },
   casosUsoVarejo: {
     backHome: "Back to Home",

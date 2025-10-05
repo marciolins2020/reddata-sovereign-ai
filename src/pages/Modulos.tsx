@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, HeartPulse, TrendingUp, FileCheck, Shield } from "lucide-react";
+import { ArrowLeft, HeartPulse, TrendingUp, FileCheck, Shield, Scale, Brain, AlertTriangle, Target } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -27,6 +27,30 @@ const Modulos = () => {
       ],
       link: "http://tetomac.redmaxx.com.br",
       gradient: "from-blue-500/10 to-cyan-500/10",
+      dashboardImage: dashboardManaus,
+      dashboardAlt: "Dashboard Prefeitura de Manaus",
+      dashboardDescription: "Tela Principal do Projeto da Prefeitura de Manaus (AM).",
+    },
+    {
+      id: "audit",
+      category: t("modules.audit.category"),
+      title: t("modules.audit.title"),
+      description: t("modules.audit.description"),
+      features: [
+        { icon: Brain, text: t("modules.audit.features.ai") },
+        { icon: Scale, text: t("modules.audit.features.jurisprudence") },
+        { icon: AlertTriangle, text: t("modules.audit.features.risks") },
+        { icon: Target, text: t("modules.audit.features.predictive") },
+      ],
+      benefits: [
+        t("modules.audit.benefits.efficiency"),
+        t("modules.audit.benefits.precision"),
+      ],
+      link: "/audit",
+      gradient: "from-red-500/10 to-orange-500/10",
+      dashboardImage: null,
+      dashboardAlt: "RedData.Audit Dashboard",
+      dashboardDescription: "Sistema de Auditoria Inteligente para Tribunais de Contas.",
     },
   ];
   
@@ -112,7 +136,7 @@ const Modulos = () => {
 
                         <Button 
                           className="w-full group-hover:scale-105 transition-transform"
-                          onClick={() => window.open(module.link, '_blank')}
+                          onClick={() => module.id === 'audit' ? window.location.href = module.link : window.open(module.link, '_blank')}
                         >
                           {t("modules.learnMore")}
                         </Button>
@@ -122,29 +146,31 @@ const Modulos = () => {
                 </Card>
 
                 {/* Dashboard Preview - Abaixo do Card */}
-                <div className="relative mt-8">
-                  <div className="absolute -inset-4 bg-gradient-to-br from-primary/30 via-blue-500/20 to-cyan-500/30 rounded-2xl blur-2xl opacity-75" />
-                  <div className="relative bg-gradient-to-br from-background/60 via-background/40 to-background/60 backdrop-blur-xl rounded-xl border-2 border-primary/30 shadow-2xl overflow-hidden">
-                    <div className="bg-gradient-to-r from-primary/10 to-blue-500/10 p-3 border-b border-primary/20">
-                      <h4 className="font-semibold text-foreground flex items-center gap-2">
-                        <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                        Dashboard Preview
-                      </h4>
-                    </div>
-                    <div className="p-4">
-                      <div className="rounded-lg overflow-hidden shadow-inner">
-                        <img 
-                          src={dashboardManaus} 
-                          alt="Dashboard Prefeitura de Manaus" 
-                          className="w-full h-auto"
-                        />
+                {module.dashboardImage && (
+                  <div className="relative mt-8">
+                    <div className="absolute -inset-4 bg-gradient-to-br from-primary/30 via-blue-500/20 to-cyan-500/30 rounded-2xl blur-2xl opacity-75" />
+                    <div className="relative bg-gradient-to-br from-background/60 via-background/40 to-background/60 backdrop-blur-xl rounded-xl border-2 border-primary/30 shadow-2xl overflow-hidden">
+                      <div className="bg-gradient-to-r from-primary/10 to-blue-500/10 p-3 border-b border-primary/20">
+                        <h4 className="font-semibold text-foreground flex items-center gap-2">
+                          <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+                          Dashboard Preview
+                        </h4>
                       </div>
-                      <p className="text-xs text-muted-foreground mt-2 text-center">
-                        Tela Principal do Projeto da Prefeitura de Manaus (AM).
-                      </p>
+                      <div className="p-4">
+                        <div className="rounded-lg overflow-hidden shadow-inner">
+                          <img 
+                            src={module.dashboardImage} 
+                            alt={module.dashboardAlt} 
+                            className="w-full h-auto"
+                          />
+                        </div>
+                        <p className="text-xs text-muted-foreground mt-2 text-center">
+                          {module.dashboardDescription}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
               </div>
             ))}
           </div>
