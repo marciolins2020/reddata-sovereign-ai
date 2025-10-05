@@ -13,18 +13,27 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react(), 
     mode === "development" && componentTagger(),
-    // Custom plugin to defer CSS loading
+    // Plugin to defer CSS loading using preload + media print trick
     {
       name: 'defer-css',
       enforce: 'post' as const,
       transformIndexHtml(html: string) {
-        // Transform CSS links to use preload with onload handler for async loading
+        // Transform CSS links to use preload + media="print" trick
+        // <link rel="stylesheet" href="X"> becomes:
+        // <link rel="preload" href="X" as="style">
+        // <link rel="stylesheet" href="X" media="print" onload="this.media='all'">
+        // <noscript><link rel="stylesheet" href="X"></noscript>
         return html.replace(
-          /<link([^>]*?)rel="stylesheet"([^>]*?)>/gi,
-          '<link$1rel="preload"$2 as="style" onload="this.onload=null;this.rel=\'stylesheet\'">'
-        ).replace(
-          /<link([^>]*?)rel="preload"([^>]*?)as="style"/gi,
-          '<link$1rel="preload"$2as="style"'
+          /<link([^>]*?)rel="stylesheet"([^>]*?)href="([^"]+)"([^>]*?)>/gi,
+          (match, before, middle, href, after) => {
+            // Skip if already has media="print" or is not a CSS file
+            if (match.includes('media="print"') || !href.includes('.css')) {
+              return match;
+            }
+            return `<link${before}rel="preload"${middle}href="${href}"${after} as="style">\n` +
+                   `<link${before}rel="stylesheet"${middle}href="${href}"${after} media="print" onload="this.media='all'">\n` +
+                   `<noscript><link${before}rel="stylesheet"${middle}href="${href}"${after}></noscript>`;
+          }
         );
       }
     } as Plugin
