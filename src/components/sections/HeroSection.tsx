@@ -23,7 +23,7 @@ export const HeroSection = () => {
                   src="/reddata-logo.png?v=2" 
                   alt="RedData® - Plataforma de Big Data e IA"
                   className="h-16 md:h-20 lg:h-24 w-auto"
-                  width="600"
+                  width="597"
                   height="96"
                   loading="eager"
               />
@@ -101,8 +101,8 @@ export const HeroSection = () => {
                 src="/reddata-dashboard-hero-optimized.webp"
                 alt="RedData® Dashboard - Ministério Público do Amazonas"
                 className="w-full h-auto object-cover"
-                width="800"
-                height="456"
+                width="634"
+                height="362"
                 fetchPriority="high"
                 loading="eager"
               />
