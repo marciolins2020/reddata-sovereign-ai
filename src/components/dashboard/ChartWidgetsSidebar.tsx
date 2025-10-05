@@ -83,7 +83,7 @@ function DraggableChartWidget({ type }: DraggableChartWidgetProps) {
 
 export function ChartWidgetsSidebar() {
   return (
-    <div className="w-64 bg-card border-r overflow-y-auto z-10 pt-[152px]">
+    <div className="w-64 bg-card border-r overflow-y-auto z-10">
       <div className="p-4 border-b sticky top-[152px] bg-card z-20">
         <h3 className="font-bold text-base mb-1">Widgets</h3>
         <p className="text-xs text-muted-foreground">
@@ -91,7 +91,7 @@ export function ChartWidgetsSidebar() {
         </p>
       </div>
 
-      <div className="p-3 space-y-4">
+      <div className="p-3 space-y-4 pt-[152px]">
         {chartCategories.map((category) => (
           <div key={category.name}>
             <h4 className="text-xs font-semibold text-muted-foreground uppercase mb-2 px-1">
