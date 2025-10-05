@@ -15,7 +15,7 @@ export function DashboardCanvas({ children, isEmpty }: DashboardCanvasProps) {
   return (
     <div
       ref={setNodeRef}
-      className={`flex-1 p-6 pt-8 min-h-[600px] transition-colors relative z-0 ${
+      className={`flex-1 p-6 pt-24 min-h-[600px] transition-colors relative z-0 ${
         isOver ? "bg-primary/5" : "bg-muted/30"
       }`}
       style={{
