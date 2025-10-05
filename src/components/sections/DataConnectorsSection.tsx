@@ -53,7 +53,7 @@ export const DataConnectorsSection = () => {
             {t("dataConnectors.subtitle")}
           </p>
           
-          <div className="inline-flex items-center gap-4 p-6 rounded-2xl bg-primary/10 border-2 border-primary/20 mb-12">
+          <div className="inline-flex items-center gap-4 p-6 rounded-2xl bg-primary/10 border-2 border-primary/20 mb-6">
             <div className="text-6xl font-bold text-primary">300+</div>
             <div className="text-left">
               <div className="text-xl font-semibold">{t("dataConnectors.sourcesTitle")}</div>
