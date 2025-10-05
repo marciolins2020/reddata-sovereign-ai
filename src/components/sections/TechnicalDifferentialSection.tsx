@@ -142,7 +142,7 @@ export const TechnicalDifferentialSection = () => {
           </Card>
 
           {/* Sovereignty Badge */}
-          <div className="mt-8 text-center">
+          <div className="mt-6 text-center">
             <div className="inline-flex items-center gap-3 px-6 py-3 bg-white border-2 border-primary/20 rounded-full">
               <Shield className="h-5 w-5 text-primary" />
               <span className="text-gray-900 font-semibold">
