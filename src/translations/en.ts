@@ -614,7 +614,7 @@ export default {
       description: "Complete system for managing and maximizing resources from the National Health Fund (FNS). Specialized solution for municipal and state health departments.",
       features: {
         bigData: "Big Data Diagnosis",
-        reports: "Automated official reports",
+        reports: "Automated official reports with AI",
         sei: "SEI/Process Support",
         consulting: "Specialized consulting",
       },

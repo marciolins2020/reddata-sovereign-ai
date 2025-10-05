@@ -614,7 +614,7 @@ export default {
       description: "Sistema completo para gestão e maximização dos recursos do Fundo Nacional de Saúde (FNS). Solução especializada para secretarias municipais e estaduais de saúde.",
       features: {
         bigData: "Diagnóstico com Big Data",
-        reports: "Relatórios oficiais automatizados",
+        reports: "Relatórios oficiais automatizados com I.A",
         sei: "Suporte SEI/Processo",
         consulting: "Consultoria especializada",
       },
