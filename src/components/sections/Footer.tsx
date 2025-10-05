@@ -1,7 +1,7 @@
 import { Separator } from "@/components/ui/separator";
 import { useLanguage } from "@/contexts/LanguageContext";
-import reddataLogo from "@/assets/reddata-logo-optimized.png";
-import redmaxxLogo from "@/assets/redmaxx-logo-optimized.png";
+import reddataLogo from "@/assets/reddata-logo-new.png";
+import redmaxxLogo from "@/assets/redmaxx-logo-new.png";
 
 export const Footer = () => {
   const { t } = useLanguage();
@@ -15,7 +15,7 @@ export const Footer = () => {
               <img 
                 src={redmaxxLogo} 
                 alt="RedMaxx - Maxximizando Resultados" 
-                className="h-12 w-auto brightness-0 invert"
+                className="h-12 w-auto"
                 width="160"
                 height="48"
                 loading="lazy"
@@ -33,7 +33,7 @@ export const Footer = () => {
               <img 
                 src={reddataLogo} 
                 alt="RedData®"
-                className="h-8 w-auto mb-3 brightness-0 invert"
+                className="h-8 w-auto mb-3"
                 width="200"
                 height="32"
                 loading="lazy"
