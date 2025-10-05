@@ -59,14 +59,15 @@ export const TechnicalDifferentialSection = () => {
             </h2>
             
             <p className="text-lg text-gray-700 max-w-4xl mx-auto leading-relaxed">
-              O <strong>RedData Appliance</strong> é entregue com <strong className="text-primary">GPU NVIDIA de alto desempenho</strong> e sistema operacional <strong className="text-primary">SUSE AI</strong> – 
-              sistema operacional Linux corporativo otimizado para Inteligência Artificial e Big Data, 
-              garantindo processamento acelerado de IA e performance superior em análises de grande volume de dados.
+              O <strong>RedData Appliance</strong> é equipado com <strong className="text-primary">GPU NVIDIA de alto desempenho</strong> e o sistema operacional <strong className="text-primary">SUSE AI</strong>, uma versão corporativa do Linux, especialmente otimizada para Inteligência Artificial e Big Data.
             </p>
             
             <p className="text-lg text-gray-700 max-w-4xl mx-auto mt-4 leading-relaxed">
-              Essa arquitetura oferece <strong>eficiência energética, estabilidade e velocidade acima da média</strong>, 
-              superando soluções similares do mercado e assegurando <strong className="text-primary">total soberania tecnológica</strong>.
+              Essa combinação garante <strong>processamento acelerado de IA, maior eficiência computacional e performance superior</strong> em análises de grandes volumes de dados.
+            </p>
+            
+            <p className="text-lg text-gray-700 max-w-4xl mx-auto mt-4 leading-relaxed">
+              Sua arquitetura proporciona <strong>eficiência energética, estabilidade e velocidade excepcionais</strong>, superando soluções equivalentes do mercado e assegurando <strong className="text-primary">soberania tecnológica total</strong>.
             </p>
           </div>
 
