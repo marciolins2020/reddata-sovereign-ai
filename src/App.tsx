@@ -20,6 +20,7 @@ const Dashboard = lazy(() => import("./pages/Dashboard"));
 const DashboardView = lazy(() => import("./pages/DashboardView"));
 const PublicDashboard = lazy(() => import("./pages/PublicDashboard"));
 const Audit = lazy(() => import("./pages/Audit"));
+const RedDataAudit = lazy(() => import("./pages/RedDataAudit"));
 
 const queryClient = new QueryClient();
 
@@ -46,6 +47,7 @@ const App = () => (
                 <Route path="/casos-uso/varejo" element={<CasosUsoVarejo />} />
                 <Route path="/modulos" element={<Modulos />} />
                 <Route path="/audit" element={<Audit />} />
+                <Route path="/reddata-audit" element={<RedDataAudit />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>

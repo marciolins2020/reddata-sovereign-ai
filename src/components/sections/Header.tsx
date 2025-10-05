@@ -136,7 +136,7 @@ export const Header = () => {
             </Link>
             
             {/* RedData.Audit Link */}
-            <Link to="/audit" className="px-4 py-2 text-sm font-medium bg-[#E30613] text-white hover:bg-[#E30613]/90 transition-colors rounded-md inline-block">
+            <Link to="/reddata-audit" className="px-4 py-2 text-sm font-medium bg-[#E30613] text-white hover:bg-[#E30613]/90 transition-colors rounded-md inline-block">
               RedData.Audit
             </Link>
             
@@ -224,7 +224,7 @@ export const Header = () => {
               
               {/* Mobile RedData.Audit Link */}
               <Link
-                to="/audit"
+                to="/reddata-audit"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="block px-4 py-3 text-left text-sm font-medium bg-[#E30613] text-white hover:bg-[#E30613]/90 transition-colors rounded-md mx-4"
               >

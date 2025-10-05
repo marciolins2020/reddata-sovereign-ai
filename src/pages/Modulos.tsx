@@ -46,7 +46,7 @@ const Modulos = () => {
         t("modules.audit.benefits.efficiency"),
         t("modules.audit.benefits.precision"),
       ],
-      link: "/audit",
+      link: "/reddata-audit",
       gradient: "from-red-500/10 to-orange-500/10",
       dashboardImage: null,
       dashboardAlt: "RedData.Audit Dashboard",
@@ -136,7 +136,13 @@ const Modulos = () => {
 
                         <Button 
                           className="w-full group-hover:scale-105 transition-transform"
-                          onClick={() => module.id === 'audit' ? window.location.href = module.link : window.open(module.link, '_blank')}
+                          onClick={() => {
+                            if (module.id === 'audit') {
+                              window.location.href = module.link;
+                            } else {
+                              window.open(module.link, '_blank');
+                            }
+                          }}
                         >
                           {t("modules.learnMore")}
                         </Button>
