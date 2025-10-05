@@ -138,7 +138,8 @@ const Modulos = () => {
                           className="w-full group-hover:scale-105 transition-transform"
                           onClick={() => {
                             if (module.id === 'audit') {
-                              window.location.href = module.link;
+                              // Ação futura será adicionada aqui
+                              console.log('RedData.Audit - Ação em breve');
                             } else {
                               window.open(module.link, '_blank');
                             }
