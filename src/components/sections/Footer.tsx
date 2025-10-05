@@ -30,7 +30,7 @@ export const Footer = () => {
             
             <div className="mb-4">
               <img 
-                src="/reddata-logo.png" 
+                src="/reddata-logo.png?v=2" 
                 alt="RedData®"
                 className="h-8 w-auto mb-3"
                 width="200"
