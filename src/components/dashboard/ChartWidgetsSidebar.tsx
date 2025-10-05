@@ -84,7 +84,7 @@ function DraggableChartWidget({ type }: DraggableChartWidgetProps) {
 export function ChartWidgetsSidebar() {
   return (
     <div className="w-64 bg-card border-r overflow-y-auto z-10">
-      <div className="p-4 border-b sticky top-[200px] bg-card z-20">
+      <div className="p-4 border-b sticky top-[220px] bg-card z-20">
         <h3 className="font-bold text-base mb-1">Widgets</h3>
         <p className="text-xs text-muted-foreground">
           Arraste os widgets para o canvas
