@@ -135,6 +135,11 @@ export const Header = () => {
               {t('header.modules')}
             </Link>
             
+            {/* RedData.Audit Link */}
+            <Link to="/audit" className="px-4 py-2 text-sm font-medium bg-[#E30613] text-white hover:bg-[#E30613]/90 transition-colors rounded-md inline-block">
+              RedData.Audit
+            </Link>
+            
             <button
               onClick={() => scrollToSection(menuItems[4].href)}
               className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-accent"
@@ -215,6 +220,15 @@ export const Header = () => {
                 className="block px-4 py-3 text-left text-sm font-medium text-foreground hover:text-primary hover:bg-accent transition-colors rounded-md mx-4"
               >
                 {t('header.modules')}
+              </Link>
+              
+              {/* Mobile RedData.Audit Link */}
+              <Link
+                to="/audit"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block px-4 py-3 text-left text-sm font-medium bg-[#E30613] text-white hover:bg-[#E30613]/90 transition-colors rounded-md mx-4"
+              >
+                RedData.Audit
               </Link>
               
               <button
