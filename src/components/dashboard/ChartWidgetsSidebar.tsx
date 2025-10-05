@@ -91,7 +91,7 @@ export function ChartWidgetsSidebar() {
         </p>
       </div>
 
-      <div className="p-3 space-y-4">
+      <div className="p-3 space-y-4 mt-[109px]">
         {chartCategories.map((category) => (
           <div key={category.name}>
             <h4 className="text-xs font-semibold text-muted-foreground uppercase mb-2 px-1">
