@@ -1,6 +1,5 @@
 import { Separator } from "@/components/ui/separator";
 import { useLanguage } from "@/contexts/LanguageContext";
-import reddataLogo from "@/assets/reddata-logo-final.png";
 import redmaxxLogo from "@/assets/redmaxx-logo.png";
 
 export const Footer = () => {
@@ -31,7 +30,7 @@ export const Footer = () => {
             
             <div className="mb-4">
               <img 
-                src={reddataLogo} 
+                src="/reddata-logo.png" 
                 alt="RedData®"
                 className="h-8 w-auto mb-3"
                 width="200"

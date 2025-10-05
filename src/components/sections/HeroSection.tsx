@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Zap, Database, TrendingUp } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { scrollToElement } from "@/lib/scroll";
-import reddataLogo from "@/assets/reddata-logo-final.png";
 
 export const HeroSection = () => {
   const { t } = useLanguage();
@@ -21,7 +20,7 @@ export const HeroSection = () => {
           <div className="text-center lg:text-left">
             <div className="flex items-center justify-center lg:justify-start mb-8">
                 <img 
-                  src={reddataLogo} 
+                  src="/reddata-logo.png" 
                   alt="RedData® - Plataforma de Big Data e IA"
                   className="h-16 md:h-20 lg:h-24 w-auto"
                   width="600"
