@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Zap, Database, TrendingUp } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { scrollToElement } from "@/lib/scroll";
-import reddataLogo from "@/assets/reddata-logo-optimized.png";
+import reddataLogo from "@/assets/reddata-logo-final.png";
 
 export const HeroSection = () => {
   const { t } = useLanguage();
