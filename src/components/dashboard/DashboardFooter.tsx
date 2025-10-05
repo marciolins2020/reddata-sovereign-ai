@@ -1,5 +1,5 @@
 import reddataIcon from "@/assets/reddata-icon.png";
-import redmaxxLogo from "@/assets/redmaxx-logo-new.png";
+import redmaxxLogo from "@/assets/redmaxx-logo.png";
 
 export function DashboardFooter() {
   return (
