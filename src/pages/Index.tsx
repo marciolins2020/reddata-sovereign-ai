@@ -8,6 +8,7 @@ const PlatformCapabilitiesSection = lazy(() => import("@/components/sections/Pla
 const DataConnectorsSection = lazy(() => import("@/components/sections/DataConnectorsSection").then(m => ({ default: m.DataConnectorsSection })));
 const HowItWorksSection = lazy(() => import("@/components/sections/HowItWorksSection").then(m => ({ default: m.HowItWorksSection })));
 const ApplianceSection = lazy(() => import("@/components/sections/ApplianceSection").then(m => ({ default: m.ApplianceSection })));
+const TechnicalDifferentialSection = lazy(() => import("@/components/sections/TechnicalDifferentialSection").then(m => ({ default: m.TechnicalDifferentialSection })));
 const VirtualMachinesSection = lazy(() => import("@/components/sections/VirtualMachinesSection").then(m => ({ default: m.VirtualMachinesSection })));
 const WhiteLabelSection = lazy(() => import("@/components/sections/WhiteLabelSection").then(m => ({ default: m.WhiteLabelSection })));
 const AutomationAlertsSection = lazy(() => import("@/components/sections/AutomationAlertsSection").then(m => ({ default: m.AutomationAlertsSection })));
@@ -32,6 +33,7 @@ const Index = () => {
         <DataConnectorsSection />
         <HowItWorksSection />
         <ApplianceSection />
+        <TechnicalDifferentialSection />
         <VirtualMachinesSection />
         <WhiteLabelSection />
         <AutomationAlertsSection />

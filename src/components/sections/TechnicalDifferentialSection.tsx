@@ -1,0 +1,127 @@
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { 
+  Cpu,
+  Zap,
+  Shield,
+  TrendingUp,
+  Gauge,
+  Server
+} from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { scrollToElement } from "@/lib/scroll";
+
+export const TechnicalDifferentialSection = () => {
+  const { t } = useLanguage();
+
+  const technicalPoints = [
+    {
+      icon: Cpu,
+      title: "GPU NVIDIA otimizada para cargas de IA e machine learning",
+    },
+    {
+      icon: Server,
+      title: "Sistema operacional Linux SUSE AI",
+    },
+    {
+      icon: Zap,
+      title: "Ambiente pronto para análises preditivas e em tempo real",
+    },
+    {
+      icon: Gauge,
+      title: "Desempenho até 40% superior em benchmarks de Big Data",
+    }
+  ];
+
+  return (
+    <section className="py-20 bg-gradient-to-b from-white to-gray-50">
+      <div className="container mx-auto px-4">
+        <div className="max-w-6xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">
+              <Cpu className="h-5 w-5 text-primary" />
+              <span className="text-sm font-semibold text-primary uppercase tracking-wide">
+                Diferencial Técnico
+              </span>
+            </div>
+            
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              <span className="text-primary">🚀 RedData Appliance</span>
+              <br />
+              Potência e Soberania em um Único Equipamento
+            </h2>
+            
+            <p className="text-lg text-gray-700 max-w-4xl mx-auto leading-relaxed">
+              O <strong>RedData Appliance</strong> é entregue com <strong className="text-primary">GPU NVIDIA de alto desempenho</strong> e sistema operacional <strong className="text-primary">Linux SUSE AI</strong>, 
+              garantindo processamento acelerado de Inteligência Artificial e performance superior em análises de grande volume de dados.
+            </p>
+            
+            <p className="text-lg text-gray-700 max-w-4xl mx-auto mt-4 leading-relaxed">
+              Essa arquitetura oferece <strong>eficiência energética, estabilidade e velocidade acima da média</strong>, 
+              superando soluções similares do mercado e assegurando <strong className="text-primary">total soberania tecnológica</strong>.
+            </p>
+          </div>
+
+          {/* Technical Points Grid */}
+          <div className="grid md:grid-cols-2 gap-6 mb-12">
+            {technicalPoints.map((point, index) => (
+              <Card key={index} className="border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
+                <CardContent className="p-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <point.icon className="h-6 w-6 text-primary" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-gray-900 font-medium leading-relaxed">
+                        {point.title}
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* Performance Highlight */}
+          <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-2 border-primary/20">
+            <CardContent className="p-8">
+              <div className="flex flex-col md:flex-row items-center gap-6">
+                <div className="w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
+                  <TrendingUp className="h-10 w-10 text-primary" />
+                </div>
+                
+                <div className="flex-1 text-center md:text-left">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                    Performance até <span className="text-primary">40% superior</span> em benchmarks de Big Data
+                  </h3>
+                  <p className="text-gray-700">
+                    Arquitetura otimizada para cargas de trabalho intensivas com processamento acelerado por GPU
+                  </p>
+                </div>
+
+                <Button 
+                  size="lg" 
+                  onClick={() => scrollToElement('#contact-form')}
+                  className="bg-primary hover:bg-primary/90 text-white"
+                >
+                  Saiba Mais
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Sovereignty Badge */}
+          <div className="mt-8 text-center">
+            <div className="inline-flex items-center gap-3 px-6 py-3 bg-white border-2 border-primary/20 rounded-full">
+              <Shield className="h-5 w-5 text-primary" />
+              <span className="text-gray-900 font-semibold">
+                Total Soberania Tecnológica • Dados 100% sob seu Controle
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
