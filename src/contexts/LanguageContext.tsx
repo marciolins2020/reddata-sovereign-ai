@@ -18,7 +18,22 @@ const translations = {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguageState] = useState<Language>('pt');
+  const [language, setLanguageState] = useState<Language>(() => {
+    // Check localStorage first
+    try {
+      const stored = localStorage?.getItem('language');
+      if (stored === 'pt' || stored === 'en') {
+        return stored;
+      }
+    } catch {
+      // Silently fail
+    }
+
+    // Auto-detect based on browser language
+    const browserLang = navigator.language.toLowerCase();
+    // If browser language starts with 'pt', use Portuguese, otherwise use English
+    return browserLang.startsWith('pt') ? 'pt' : 'en';
+  });
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
