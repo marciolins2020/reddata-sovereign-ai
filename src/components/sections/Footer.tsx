@@ -1,6 +1,6 @@
 import { Separator } from "@/components/ui/separator";
 import { useLanguage } from "@/contexts/LanguageContext";
-import reddataLogo from "@/assets/reddata-logo-new.png";
+import reddataLogo from "@/assets/reddata-logo-optimized.png";
 import redmaxxLogo from "@/assets/redmaxx-logo.png";
 
 export const Footer = () => {
