@@ -27,7 +27,7 @@ const Modulos = () => {
         t("modules.tetoMac.benefits.approval"),
       ],
       link: "http://tetomac.redmaxx.com.br",
-      gradient: "from-blue-500/10 to-cyan-500/10",
+      gradient: "from-red-500/10 to-orange-500/10",
       dashboardImage: dashboardManaus,
       dashboardAlt: "Dashboard Prefeitura de Manaus",
       dashboardDescription: "Tela Principal do Projeto da Prefeitura de Manaus (AM).",
@@ -48,7 +48,7 @@ const Modulos = () => {
         t("modules.audit.benefits.precision"),
       ],
       link: "https://auditoria.redmaxx.com.br",
-      gradient: "from-red-500/10 to-orange-500/10",
+      gradient: "from-blue-500/10 to-cyan-500/10",
       dashboardImage: dashboardAudit,
       dashboardAlt: "RedData.Audit Dashboard - IA Explicável",
       dashboardDescription: "Tela de IA Explicável (XAI) do RedData.Audit com análise detalhada de processos.",
@@ -149,9 +149,17 @@ const Modulos = () => {
                 {/* Dashboard Preview - Abaixo do Card */}
                 {module.dashboardImage && (
                   <div className="relative mt-8">
-                    <div className="absolute -inset-4 bg-gradient-to-br from-primary/30 via-blue-500/20 to-cyan-500/30 rounded-2xl blur-2xl opacity-75" />
+                    <div className={`absolute -inset-4 bg-gradient-to-br rounded-2xl blur-2xl opacity-75 ${
+                      module.id === 'teto-mac' 
+                        ? 'from-red-500/30 via-orange-500/20 to-red-500/30' 
+                        : 'from-blue-500/30 via-cyan-500/20 to-blue-500/30'
+                    }`} />
                     <div className="relative bg-gradient-to-br from-background/60 via-background/40 to-background/60 backdrop-blur-xl rounded-xl border-2 border-primary/30 shadow-2xl overflow-hidden">
-                      <div className="bg-gradient-to-r from-primary/10 to-blue-500/10 p-3 border-b border-primary/20">
+                      <div className={`bg-gradient-to-r p-3 border-b border-primary/20 ${
+                        module.id === 'teto-mac'
+                          ? 'from-red-500/10 to-orange-500/10'
+                          : 'from-blue-500/10 to-cyan-500/10'
+                      }`}>
                         <h4 className="font-semibold text-foreground flex items-center gap-2">
                           <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
                           Dashboard Preview

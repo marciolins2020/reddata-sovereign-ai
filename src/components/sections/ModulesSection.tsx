@@ -24,7 +24,7 @@ export const ModulesSection = () => {
         t("modules.tetoMac.benefits.approval"),
       ],
       link: "http://tetomac.redmaxx.com.br",
-      gradient: "from-blue-500/10 to-cyan-500/10",
+      gradient: "from-red-500/10 to-orange-500/10",
     },
   ];
 
@@ -96,9 +96,9 @@ export const ModulesSection = () => {
 
               {/* Dashboard Preview - Abaixo do Card */}
               <div className="relative">
-                <div className="absolute -inset-2 md:-inset-4 bg-gradient-to-br from-primary/30 via-blue-500/20 to-cyan-500/30 rounded-2xl blur-2xl opacity-75" />
+                <div className="absolute -inset-2 md:-inset-4 bg-gradient-to-br from-red-500/30 via-orange-500/20 to-red-500/30 rounded-2xl blur-2xl opacity-75" />
                 <div className="relative bg-gradient-to-br from-background/60 via-background/40 to-background/60 backdrop-blur-xl rounded-xl border-2 border-primary/30 shadow-2xl overflow-hidden">
-                  <div className="bg-gradient-to-r from-primary/10 to-blue-500/10 p-2 md:p-3 border-b border-primary/20">
+                  <div className="bg-gradient-to-r from-red-500/10 to-orange-500/10 p-2 md:p-3 border-b border-primary/20">
                     <h4 className="text-sm md:text-base font-semibold text-foreground flex items-center gap-2">
                       <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
                       Dashboard ao Vivo
