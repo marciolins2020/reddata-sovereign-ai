@@ -8,8 +8,10 @@ import { Card } from "@/components/ui/card";
 import { toast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 import reddataLogo from "@/assets/reddata-logo-optimized.png";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Auth() {
+  const { t } = useLanguage();
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -41,8 +43,8 @@ export default function Auth() {
         if (error) throw error;
         
         toast({
-          title: "Login realizado!",
-          description: "Redirecionando para o dashboard...",
+          title: t("auth.loginSuccess"),
+          description: t("auth.loginSuccessDesc"),
         });
         navigate("/dashboard");
       } else {
@@ -62,14 +64,14 @@ export default function Auth() {
         if (error) throw error;
         
         toast({
-          title: "Conta criada com sucesso!",
-          description: "Você pode fazer login agora. Seu trial de 30 dias começou!",
+          title: t("auth.signupSuccess"),
+          description: t("auth.signupSuccessDesc"),
         });
         setIsLogin(true);
       }
     } catch (error: any) {
       toast({
-        title: "Erro",
+        title: t("auth.error"),
         description: error.message,
         variant: "destructive",
       });
@@ -84,48 +86,48 @@ export default function Auth() {
         <div className="flex flex-col items-center mb-8">
           <img src={reddataLogo} alt="RedData" className="h-12 mb-4" />
           <h1 className="text-2xl font-bold text-foreground">
-            {isLogin ? "Entrar" : "Criar Conta"}
+            {isLogin ? t("auth.login") : t("auth.signup")}
           </h1>
           <p className="text-muted-foreground text-center mt-2">
-            {isLogin ? "Acesse seu dashboard" : "Teste grátis por 30 dias"}
+            {isLogin ? t("auth.loginSubtitle") : t("auth.signupSubtitle")}
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {!isLogin && (
             <div>
-              <Label htmlFor="fullName">Nome Completo</Label>
+              <Label htmlFor="fullName">{t("auth.fullNameLabel")}</Label>
               <Input
                 id="fullName"
                 type="text"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
-                placeholder="Seu nome completo"
+                placeholder={t("auth.fullNamePlaceholder")}
                 required={!isLogin}
               />
             </div>
           )}
           
           <div>
-            <Label htmlFor="email">E-mail</Label>
+            <Label htmlFor="email">{t("auth.emailLabel")}</Label>
             <Input
               id="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="seu@email.com"
+              placeholder={t("auth.emailPlaceholder")}
               required
             />
           </div>
           
           <div>
-            <Label htmlFor="password">Senha</Label>
+            <Label htmlFor="password">{t("auth.passwordLabel")}</Label>
             <Input
               id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
+              placeholder={t("auth.passwordPlaceholder")}
               required
               minLength={6}
             />
@@ -133,7 +135,7 @@ export default function Auth() {
 
           <Button type="submit" className="w-full" disabled={loading}>
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            {isLogin ? "Entrar" : "Criar Conta"}
+            {isLogin ? t("auth.loginButton") : t("auth.signupButton")}
           </Button>
         </form>
 
@@ -144,14 +146,14 @@ export default function Auth() {
             className="text-sm text-primary hover:underline"
           >
             {isLogin
-              ? "Não tem conta? Crie uma agora"
-              : "Já tem conta? Faça login"}
+              ? t("auth.noAccount")
+              : t("auth.hasAccount")}
           </button>
         </div>
 
         <div className="mt-6 text-center text-xs text-muted-foreground">
           <a href="/" className="hover:text-foreground">
-            Voltar para home
+            {t("auth.backHome")}
           </a>
         </div>
       </Card>

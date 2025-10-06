@@ -10,6 +10,7 @@ import { UploadSection } from "@/components/dashboard/UploadSection";
 import { DashboardList } from "@/components/dashboard/DashboardList";
 import { FileManager } from "@/components/dashboard/FileManager";
 import { DashboardFooter } from "@/components/dashboard/DashboardFooter";
+import { useLanguage } from "@/contexts/LanguageContext";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,6 +31,7 @@ import {
 } from "@/components/ui/alert-dialog";
 
 export default function Dashboard() {
+  const { t } = useLanguage();
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [profile, setProfile] = useState<any>(null);
@@ -90,8 +92,8 @@ export default function Dashboard() {
 
     if (data && !data.is_trial_active) {
       toast({
-        title: "Trial expirado",
-        description: "Seu período de teste de 30 dias expirou. Entre em contato para continuar usando.",
+        title: t("dashboard.trialExpired"),
+        description: t("dashboard.trialExpiredMessage"),
         variant: "destructive",
       });
     }
@@ -162,8 +164,8 @@ export default function Dashboard() {
       setDashboardRefreshTrigger(prev => prev + 1);
 
       toast({
-        title: "Arquivo excluído",
-        description: "O arquivo e seus dashboards foram excluídos com sucesso",
+        title: t("dashboard.fileDeleted"),
+        description: t("dashboard.fileDeletedDesc"),
       });
 
       // Refresh profile to update storage usage
@@ -175,8 +177,8 @@ export default function Dashboard() {
         console.error("Delete error:", error);
       }
       toast({
-        title: "Erro ao excluir",
-        description: "Não foi possível excluir o arquivo. Tente novamente.",
+        title: t("dashboard.deleteError"),
+        description: t("dashboard.deleteErrorDesc"),
         variant: "destructive",
       });
     }
@@ -208,9 +210,9 @@ export default function Dashboard() {
           <div className="flex items-center gap-3">
             <img src={reddataIcon} alt="RedData" className="h-10" />
             <div>
-              <h1 className="text-xl font-bold text-foreground">Dashboard RedData</h1>
+              <h1 className="text-xl font-bold text-foreground">{t("dashboard.title")}</h1>
               <p className="text-xs text-muted-foreground">
-                {profile.is_trial_active ? `${trialDaysLeft} dias restantes no trial` : "Trial expirado"}
+                {profile.is_trial_active ? `${trialDaysLeft} ${t("dashboard.trialDaysLeft")}` : t("dashboard.trialExpired")}
               </p>
             </div>
           </div>
@@ -221,16 +223,16 @@ export default function Dashboard() {
                 <button className="text-right hidden sm:block hover:opacity-80 transition-opacity cursor-pointer">
                   <p className="text-sm font-medium text-foreground">{profile.full_name || user.email}</p>
                   <p className="text-xs text-muted-foreground">
-                    {profile.storage_used_mb?.toFixed(2) || 0} / {profile.storage_limit_mb || 10} MB usado
+                    {profile.storage_used_mb?.toFixed(2) || 0} / {profile.storage_limit_mb || 10} MB {t("dashboard.storageUsed")}
                   </p>
                 </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-80">
-                <DropdownMenuLabel>Meus Arquivos</DropdownMenuLabel>
+                <DropdownMenuLabel>{t("dashboard.myFiles")}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 {userFiles.length === 0 ? (
                   <div className="px-2 py-4 text-sm text-muted-foreground text-center">
-                    Nenhum arquivo carregado
+                    {t("dashboard.noFiles")}
                   </div>
                 ) : (
                   <div className="max-h-60 overflow-y-auto">
@@ -265,7 +267,7 @@ export default function Dashboard() {
             </DropdownMenu>
             <Button variant="outline" size="sm" onClick={handleSignOut}>
               <LogOut className="h-4 w-4 mr-2" />
-              Sair
+              {t("dashboard.logout")}
             </Button>
           </div>
         </div>
@@ -283,7 +285,7 @@ export default function Dashboard() {
             }`}
           >
             <Upload className="h-4 w-4 inline mr-2" />
-            Upload de Arquivo
+            {t("dashboard.uploadTab")}
           </button>
           <button
             onClick={() => setActiveTab("files")}
@@ -294,7 +296,7 @@ export default function Dashboard() {
             }`}
           >
             <FileSpreadsheet className="h-4 w-4 inline mr-2" />
-            Meus Arquivos
+            {t("dashboard.filesTab")}
           </button>
           <button
             onClick={() => setActiveTab("dashboards")}
@@ -305,7 +307,7 @@ export default function Dashboard() {
             }`}
           >
             <LayoutDashboard className="h-4 w-4 inline mr-2" />
-            Meus Dashboards
+            {t("dashboard.dashboardsTab")}
           </button>
         </div>
       </div>
@@ -344,19 +346,18 @@ export default function Dashboard() {
       <AlertDialog open={!!fileToDelete} onOpenChange={() => setFileToDelete(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Excluir arquivo?</AlertDialogTitle>
+            <AlertDialogTitle>{t("dashboard.deleteFile")}</AlertDialogTitle>
             <AlertDialogDescription>
-              Esta ação não pode ser desfeita. O arquivo e todos os dashboards associados 
-              serão permanentemente excluídos.
+              {t("dashboard.deleteFileDesc")}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogCancel>{t("dashboard.cancel")}</AlertDialogCancel>
             <AlertDialogAction
               onClick={() => fileToDelete && handleDeleteFile(fileToDelete)}
               className="bg-destructive hover:bg-destructive/90"
             >
-              Excluir
+              {t("dashboard.delete")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
