@@ -18,22 +18,51 @@ const translations = {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguageState] = useState<Language>(() => {
-    // Check localStorage first
-    try {
-      const stored = localStorage?.getItem('language');
-      if (stored === 'pt' || stored === 'en') {
-        return stored;
-      }
-    } catch {
-      // Silently fail
-    }
+  const [language, setLanguageState] = useState<Language>('pt');
+  const [isLanguageSet, setIsLanguageSet] = useState(false);
 
-    // Auto-detect based on browser language
-    const browserLang = navigator.language.toLowerCase();
-    // If browser language starts with 'pt', use Portuguese, otherwise use English
-    return browserLang.startsWith('pt') ? 'pt' : 'en';
-  });
+  // Detect language based on IP geolocation
+  React.useEffect(() => {
+    const detectLanguage = async () => {
+      // Check localStorage first
+      try {
+        const stored = localStorage?.getItem('language');
+        if (stored === 'pt' || stored === 'en') {
+          setLanguageState(stored);
+          setIsLanguageSet(true);
+          return;
+        }
+      } catch {
+        // Silently fail
+      }
+
+      // Detect country by IP
+      try {
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+        
+        // If country is Brazil, use Portuguese, otherwise English
+        const detectedLang = data.country_code === 'BR' ? 'pt' : 'en';
+        setLanguageState(detectedLang);
+        setIsLanguageSet(true);
+        
+        // Store the detected language
+        try {
+          localStorage?.setItem('language', detectedLang);
+        } catch {
+          // Silently fail
+        }
+      } catch (error) {
+        // Fallback to browser language if IP detection fails
+        const browserLang = navigator.language.toLowerCase();
+        const fallbackLang = browserLang.startsWith('pt') ? 'pt' : 'en';
+        setLanguageState(fallbackLang);
+        setIsLanguageSet(true);
+      }
+    };
+
+    detectLanguage();
+  }, []);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
