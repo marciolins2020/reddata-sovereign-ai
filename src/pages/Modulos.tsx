@@ -5,6 +5,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import dashboardManaus from "@/assets/dashboard-manaus.png";
+import dashboardAudit from "@/assets/reddata-audit-dashboard.png";
 
 const Modulos = () => {
   const { t } = useLanguage();
@@ -46,11 +47,11 @@ const Modulos = () => {
         t("modules.audit.benefits.efficiency"),
         t("modules.audit.benefits.precision"),
       ],
-      link: "/reddata-audit",
+      link: "https://auditoria.redmaxx.com.br",
       gradient: "from-red-500/10 to-orange-500/10",
-      dashboardImage: null,
-      dashboardAlt: "RedData.Audit Dashboard",
-      dashboardDescription: "Sistema de Auditoria Inteligente para Tribunais de Contas.",
+      dashboardImage: dashboardAudit,
+      dashboardAlt: "RedData.Audit Dashboard - IA Explicável",
+      dashboardDescription: "Tela de IA Explicável (XAI) do RedData.Audit com análise detalhada de processos.",
     },
   ];
   
@@ -136,14 +137,7 @@ const Modulos = () => {
 
                         <Button 
                           className="w-full group-hover:scale-105 transition-transform"
-                          onClick={() => {
-                            if (module.id === 'audit') {
-                              // Ação futura será adicionada aqui
-                              console.log('RedData.Audit - Ação em breve');
-                            } else {
-                              window.open(module.link, '_blank');
-                            }
-                          }}
+                          onClick={() => window.open(module.link, '_blank')}
                         >
                           {t("modules.learnMore")}
                         </Button>
