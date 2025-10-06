@@ -96,8 +96,10 @@ const Modulos = () => {
                     <Badge className="w-fit mb-4" variant="secondary">
                       {module.category}
                     </Badge>
-                    <CardTitle className="text-2xl">{module.title}</CardTitle>
-                    <CardDescription className="text-base">
+                    <CardTitle className={`text-2xl ${module.id === 'audit' ? 'text-black dark:text-white' : ''}`}>
+                      {module.title}
+                    </CardTitle>
+                    <CardDescription className={`text-base ${module.id === 'audit' ? 'text-black/80 dark:text-white/80' : ''}`}>
                       {module.description}
                     </CardDescription>
                   </CardHeader>
@@ -106,14 +108,16 @@ const Modulos = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                       {/* Left Column - Features */}
                       <div>
-                        <h4 className="font-semibold mb-3 text-foreground">
+                        <h4 className={`font-semibold mb-3 ${module.id === 'audit' ? 'text-black dark:text-white' : 'text-foreground'}`}>
                           {t("modules.featuresTitle")}
                         </h4>
                         <div className="grid grid-cols-1 gap-3">
                           {module.features.map((feature, idx) => (
                             <div key={idx} className="flex items-start gap-3 p-3 rounded-lg bg-background/30 hover:bg-background/50 transition-colors">
-                              <feature.icon className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                              <span className="text-sm text-muted-foreground">{feature.text}</span>
+                              <feature.icon className={`h-5 w-5 mt-0.5 flex-shrink-0 ${module.id === 'audit' ? 'text-blue-600' : 'text-primary'}`} />
+                              <span className={`text-sm ${module.id === 'audit' ? 'text-black/80 dark:text-white/80' : 'text-muted-foreground'}`}>
+                                {feature.text}
+                              </span>
                             </div>
                           ))}
                         </div>
@@ -122,13 +126,13 @@ const Modulos = () => {
                       {/* Right Column - Results */}
                       <div className="space-y-6">
                         <div className="bg-background/50 rounded-lg p-4">
-                          <h4 className="font-semibold mb-3 text-foreground">
+                          <h4 className={`font-semibold mb-3 ${module.id === 'audit' ? 'text-black dark:text-white' : 'text-foreground'}`}>
                             {t("modules.resultsTitle")}
                           </h4>
                           <ul className="space-y-2">
                             {module.benefits.map((benefit, idx) => (
-                              <li key={idx} className="text-sm text-muted-foreground flex items-start gap-2">
-                                <span className="text-primary text-lg">✓</span>
+                              <li key={idx} className={`text-sm flex items-start gap-2 ${module.id === 'audit' ? 'text-black/80 dark:text-white/80' : 'text-muted-foreground'}`}>
+                                <span className={`text-lg ${module.id === 'audit' ? 'text-blue-600' : 'text-primary'}`}>✓</span>
                                 <span>{benefit}</span>
                               </li>
                             ))}
@@ -136,7 +140,7 @@ const Modulos = () => {
                         </div>
 
                         <Button 
-                          className="w-full group-hover:scale-105 transition-transform"
+                          className={`w-full group-hover:scale-105 transition-transform ${module.id === 'audit' ? 'bg-blue-600 hover:bg-blue-700 text-white' : ''}`}
                           onClick={() => window.open(module.link, '_blank')}
                         >
                           {t("modules.learnMore")}
