@@ -2,3 +2,6 @@ project_id = "vjxssuywneheecuirxwb"
 
 [functions.send-contact-email]
 verify_jwt = false
+
+[functions.reddata-chat]
+verify_jwt = false

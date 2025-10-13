@@ -7,6 +7,8 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { lazy, Suspense } from "react";
 import Index from "./pages/Index";
+import { WhatsAppWidget } from "@/components/ui/WhatsAppWidget";
+import { ReddataChatWidget } from "@/components/ui/ReddataChatWidget";
 
 // Lazy load non-home page routes to reduce initial bundle size
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -31,6 +33,8 @@ const App = () => (
         <TooltipProvider>
           <Toaster />
           <Sonner />
+          <WhatsAppWidget />
+          <ReddataChatWidget />
           <BrowserRouter>
             <Suspense fallback={<div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>}>
               <Routes>
