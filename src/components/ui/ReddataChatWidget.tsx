@@ -32,6 +32,7 @@ export const ReddataChatWidget = () => {
   const [usageData, setUsageData] = useState<UsageData>({ usedTokens: 0, lastUpdateISO: "" });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
+  const [hasShown90Warning, setHasShown90Warning] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
 
@@ -62,6 +63,17 @@ export const ReddataChatWidget = () => {
     }
   }, [messages]);
 
+  useEffect(() => {
+    const usagePercentage = (usageData.usedTokens / maxTokens) * 100;
+    if (usagePercentage >= 90 && !hasShown90Warning && usageData.usedTokens > 0) {
+      setMessages(prev => [...prev, {
+        role: "assistant",
+        content: "⚠️ Atenção: Você já utilizou 90% do seu limite diário de tokens. Entre em contato com a RedMaxx para continuar usando o chat após atingir o limite."
+      }]);
+      setHasShown90Warning(true);
+    }
+  }, [usageData.usedTokens, maxTokens, hasShown90Warning]);
+
   const getStorageKey = () => {
     const today = new Date().toISOString().split('T')[0].replace(/-/g, '');
     if (isLoggedIn && userId) {
@@ -82,6 +94,7 @@ export const ReddataChatWidget = () => {
       }
     } else {
       setUsageData({ usedTokens: 0, lastUpdateISO: new Date().toISOString() });
+      setHasShown90Warning(false);
     }
   };
 
@@ -294,9 +307,6 @@ export const ReddataChatWidget = () => {
                 >
                   <X className="h-4 w-4" />
                 </Button>
-              </div>
-              <div className="text-xs text-white/90 mt-2">
-                Uso de hoje: {usageData.usedTokens} / {maxTokens} tokens {isLoggedIn ? "(conta)" : "(dispositivo)"}
               </div>
             </CardHeader>
             
