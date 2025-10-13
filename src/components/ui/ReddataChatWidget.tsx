@@ -254,6 +254,31 @@ export const ReddataChatWidget = () => {
     }
   };
 
+  const handlePaste = (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
+    const items = e.clipboardData?.items;
+    if (items) {
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf('image') !== -1) {
+          e.preventDefault();
+          setError("Envio de imagens não é permitido na versão Basic do RedData. Entre em contato com a RedMaxx para mais recursos.");
+          return;
+        }
+      }
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLTextAreaElement>) => {
+    e.preventDefault();
+    const files = e.dataTransfer?.files;
+    if (files && files.length > 0) {
+      setError("Envio de arquivos não é permitido na versão Basic do RedData. Entre em contato com a RedMaxx para mais recursos.");
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLTextAreaElement>) => {
+    e.preventDefault();
+  };
+
   const toggleChat = () => {
     setIsOpen(!isOpen);
     if (!isOpen && typeof window !== 'undefined' && (window as any).gtag) {
@@ -374,7 +399,10 @@ export const ReddataChatWidget = () => {
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    placeholder="Digite sua pergunta… (somente texto)"
+                    onPaste={handlePaste}
+                    onDrop={handleDrop}
+                    onDragOver={handleDragOver}
+                    placeholder="Digite sua pergunta…"
                     className="min-h-[60px] max-h-[120px] resize-none"
                     disabled={isLoading || isLimitReached}
                     aria-label="Digite sua mensagem"
