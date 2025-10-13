@@ -26,7 +26,7 @@ const Index = () => {
   return (
     <main className="min-h-screen">
       <Header />
-      <OnboardingTour />
+      {/* <OnboardingTour /> */}
       <HeroSection />
       <StatsSection />
       <Suspense fallback={<div className="py-20" />}>
