@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ChevronUp } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { scrollToElement } from "@/lib/scroll";
@@ -18,7 +18,6 @@ export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
-  const [showScrollTop, setShowScrollTop] = useState(false);
   const { language, setLanguage, t } = useLanguage();
   const location = useLocation();
 
@@ -42,7 +41,6 @@ export const Header = () => {
     const handleScroll = () => {
       const scrolled = window.scrollY > 10;
       setIsScrolled(scrolled);
-      setShowScrollTop(window.scrollY > 400);
 
       // ScrollSpy - detectar seção ativa apenas na página principal
       if (location.pathname === "/") {
@@ -69,13 +67,6 @@ export const Header = () => {
   const scrollToSection = (href: string) => {
     scrollToElement(href);
     setIsMobileMenuOpen(false);
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
   };
 
   const isActiveLink = (sectionId: string) => {
@@ -290,17 +281,6 @@ export const Header = () => {
           )}
         </div>
       </header>
-
-    {/* Botão Voltar ao Topo */}
-    {showScrollTop && (
-      <button
-        onClick={scrollToTop}
-        className="fixed bottom-6 right-6 z-[90] p-3 bg-primary text-white rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:scale-110 animate-fade-in"
-        aria-label="Voltar ao topo"
-      >
-        <ChevronUp className="h-6 w-6" />
-      </button>
-    )}
     </>
   );
 };
