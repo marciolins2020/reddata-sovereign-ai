@@ -8,9 +8,9 @@ export const HeroSection = () => {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center bg-gradient-hero overflow-hidden pt-20">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 -right-32 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+      {/* Background decorative elements - moved lower to not overlap with logo */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/2 -right-32 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 -left-32 w-96 h-96 bg-primary/3 rounded-full blur-3xl"></div>
       </div>
       
