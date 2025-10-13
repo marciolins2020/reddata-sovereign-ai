@@ -20,7 +20,6 @@ const DashboardDemoSection = lazy(() => import("@/components/sections/DashboardD
 const FAQSection = lazy(() => import("@/components/sections/FAQSection").then(m => ({ default: m.FAQSection })));
 const ContactFormSection = lazy(() => import("@/components/sections/ContactFormSection").then(m => ({ default: m.ContactFormSection })));
 const Footer = lazy(() => import("@/components/sections/Footer").then(m => ({ default: m.Footer })));
-const WhatsAppWidget = lazy(() => import("@/components/ui/WhatsAppWidget").then(m => ({ default: m.WhatsAppWidget })));
 
 const Index = () => {
   return (
@@ -45,7 +44,6 @@ const Index = () => {
         <FAQSection />
         <ContactFormSection />
         <Footer />
-        <WhatsAppWidget />
       </Suspense>
     </main>
   );
