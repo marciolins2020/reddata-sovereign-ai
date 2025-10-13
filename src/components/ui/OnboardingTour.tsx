@@ -40,34 +40,48 @@ export const OnboardingTour = () => {
     const tourCompleted = localStorage.getItem("reddata-tour-completed");
     
     if (!tourCompleted) {
-      // Aguardar 1 segundo antes de mostrar o tour
+      // Aguardar 2 segundos antes de mostrar o tour para garantir que a página carregou
       const timer = setTimeout(() => {
-        setIsVisible(true);
-        updateTargetPosition();
-      }, 1000);
+        const firstTarget = document.querySelector(TOUR_STEPS[0].target);
+        if (firstTarget) {
+          setIsVisible(true);
+          updateTargetPosition();
+        }
+      }, 2000);
 
       return () => clearTimeout(timer);
     }
   }, []);
 
   useEffect(() => {
-    if (isVisible) {
-      updateTargetPosition();
+    if (isVisible && currentStep >= 0) {
+      const timer = setTimeout(updateTargetPosition, 100);
       window.addEventListener("resize", updateTargetPosition);
-      return () => window.removeEventListener("resize", updateTargetPosition);
+      return () => {
+        clearTimeout(timer);
+        window.removeEventListener("resize", updateTargetPosition);
+      };
     }
   }, [currentStep, isVisible]);
 
   const updateTargetPosition = () => {
-    const target = document.querySelector(TOUR_STEPS[currentStep].target);
+    const step = TOUR_STEPS[currentStep];
+    if (!step) return;
+    
+    const target = document.querySelector(step.target);
     if (target) {
-      setTargetRect(target.getBoundingClientRect());
+      const rect = target.getBoundingClientRect();
+      setTargetRect(rect);
       
       // Scroll suave até o elemento
       target.scrollIntoView({
         behavior: "smooth",
         block: "center",
       });
+    } else {
+      // Se não encontrar o elemento, fecha o tour
+      console.warn(`Tour target not found: ${step.target}`);
+      completeTour();
     }
   };
 
@@ -119,8 +133,11 @@ export const OnboardingTour = () => {
 
   return (
     <>
-      {/* Overlay escuro */}
-      <div className="fixed inset-0 bg-black/70 z-[9998] animate-fade-in" />
+      {/* Overlay escuro - com pointer-events-none para não bloquear interação */}
+      <div 
+        className="fixed inset-0 bg-black/70 z-[9998] animate-fade-in pointer-events-none" 
+        onClick={handleSkip}
+      />
 
       {/* Highlight do elemento alvo */}
       <div
