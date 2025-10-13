@@ -320,7 +320,7 @@ export const ReddataChatWidget = () => {
                   <img src={reddataChatIcon} alt="RedData" className="w-8 h-8 object-contain" />
                   <div>
                     <CardTitle className="text-lg">RedData Chat</CardTitle>
-                    <CardDescription className="text-white/80 text-xs">Beta</CardDescription>
+                    <CardDescription className="text-white/80 text-xs">Versão Basic</CardDescription>
                   </div>
                 </div>
                 <Button
