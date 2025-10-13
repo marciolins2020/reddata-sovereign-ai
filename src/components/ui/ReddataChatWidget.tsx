@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { supabase } from "@/integrations/supabase/client";
-import reddataLogo from "@/assets/reddata-logo.png";
+import reddataChatIcon from "@/assets/reddata-chat-icon.png";
 
 interface Message {
   role: "user" | "assistant";
@@ -251,23 +251,25 @@ export const ReddataChatWidget = () => {
   return (
     <>
       {/* Widget Button */}
-      <div className="fixed bottom-[110px] right-6 z-[9999]">
+      <div className="fixed bottom-[90px] right-6 z-[9999]">
         {!isOpen && (
           <Button
             onClick={toggleChat}
             size="lg"
             aria-label="Fale com o RedData (Beta)"
-            className="relative rounded-full w-16 h-16 bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all duration-300 animate-pulse p-0 overflow-hidden group"
+            className="relative rounded-full w-14 h-14 bg-transparent hover:bg-transparent shadow-lg hover:shadow-xl transition-all duration-300 p-0 overflow-visible group border-0"
             style={{
               animation: 'pulse 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
             }}
           >
             <img 
-              src={reddataLogo} 
-              alt="RedData" 
-              className="w-10 h-10 object-contain filter brightness-0 invert"
+              src={reddataChatIcon} 
+              alt="RedData Chat" 
+              className="w-14 h-14 object-contain"
+              style={{
+                filter: 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1))'
+              }}
             />
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
           </Button>
         )}
         
@@ -277,7 +279,7 @@ export const ReddataChatWidget = () => {
             <CardHeader className="bg-gradient-to-r from-primary to-primary/80 text-white pb-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <img src={reddataLogo} alt="RedData" className="w-8 h-8 object-contain filter brightness-0 invert" />
+                  <img src={reddataChatIcon} alt="RedData" className="w-8 h-8 object-contain" />
                   <div>
                     <CardTitle className="text-lg">RedData Chat</CardTitle>
                     <CardDescription className="text-white/80 text-xs">Beta</CardDescription>
