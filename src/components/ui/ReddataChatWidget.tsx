@@ -251,7 +251,7 @@ export const ReddataChatWidget = () => {
   return (
     <>
       {/* Widget Button */}
-      <div className="fixed bottom-[90px] right-6 z-[9999]">
+      <div className="fixed bottom-6 right-6 z-[9999]">
         {!isOpen && (
           <Button
             onClick={toggleChat}
