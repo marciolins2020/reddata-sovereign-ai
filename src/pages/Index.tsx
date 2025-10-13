@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { Header } from "@/components/sections/Header";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { StatsSection } from "@/components/sections/StatsSection";
+import { OnboardingTour } from "@/components/ui/OnboardingTour";
 
 // Lazy load all below-the-fold sections to reduce initial bundle
 const PlatformCapabilitiesSection = lazy(() => import("@/components/sections/PlatformCapabilitiesSection").then(m => ({ default: m.PlatformCapabilitiesSection })));
@@ -25,6 +26,7 @@ const Index = () => {
   return (
     <main className="min-h-screen">
       <Header />
+      <OnboardingTour />
       <HeroSection />
       <StatsSection />
       <Suspense fallback={<div className="py-20" />}>
