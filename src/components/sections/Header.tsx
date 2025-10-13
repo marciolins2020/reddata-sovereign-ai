@@ -291,16 +291,16 @@ export const Header = () => {
         </div>
       </header>
 
-      {/* Botão Voltar ao Topo */}
-      {showScrollTop && (
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-[90] p-3 bg-primary text-white rounded-full shadow-lg hover:bg-primary/90 transition-all duration-300 hover:scale-110 animate-fade-in"
-          aria-label="Voltar ao topo"
-        >
-          <ChevronUp className="h-6 w-6" />
-        </button>
-      )}
+    {/* Botão Voltar ao Topo */}
+    {showScrollTop && (
+      <button
+        onClick={scrollToTop}
+        className="fixed bottom-6 right-6 z-[90] p-3 bg-primary text-white rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:scale-110 animate-fade-in"
+        aria-label="Voltar ao topo"
+      >
+        <ChevronUp className="h-6 w-6" />
+      </button>
+    )}
     </>
   );
 };
