@@ -313,8 +313,8 @@ export const ReddataChatWidget = () => {
         
         {/* Chat Panel */}
         {isOpen && (
-          <Card className="w-[380px] h-[600px] shadow-2xl border-2 animate-in slide-in-from-bottom-2 flex flex-col">
-            <CardHeader className="bg-gradient-to-r from-primary to-primary/80 text-white pb-3">
+          <Card className="fixed inset-0 md:relative md:w-[380px] md:h-[600px] w-full h-full md:shadow-2xl md:border-2 border-0 animate-in slide-in-from-bottom-2 md:slide-in-from-bottom-2 flex flex-col md:rounded-lg rounded-none">
+            <CardHeader className="bg-gradient-to-r from-primary to-primary/80 text-white pb-3 flex-shrink-0">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <img src={reddataChatIcon} alt="RedData" className="w-8 h-8 object-contain" />
@@ -335,26 +335,26 @@ export const ReddataChatWidget = () => {
               </div>
             </CardHeader>
             
-            <CardContent className="flex-1 flex flex-col p-0 overflow-hidden">
+            <CardContent className="flex-1 flex flex-col p-0 overflow-hidden min-h-0">
               {isLimitReached && (
-                <Alert className="m-4 mb-2 border-orange-500 bg-orange-50 dark:bg-orange-950">
+                <Alert className="m-2 md:m-4 mb-2 border-orange-500 bg-orange-50 dark:bg-orange-950 flex-shrink-0">
                   <AlertCircle className="h-4 w-4 text-orange-600" />
-                  <AlertDescription className="text-sm text-orange-800 dark:text-orange-200">
+                  <AlertDescription className="text-xs md:text-sm text-orange-800 dark:text-orange-200">
                     Limite gratuito diário atingido. Para continuar, entre em contato com a RedMaxx.
                   </AlertDescription>
                 </Alert>
               )}
 
               {error && (
-                <Alert className="m-4 mb-2 border-red-500 bg-red-50 dark:bg-red-950">
+                <Alert className="m-2 md:m-4 mb-2 border-red-500 bg-red-50 dark:bg-red-950 flex-shrink-0">
                   <AlertCircle className="h-4 w-4 text-red-600" />
-                  <AlertDescription className="text-sm text-red-800 dark:text-red-200">
+                  <AlertDescription className="text-xs md:text-sm text-red-800 dark:text-red-200">
                     {error}
                   </AlertDescription>
                 </Alert>
               )}
 
-              <ScrollArea className="flex-1 p-4" ref={scrollRef}>
+              <ScrollArea className="flex-1 p-2 md:p-4 min-h-0" ref={scrollRef}>
                 {messages.length === 0 ? (
                   <div className="text-center text-muted-foreground py-12 text-sm">
                     <MessageCircle className="h-12 w-12 mx-auto mb-3 opacity-20" />
@@ -393,7 +393,7 @@ export const ReddataChatWidget = () => {
                 )}
               </ScrollArea>
 
-              <div className="border-t p-4 space-y-2">
+              <div className="border-t p-2 md:p-4 space-y-2 flex-shrink-0 bg-background">
                 <div className="flex gap-2">
                   <Textarea
                     value={input}
@@ -403,7 +403,7 @@ export const ReddataChatWidget = () => {
                     onDrop={handleDrop}
                     onDragOver={handleDragOver}
                     placeholder="Digite sua pergunta…"
-                    className="min-h-[60px] max-h-[120px] resize-none"
+                    className="min-h-[50px] md:min-h-[60px] max-h-[100px] md:max-h-[120px] resize-none text-sm"
                     disabled={isLoading || isLimitReached}
                     aria-label="Digite sua mensagem"
                   />
@@ -411,13 +411,13 @@ export const ReddataChatWidget = () => {
                     onClick={sendMessage} 
                     disabled={!input.trim() || isLoading || isLimitReached}
                     size="icon"
-                    className="h-[60px] w-[60px] flex-shrink-0"
+                    className="h-[50px] w-[50px] md:h-[60px] md:w-[60px] flex-shrink-0"
                     aria-label="Enviar mensagem"
                   >
                     <Send className="h-4 w-4" />
                   </Button>
                 </div>
-                <p className="text-xs text-muted-foreground text-center">
+                <p className="text-[10px] md:text-xs text-muted-foreground text-center leading-tight">
                   As conversas podem ser registradas para melhoria do serviço. Não compartilhe dados sensíveis.
                 </p>
               </div>
