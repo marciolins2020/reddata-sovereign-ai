@@ -34,37 +34,6 @@ const timelineData = {
 const Timeline = () => {
   const [selectedItem, setSelectedItem] = useState<TimelineItem | null>(null);
 
-  const yearToCol = (year: string): number => {
-    const map: Record<string, number> = {
-      "2017": 1, "2018": 3, "2019": 5, "2020": 7,
-      "2021": 8, "2023": 10, "2024–2025": 12, "2024": 11, "2025": 12
-    };
-    return map[year] || 12;
-  };
-
-  const TimelineNode = ({ item, color }: { item: TimelineItem; color: string }) => {
-    const col = yearToCol(item.year);
-    
-    return (
-      <div 
-        className="col-span-2 relative group animate-fade-in"
-        style={{ gridColumn: `${col} / span 2` }}
-      >
-        <button
-          onClick={() => setSelectedItem(item)}
-          className="mx-auto block h-4 w-4 rounded-full ring-2 ring-white shadow-md hover:scale-125 transition-transform focus:outline-none focus:ring-4 focus:ring-primary/20"
-          style={{ backgroundColor: color }}
-          title={`${item.year} – ${item.title}`}
-          aria-label={`${item.year} – ${item.title}`}
-        />
-        <div className="mt-4 text-center">
-          <div className="text-sm font-semibold">{item.year}</div>
-          <div className="text-sm text-muted-foreground">{item.title}</div>
-        </div>
-      </div>
-    );
-  };
-
   const handleExportPNG = async () => {
     const element = document.getElementById('timeline-wrapper');
     if (element) {
@@ -77,50 +46,72 @@ const Timeline = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-background">
       <Header />
       
-      <main className="flex-1 bg-background">
-        <div className="max-w-7xl mx-auto px-6 py-16">
+      <main className="flex-1 pt-24 md:pt-32 pb-16">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <header className="mb-12">
-            <h1 className="text-3xl md:text-5xl font-bold mb-4">
+            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 text-foreground">
               Linha do Tempo – RedData × LLMs (2017–2025)
             </h1>
-            <p className="text-muted-foreground text-lg mb-6">
+            <p className="text-muted-foreground text-base md:text-lg mb-6 max-w-3xl">
               Evolução do RedData (acima) em paralelo aos marcos das LLMs open source (abaixo).
             </p>
             <div className="flex flex-wrap gap-3">
-              <Button onClick={handleExportPNG} className="bg-primary hover:bg-primary/90">
+              <Button onClick={handleExportPNG} size="lg">
                 Baixar PNG
               </Button>
-              <Button onClick={() => window.print()} variant="outline">
+              <Button onClick={() => window.print()} variant="outline" size="lg">
                 Imprimir PDF
               </Button>
             </div>
           </header>
 
-          <div id="timeline-wrapper" className="relative overflow-x-auto">
-            <div className="min-w-[1100px]">
+          <div id="timeline-wrapper" className="relative overflow-x-auto py-8 px-2">
+            <div className="min-w-[1400px]">
               {/* Track RedData */}
-              <section aria-label="Linha do tempo RedData" className="relative mb-16">
-                <div className="h-px bg-border translate-y-6"></div>
-                <div className="relative grid grid-cols-12 gap-4 mt-0">
+              <section aria-label="Linha do tempo RedData" className="relative mb-32">
+                <div className="absolute left-0 right-0 h-[2px] bg-primary/20 top-2"></div>
+                <div className="relative flex justify-between items-start pt-6 pb-8">
                   {timelineData.reddata.map((item, idx) => (
-                    <TimelineNode key={idx} item={item} color="#E2211C" />
+                    <div key={idx} className="flex flex-col items-center min-w-[140px] px-2">
+                      <button
+                        onClick={() => setSelectedItem(item)}
+                        className="h-5 w-5 rounded-full bg-primary ring-4 ring-background shadow-lg hover:scale-125 transition-all focus:outline-none focus:ring-4 focus:ring-primary/30 relative z-10"
+                        title={`${item.year} – ${item.title}`}
+                        aria-label={`${item.year} – ${item.title}`}
+                      />
+                      <div className="mt-6 text-center">
+                        <div className="text-lg font-bold text-foreground mb-1">{item.year}</div>
+                        <div className="text-sm text-muted-foreground leading-tight">{item.title}</div>
+                      </div>
+                    </div>
                   ))}
                 </div>
-                <div className="mt-2 text-sm font-semibold text-primary">RedData</div>
+                <div className="text-base font-bold text-primary">RedData</div>
               </section>
 
               {/* Track LLMs */}
-              <section aria-label="Linha do tempo LLMs" className="relative">
-                <div className="h-px bg-border translate-y-6"></div>
-                <div className="relative grid grid-cols-12 gap-4 mt-0">
+              <section aria-label="Linha do tempo LLMs" className="relative mb-8">
+                <div className="absolute left-0 right-0 h-[2px] bg-muted top-2"></div>
+                <div className="relative flex justify-between items-start pt-6 pb-8">
                   {timelineData.llms.map((item, idx) => (
-                    <TimelineNode key={idx} item={item} color="#9CA3AF" />
+                    <div key={idx} className="flex flex-col items-center min-w-[140px] px-2">
+                      <button
+                        onClick={() => setSelectedItem(item)}
+                        className="h-5 w-5 rounded-full bg-muted-foreground ring-4 ring-background shadow-lg hover:scale-125 transition-all focus:outline-none focus:ring-4 focus:ring-muted-foreground/30 relative z-10"
+                        title={`${item.year} – ${item.title}`}
+                        aria-label={`${item.year} – ${item.title}`}
+                      />
+                      <div className="mt-6 text-center">
+                        <div className="text-lg font-bold text-foreground mb-1">{item.year}</div>
+                        <div className="text-sm text-muted-foreground leading-tight">{item.title}</div>
+                      </div>
+                    </div>
                   ))}
                 </div>
-                <div className="mt-2 text-sm font-semibold text-muted-foreground">LLMs Open Source</div>
+                <div className="text-base font-bold text-muted-foreground">LLMs Open Source</div>
               </section>
             </div>
           </div>
