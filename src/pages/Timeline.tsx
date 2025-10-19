@@ -50,12 +50,12 @@ const Timeline = () => {
       <Header />
       
       <main className="flex-1 pt-24 md:pt-32 pb-16">
-        <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <header className="mb-12">
-            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 text-foreground">
+        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+          <div className="mb-12">
+            <h1 className="text-2xl md:text-4xl font-bold mb-4">
               Linha do Tempo – RedData × LLMs (2017–2025)
             </h1>
-            <p className="text-muted-foreground text-base md:text-lg mb-6 max-w-3xl">
+            <p className="text-muted-foreground text-base md:text-lg mb-6">
               Evolução do RedData (acima) em paralelo aos marcos das LLMs open source (abaixo).
             </p>
             <div className="flex flex-wrap gap-3">
@@ -66,53 +66,55 @@ const Timeline = () => {
                 Imprimir PDF
               </Button>
             </div>
-          </header>
+          </div>
 
-          <div id="timeline-wrapper" className="relative overflow-x-auto py-8 px-2">
-            <div className="min-w-[1400px]">
-              {/* Track RedData */}
-              <section aria-label="Linha do tempo RedData" className="relative mb-32">
-                <div className="absolute left-0 right-0 h-[2px] bg-primary/20 top-2"></div>
-                <div className="relative flex justify-between items-start pt-6 pb-8">
+          <div id="timeline-wrapper" className="bg-background py-8">
+            {/* RedData Timeline */}
+            <div className="mb-24">
+              <div className="text-lg font-bold text-primary mb-4">RedData</div>
+              <div className="relative">
+                <div className="absolute left-0 right-0 h-0.5 bg-primary/20 top-3"></div>
+                <div className="grid grid-cols-1 md:grid-cols-7 gap-8 relative">
                   {timelineData.reddata.map((item, idx) => (
-                    <div key={idx} className="flex flex-col items-center min-w-[140px] px-2">
+                    <div key={idx} className="flex flex-col items-center text-center">
                       <button
                         onClick={() => setSelectedItem(item)}
-                        className="h-5 w-5 rounded-full bg-primary ring-4 ring-background shadow-lg hover:scale-125 transition-all focus:outline-none focus:ring-4 focus:ring-primary/30 relative z-10"
+                        className="h-6 w-6 rounded-full bg-primary shadow-lg hover:scale-110 transition-transform focus:outline-none focus:ring-4 focus:ring-primary/30 relative z-10 mb-6"
                         title={`${item.year} – ${item.title}`}
                         aria-label={`${item.year} – ${item.title}`}
                       />
-                      <div className="mt-6 text-center">
-                        <div className="text-lg font-bold text-foreground mb-1">{item.year}</div>
-                        <div className="text-sm text-muted-foreground leading-tight">{item.title}</div>
+                      <div className="space-y-2">
+                        <div className="text-base font-bold">{item.year}</div>
+                        <div className="text-sm text-muted-foreground">{item.title}</div>
                       </div>
                     </div>
                   ))}
                 </div>
-                <div className="text-base font-bold text-primary">RedData</div>
-              </section>
+              </div>
+            </div>
 
-              {/* Track LLMs */}
-              <section aria-label="Linha do tempo LLMs" className="relative mb-8">
-                <div className="absolute left-0 right-0 h-[2px] bg-muted top-2"></div>
-                <div className="relative flex justify-between items-start pt-6 pb-8">
+            {/* LLMs Timeline */}
+            <div>
+              <div className="text-lg font-bold text-muted-foreground mb-4">LLMs Open Source</div>
+              <div className="relative">
+                <div className="absolute left-0 right-0 h-0.5 bg-muted top-3"></div>
+                <div className="grid grid-cols-1 md:grid-cols-6 gap-8 relative">
                   {timelineData.llms.map((item, idx) => (
-                    <div key={idx} className="flex flex-col items-center min-w-[140px] px-2">
+                    <div key={idx} className="flex flex-col items-center text-center">
                       <button
                         onClick={() => setSelectedItem(item)}
-                        className="h-5 w-5 rounded-full bg-muted-foreground ring-4 ring-background shadow-lg hover:scale-125 transition-all focus:outline-none focus:ring-4 focus:ring-muted-foreground/30 relative z-10"
+                        className="h-6 w-6 rounded-full bg-muted-foreground shadow-lg hover:scale-110 transition-transform focus:outline-none focus:ring-4 focus:ring-muted-foreground/30 relative z-10 mb-6"
                         title={`${item.year} – ${item.title}`}
                         aria-label={`${item.year} – ${item.title}`}
                       />
-                      <div className="mt-6 text-center">
-                        <div className="text-lg font-bold text-foreground mb-1">{item.year}</div>
-                        <div className="text-sm text-muted-foreground leading-tight">{item.title}</div>
+                      <div className="space-y-2">
+                        <div className="text-base font-bold">{item.year}</div>
+                        <div className="text-sm text-muted-foreground">{item.title}</div>
                       </div>
                     </div>
                   ))}
                 </div>
-                <div className="text-base font-bold text-muted-foreground">LLMs Open Source</div>
-              </section>
+              </div>
             </div>
           </div>
         </div>
@@ -127,7 +129,7 @@ const Timeline = () => {
             <DialogTitle className="text-xl">{selectedItem?.title}</DialogTitle>
             <p className="text-sm text-muted-foreground mt-1">{selectedItem?.year}</p>
           </DialogHeader>
-          <p className="text-foreground leading-relaxed mt-4">
+          <p className="leading-relaxed mt-4">
             {selectedItem?.detail}
           </p>
         </DialogContent>
