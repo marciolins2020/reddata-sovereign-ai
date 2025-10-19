@@ -5,6 +5,7 @@ import { Header } from "@/components/sections/Header";
 import { Footer } from "@/components/sections/Footer";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import html2canvas from "html2canvas";
+import reddataLogo from "@/assets/reddata-logo-timeline.png";
 
 interface TimelineItem {
   year: string;
@@ -216,6 +217,15 @@ const Timeline = () => {
 
           <div id="timeline-wrapper" className="relative overflow-x-auto">
             <div className="min-w-[1200px] py-8">
+              {/* Logo RedData */}
+              <div className="flex justify-center mb-12">
+                <img 
+                  src={reddataLogo} 
+                  alt="RedData Logo" 
+                  className="h-16 md:h-20 w-auto opacity-90"
+                />
+              </div>
+
               {/* Track RedData */}
               <section aria-label="Linha do tempo RedData" className="relative mb-16">
                 <div className="h-px bg-border translate-y-2"></div>
