@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Header } from "@/components/sections/Header";
 import { Footer } from "@/components/sections/Footer";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import html2canvas from "html2canvas";
 
 interface TimelineItem {
@@ -150,6 +151,8 @@ const TimelineNode = ({ item, color }: { item: TimelineItem; color: string }) =>
 
 const Timeline = () => {
   const [selectedItem, setSelectedItem] = useState<TimelineItem | null>(null);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [currentTrack, setCurrentTrack] = useState<'reddata' | 'llms'>('reddata');
 
   const handleExportPNG = async () => {
     const element = document.getElementById('timeline-wrapper');
@@ -161,6 +164,32 @@ const Timeline = () => {
       link.click();
     }
   };
+
+  const handleItemClick = (item: TimelineItem, track: 'reddata' | 'llms', index: number) => {
+    setSelectedItem(item);
+    setCurrentIndex(index);
+    setCurrentTrack(track);
+  };
+
+  const handlePrevious = () => {
+    if (currentIndex > 0) {
+      const newIndex = currentIndex - 1;
+      setCurrentIndex(newIndex);
+      setSelectedItem(timelineData[currentTrack][newIndex]);
+    }
+  };
+
+  const handleNext = () => {
+    const maxIndex = timelineData[currentTrack].length - 1;
+    if (currentIndex < maxIndex) {
+      const newIndex = currentIndex + 1;
+      setCurrentIndex(newIndex);
+      setSelectedItem(timelineData[currentTrack][newIndex]);
+    }
+  };
+
+  const canGoPrevious = currentIndex > 0;
+  const canGoNext = currentIndex < timelineData[currentTrack].length - 1;
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -198,7 +227,7 @@ const Timeline = () => {
                         key={idx}
                         className="flex flex-col items-center text-center"
                         style={{ gridColumn: `${col} / span 2` }}
-                        onClick={() => setSelectedItem(item)}
+                        onClick={() => handleItemClick(item, 'reddata', idx)}
                       >
                         <TimelineNode item={item} color="hsl(var(--primary))" />
                         <div className="mt-4 space-y-2">
@@ -223,7 +252,7 @@ const Timeline = () => {
                         key={idx}
                         className="flex flex-col items-center text-center"
                         style={{ gridColumn: `${col} / span 2` }}
-                        onClick={() => setSelectedItem(item)}
+                        onClick={() => handleItemClick(item, 'llms', idx)}
                       >
                         <TimelineNode item={item} color="hsl(var(--muted-foreground))" />
                         <div className="mt-4 space-y-2">
@@ -289,12 +318,37 @@ const Timeline = () => {
         <DialogContent className="max-w-2xl">
           <DialogHeader>
             <DialogTitle className="text-xl">{selectedItem?.title}</DialogTitle>
-            <p className="text-sm text-muted-foreground mt-1">{selectedItem?.year}</p>
+            <p className="text-2xl font-bold text-[#E2211C] mt-2">{selectedItem?.year}</p>
           </DialogHeader>
           <div 
             className="prose prose-sm max-w-none leading-relaxed mt-4 text-foreground"
             dangerouslySetInnerHTML={{ __html: selectedItem?.detailHtml || '' }}
           />
+          <div className="flex items-center justify-between mt-6 pt-4 border-t border-border">
+            <Button
+              onClick={handlePrevious}
+              disabled={!canGoPrevious}
+              variant="outline"
+              size="lg"
+              className="gap-2"
+            >
+              <ChevronLeft className="h-5 w-5" />
+              Anterior
+            </Button>
+            <span className="text-sm text-muted-foreground">
+              {currentIndex + 1} de {timelineData[currentTrack].length}
+            </span>
+            <Button
+              onClick={handleNext}
+              disabled={!canGoNext}
+              variant="outline"
+              size="lg"
+              className="gap-2"
+            >
+              Próximo
+              <ChevronRight className="h-5 w-5" />
+            </Button>
+          </div>
         </DialogContent>
       </Dialog>
     </div>
