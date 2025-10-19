@@ -217,6 +217,15 @@ const Timeline = () => {
 
           <div id="timeline-wrapper" className="relative overflow-x-auto">
             <div className="min-w-[1200px] py-8">
+              {/* Logo RedData */}
+              <div className="flex justify-center mb-12">
+                <img 
+                  src={reddataLogo} 
+                  alt="RedData Logo" 
+                  className="h-16 md:h-20 w-auto opacity-90"
+                />
+              </div>
+
               {/* Track RedData */}
               <section aria-label="Linha do tempo RedData" className="relative mb-16">
                 <div className="h-px bg-border translate-y-2"></div>
@@ -241,31 +250,6 @@ const Timeline = () => {
                 </div>
                 <div className="mt-2 text-sm font-semibold text-primary">RedData</div>
               </section>
-
-              {/* Track LLMs */}
-              <section aria-label="Linha do tempo LLMs" className="relative">
-                <div className="h-px bg-border translate-y-2"></div>
-                <div className="relative grid grid-cols-12 gap-4">
-                  {timelineData.llms.map((item, idx) => {
-                    const col = yearToCol(item.year);
-                    return (
-                      <div
-                        key={idx}
-                        className="flex flex-col items-center text-center"
-                        style={{ gridColumn: `${col} / span 2` }}
-                        onClick={() => handleItemClick(item, 'llms', idx)}
-                      >
-                        <TimelineNode item={item} color="hsl(var(--muted-foreground))" />
-                        <div className="mt-4 space-y-2">
-                          <div className="text-sm font-semibold">{item.year}</div>
-                          <div className="text-sm text-muted-foreground">{item.title}</div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className="mt-2 text-sm font-semibold text-muted-foreground">LLMs Open Source</div>
-              </section>
             </div>
           </div>
 
@@ -274,28 +258,10 @@ const Timeline = () => {
             <h2 className="text-xl md:text-2xl font-bold mb-6">Resumo Expandido (Conteúdo Completo)</h2>
             
             {/* RedData Section */}
-            <div className="mb-10">
+            <div>
               <h3 className="text-lg font-semibold text-primary mb-4">RedData</h3>
               <div className="space-y-6">
                 {timelineData.reddata.map((item, idx) => (
-                  <article key={idx} className="border border-border rounded-xl p-5 shadow-sm bg-card">
-                    <h4 className="text-base md:text-lg font-bold mb-3">
-                      {item.year} – {item.title}
-                    </h4>
-                    <div 
-                      className="prose prose-sm max-w-none text-foreground"
-                      dangerouslySetInnerHTML={{ __html: item.detailHtml }}
-                    />
-                  </article>
-                ))}
-              </div>
-            </div>
-
-            {/* LLMs Section */}
-            <div>
-              <h3 className="text-lg font-semibold text-muted-foreground mb-4">LLMs Open Source</h3>
-              <div className="space-y-6">
-                {timelineData.llms.map((item, idx) => (
                   <article key={idx} className="border border-border rounded-xl p-5 shadow-sm bg-card">
                     <h4 className="text-base md:text-lg font-bold mb-3">
                       {item.year} – {item.title}
