@@ -166,6 +166,12 @@ export const Header = () => {
               >
                 {menuItems[5].label}
               </button>
+              
+              {/* Trajetória Link */}
+              <Link to="/trajetoria" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-accent inline-block">
+                Trajetória
+              </Link>
+              
               <button
                 onClick={() => scrollToSection(menuItems[6].href)}
                 className={`px-4 py-2 text-sm font-medium transition-all rounded-md relative ${
@@ -270,6 +276,16 @@ export const Header = () => {
                 >
                   {menuItems[5].label}
                 </button>
+                
+                {/* Mobile Trajetória Link */}
+                <Link
+                  to="/trajetoria"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block px-4 py-3 text-left text-sm font-medium text-foreground hover:text-primary hover:bg-accent transition-colors rounded-md mx-4"
+                >
+                  Trajetória
+                </Link>
+                
                 <button
                   onClick={() => scrollToSection(menuItems[6].href)}
                   className={`px-4 py-3 text-left text-sm font-medium transition-colors rounded-md ${

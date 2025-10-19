@@ -21,6 +21,7 @@ const Dashboard = lazy(() => import("./pages/Dashboard"));
 const DashboardView = lazy(() => import("./pages/DashboardView"));
 const PublicDashboard = lazy(() => import("./pages/PublicDashboard"));
 const Audit = lazy(() => import("./pages/Audit"));
+const Timeline = lazy(() => import("./pages/Timeline"));
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,7 @@ const App = () => (
                 <Route path="/casos-uso/varejo" element={<CasosUsoVarejo />} />
                 <Route path="/modulos" element={<Modulos />} />
                 <Route path="/audit" element={<Audit />} />
+                <Route path="/trajetoria" element={<Timeline />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
