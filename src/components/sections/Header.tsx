@@ -27,6 +27,7 @@ export const Header = () => {
     { label: t('header.solutions'), href: "#casos-uso", id: "casos-uso" },
     { label: "Dashboard", href: "#dashboard-demo", id: "dashboard-demo" },
     { label: t('header.faq'), href: "#faq", id: "faq" },
+    { label: "Materiais", href: "#ebook", id: "ebook" },
     { label: t('header.contact'), href: "#contact-form", id: "contato" },
   ];
 
@@ -165,6 +166,16 @@ export const Header = () => {
               >
                 {menuItems[5].label}
               </button>
+              <button
+                onClick={() => scrollToSection(menuItems[6].href)}
+                className={`px-4 py-2 text-sm font-medium transition-all rounded-md relative ${
+                  isActiveLink(menuItems[6].id)
+                    ? "text-primary after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-8 after:h-0.5 after:bg-primary"
+                    : "text-foreground hover:text-primary hover:bg-accent"
+                }`}
+              >
+                {menuItems[6].label}
+              </button>
             </nav>
 
             {/* Language Switcher & CTA Button Desktop */}
@@ -258,6 +269,16 @@ export const Header = () => {
                   }`}
                 >
                   {menuItems[5].label}
+                </button>
+                <button
+                  onClick={() => scrollToSection(menuItems[6].href)}
+                  className={`px-4 py-3 text-left text-sm font-medium transition-colors rounded-md ${
+                    isActiveLink(menuItems[6].id)
+                      ? "text-primary bg-accent border-l-4 border-primary"
+                      : "text-foreground hover:text-primary hover:bg-accent"
+                  }`}
+                >
+                  {menuItems[6].label}
                 </button>
                 
                 <div className="px-4 pt-2 space-y-2">

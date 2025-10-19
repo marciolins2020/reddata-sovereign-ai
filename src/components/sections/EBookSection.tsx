@@ -42,7 +42,7 @@ export const EBookSection = () => {
   };
 
   return (
-    <section className="relative py-24 overflow-hidden">
+    <section id="ebook" className="relative py-24 overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-primary/10" />
       
