@@ -19,6 +19,7 @@ const TestimonialsSection = lazy(() => import("@/components/sections/Testimonial
 const ComparisonSection = lazy(() => import("@/components/sections/ComparisonSection").then(m => ({ default: m.ComparisonSection })));
 const DashboardDemoSection = lazy(() => import("@/components/sections/DashboardDemoSection").then(m => ({ default: m.DashboardDemoSection })));
 const FAQSection = lazy(() => import("@/components/sections/FAQSection").then(m => ({ default: m.FAQSection })));
+const EBookSection = lazy(() => import("@/components/sections/EBookSection").then(m => ({ default: m.EBookSection })));
 const ContactFormSection = lazy(() => import("@/components/sections/ContactFormSection").then(m => ({ default: m.ContactFormSection })));
 const Footer = lazy(() => import("@/components/sections/Footer").then(m => ({ default: m.Footer })));
 
@@ -44,6 +45,7 @@ const Index = () => {
         <ComparisonSection />
         <TestimonialsSection />
         <FAQSection />
+        <EBookSection />
         <ContactFormSection />
         <Footer />
       </Suspense>
