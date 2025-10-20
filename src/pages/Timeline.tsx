@@ -184,9 +184,9 @@ const Timeline = () => {
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
       
-      <main className="flex-1 pt-24 md:pt-32 pb-16">
+      <main className="flex-1 pt-16 md:pt-20 pb-8">
         <div className="container mx-auto px-4 md:px-6 max-w-7xl">
-          <div className="mb-12">
+          <div className="mb-8">
             <h1 className="text-2xl md:text-4xl font-bold mb-4">
               Linha do Tempo – RedData × LLMs (2017–2025)
             </h1>
@@ -196,9 +196,9 @@ const Timeline = () => {
           </div>
 
           <div id="timeline-wrapper" className="relative overflow-x-auto">
-            <div className="min-w-[1200px] py-8">
+            <div className="min-w-[1200px] py-4">
               {/* Logo RedData */}
-              <div className="flex justify-center mb-12">
+              <div className="flex justify-center mb-6">
                 <img 
                   src={reddataLogo} 
                   alt="RedData Logo" 
@@ -207,7 +207,7 @@ const Timeline = () => {
               </div>
 
               {/* Track RedData */}
-              <section aria-label="Linha do tempo RedData" className="relative mb-16">
+              <section aria-label="Linha do tempo RedData" className="relative mb-8">
                 <div className="h-px bg-border translate-y-2"></div>
                 <div className="relative grid grid-cols-12 gap-4">
                   {timelineData.reddata.map((item, idx) => {
@@ -228,7 +228,6 @@ const Timeline = () => {
                     );
                   })}
                 </div>
-                <div className="mt-2 text-sm font-semibold text-primary">RedData</div>
               </section>
             </div>
           </div>
