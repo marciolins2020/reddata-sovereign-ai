@@ -63,7 +63,7 @@ const timelineData = {
       detailHtml: `<ul class="list-disc pl-5 space-y-1">
   <li>Primeiro contrato público com órgãos pioneiros na adoção de IA nacional.</li>
   <li>RedData reconhecido como <strong>plataforma 100% proprietária e soberana</strong>.</li>
-  <li><strong>EleutherAI</strong> lança <strong>GPT-Neo (2021)</strong> e <strong>GPT-J (jun/2021)</strong>, marcos open source compatíveis com GPT-3, inspirando estudos de IA generativa na RedMaxx.</li>
+  <li><strong>RedMaxx</strong> inicia testes, estudos, customizações e experimentos com os modelos <strong>GPT-Neo (2021)</strong> e <strong>GPT-J (jun/2021)</strong> da <strong>EleutherAI</strong>, marcos open source compatíveis com GPT-3.</li>
   <li>Início de <strong>experimentos internos</strong> com modelos de linguagem aplicados a dados governamentais.</li>
 </ul>`
     },
