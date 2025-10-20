@@ -3,6 +3,7 @@ export default {
     mainNav: "Principal",
     howItWorks: "Como Funciona",
     solutions: "Aplicações",
+    trajectory: "Trajetória",
     cases: "Casos de Uso",
     modules: "Módulos",
     faq: "FAQ",

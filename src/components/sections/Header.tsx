@@ -128,7 +128,7 @@ export const Header = () => {
               
               {/* Trajetória Link */}
               <Link to="/trajetoria" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-accent inline-block">
-                Trajetória
+                {t('header.trajectory')}
               </Link>
               
               <button
@@ -262,7 +262,7 @@ export const Header = () => {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="block px-4 py-3 text-left text-sm font-medium text-foreground hover:text-primary hover:bg-accent transition-colors rounded-md mx-4"
                 >
-                  Trajetória
+                  {t('header.trajectory')}
                 </Link>
                 
                 <button
