@@ -36,28 +36,17 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         // Silently fail
       }
 
-      // Detect country by IP
+      // Fallback to browser language
+      const browserLang = navigator.language.toLowerCase();
+      const fallbackLang = browserLang.startsWith('pt') ? 'pt' : 'en';
+      setLanguageState(fallbackLang);
+      setIsLanguageSet(true);
+      
+      // Store the detected language
       try {
-        const response = await fetch('https://ipapi.co/json/');
-        const data = await response.json();
-        
-        // If country is Brazil, use Portuguese, otherwise English
-        const detectedLang = data.country_code === 'BR' ? 'pt' : 'en';
-        setLanguageState(detectedLang);
-        setIsLanguageSet(true);
-        
-        // Store the detected language
-        try {
-          localStorage?.setItem('language', detectedLang);
-        } catch {
-          // Silently fail
-        }
-      } catch (error) {
-        // Fallback to browser language if IP detection fails
-        const browserLang = navigator.language.toLowerCase();
-        const fallbackLang = browserLang.startsWith('pt') ? 'pt' : 'en';
-        setLanguageState(fallbackLang);
-        setIsLanguageSet(true);
+        localStorage?.setItem('language', fallbackLang);
+      } catch {
+        // Silently fail
       }
     };
 
