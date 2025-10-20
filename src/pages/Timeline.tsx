@@ -4,7 +4,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Header } from "@/components/sections/Header";
 import { Footer } from "@/components/sections/Footer";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import html2canvas from "html2canvas";
 import reddataLogo from "@/assets/reddata-logo-timeline.png";
 
 interface TimelineItem {
@@ -155,17 +154,6 @@ const Timeline = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [currentTrack, setCurrentTrack] = useState<'reddata' | 'llms'>('reddata');
 
-  const handleExportPNG = async () => {
-    const element = document.getElementById('timeline-wrapper');
-    if (element) {
-      const canvas = await html2canvas(element, { scale: 2, backgroundColor: "#FFFFFF" });
-      const link = document.createElement("a");
-      link.download = "linha-do-tempo-reddata-llms.png";
-      link.href = canvas.toDataURL("image/png");
-      link.click();
-    }
-  };
-
   const handleItemClick = (item: TimelineItem, track: 'reddata' | 'llms', index: number) => {
     setSelectedItem(item);
     setCurrentIndex(index);
@@ -202,17 +190,9 @@ const Timeline = () => {
             <h1 className="text-2xl md:text-4xl font-bold mb-4">
               Linha do Tempo – RedData × LLMs (2017–2025)
             </h1>
-            <p className="text-muted-foreground text-base md:text-lg mb-6">
+            <p className="text-muted-foreground text-base md:text-lg">
               Evolução do RedData (acima) em paralelo aos marcos das LLMs open source (abaixo). Ao clicar nos pontos, abre um resumo. Abaixo, o conteúdo completo já expandido.
             </p>
-            <div className="flex flex-wrap gap-3">
-              <Button onClick={handleExportPNG} size="lg">
-                Baixar PNG
-              </Button>
-              <Button onClick={() => window.print()} variant="outline" size="lg">
-                Imprimir PDF
-              </Button>
-            </div>
           </div>
 
           <div id="timeline-wrapper" className="relative overflow-x-auto">
