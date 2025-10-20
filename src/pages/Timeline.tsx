@@ -241,7 +241,7 @@ const Timeline = () => {
                       >
                         <TimelineNode item={item} color="hsl(var(--primary))" />
                         <div className="mt-4 space-y-2">
-                          <div className="text-sm font-semibold">{item.year}</div>
+                          <div className="text-base font-bold text-primary">{item.year}</div>
                           <div className="text-sm text-muted-foreground">{item.title}</div>
                         </div>
                       </div>
