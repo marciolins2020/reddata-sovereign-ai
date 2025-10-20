@@ -5,6 +5,15 @@ import { Header } from "@/components/sections/Header";
 import { Footer } from "@/components/sections/Footer";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import reddataLogo from "@/assets/reddata-logo-timeline.png";
+import DOMPurify from "dompurify";
+
+// Sanitize HTML to prevent XSS attacks
+const sanitizeHtml = (html: string): string => {
+  return DOMPurify.sanitize(html, {
+    ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 'ul', 'ol', 'li', 'a', 'span', 'div'],
+    ALLOWED_ATTR: ['href', 'target', 'rel', 'class']
+  });
+};
 
 interface TimelineItem {
   year: string;
@@ -247,7 +256,7 @@ const Timeline = () => {
                     </h4>
                     <div 
                       className="prose prose-sm max-w-none text-foreground"
-                      dangerouslySetInnerHTML={{ __html: item.detailHtml }}
+                      dangerouslySetInnerHTML={{ __html: sanitizeHtml(item.detailHtml) }}
                     />
                   </article>
                 ))}
@@ -268,7 +277,7 @@ const Timeline = () => {
           </DialogHeader>
           <div 
             className="prose prose-sm max-w-none leading-relaxed mt-4 text-foreground"
-            dangerouslySetInnerHTML={{ __html: selectedItem?.detailHtml || '' }}
+            dangerouslySetInnerHTML={{ __html: sanitizeHtml(selectedItem?.detailHtml || '') }}
           />
           <div className="flex items-center justify-between mt-6 pt-4 border-t border-border">
             <Button
