@@ -54,7 +54,7 @@ const timelineData = {
       detailHtml: `<ul class="list-disc pl-5 space-y-1">
   <li>Lançamento da <strong>versão comercial</strong> do RedData.</li>
   <li>Primeiros projetos em energia, indústria e varejo.</li>
-  <li>Consolidação do modelo <strong>SaaS</strong> e de <strong>dashboards analíticos interativos e I.A generativa</strong>.</li>
+  <li>Consolidação do modelo <strong>SaaS</strong>, dos <strong>dashboards analíticos interativos</strong> e da <strong>IA preditiva baseada em Machine Learning</strong>.</li>
 </ul>`
     },
     {
