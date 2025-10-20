@@ -73,8 +73,8 @@ const timelineData = {
       detailHtml: `<ul class="list-disc pl-5 space-y-1">
   <li>Ampliação de projetos em governos estaduais, municipais e tribunais de contas.</li>
   <li>Introdução de <strong>IA generativa</strong> e <strong>diagnósticos inteligentes</strong>.</li>
-  <li><strong>Meta lança LLaMA (fev/2023)</strong>, catalisando o ecossistema open source.</li>
-  <li><strong>Mistral 7B (out/2023)</strong> e <strong>Mixtral 8×7B (dez/2023)</strong> (Apache 2.0) viabilizam <strong>execução offline</strong> e base do <strong>RedData Appliance</strong>.</li>
+  <li><strong>RedMaxx</strong> inicia testes, estudos e customizações com <strong>LLaMA (fev/2023)</strong> da Meta, explorando o ecossistema open source.</li>
+  <li><strong>RedMaxx</strong> realiza testes e customizações com <strong>Mistral 7B (out/2023)</strong> e <strong>Mixtral 8×7B (dez/2023)</strong> (Apache 2.0), viabilizando <strong>execução offline</strong> e estabelecendo a base do <strong>RedData Appliance</strong>.</li>
   <li>Módulos embarcados de IA local para ambientes com <strong>alta restrição de rede</strong> e dados sensíveis.</li>
 </ul>`
     },
