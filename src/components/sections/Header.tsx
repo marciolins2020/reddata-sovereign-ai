@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { scrollToElement } from "@/lib/scroll";
 import redmaxxLogo from "@/assets/redmaxx-logo.png";
@@ -20,6 +20,7 @@ export const Header = () => {
   const [activeSection, setActiveSection] = useState("");
   const { language, setLanguage, t } = useLanguage();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const menuItems = [
     { label: t('header.mainNav'), href: "#hero", id: "hero" },
@@ -66,8 +67,19 @@ export const Header = () => {
   }, [location.pathname]);
 
   const scrollToSection = (href: string) => {
-    scrollToElement(href);
     setIsMobileMenuOpen(false);
+    
+    if (location.pathname !== "/") {
+      // Se não estiver na página inicial, navegar primeiro para lá
+      navigate("/");
+      // Aguardar um pouco para a página carregar e então fazer o scroll
+      setTimeout(() => {
+        scrollToElement(href);
+      }, 100);
+    } else {
+      // Se já estiver na página inicial, apenas fazer o scroll
+      scrollToElement(href);
+    }
   };
 
   const isActiveLink = (sectionId: string) => {
