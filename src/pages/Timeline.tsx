@@ -188,7 +188,7 @@ const Timeline = () => {
         <div className="container mx-auto px-4 md:px-6 max-w-7xl">
           <div className="mb-8">
             <h1 className="text-2xl md:text-4xl font-bold mb-4">
-              Linha do Tempo – RedData × LLMs (2017–2025)
+              Linha do Tempo – RedData × Business Intelligence, Big Data, I.A: ML | LLMs (2017–2025)
             </h1>
             <p className="text-muted-foreground text-base md:text-lg">
               Evolução do RedData (acima) em paralelo aos marcos das LLMs open source (abaixo). Ao clicar nos pontos, abre um resumo. Abaixo, o conteúdo completo já expandido.
