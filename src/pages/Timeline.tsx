@@ -63,7 +63,7 @@ const timelineData = {
       detailHtml: `<ul class="list-disc pl-5 space-y-1">
   <li>Primeiro contrato público com órgãos pioneiros na adoção de IA nacional.</li>
   <li>RedData reconhecido como <strong>plataforma 100% proprietária e soberana</strong>.</li>
-  <li>A <strong>RedMaxx</strong> dá início a testes, experimentos e adaptações com os modelos <strong>GPT-Neo (2021)</strong> e <strong>GPT-J (junho de 2021)</strong> da <strong>EleutherAI</strong>, considerados as principais alternativas open source compatíveis com a arquitetura do GPT-3.</li>
+  <li>A <strong>RedMaxx</strong> dá início a testes, experimentos e adaptações com os modelos <strong>GPT-Neo (2021)</strong> e <strong>GPT-J (junho de 2021)</strong> da <strong>EleutherAI</strong>, consideradas as principais alternativas open source compatíveis com a arquitetura do RedData.</li>
   <li>Início de <strong>experimentos internos</strong> com modelos de linguagem aplicados a dados governamentais.</li>
 </ul>`
     },
@@ -71,7 +71,7 @@ const timelineData = {
       year: "2022–2023",
       title: "Expansão, IA Generativa e Soberania Tecnológica",
       detailHtml: `<ul class="list-disc pl-5 space-y-1">
-  <li>Ampliação de projetos em governos estaduais, municipais e tribunais de contas.</li>
+  <li>Ampliação de projetos em governos estaduais, municipais, tribunais de contas e ministérios públicos.</li>
   <li>Introdução de <strong>IA generativa</strong> e <strong>diagnósticos inteligentes</strong>.</li>
   <li><strong>RedMaxx</strong> inicia testes, estudos e customizações com <strong>LLaMA (fev/2023)</strong> da Meta, explorando o ecossistema open source.</li>
   <li><strong>RedMaxx</strong> realiza testes e customizações com <strong>Mistral 7B (out/2023)</strong> e <strong>Mixtral 8×7B (dez/2023)</strong> (Apache 2.0), viabilizando <strong>execução offline</strong> e estabelecendo a base do <strong>RedData Appliance</strong>.</li>
@@ -82,8 +82,8 @@ const timelineData = {
       year: "2024–2025",
       title: "Consolidação, Homologações e Soberania Digital",
       detailHtml: `<ul class="list-disc pl-5 space-y-1">
-  <li>RedData consolida-se como <strong>plataforma líder</strong> no setor público brasileiro.</li>
-  <li>Integração de <strong>LLaMA 3</strong> e <strong>Mistral 7B/Mixtral 8×7B</strong> com <strong>execução 100% offline</strong> para diagnóstico, previsão e auditoria automatizada.</li>
+  <li>RedData consolida-se como <strong>plataforma mais inovadora em Big data e I.A</strong> do setor público brasileiro.</li>
+  <li>Integração e transformação dos modelos <strong>LLaMA 3</strong> e <strong>Mistral 7B/Mixtral 8×7B</strong> em versões customizadas pela RedMaxx, dando origem ao modo único do RedData de IA Generativa, com algoritmos e scripts proprietários, <strong>execução 100% offline</strong> e <strong>soberania total</strong>.</li>
   <li><strong>Homologação NVIDIA (2025) – em andamento</strong> – operação oficial em <strong>RTX e A100</strong>, com <strong>CUDA e TensorRT</strong>.</li>
   <li><strong>Migração para SUSE Linux AI (2025)</strong> – substitui Debian; compatível com <strong>NVIDIA AI Enterprise</strong>.</li>
   <li><strong>Parceria SERPRO (2025)</strong> – implantação na <strong>AWS</strong> em <strong>modelo de bilhetagem</strong>, com integração ao <strong>Marketplace SERPRO</strong>.</li>
