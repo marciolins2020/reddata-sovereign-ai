@@ -6,6 +6,7 @@ export default {
     trajectory: "Timeline",
     cases: "Use Cases",
     modules: "Modules",
+    resources: "Resources",
     faq: "FAQ",
     contact: "Contact",
     requestDemo: "Request Demo"

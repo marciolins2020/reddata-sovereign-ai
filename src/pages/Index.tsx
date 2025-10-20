@@ -25,31 +25,40 @@ const Footer = lazy(() => import("@/components/sections/Footer").then(m => ({ de
 
 const Index = () => {
   return (
-    <main className="min-h-screen">
-      <Header />
-      {/* <OnboardingTour /> */}
-      <HeroSection />
-      <StatsSection />
-      <Suspense fallback={<div className="py-20" />}>
-        <PlatformCapabilitiesSection />
-        <DataConnectorsSection />
-        <HowItWorksSection />
-        <ApplianceSection />
-        <TechnicalDifferentialSection />
-        <VirtualMachinesSection />
-        <WhiteLabelSection />
-        <AutomationAlertsSection />
-        <TechnicalArchitectureSection />
-        <ApplicationsSection />
-        <DashboardDemoSection />
-        <ComparisonSection />
-        <TestimonialsSection />
-        <FAQSection />
-        <EBookSection />
-        <ContactFormSection />
-        <Footer />
-      </Suspense>
-    </main>
+    <>
+      {/* Skip to content link for accessibility */}
+      <a 
+        href="#hero" 
+        className="skip-to-content fixed left-[-9999px] top-auto z-[10000] bg-white text-gray-900 px-4 py-2 rounded border-2 border-gray-900 font-medium focus:left-4 focus:top-4"
+      >
+        Pular para o conteúdo
+      </a>
+      <main className="min-h-screen">
+        <Header />
+        {/* <OnboardingTour /> */}
+        <HeroSection />
+        <StatsSection />
+        <Suspense fallback={<div className="py-20" />}>
+          <PlatformCapabilitiesSection />
+          <DataConnectorsSection />
+          <HowItWorksSection />
+          <ApplianceSection />
+          <TechnicalDifferentialSection />
+          <VirtualMachinesSection />
+          <WhiteLabelSection />
+          <AutomationAlertsSection />
+          <TechnicalArchitectureSection />
+          <ApplicationsSection />
+          <DashboardDemoSection />
+          <ComparisonSection />
+          <TestimonialsSection />
+          <FAQSection />
+          <EBookSection />
+          <ContactFormSection />
+          <Footer />
+        </Suspense>
+      </main>
+    </>
   );
 };
 

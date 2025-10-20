@@ -1,6 +1,8 @@
 import { Card } from "@/components/ui/card";
 import { Quote } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { scrollToElement } from "@/lib/scroll";
+import { Button } from "@/components/ui/button";
 
 export const TestimonialsSection = () => {
   const { t } = useLanguage();
@@ -27,7 +29,7 @@ export const TestimonialsSection = () => {
   ];
 
   return (
-    <section className="py-12 bg-background">
+    <section id="cases" className="py-12 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -62,12 +64,20 @@ export const TestimonialsSection = () => {
         </div>
         
         <div className="text-center mt-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-muted rounded-full">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-muted rounded-full mb-8">
             <span className="w-2 h-2 bg-primary rounded-full"></span>
             <span className="text-sm text-muted-foreground">
               {t('testimonials.conclusion')}
             </span>
           </div>
+          
+          <Button 
+            size="lg"
+            onClick={() => scrollToElement('#contact-form')}
+            className="bg-primary hover:bg-primary-dark text-primary-foreground shadow-primary hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+          >
+            {t('hero.cta')}
+          </Button>
         </div>
       </div>
     </section>

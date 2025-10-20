@@ -6,6 +6,8 @@ import {
   DollarSign
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { scrollToElement } from "@/lib/scroll";
+import { Button } from "@/components/ui/button";
 
 export const ApplicationsSection = () => {
   const { t } = useLanguage();
@@ -98,10 +100,18 @@ export const ApplicationsSection = () => {
         </div>
         
         <div className="text-center mt-12">
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 rounded-full">
+          <div className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 rounded-full mb-8">
             <span className="text-primary font-semibold">{t('applications.experienceBadge')}</span>
             <span className="text-muted-foreground">{t('applications.experienceText')}</span>
           </div>
+          
+          <Button 
+            size="lg"
+            onClick={() => scrollToElement('#contact-form')}
+            className="bg-primary hover:bg-primary-dark text-primary-foreground shadow-primary hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+          >
+            {t('hero.cta')}
+          </Button>
         </div>
       </div>
     </section>

@@ -22,14 +22,13 @@ export const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  // Menu reduzido a 5 itens-âncora principais
   const menuItems = [
     { label: t('header.mainNav'), href: "#hero", id: "hero" },
     { label: t('header.howItWorks'), href: "#como-funciona", id: "como-funciona" },
     { label: t('header.solutions'), href: "#casos-uso", id: "casos-uso" },
-    { label: "Dashboard", href: "#dashboard-demo", id: "dashboard-demo" },
-    { label: t('header.faq'), href: "#faq", id: "faq" },
-    { label: "Materiais", href: "#ebook", id: "ebook" },
-    { label: t('header.contact'), href: "#contact-form", id: "contato" },
+    { label: t('header.cases'), href: "#cases", id: "cases" },
+    { label: t('header.resources'), href: "#recursos", id: "recursos" },
   ];
 
   const casosUsoItems = [
@@ -46,7 +45,7 @@ export const Header = () => {
 
       // ScrollSpy - detectar seção ativa apenas na página principal
       if (location.pathname === "/") {
-        const sections = ["hero", "como-funciona", "appliance", "arquitetura", "casos-uso", "comparativo", "contato"];
+        const sections = ["hero", "como-funciona", "casos-uso", "cases", "recursos"];
         
         for (const section of sections) {
           const element = document.getElementById(section);
@@ -110,102 +109,22 @@ export const Header = () => {
               />
             </div>
 
-            {/* Desktop Menu */}
-            <nav className="hidden lg:flex items-center space-x-1">
-              {menuItems.slice(0, 3).map((item) => (
+            {/* Desktop Menu - 5 itens principais */}
+            <nav className="hidden lg:flex items-center space-x-1" aria-label="Main navigation">
+              {menuItems.map((item) => (
                 <button
                   key={item.href}
                   onClick={() => scrollToSection(item.href)}
-                  className={`px-4 py-2 text-sm font-medium transition-all rounded-md relative ${
+                  className={`px-4 py-2 text-sm font-medium transition-all rounded-md relative focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
                     isActiveLink(item.id)
                       ? "text-primary after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-8 after:h-0.5 after:bg-primary"
                       : "text-foreground hover:text-primary hover:bg-accent"
                   }`}
+                  aria-current={isActiveLink(item.id) ? "page" : undefined}
                 >
                   {item.label}
                 </button>
               ))}
-              
-              {/* Trajetória Link */}
-              <Link to="/trajetoria" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-accent inline-block">
-                {t('header.trajectory')}
-              </Link>
-              
-              <button
-                onClick={() => scrollToSection(menuItems[3].href)}
-                className={`px-4 py-2 text-sm font-medium transition-all rounded-md relative ${
-                  isActiveLink(menuItems[3].id)
-                    ? "text-primary after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-8 after:h-0.5 after:bg-primary"
-                    : "text-foreground hover:text-primary hover:bg-accent"
-                }`}
-              >
-                {menuItems[3].label}
-              </button>
-              
-              {/* Módulos Link */}
-              <Link to="/modulos" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-accent inline-block">
-                {t('header.modules')}
-              </Link>
-              
-              {/* Casos de Uso Dropdown */}
-              <NavigationMenu className="z-[150]">
-                <NavigationMenuList>
-                  <NavigationMenuItem>
-                    <NavigationMenuTrigger className="h-auto px-4 py-2 text-sm font-medium">
-                      {t('header.cases')}
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent className="z-[150]">
-                      <ul className="grid w-[400px] gap-3 p-4 bg-background">
-                        {casosUsoItems.map((item) => (
-                          <li key={item.href}>
-                            <Link to={item.href}>
-                              <NavigationMenuLink className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                                <div className="text-sm font-medium leading-none">{item.label}</div>
-                                <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                                  {item.description}
-                                </p>
-                              </NavigationMenuLink>
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-                </NavigationMenuList>
-              </NavigationMenu>
-              
-              <button
-                onClick={() => scrollToSection(menuItems[5].href)}
-                className={`px-4 py-2 text-sm font-medium transition-all rounded-md relative ${
-                  isActiveLink(menuItems[5].id)
-                    ? "text-primary after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-8 after:h-0.5 after:bg-primary"
-                    : "text-foreground hover:text-primary hover:bg-accent"
-                }`}
-              >
-                {menuItems[5].label}
-              </button>
-              
-              <button
-                onClick={() => scrollToSection(menuItems[4].href)}
-                className={`px-4 py-2 text-sm font-medium transition-all rounded-md relative ${
-                  isActiveLink(menuItems[4].id)
-                    ? "text-primary after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-8 after:h-0.5 after:bg-primary"
-                    : "text-foreground hover:text-primary hover:bg-accent"
-                }`}
-              >
-                {menuItems[4].label}
-              </button>
-              
-              <button
-                onClick={() => scrollToSection(menuItems[6].href)}
-                className={`px-4 py-2 text-sm font-medium transition-all rounded-md relative ${
-                  isActiveLink(menuItems[6].id)
-                    ? "text-primary after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-8 after:h-0.5 after:bg-primary"
-                    : "text-foreground hover:text-primary hover:bg-accent"
-                }`}
-              >
-                {menuItems[6].label}
-              </button>
             </nav>
 
             {/* Language Switcher & CTA Button Desktop */}
@@ -215,11 +134,14 @@ export const Header = () => {
                 size="sm"
                 onClick={() => setLanguage(language === 'pt' ? 'en' : 'pt')}
                 className="flex items-center gap-2"
-                aria-label="Switch language"
+                aria-label={language === 'pt' ? 'Switch to English' : 'Mudar para Português'}
               >
                 <span className="text-xl">{language === 'pt' ? '🇺🇸' : '🇧🇷'}</span>
               </Button>
-              <Button onClick={() => scrollToSection("#contact-form")}>
+              <Button 
+                onClick={() => scrollToSection("#contact-form")}
+                className="focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              >
                 {t('header.requestDemo')}
               </Button>
             </div>
@@ -241,110 +163,35 @@ export const Header = () => {
           {/* Mobile Menu */}
           {isMobileMenuOpen && (
             <div className="lg:hidden py-4 border-t border-border bg-background/80 backdrop-blur-xl">
-              <nav className="flex flex-col space-y-2">
-                {menuItems.slice(0, 3).map((item) => (
+              <nav className="flex flex-col space-y-2" aria-label="Mobile navigation">
+                {menuItems.map((item) => (
                   <button
                     key={item.href}
                     onClick={() => scrollToSection(item.href)}
-                    className={`px-4 py-3 text-left text-sm font-medium transition-colors rounded-md ${
+                    className={`px-4 py-3 text-left text-sm font-medium transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
                       isActiveLink(item.id)
                         ? "text-primary bg-accent border-l-4 border-primary"
                         : "text-foreground hover:text-primary hover:bg-accent"
                     }`}
+                    aria-current={isActiveLink(item.id) ? "page" : undefined}
                   >
                     {item.label}
                   </button>
                 ))}
-                
-                {/* Mobile Trajetória Link */}
-                <Link
-                  to="/trajetoria"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block px-4 py-3 text-left text-sm font-medium text-foreground hover:text-primary hover:bg-accent transition-colors rounded-md mx-4"
-                >
-                  {t('header.trajectory')}
-                </Link>
-                
-                <button
-                  onClick={() => scrollToSection(menuItems[3].href)}
-                  className={`px-4 py-3 text-left text-sm font-medium transition-colors rounded-md ${
-                    isActiveLink(menuItems[3].id)
-                      ? "text-primary bg-accent border-l-4 border-primary"
-                      : "text-foreground hover:text-primary hover:bg-accent"
-                  }`}
-                >
-                  {menuItems[3].label}
-                </button>
-                
-                {/* Mobile Módulos Link */}
-                <Link
-                  to="/modulos"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block px-4 py-3 text-left text-sm font-medium text-foreground hover:text-primary hover:bg-accent transition-colors rounded-md mx-4"
-                >
-                  {t('header.modules')}
-                </Link>
-                
-                {/* Mobile Casos de Uso Submenu */}
-                <div className="px-4 py-2">
-                  <div className="text-sm font-medium text-muted-foreground mb-2">{t('header.cases')}</div>
-                  {casosUsoItems.map((item) => (
-                    <Link
-                      key={item.href}
-                      to={item.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="block px-4 py-3 text-left text-sm text-foreground hover:text-primary hover:bg-accent transition-colors rounded-md"
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                </div>
-                
-                <button
-                  onClick={() => scrollToSection(menuItems[5].href)}
-                  className={`px-4 py-3 text-left text-sm font-medium transition-colors rounded-md ${
-                    isActiveLink(menuItems[5].id)
-                      ? "text-primary bg-accent border-l-4 border-primary"
-                      : "text-foreground hover:text-primary hover:bg-accent"
-                  }`}
-                >
-                  {menuItems[5].label}
-                </button>
-                
-                <button
-                  onClick={() => scrollToSection(menuItems[4].href)}
-                  className={`px-4 py-3 text-left text-sm font-medium transition-colors rounded-md ${
-                    isActiveLink(menuItems[4].id)
-                      ? "text-primary bg-accent border-l-4 border-primary"
-                      : "text-foreground hover:text-primary hover:bg-accent"
-                  }`}
-                >
-                  {menuItems[4].label}
-                </button>
-                
-                <button
-                  onClick={() => scrollToSection(menuItems[6].href)}
-                  className={`px-4 py-3 text-left text-sm font-medium transition-colors rounded-md ${
-                    isActiveLink(menuItems[6].id)
-                      ? "text-primary bg-accent border-l-4 border-primary"
-                      : "text-foreground hover:text-primary hover:bg-accent"
-                  }`}
-                >
-                  {menuItems[6].label}
-                </button>
                 
                 <div className="px-4 pt-2 space-y-2">
                   <Button
                     variant="outline"
                     onClick={() => setLanguage(language === 'pt' ? 'en' : 'pt')}
                     className="w-full flex items-center justify-center gap-2"
+                    aria-label={language === 'pt' ? 'Switch to English' : 'Mudar para Português'}
                   >
                     <span className="text-xl">{language === 'pt' ? '🇺🇸' : '🇧🇷'}</span>
                     <span>{language === 'pt' ? 'English' : 'Português'}</span>
                   </Button>
                   <Button
                     onClick={() => scrollToSection("#contact-form")}
-                    className="w-full"
+                    className="w-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                   >
                     {t('header.requestDemo')}
                   </Button>

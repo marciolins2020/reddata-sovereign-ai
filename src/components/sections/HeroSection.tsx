@@ -40,19 +40,19 @@ export const HeroSection = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-4">
               <Button 
                 size="lg" 
-                onClick={() => window.location.href = '/auth'} 
-                className="bg-primary hover:bg-primary-dark text-primary-foreground shadow-primary hover:shadow-lg transition-all duration-300 group"
+                onClick={() => scrollToElement('#contact-form')} 
+                className="bg-primary hover:bg-primary-dark text-primary-foreground shadow-primary hover:shadow-lg transition-all duration-300 group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
               >
-                {t('hero.freeTrial')}
+                {t('hero.cta')}
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
               <Button 
-                variant="ghost" 
+                variant="outline" 
                 size="lg" 
-                onClick={() => scrollToElement('contact-form')}
-                className="bg-black/40 hover:bg-black/60 text-white border border-white/20 backdrop-blur-sm transition-all duration-300"
+                onClick={() => window.open('https://reddata-production.lovable.app/dashboard/view/08deabbb-3a42-4c7b-8f13-7ad1ddc4eea2', '_blank')}
+                className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
               >
-                {t('hero.cta')}
+                Ver Painel ao Vivo
               </Button>
             </div>
             
