@@ -84,7 +84,7 @@ const timelineData = {
       detailHtml: `<ul class="list-disc pl-5 space-y-1">
   <li>RedData consolida-se como <strong>plataforma líder</strong> no setor público brasileiro.</li>
   <li>Integração de <strong>LLaMA 3</strong> e <strong>Mistral 7B/Mixtral 8×7B</strong> com <strong>execução 100% offline</strong> para diagnóstico, previsão e auditoria automatizada.</li>
-  <li><strong>Homologação NVIDIA (2025)</strong> – operação oficial em <strong>RTX e A100</strong>, com <strong>CUDA e TensorRT</strong>.</li>
+  <li><strong>Homologação NVIDIA (2025) – em andamento</strong> – operação oficial em <strong>RTX e A100</strong>, com <strong>CUDA e TensorRT</strong>.</li>
   <li><strong>Migração para SUSE Linux AI (2025)</strong> – substitui Debian; compatível com <strong>NVIDIA AI Enterprise</strong>.</li>
   <li><strong>Parceria SERPRO (2025)</strong> – implantação na <strong>AWS</strong> em <strong>modelo de bilhetagem</strong>, com integração ao <strong>Marketplace SERPRO</strong>.</li>
   <li>Reconhecimento por <strong>independência tecnológica</strong>, <strong>LGPD/ISO 27001</strong> e <strong>soberania digital</strong>.</li>
