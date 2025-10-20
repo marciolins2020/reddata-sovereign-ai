@@ -5,9 +5,91 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
+// Rate limiting configuration
+interface RateLimitEntry {
+  count: number;
+  resetTime: number;
+  blockedUntil?: number;
+}
+
+const rateLimitMap = new Map<string, RateLimitEntry>();
+const RATE_LIMIT_WINDOW = 60000; // 1 minute
+const MAX_REQUESTS_PER_WINDOW = 20;
+const BLOCK_DURATION = 300000; // 5 minutes
+
+// Clean up old entries every 10 minutes
+setInterval(() => {
+  const now = Date.now();
+  for (const [key, value] of rateLimitMap.entries()) {
+    if (value.resetTime < now && (!value.blockedUntil || value.blockedUntil < now)) {
+      rateLimitMap.delete(key);
+    }
+  }
+}, 600000);
+
+function getClientIdentifier(req: Request): string {
+  // Try to get IP from various headers
+  const forwardedFor = req.headers.get('x-forwarded-for');
+  const realIp = req.headers.get('x-real-ip');
+  const cfConnectingIp = req.headers.get('cf-connecting-ip');
+  
+  return cfConnectingIp || realIp || forwardedFor?.split(',')[0] || 'unknown';
+}
+
+function checkRateLimit(clientId: string): { allowed: boolean; retryAfter?: number } {
+  const now = Date.now();
+  const entry = rateLimitMap.get(clientId);
+
+  // Check if client is blocked
+  if (entry?.blockedUntil && entry.blockedUntil > now) {
+    return { allowed: false, retryAfter: Math.ceil((entry.blockedUntil - now) / 1000) };
+  }
+
+  // Initialize or reset if window expired
+  if (!entry || entry.resetTime < now) {
+    rateLimitMap.set(clientId, {
+      count: 1,
+      resetTime: now + RATE_LIMIT_WINDOW,
+    });
+    return { allowed: true };
+  }
+
+  // Increment count
+  entry.count++;
+
+  // Block if limit exceeded
+  if (entry.count > MAX_REQUESTS_PER_WINDOW) {
+    entry.blockedUntil = now + BLOCK_DURATION;
+    return { allowed: false, retryAfter: Math.ceil(BLOCK_DURATION / 1000) };
+  }
+
+  return { allowed: true };
+}
+
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
+  }
+
+  // Rate limiting check
+  const clientId = getClientIdentifier(req);
+  const rateLimitResult = checkRateLimit(clientId);
+  
+  if (!rateLimitResult.allowed) {
+    return new Response(
+      JSON.stringify({ 
+        error: "Taxa de requisições excedida. Por favor, aguarde alguns minutos.",
+        retryAfter: rateLimitResult.retryAfter 
+      }), 
+      {
+        status: 429,
+        headers: { 
+          ...corsHeaders, 
+          "Content-Type": "application/json",
+          "Retry-After": String(rateLimitResult.retryAfter || 300)
+        },
+      }
+    );
   }
 
   try {

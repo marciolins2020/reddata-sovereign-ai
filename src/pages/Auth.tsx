@@ -9,6 +9,13 @@ import { toast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 import reddataLogo from "@/assets/reddata-logo-optimized.png";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { z } from "zod";
+
+const authSchema = z.object({
+  email: z.string().email("Por favor, insira um e-mail válido"),
+  password: z.string().min(6, "A senha deve ter no mínimo 6 caracteres"),
+  fullName: z.string().optional(),
+});
 
 export default function Auth() {
   const { t } = useLanguage();
@@ -31,6 +38,19 @@ export default function Auth() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate inputs
+    const validation = authSchema.safeParse({ email, password, fullName });
+    if (!validation.success) {
+      const firstError = validation.error.errors[0];
+      toast({
+        title: t("auth.error"),
+        description: firstError.message,
+        variant: "destructive",
+      });
+      return;
+    }
+    
     setLoading(true);
 
     try {
