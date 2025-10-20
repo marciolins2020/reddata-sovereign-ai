@@ -100,7 +100,7 @@ export const Header = () => {
 
             {/* Desktop Menu */}
             <nav className="hidden lg:flex items-center space-x-1">
-              {menuItems.slice(0, 4).map((item) => (
+              {menuItems.slice(0, 3).map((item) => (
                 <button
                   key={item.href}
                   onClick={() => scrollToSection(item.href)}
@@ -113,6 +113,27 @@ export const Header = () => {
                   {item.label}
                 </button>
               ))}
+              
+              {/* Trajetória Link */}
+              <Link to="/trajetoria" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-accent inline-block">
+                Trajetória
+              </Link>
+              
+              <button
+                onClick={() => scrollToSection(menuItems[3].href)}
+                className={`px-4 py-2 text-sm font-medium transition-all rounded-md relative ${
+                  isActiveLink(menuItems[3].id)
+                    ? "text-primary after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-8 after:h-0.5 after:bg-primary"
+                    : "text-foreground hover:text-primary hover:bg-accent"
+                }`}
+              >
+                {menuItems[3].label}
+              </button>
+              
+              {/* Módulos Link */}
+              <Link to="/modulos" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-accent inline-block">
+                {t('header.modules')}
+              </Link>
               
               {/* Casos de Uso Dropdown */}
               <NavigationMenu className="z-[150]">
@@ -141,21 +162,6 @@ export const Header = () => {
                 </NavigationMenuList>
               </NavigationMenu>
               
-              {/* Módulos Link */}
-              <Link to="/modulos" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-accent inline-block">
-                {t('header.modules')}
-              </Link>
-              
-              <button
-                onClick={() => scrollToSection(menuItems[4].href)}
-                className={`px-4 py-2 text-sm font-medium transition-all rounded-md relative ${
-                  isActiveLink(menuItems[4].id)
-                    ? "text-primary after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-8 after:h-0.5 after:bg-primary"
-                    : "text-foreground hover:text-primary hover:bg-accent"
-                }`}
-              >
-                {menuItems[4].label}
-              </button>
               <button
                 onClick={() => scrollToSection(menuItems[5].href)}
                 className={`px-4 py-2 text-sm font-medium transition-all rounded-md relative ${
@@ -167,10 +173,16 @@ export const Header = () => {
                 {menuItems[5].label}
               </button>
               
-              {/* Trajetória Link */}
-              <Link to="/trajetoria" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-accent inline-block">
-                Trajetória
-              </Link>
+              <button
+                onClick={() => scrollToSection(menuItems[4].href)}
+                className={`px-4 py-2 text-sm font-medium transition-all rounded-md relative ${
+                  isActiveLink(menuItems[4].id)
+                    ? "text-primary after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-8 after:h-0.5 after:bg-primary"
+                    : "text-foreground hover:text-primary hover:bg-accent"
+                }`}
+              >
+                {menuItems[4].label}
+              </button>
               
               <button
                 onClick={() => scrollToSection(menuItems[6].href)}
@@ -218,7 +230,7 @@ export const Header = () => {
           {isMobileMenuOpen && (
             <div className="lg:hidden py-4 border-t border-border bg-background/80 backdrop-blur-xl">
               <nav className="flex flex-col space-y-2">
-                {menuItems.slice(0, 4).map((item) => (
+                {menuItems.slice(0, 3).map((item) => (
                   <button
                     key={item.href}
                     onClick={() => scrollToSection(item.href)}
@@ -231,6 +243,35 @@ export const Header = () => {
                     {item.label}
                   </button>
                 ))}
+                
+                {/* Mobile Trajetória Link */}
+                <Link
+                  to="/trajetoria"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block px-4 py-3 text-left text-sm font-medium text-foreground hover:text-primary hover:bg-accent transition-colors rounded-md mx-4"
+                >
+                  Trajetória
+                </Link>
+                
+                <button
+                  onClick={() => scrollToSection(menuItems[3].href)}
+                  className={`px-4 py-3 text-left text-sm font-medium transition-colors rounded-md ${
+                    isActiveLink(menuItems[3].id)
+                      ? "text-primary bg-accent border-l-4 border-primary"
+                      : "text-foreground hover:text-primary hover:bg-accent"
+                  }`}
+                >
+                  {menuItems[3].label}
+                </button>
+                
+                {/* Mobile Módulos Link */}
+                <Link
+                  to="/modulos"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block px-4 py-3 text-left text-sm font-medium text-foreground hover:text-primary hover:bg-accent transition-colors rounded-md mx-4"
+                >
+                  {t('header.modules')}
+                </Link>
                 
                 {/* Mobile Casos de Uso Submenu */}
                 <div className="px-4 py-2">
@@ -247,25 +288,6 @@ export const Header = () => {
                   ))}
                 </div>
                 
-                {/* Mobile Módulos Link */}
-                <Link
-                  to="/modulos"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block px-4 py-3 text-left text-sm font-medium text-foreground hover:text-primary hover:bg-accent transition-colors rounded-md mx-4"
-                >
-                  {t('header.modules')}
-                </Link>
-                
-                <button
-                  onClick={() => scrollToSection(menuItems[4].href)}
-                  className={`px-4 py-3 text-left text-sm font-medium transition-colors rounded-md ${
-                    isActiveLink(menuItems[4].id)
-                      ? "text-primary bg-accent border-l-4 border-primary"
-                      : "text-foreground hover:text-primary hover:bg-accent"
-                  }`}
-                >
-                  {menuItems[4].label}
-                </button>
                 <button
                   onClick={() => scrollToSection(menuItems[5].href)}
                   className={`px-4 py-3 text-left text-sm font-medium transition-colors rounded-md ${
@@ -277,14 +299,16 @@ export const Header = () => {
                   {menuItems[5].label}
                 </button>
                 
-                {/* Mobile Trajetória Link */}
-                <Link
-                  to="/trajetoria"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block px-4 py-3 text-left text-sm font-medium text-foreground hover:text-primary hover:bg-accent transition-colors rounded-md mx-4"
+                <button
+                  onClick={() => scrollToSection(menuItems[4].href)}
+                  className={`px-4 py-3 text-left text-sm font-medium transition-colors rounded-md ${
+                    isActiveLink(menuItems[4].id)
+                      ? "text-primary bg-accent border-l-4 border-primary"
+                      : "text-foreground hover:text-primary hover:bg-accent"
+                  }`}
                 >
-                  Trajetória
-                </Link>
+                  {menuItems[4].label}
+                </button>
                 
                 <button
                   onClick={() => scrollToSection(menuItems[6].href)}
