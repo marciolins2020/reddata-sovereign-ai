@@ -234,7 +234,7 @@ const Timeline = () => {
 
           {/* Resumo Expandido */}
           <section className="mt-12">
-            <h2 className="text-xl md:text-2xl font-bold mb-6">Resumo Expandido (Conteúdo Completo)</h2>
+            <h2 className="text-xl md:text-2xl font-bold mb-6">Resumo Expandido</h2>
             
             {/* RedData Section */}
             <div>
