@@ -17,6 +17,46 @@ const authSchema = z.object({
   fullName: z.string().optional(),
 });
 
+// Check if password has been compromised using Have I Been Pwned API
+async function checkPasswordPwned(password: string): Promise<boolean> {
+  try {
+    // Create SHA-1 hash of the password
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+    const hashBuffer = await crypto.subtle.digest('SHA-1', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
+    
+    // Use k-Anonymity: only send first 5 characters of hash
+    const prefix = hashHex.substring(0, 5);
+    const suffix = hashHex.substring(5);
+    
+    // Query HIBP API
+    const response = await fetch(`https://api.pwnedpasswords.com/range/${prefix}`);
+    if (!response.ok) {
+      // If API fails, don't block signup but log warning
+      console.warn('Could not check password against breach database');
+      return false;
+    }
+    
+    const text = await response.text();
+    const hashes = text.split('\n');
+    
+    // Check if our hash suffix appears in the results
+    for (const line of hashes) {
+      const [hashSuffix] = line.split(':');
+      if (hashSuffix === suffix) {
+        return true; // Password found in breach database
+      }
+    }
+    
+    return false; // Password not found in breaches
+  } catch (error) {
+    console.error('Error checking password:', error);
+    return false; // Don't block signup on error
+  }
+}
+
 export default function Auth() {
   const { t } = useLanguage();
   const [isLogin, setIsLogin] = useState(true);
@@ -68,6 +108,18 @@ export default function Auth() {
         });
         navigate("/dashboard");
       } else {
+        // Check if password has been compromised
+        const isPwned = await checkPasswordPwned(password);
+        if (isPwned) {
+          toast({
+            title: "Senha Comprometida",
+            description: "Esta senha foi exposta em vazamentos de dados. Por favor, escolha uma senha mais segura.",
+            variant: "destructive",
+          });
+          setLoading(false);
+          return;
+        }
+        
         const redirectUrl = `${window.location.origin}/dashboard`;
         
         const { error } = await supabase.auth.signUp({
