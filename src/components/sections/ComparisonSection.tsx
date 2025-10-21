@@ -73,20 +73,20 @@ export const ComparisonSection = () => {
                     <tr key={index} className="border-b border-border/50">
                       <td className="py-4 text-foreground">{row.feature}</td>
                       <td className="py-4 text-center">
-                        <Check className="h-5 w-5 text-green-500 mx-auto" />
+                        <Check className="h-5 w-5 text-green-500 mx-auto" aria-label="Sim" />
                       </td>
                       <td className="py-4 text-center">
                         {row.traditional === "partial" ? (
                           <span className="text-sm text-muted-foreground">{t('comparison.partial')}</span>
                         ) : (
-                          <X className="h-5 w-5 text-red-500 mx-auto" />
+                          <X className="h-5 w-5 text-red-500 mx-auto" aria-label="Não" />
                         )}
                       </td>
                       <td className="py-4 text-center">
                         {row.saas === "partial" ? (
                           <span className="text-sm text-muted-foreground">{t('comparison.partial')}</span>
                         ) : (
-                          <X className="h-5 w-5 text-red-500 mx-auto" />
+                          <X className="h-5 w-5 text-red-500 mx-auto" aria-label="Não" />
                         )}
                       </td>
                     </tr>
