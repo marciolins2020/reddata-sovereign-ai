@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { Send, CheckCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -29,6 +30,18 @@ interface FormData {
   cargo: string;
   interesse: string;
   mensagem: string;
+  lgpd: boolean;
+}
+
+interface FormErrors {
+  nome?: string;
+  email?: string;
+  telefone?: string;
+  municipio?: string;
+  cargo?: string;
+  interesse?: string;
+  mensagem?: string;
+  lgpd?: string;
 }
 
 export const ContactFormSection = () => {
@@ -41,29 +54,60 @@ export const ContactFormSection = () => {
     municipio: "",
     cargo: "",
     interesse: "",
-    mensagem: ""
+    mensagem: "",
+    lgpd: false
   });
+  const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleInputChange = (field: keyof FormData, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    if (field === "lgpd") {
+      setFormData(prev => ({ ...prev, [field]: value === "true" }));
+    } else {
+      setFormData(prev => ({ ...prev, [field]: value }));
+    }
+    // Clear error for this field when user starts typing
+    if (errors[field]) {
+      setErrors(prev => ({ ...prev, [field]: undefined }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Clear previous errors
+    setErrors({});
     
     // Comprehensive validation with zod
     try {
       contactFormSchema.parse(formData);
     } catch (error) {
       if (error instanceof z.ZodError) {
+        const newErrors: FormErrors = {};
+        error.errors.forEach((err) => {
+          if (err.path[0]) {
+            newErrors[err.path[0] as keyof FormErrors] = err.message;
+          }
+        });
+        setErrors(newErrors);
         toast({
           title: "Erro de validação",
-          description: error.errors[0].message,
+          description: "Por favor, corrija os erros no formulário.",
           variant: "destructive"
         });
       }
+      return;
+    }
+    
+    // Validate LGPD checkbox
+    if (!formData.lgpd) {
+      setErrors({ lgpd: "Você deve aceitar a Política de Privacidade para continuar." });
+      toast({
+        title: "Erro de validação",
+        description: "Você deve aceitar a Política de Privacidade.",
+        variant: "destructive"
+      });
       return;
     }
 
@@ -93,8 +137,10 @@ export const ContactFormSection = () => {
           municipio: "",
           cargo: "",
           interesse: "",
-          mensagem: ""
+          mensagem: "",
+          lgpd: false
         });
+        setErrors({});
         setIsSubmitted(false);
       }, 3000);
       
@@ -154,18 +200,25 @@ export const ContactFormSection = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <Label htmlFor="nome">{t('contact.nameLabel')}</Label>
+                  <Label htmlFor="nome">{t('contact.nameLabel')} *</Label>
                   <Input
                     id="nome"
                     value={formData.nome}
                     onChange={(e) => handleInputChange("nome", e.target.value)}
                     placeholder={t('contact.namePlaceholder')}
                     required
+                    aria-invalid={!!errors.nome}
+                    aria-describedby={errors.nome ? "err-nome" : undefined}
                   />
+                  {errors.nome && (
+                    <span id="err-nome" className="text-sm text-destructive" role="alert" aria-live="polite">
+                      {errors.nome}
+                    </span>
+                  )}
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="email">{t('contact.emailLabel')}</Label>
+                  <Label htmlFor="email">{t('contact.emailLabel')} *</Label>
                   <Input
                     id="email"
                     type="email"
@@ -173,7 +226,14 @@ export const ContactFormSection = () => {
                     onChange={(e) => handleInputChange("email", e.target.value)}
                     placeholder={t('contact.emailPlaceholder')}
                     required
+                    aria-invalid={!!errors.email}
+                    aria-describedby={errors.email ? "err-email" : undefined}
                   />
+                  {errors.email && (
+                    <span id="err-email" className="text-sm text-destructive" role="alert" aria-live="polite">
+                      {errors.email}
+                    </span>
+                  )}
                 </div>
               </div>
               
@@ -182,10 +242,19 @@ export const ContactFormSection = () => {
                   <Label htmlFor="telefone">{t('contact.phoneLabel')}</Label>
                   <Input
                     id="telefone"
+                    type="tel"
+                    inputMode="tel"
                     value={formData.telefone}
                     onChange={(e) => handleInputChange("telefone", e.target.value)}
-                    placeholder={t('contact.phonePlaceholder')}
+                    placeholder="+55 (__)  _____-____"
+                    aria-invalid={!!errors.telefone}
+                    aria-describedby={errors.telefone ? "err-telefone" : undefined}
                   />
+                  {errors.telefone && (
+                    <span id="err-telefone" className="text-sm text-destructive" role="alert" aria-live="polite">
+                      {errors.telefone}
+                    </span>
+                  )}
                 </div>
                 
                 <div className="space-y-2">
@@ -195,7 +264,14 @@ export const ContactFormSection = () => {
                     value={formData.municipio}
                     onChange={(e) => handleInputChange("municipio", e.target.value)}
                     placeholder={t('contact.municipioPlaceholder')}
+                    aria-invalid={!!errors.municipio}
+                    aria-describedby={errors.municipio ? "err-municipio" : undefined}
                   />
+                  {errors.municipio && (
+                    <span id="err-municipio" className="text-sm text-destructive" role="alert" aria-live="polite">
+                      {errors.municipio}
+                    </span>
+                  )}
                 </div>
               </div>
               
@@ -207,13 +283,20 @@ export const ContactFormSection = () => {
                     value={formData.cargo}
                     onChange={(e) => handleInputChange("cargo", e.target.value)}
                     placeholder={t('contact.cargoPlaceholder')}
+                    aria-invalid={!!errors.cargo}
+                    aria-describedby={errors.cargo ? "err-cargo" : undefined}
                   />
+                  {errors.cargo && (
+                    <span id="err-cargo" className="text-sm text-destructive" role="alert" aria-live="polite">
+                      {errors.cargo}
+                    </span>
+                  )}
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="interesse">{t('contact.interestLabel')}</Label>
+                  <Label htmlFor="interesse">{t('contact.interestLabel')} *</Label>
                   <Select value={formData.interesse} onValueChange={(value) => handleInputChange("interesse", value)}>
-                    <SelectTrigger>
+                    <SelectTrigger aria-invalid={!!errors.interesse} aria-describedby={errors.interesse ? "err-interesse" : undefined}>
                       <SelectValue placeholder={t('contact.interestPlaceholder')} />
                     </SelectTrigger>
                     <SelectContent>
@@ -224,6 +307,11 @@ export const ContactFormSection = () => {
                       <SelectItem value="demonstracao">{t('contact.interestDemonstracao')}</SelectItem>
                     </SelectContent>
                   </Select>
+                  {errors.interesse && (
+                    <span id="err-interesse" className="text-sm text-destructive" role="alert" aria-live="polite">
+                      {errors.interesse}
+                    </span>
+                  )}
                 </div>
               </div>
               
@@ -235,7 +323,34 @@ export const ContactFormSection = () => {
                   onChange={(e) => handleInputChange("mensagem", e.target.value)}
                   placeholder={t('contact.messagePlaceholder')}
                   rows={4}
+                  aria-invalid={!!errors.mensagem}
+                  aria-describedby={errors.mensagem ? "err-mensagem" : undefined}
                 />
+                {errors.mensagem && (
+                  <span id="err-mensagem" className="text-sm text-destructive" role="alert" aria-live="polite">
+                    {errors.mensagem}
+                  </span>
+                )}
+              </div>
+              
+              <div className="flex items-start gap-3 p-4 bg-muted/30 rounded-lg border">
+                <Checkbox 
+                  id="lgpd" 
+                  checked={formData.lgpd}
+                  onCheckedChange={(checked) => handleInputChange("lgpd", String(checked))}
+                  aria-invalid={!!errors.lgpd}
+                  aria-describedby={errors.lgpd ? "err-lgpd" : undefined}
+                />
+                <div className="space-y-1">
+                  <Label htmlFor="lgpd" className="text-sm font-medium leading-tight cursor-pointer">
+                    Li e concordo com a Política de Privacidade (LGPD) *
+                  </Label>
+                  {errors.lgpd && (
+                    <span id="err-lgpd" className="text-sm text-destructive block" role="alert" aria-live="polite">
+                      {errors.lgpd}
+                    </span>
+                  )}
+                </div>
               </div>
               
               <Button 
