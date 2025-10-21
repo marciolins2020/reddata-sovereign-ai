@@ -35,7 +35,7 @@ export const Header = () => {
     { label: "Aplicações", href: "#casos-uso", id: "casos-uso" },
     { label: "Trajetória", href: "/trajetoria", id: "timeline", isRoute: true },
     { label: "Dashboard", href: "#dashboard-demo", id: "dashboard-demo" },
-    { label: "Módulos", href: "#modulos", id: "modulos" },
+    { label: "Módulos", href: "/modulos", id: "modulos", isRoute: true },
     { label: "Casos de Uso", href: "#cases", id: "cases", submenu: [
       { label: "Governo", href: "/casos-uso/governo" },
       { label: "Energia", href: "/casos-uso/energia" },
