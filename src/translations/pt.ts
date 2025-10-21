@@ -726,5 +726,51 @@ export default {
     fileDeletedDesc: "O arquivo e seus dashboards foram excluídos com sucesso",
     deleteError: "Erro ao excluir",
     deleteErrorDesc: "Não foi possível excluir o arquivo. Tente novamente."
+  },
+  timeline: {
+    title: "Linha do Tempo – RedData × Business Intelligence, Big Data, I.A: ML | LLMs (2017–2025)",
+    subtitle: "Evolução do RedData (acima) em paralelo aos marcos das LLMs open source (abaixo). Ao clicar nos pontos, abre um resumo. Abaixo, o conteúdo completo já expandido.",
+    expandedSummary: "Resumo Expandido",
+    reddataSection: "RedData",
+    previous: "Anterior",
+    next: "Próximo",
+    of: "de",
+    reddata: {
+      2017: {
+        year: "2017",
+        title: "Concepção, Pesquisa Inicial e Desenvolvimento do KDD",
+        detail: "<ul class=\"list-disc pl-5 space-y-1\"><li>Início do projeto RedData em parceria com <strong>instituto designado pelo fundo de P&amp;D</strong>, com foco em Big Data e Inteligência Artificial aplicados ao setor público e privado.</li><li>Definição da <strong>arquitetura base da plataforma</strong> e do <strong>framework de integração de dados massivos</strong>, que viria a dar origem ao <strong>KDD – Knowledge Discovery in Databases</strong>.</li><li>Desenvolvimento inicial do <strong>KDD</strong>, processo estruturado para descoberta de conhecimento a partir de grandes volumes de dados, composto por etapas como:</li><ul class=\"list-[circle] pl-6 space-y-1\"><li>Seleção e integração de dados (extração de múltiplas fontes).</li><li>Limpeza e pré-processamento (padronização, tratamento de inconsistências).</li><li>Transformação e mineração de dados (uso de algoritmos para identificar padrões).</li><li>Interpretação e visualização (conversão em insights e relatórios estratégicos).</li></ul><li>Esse método serviu como <strong>base metodológica do RedData</strong>, permitindo pipelines automatizados e rastreáveis.</li></ul>"
+      },
+      2018: {
+        year: "2018",
+        title: "Desenvolvimento Colaborativo e Mentoria IBM",
+        detail: "<ul class=\"list-disc pl-5 space-y-1\"><li><strong>Entrada no programa de startups da IBM</strong>, com acesso à IBM Cloud e mentoria técnica (machine learning, arquitetura de dados, DevOps).</li><li>Otimização do pipeline KDD, adoção de <strong>boas práticas de governança de dados</strong> e estruturação da <strong>camada de inteligência analítica</strong> do RedData.</li><li>Conclusão de versões experimentais com apoio multidisciplinar e <strong>testes de desempenho</strong> em ambientes corporativos e governamentais.</li></ul>"
+      },
+      2019: {
+        year: "2019",
+        title: "Desenvolvimento Interno e Provas de Conceito (PoCs)",
+        detail: "<ul class=\"list-disc pl-5 space-y-1\"><li><strong>Internalização total</strong> do desenvolvimento pela equipe RedMaxx.</li><li>PoCs em varejo, governo e indústria, validando <strong>escalabilidade</strong>.</li><li>Inclusão dos primeiros <strong>módulos de machine learning</strong> e modelagem preditiva.</li></ul>"
+      },
+      2020: {
+        year: "2020",
+        title: "Lançamento Comercial e Adoção Privada",
+        detail: "<ul class=\"list-disc pl-5 space-y-1\"><li>Lançamento da <strong>versão comercial</strong> do RedData.</li><li>Primeiros projetos em energia, indústria e varejo.</li><li>Consolidação do modelo <strong>SaaS</strong>, dos <strong>dashboards analíticos interativos</strong> e da <strong>IA preditiva baseada em Machine Learning</strong>.</li></ul>"
+      },
+      2021: {
+        year: "2021",
+        title: "Entrada no Setor Público e Avanço das LLMs Open Source",
+        detail: "<ul class=\"list-disc pl-5 space-y-1\"><li>Primeiro contrato público com órgãos pioneiros na adoção de IA nacional.</li><li>RedData reconhecido como <strong>plataforma 100% proprietária e soberana</strong>.</li><li>A <strong>RedMaxx</strong> dá início a testes, experimentos e adaptações com os modelos <strong>GPT-Neo (2021)</strong> e <strong>GPT-J (junho de 2021)</strong> da <strong>EleutherAI</strong>, consideradas as principais alternativas open source compatíveis com a arquitetura do RedData.</li><li>Início de <strong>experimentos internos</strong> com modelos de linguagem aplicados a dados governamentais.</li></ul>"
+      },
+      "2022-2023": {
+        year: "2022–2023",
+        title: "Expansão, IA Generativa e Soberania Tecnológica",
+        detail: "<ul class=\"list-disc pl-5 space-y-1\"><li>Ampliação de projetos em governos estaduais, municipais, tribunais de contas e ministérios públicos.</li><li>Introdução de <strong>IA generativa</strong> e <strong>diagnósticos inteligentes</strong>.</li><li><strong>RedMaxx</strong> inicia testes, estudos e customizações com <strong>LLaMA (fev/2023)</strong> da Meta, explorando o ecossistema open source.</li><li><strong>RedMaxx</strong> realiza testes e customizações com <strong>Mistral 7B (out/2023)</strong> e <strong>Mixtral 8×7B (dez/2023)</strong> (Apache 2.0), viabilizando <strong>execução offline</strong> e estabelecendo a base do <strong>RedData Appliance</strong>.</li><li>Módulos embarcados de IA local para ambientes com <strong>alta restrição de rede</strong> e dados sensíveis.</li></ul>"
+      },
+      "2024-2025": {
+        year: "2024–2025",
+        title: "Consolidação, Homologações e Soberania Digital",
+        detail: "<ul class=\"list-disc pl-5 space-y-1\"><li>RedData consolida-se como <strong>plataforma mais inovadora em Big data e I.A</strong> do setor público brasileiro.</li><li>Integração e transformação dos modelos <strong>LLaMA 3</strong> e <strong>Mistral 7B/Mixtral 8×7B</strong> em versões customizadas pela RedMaxx, dando origem ao modo único do RedData de IA Generativa, com algoritmos e scripts proprietários, <strong>execução 100% offline</strong> e <strong>soberania total</strong>.</li><li><strong>Homologação NVIDIA (2025) – em andamento</strong> – operação oficial em <strong>RTX e A100</strong>, com <strong>CUDA e TensorRT</strong>.</li><li><strong>Migração para SUSE Linux AI (2025)</strong> – substitui Debian; compatível com <strong>NVIDIA AI Enterprise</strong>.</li><li><strong>Parceria em andamento SERPRO (2025)</strong> – implantação na <strong>AWS</strong> em <strong>modelo de bilhetagem</strong>, com integração ao <strong>Marketplace SERPRO</strong> e <strong>PRODAM (conclusão em 2026)</strong>.</li><li>Reconhecimento por <strong>independência tecnológica</strong>, <strong>LGPD/ISO 27001</strong> e <strong>soberania digital</strong>.</li></ul>"
+      }
+    }
   }
 };
