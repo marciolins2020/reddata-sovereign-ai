@@ -23,18 +23,26 @@ export const Header = () => {
   const navigate = useNavigate();
 
   // Menu principal com navegação por âncoras
-  const menuItems = [
+  const menuItems: Array<{
+    label: string;
+    href: string;
+    id: string;
+    isRoute?: boolean;
+    submenu?: Array<{ label: string; href: string; isRoute?: boolean }>;
+  }> = [
     { label: t('header.mainNav'), href: "#hero", id: "hero" },
     { label: "Plataforma", href: "#plataforma", id: "plataforma", submenu: [
       { label: "Capacidades", href: "#plataforma" },
       { label: "Conectores", href: "#conectores" },
       { label: "Como Funciona", href: "#como-funciona" },
       { label: "Appliance", href: "#appliance" },
+      { label: "Arquitetura", href: "#arquitetura" },
     ]},
     { label: t('header.solutions'), href: "#solucoes", id: "solucoes", submenu: [
       { label: "Aplicações", href: "#casos-uso" },
       { label: "Módulos", href: "#modulos" },
       { label: "Dashboard Demo", href: "#dashboard-demo" },
+      { label: "Automação e Alertas", href: "#alertas" },
     ]},
     { label: "Diferenciais", href: "#diferenciais", id: "diferenciais", submenu: [
       { label: "Técnico", href: "#diferenciais" },
@@ -47,6 +55,7 @@ export const Header = () => {
       { label: "Comparação", href: "#comparacao" },
       { label: "Casos de Sucesso", href: "#cases" },
     ]},
+    { label: "Trajetória", href: "/timeline", id: "timeline", isRoute: true },
   ];
 
   useEffect(() => {
@@ -76,8 +85,14 @@ export const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [location.pathname]);
 
-  const scrollToSection = (href: string) => {
+  const scrollToSection = (href: string, isRoute?: boolean) => {
     setIsMobileMenuOpen(false);
+    
+    // Se for uma rota (não uma âncora), navegue diretamente
+    if (isRoute) {
+      navigate(href);
+      return;
+    }
     
     if (location.pathname !== "/") {
       // Se não estiver na página inicial, navegar primeiro para lá
@@ -138,7 +153,7 @@ export const Header = () => {
                               <li key={subitem.href}>
                                 <NavigationMenuLink asChild>
                                   <button
-                                    onClick={() => scrollToSection(subitem.href)}
+                                    onClick={() => scrollToSection(subitem.href, subitem.isRoute)}
                                     className="block w-full text-left select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                                   >
                                     <div className="text-sm font-medium">{subitem.label}</div>
@@ -154,7 +169,7 @@ export const Header = () => {
                 ) : (
                   <button
                     key={item.href}
-                    onClick={() => scrollToSection(item.href)}
+                    onClick={() => scrollToSection(item.href, item.isRoute)}
                     className={`px-4 py-2 text-sm font-medium transition-all rounded-md relative focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
                       isActiveLink(item.id)
                         ? "text-primary after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-8 after:h-0.5 after:bg-primary"
@@ -208,7 +223,7 @@ export const Header = () => {
                 {menuItems.map((item) => (
                   <div key={item.href}>
                     <button
-                      onClick={() => scrollToSection(item.href)}
+                      onClick={() => scrollToSection(item.href, item.isRoute)}
                       className={`w-full px-4 py-3 text-left text-sm font-medium transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
                         isActiveLink(item.id)
                           ? "text-primary bg-accent border-l-4 border-primary"
