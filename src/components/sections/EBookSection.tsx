@@ -4,6 +4,7 @@ import { BookOpen, Download, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import { scrollToElement } from "@/lib/scroll";
 
 export const EBookSection = () => {
   const { t } = useLanguage();
@@ -172,6 +173,16 @@ export const EBookSection = () => {
               {/* Decorative elements */}
               <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-primary/5 blur-3xl rounded-full" />
             </div>
+          </div>
+          
+          {/* CTA to Contact */}
+          <div className="text-center mt-12">
+            <Button 
+              size="lg" 
+              onClick={() => scrollToElement('#contact-form')}
+            >
+              Solicitar Demonstração
+            </Button>
           </div>
         </div>
       </div>

@@ -4,7 +4,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { scrollToElement } from "@/lib/scroll";
 
 export const FAQSection = () => {
   const { t } = useLanguage();
@@ -53,11 +55,19 @@ export const FAQSection = () => {
           </Accordion>
         </div>
         
-        <div className="text-center mt-12">
+        <div className="text-center mt-12 space-y-6">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full">
             <span className="text-sm text-primary font-medium">
               {t('faq.stillHaveQuestions')}
             </span>
+          </div>
+          <div>
+            <Button 
+              size="lg" 
+              onClick={() => scrollToElement('#contact-form')}
+            >
+              Solicitar Demonstração
+            </Button>
           </div>
         </div>
       </div>

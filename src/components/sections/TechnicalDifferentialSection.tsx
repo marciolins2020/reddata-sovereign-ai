@@ -1,5 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { 
   Cpu,
   Zap,
@@ -94,24 +100,33 @@ export const TechnicalDifferentialSection = () => {
           </Card>
 
           {/* Technical Points Grid */}
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
-            {technicalPoints.slice(1).map((point, index) => (
-              <Card key={index} className="border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <point.icon className="h-6 w-6 text-primary" />
+          <TooltipProvider>
+            <div className="grid md:grid-cols-2 gap-6 mb-12">
+              {technicalPoints.slice(1).map((point, index) => (
+                <Card key={index} className="border-2 hover:border-primary/50 transition-all duration-200 hover:shadow-lg">
+                  <CardContent className="p-6">
+                    <div className="flex items-start gap-4">
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 cursor-help">
+                            <point.icon className="h-6 w-6 text-primary" aria-hidden="true" />
+                          </div>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p className="text-sm">{point.title}</p>
+                        </TooltipContent>
+                      </Tooltip>
+                      <div className="flex-1">
+                        <p className="text-gray-900 font-medium leading-relaxed">
+                          {point.title}
+                        </p>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <p className="text-gray-900 font-medium leading-relaxed">
-                        {point.title}
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </TooltipProvider>
 
           {/* Performance Highlight */}
           <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-2 border-primary/20">

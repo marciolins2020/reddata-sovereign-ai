@@ -1,5 +1,11 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { Cloud, Server, Settings } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { scrollToElement } from "@/lib/scroll";
@@ -41,49 +47,72 @@ export const VirtualMachinesSection = () => {
           {/* Left - Benefits */}
           <div>
             <Card className="p-8 bg-gradient-tech border-0">
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Server className="h-6 w-6 text-primary" />
+              <TooltipProvider>
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4">
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 cursor-help">
+                          <Server className="h-6 w-6 text-primary" aria-hidden="true" />
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>{t('virtualMachines.benefit1Title')}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                    <div>
+                      <h3 className="text-lg font-semibold text-foreground mb-2">
+                        {t('virtualMachines.benefit1Title')}
+                      </h3>
+                      <p className="text-muted-foreground">
+                        {t('virtualMachines.benefit1Desc')}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-foreground mb-2">
-                      {t('virtualMachines.benefit1Title')}
-                    </h3>
-                    <p className="text-muted-foreground">
-                      {t('virtualMachines.benefit1Desc')}
-                    </p>
+                  
+                  <div className="flex items-start gap-4">
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 cursor-help">
+                          <Cloud className="h-6 w-6 text-primary" aria-hidden="true" />
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>{t('virtualMachines.benefit2Title')}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                    <div>
+                      <h3 className="text-lg font-semibold text-foreground mb-2">
+                        {t('virtualMachines.benefit2Title')}
+                      </h3>
+                      <p className="text-muted-foreground">
+                        {t('virtualMachines.benefit2Desc')}
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-4">
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 cursor-help">
+                          <Settings className="h-6 w-6 text-primary" aria-hidden="true" />
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>{t('virtualMachines.benefit3Title')}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                    <div>
+                      <h3 className="text-lg font-semibold text-foreground mb-2">
+                        {t('virtualMachines.benefit3Title')}
+                      </h3>
+                      <p className="text-muted-foreground">
+                        {t('virtualMachines.benefit3Desc')}
+                      </p>
+                    </div>
                   </div>
                 </div>
-                
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Cloud className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-foreground mb-2">
-                      {t('virtualMachines.benefit2Title')}
-                    </h3>
-                    <p className="text-muted-foreground">
-                      {t('virtualMachines.benefit2Desc')}
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Settings className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-foreground mb-2">
-                      {t('virtualMachines.benefit3Title')}
-                    </h3>
-                    <p className="text-muted-foreground">
-                      {t('virtualMachines.benefit3Desc')}
-                    </p>
-                  </div>
-                </div>
-              </div>
+              </TooltipProvider>
             </Card>
             
             <div className="mt-8">
