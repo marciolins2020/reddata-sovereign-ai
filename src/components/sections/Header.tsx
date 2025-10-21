@@ -155,6 +155,19 @@ export const Header = () => {
                       </NavigationMenuItem>
                     </NavigationMenuList>
                   </NavigationMenu>
+                ) : item.isRoute ? (
+                  <Link
+                    key={item.href}
+                    to={item.href}
+                    className={`px-3 py-2 text-sm font-medium transition-all rounded-md relative focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
+                      location.pathname === item.href
+                        ? "text-primary after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-8 after:h-0.5 after:bg-primary"
+                        : "text-foreground hover:text-primary hover:bg-accent"
+                    }`}
+                    aria-current={location.pathname === item.href ? "page" : undefined}
+                  >
+                    {item.label}
+                  </Link>
                 ) : (
                   <button
                     key={item.href}
@@ -203,17 +216,32 @@ export const Header = () => {
               <nav className="flex flex-col space-y-2" aria-label="Mobile navigation">
                 {menuItems.map((item) => (
                   <div key={item.href}>
-                    <button
-                      onClick={() => scrollToSection(item.href, item.isRoute)}
-                      className={`w-full px-4 py-3 text-left text-sm font-medium transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
-                        isActiveLink(item.id)
-                          ? "text-primary bg-accent border-l-4 border-primary"
-                          : "text-foreground hover:text-primary hover:bg-accent"
-                      }`}
-                      aria-current={isActiveLink(item.id) ? "page" : undefined}
-                    >
-                      {item.label}
-                    </button>
+                    {item.isRoute ? (
+                      <Link
+                        to={item.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className={`block w-full px-4 py-3 text-left text-sm font-medium transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
+                          location.pathname === item.href
+                            ? "text-primary bg-accent border-l-4 border-primary"
+                            : "text-foreground hover:text-primary hover:bg-accent"
+                        }`}
+                        aria-current={location.pathname === item.href ? "page" : undefined}
+                      >
+                        {item.label}
+                      </Link>
+                    ) : (
+                      <button
+                        onClick={() => scrollToSection(item.href, item.isRoute)}
+                        className={`w-full px-4 py-3 text-left text-sm font-medium transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
+                          isActiveLink(item.id)
+                            ? "text-primary bg-accent border-l-4 border-primary"
+                            : "text-foreground hover:text-primary hover:bg-accent"
+                        }`}
+                        aria-current={isActiveLink(item.id) ? "page" : undefined}
+                      >
+                        {item.label}
+                      </button>
+                    )}
                     {item.submenu && (
                       <div className="ml-4 mt-1 space-y-1">
                         {item.submenu.map((subitem) => (
@@ -230,6 +258,7 @@ export const Header = () => {
                     )}
                   </div>
                 ))}
+                
                 
                 <div className="px-4 pt-2">
                   <button
