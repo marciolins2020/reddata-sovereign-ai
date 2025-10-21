@@ -58,6 +58,7 @@ export const ApplicationsSection = () => {
       ]
     }
   ];
+
   return (
     <section id="casos-uso" className="py-12 bg-gradient-tech">
       <div className="container mx-auto px-4">

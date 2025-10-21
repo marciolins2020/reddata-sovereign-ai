@@ -49,7 +49,7 @@ export const ApplianceSection = () => {
   ];
 
   return (
-    <section className="py-12 bg-gradient-dark text-white relative overflow-hidden">
+    <section className="py-12 bg-gradient-dark text-white relative overflow-hidden" id="appliance">
       {/* Background decoration */}
       <div className="absolute inset-0">
         <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>

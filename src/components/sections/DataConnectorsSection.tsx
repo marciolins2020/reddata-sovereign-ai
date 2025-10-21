@@ -40,7 +40,7 @@ export const DataConnectorsSection = () => {
   ];
 
   return (
-    <section className="py-10 px-4 bg-gradient-to-b from-background to-muted/50">
+    <section className="py-10 px-4 bg-gradient-to-b from-background to-muted/50" id="conectores">
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-12">
           <Badge className="mb-4 text-lg px-6 py-2" variant="secondary">

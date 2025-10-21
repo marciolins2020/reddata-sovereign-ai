@@ -26,7 +26,7 @@ export const VirtualMachinesSection = () => {
   const { t } = useLanguage();
 
   return (
-    <section className="py-8 bg-background">
+    <section className="py-8 bg-background" id="vms">
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">

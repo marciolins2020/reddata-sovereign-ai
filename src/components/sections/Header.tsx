@@ -22,20 +22,31 @@ export const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Menu reduzido a 5 itens-âncora principais
+  // Menu principal com navegação por âncoras
   const menuItems = [
     { label: t('header.mainNav'), href: "#hero", id: "hero" },
-    { label: t('header.howItWorks'), href: "#como-funciona", id: "como-funciona" },
-    { label: t('header.solutions'), href: "#casos-uso", id: "casos-uso" },
-    { label: t('header.cases'), href: "#cases", id: "cases" },
-    { label: t('header.resources'), href: "#recursos", id: "recursos" },
-  ];
-
-  const casosUsoItems = [
-    { label: t('useCases.energy'), href: "/casos-uso/energia", description: t('useCases.energyDesc') },
-    { label: t('useCases.industry'), href: "/casos-uso/industria", description: t('useCases.industryDesc') },
-    { label: t('useCases.government'), href: "/casos-uso/governo", description: t('useCases.governmentDesc') },
-    { label: t('useCases.retail'), href: "/casos-uso/varejo", description: t('useCases.retailDesc') },
+    { label: "Plataforma", href: "#plataforma", id: "plataforma", submenu: [
+      { label: "Capacidades", href: "#plataforma" },
+      { label: "Conectores", href: "#conectores" },
+      { label: "Como Funciona", href: "#como-funciona" },
+      { label: "Appliance", href: "#appliance" },
+    ]},
+    { label: t('header.solutions'), href: "#solucoes", id: "solucoes", submenu: [
+      { label: "Aplicações", href: "#casos-uso" },
+      { label: "Módulos", href: "#modulos" },
+      { label: "Dashboard Demo", href: "#dashboard-demo" },
+    ]},
+    { label: "Diferenciais", href: "#diferenciais", id: "diferenciais", submenu: [
+      { label: "Técnico", href: "#diferenciais" },
+      { label: "White Label", href: "#white-label" },
+      { label: "Máquinas Virtuais", href: "#vms" },
+    ]},
+    { label: t('header.resources'), href: "#recursos", id: "recursos", submenu: [
+      { label: "FAQ", href: "#recursos" },
+      { label: "eBook", href: "#ebook" },
+      { label: "Comparação", href: "#comparacao" },
+      { label: "Casos de Sucesso", href: "#cases" },
+    ]},
   ];
 
   useEffect(() => {
@@ -45,7 +56,7 @@ export const Header = () => {
 
       // ScrollSpy - detectar seção ativa apenas na página principal
       if (location.pathname === "/") {
-        const sections = ["hero", "como-funciona", "casos-uso", "cases", "recursos"];
+        const sections = ["hero", "plataforma", "solucoes", "diferenciais", "recursos"];
         
         for (const section of sections) {
           const element = document.getElementById(section);
@@ -109,21 +120,51 @@ export const Header = () => {
               />
             </div>
 
-            {/* Desktop Menu - 5 itens principais */}
+            {/* Desktop Menu - Navigation with dropdowns */}
             <nav className="hidden lg:flex items-center space-x-1" aria-label="Main navigation">
               {menuItems.map((item) => (
-                <button
-                  key={item.href}
-                  onClick={() => scrollToSection(item.href)}
-                  className={`px-4 py-2 text-sm font-medium transition-all rounded-md relative focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
-                    isActiveLink(item.id)
-                      ? "text-primary after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-8 after:h-0.5 after:bg-primary"
-                      : "text-foreground hover:text-primary hover:bg-accent"
-                  }`}
-                  aria-current={isActiveLink(item.id) ? "page" : undefined}
-                >
-                  {item.label}
-                </button>
+                item.submenu ? (
+                  <NavigationMenu key={item.href}>
+                    <NavigationMenuList>
+                      <NavigationMenuItem>
+                        <NavigationMenuTrigger className={`px-4 py-2 text-sm font-medium ${
+                          isActiveLink(item.id) ? "text-primary" : "text-foreground"
+                        }`}>
+                          {item.label}
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent>
+                          <ul className="grid w-[200px] gap-1 p-2">
+                            {item.submenu.map((subitem) => (
+                              <li key={subitem.href}>
+                                <NavigationMenuLink asChild>
+                                  <button
+                                    onClick={() => scrollToSection(subitem.href)}
+                                    className="block w-full text-left select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                                  >
+                                    <div className="text-sm font-medium">{subitem.label}</div>
+                                  </button>
+                                </NavigationMenuLink>
+                              </li>
+                            ))}
+                          </ul>
+                        </NavigationMenuContent>
+                      </NavigationMenuItem>
+                    </NavigationMenuList>
+                  </NavigationMenu>
+                ) : (
+                  <button
+                    key={item.href}
+                    onClick={() => scrollToSection(item.href)}
+                    className={`px-4 py-2 text-sm font-medium transition-all rounded-md relative focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
+                      isActiveLink(item.id)
+                        ? "text-primary after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-8 after:h-0.5 after:bg-primary"
+                        : "text-foreground hover:text-primary hover:bg-accent"
+                    }`}
+                    aria-current={isActiveLink(item.id) ? "page" : undefined}
+                  >
+                    {item.label}
+                  </button>
+                )
               ))}
             </nav>
 
@@ -165,18 +206,32 @@ export const Header = () => {
             <div className="lg:hidden py-4 border-t border-border bg-background/80 backdrop-blur-xl">
               <nav className="flex flex-col space-y-2" aria-label="Mobile navigation">
                 {menuItems.map((item) => (
-                  <button
-                    key={item.href}
-                    onClick={() => scrollToSection(item.href)}
-                    className={`px-4 py-3 text-left text-sm font-medium transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
-                      isActiveLink(item.id)
-                        ? "text-primary bg-accent border-l-4 border-primary"
-                        : "text-foreground hover:text-primary hover:bg-accent"
-                    }`}
-                    aria-current={isActiveLink(item.id) ? "page" : undefined}
-                  >
-                    {item.label}
-                  </button>
+                  <div key={item.href}>
+                    <button
+                      onClick={() => scrollToSection(item.href)}
+                      className={`w-full px-4 py-3 text-left text-sm font-medium transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
+                        isActiveLink(item.id)
+                          ? "text-primary bg-accent border-l-4 border-primary"
+                          : "text-foreground hover:text-primary hover:bg-accent"
+                      }`}
+                      aria-current={isActiveLink(item.id) ? "page" : undefined}
+                    >
+                      {item.label}
+                    </button>
+                    {item.submenu && (
+                      <div className="ml-4 mt-1 space-y-1">
+                        {item.submenu.map((subitem) => (
+                          <button
+                            key={subitem.href}
+                            onClick={() => scrollToSection(subitem.href)}
+                            className="w-full px-4 py-2 text-left text-sm text-muted-foreground hover:text-primary hover:bg-accent rounded-md transition-colors"
+                          >
+                            {subitem.label}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ))}
                 
                 <div className="px-4 pt-2 space-y-2">

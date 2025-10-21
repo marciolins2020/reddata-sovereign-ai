@@ -52,7 +52,7 @@ export const PlatformCapabilitiesSection = () => {
   ];
 
   return (
-    <section className="py-10 px-4 bg-gradient-to-b from-background via-muted/30 to-background">
+    <section className="py-10 px-4 bg-gradient-to-b from-background via-muted/30 to-background" id="plataforma">
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
