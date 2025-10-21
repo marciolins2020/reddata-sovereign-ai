@@ -684,6 +684,28 @@ export default {
     differential4: "Escalabilidade: solução replicável para outras regiões e redes de distribuição.",
     ctaButton: "Solicitar Demonstração"
   },
+  ebook: {
+    materialsTitle: "Materiais",
+    freeMaterial: "Material Gratuito",
+    title: "Governo Impulsionado por Dados",
+    subtitle: "Transformando a Gestão Pública em Saúde, Educação, Fazenda e Segurança",
+    feature1: "Conceitos fundamentais de Data Driven Government",
+    feature2: "Aplicações práticas em setores críticos do governo",
+    feature3: "Estudos de caso e melhores práticas",
+    feature4: "Estratégias de implementação e ferramentas",
+    downloadTitle: "Baixe o eBook Gratuito",
+    downloadSubtitle: "Insira seu email para receber o material completo",
+    emailPlaceholder: "seu@email.com",
+    downloadButton: "Baixar eBook Agora",
+    privacyNote: "Ao baixar, você concorda em receber comunicações da RedMaxx. Seus dados estão protegidos pela LGPD.",
+    successTitle: "Download Iniciado!",
+    successMessage: "Obrigado pelo interesse. O eBook está sendo baixado.",
+    downloadAgain: "Baixar Novamente",
+    invalidEmail: "Email inválido",
+    invalidEmailDesc: "Por favor, insira um email válido para baixar o eBook.",
+    downloadStarted: "Download iniciado!",
+    downloadStartedDesc: "Seu eBook está sendo baixado. Obrigado pelo interesse!"
+  },
   auth: {
     login: "Entrar",
     signup: "Criar Conta",

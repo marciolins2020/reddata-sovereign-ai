@@ -684,6 +684,28 @@ export default {
     differential4: "Scalability: replicable solution for other regions and distribution networks.",
     ctaButton: "Request Demo"
   },
+  ebook: {
+    materialsTitle: "Materials",
+    freeMaterial: "Free Material",
+    title: "Data-Driven Government",
+    subtitle: "Transforming Public Management in Health, Education, Finance and Security",
+    feature1: "Fundamental concepts of Data Driven Government",
+    feature2: "Practical applications in critical government sectors",
+    feature3: "Case studies and best practices",
+    feature4: "Implementation strategies and tools",
+    downloadTitle: "Download Free eBook",
+    downloadSubtitle: "Enter your email to receive the complete material",
+    emailPlaceholder: "your@email.com",
+    downloadButton: "Download eBook Now",
+    privacyNote: "By downloading, you agree to receive communications from RedMaxx. Your data is protected by LGPD.",
+    successTitle: "Download Started!",
+    successMessage: "Thank you for your interest. The eBook is being downloaded.",
+    downloadAgain: "Download Again",
+    invalidEmail: "Invalid email",
+    invalidEmailDesc: "Please enter a valid email to download the eBook.",
+    downloadStarted: "Download started!",
+    downloadStartedDesc: "Your eBook is being downloaded. Thank you for your interest!"
+  },
   auth: {
     login: "Login",
     signup: "Sign Up",
