@@ -31,20 +31,20 @@ export const Header = () => {
     submenu?: Array<{ label: string; href: string }>;
   }> = [
     { label: t('header.mainNav'), href: "#hero", id: "hero" },
-    { label: "Como Funciona", href: "#como-funciona", id: "como-funciona" },
-    { label: "Aplicações", href: "#casos-uso", id: "casos-uso" },
-    { label: "Trajetória", href: "/trajetoria", id: "timeline", isRoute: true },
+    { label: t('header.howItWorks'), href: "#como-funciona", id: "como-funciona" },
+    { label: t('header.solutions'), href: "#casos-uso", id: "casos-uso" },
+    { label: t('header.trajectory'), href: "/trajetoria", id: "timeline", isRoute: true },
     { label: "Dashboard", href: "#dashboard-demo", id: "dashboard-demo" },
-    { label: "Módulos", href: "/modulos", id: "modulos", isRoute: true },
-    { label: "Casos de Uso", href: "#cases", id: "cases", submenu: [
-      { label: "Governo", href: "/casos-uso/governo" },
-      { label: "Energia", href: "/casos-uso/energia" },
-      { label: "Indústria", href: "/casos-uso/industria" },
-      { label: "Varejo", href: "/casos-uso/varejo" },
+    { label: t('header.modules'), href: "/modulos", id: "modulos", isRoute: true },
+    { label: t('header.cases'), href: "#cases", id: "cases", submenu: [
+      { label: t('casosUso.government'), href: "/casos-uso/governo" },
+      { label: t('casosUso.energy'), href: "/casos-uso/energia" },
+      { label: t('casosUso.industry'), href: "/casos-uso/industria" },
+      { label: t('casosUso.retail'), href: "/casos-uso/varejo" },
     ]},
-    { label: "Materiais", href: "#ebook", id: "ebook" },
-    { label: "FAQ", href: "#recursos", id: "recursos" },
-    { label: "Contato", href: "#contact-form", id: "contact-form" },
+    { label: t('ebook.materialsTitle'), href: "#ebook", id: "ebook" },
+    { label: t('header.faq'), href: "#recursos", id: "recursos" },
+    { label: t('header.contact'), href: "#contact-form", id: "contact-form" },
   ];
 
   useEffect(() => {
