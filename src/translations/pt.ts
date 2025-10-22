@@ -44,7 +44,7 @@ export default {
     pillar1Desc: "Roda em nuvem pública, privada, on-premises, em máquinas virtuais ou como appliance local.",
     pillar2Title: "Conector Universal de Dados",
     pillar2Desc:
-      "Poderoso motor de Big Data Analytics que integra dados estruturados e não estruturados de qualquer fonte: ERPs, APIs, CRMs, planilhas, sensores, redes sociais, bancos de dados e sistemas legados.",
+      "Integra dados de qualquer fonte, ERPs, APIs, CRMs, sensores e sistemas legados, sem necessidade de Data Warehouse, pois o RedData possui arquitetura lakehouse com ingestão, modelagem e análise em tempo real.",
     pillar3Title: "Processamento com IA Preditiva",
     pillar3Desc:
       "Machine Learning e modelos estatísticos transformam grandes volumes de dados em insights prontos para decisão.",
