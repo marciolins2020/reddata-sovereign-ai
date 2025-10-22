@@ -54,7 +54,8 @@ export default {
     pillar5Desc:
       "Assistente embarcado que opera offline e responde em linguagem natural, com diagnósticos automatizados.",
     pillar6Title: "Segurança e Conformidade",
-    pillar6Desc: "Totalmente aderente à LGPD, GDPR e ISO 27001. Arquitetura blindada para ambientes críticos.",
+    pillar6Desc:
+      "Totalmente aderente à LGPD, GDPR, ISO 27001 e ISO 20000. Arquitetura blindada para ambientes críticos.",
     integrated: "6 pilares integrados em uma única plataforma",
   },
   appliance: {
