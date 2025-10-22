@@ -7,6 +7,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import reddataLogo from "@/assets/reddata-logo-timeline.png";
 import DOMPurify from "dompurify";
 import { useLanguage } from "@/contexts/LanguageContext";
+import pt from "@/translations/pt";
+import en from "@/translations/en";
 
 // Sanitize HTML to prevent XSS attacks
 const sanitizeHtml = (html: string): string => {
@@ -81,21 +83,24 @@ const TimelineNode = ({
 };
 
 const Timeline = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [selectedItem, setSelectedItem] = useState<TimelineItem | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [currentTrack, setCurrentTrack] = useState<'reddata' | 'llms'>('reddata');
   
   // Get timeline data from translations
+  const translations = language === 'pt' ? pt : en;
+  const reddataTimeline = translations.timeline.reddata;
+  
   const timelineData = {
     reddata: [
-      { year: t('timeline.reddata.2017.year'), title: t('timeline.reddata.2017.title'), detailHtml: t('timeline.reddata.2017.detail') },
-      { year: t('timeline.reddata.2018.year'), title: t('timeline.reddata.2018.title'), detailHtml: t('timeline.reddata.2018.detail') },
-      { year: t('timeline.reddata.2019.year'), title: t('timeline.reddata.2019.title'), detailHtml: t('timeline.reddata.2019.detail') },
-      { year: t('timeline.reddata.2020.year'), title: t('timeline.reddata.2020.title'), detailHtml: t('timeline.reddata.2020.detail') },
-      { year: t('timeline.reddata.2021.year'), title: t('timeline.reddata.2021.title'), detailHtml: t('timeline.reddata.2021.detail') },
-      { year: t('timeline.reddata["2022-2023"].year'), title: t('timeline.reddata["2022-2023"].title'), detailHtml: t('timeline.reddata["2022-2023"].detail') },
-      { year: t('timeline.reddata["2024-2025"].year'), title: t('timeline.reddata["2024-2025"].title'), detailHtml: t('timeline.reddata["2024-2025"].detail') },
+      { year: reddataTimeline[2017].year, title: reddataTimeline[2017].title, detailHtml: reddataTimeline[2017].detail },
+      { year: reddataTimeline[2018].year, title: reddataTimeline[2018].title, detailHtml: reddataTimeline[2018].detail },
+      { year: reddataTimeline[2019].year, title: reddataTimeline[2019].title, detailHtml: reddataTimeline[2019].detail },
+      { year: reddataTimeline[2020].year, title: reddataTimeline[2020].title, detailHtml: reddataTimeline[2020].detail },
+      { year: reddataTimeline[2021].year, title: reddataTimeline[2021].title, detailHtml: reddataTimeline[2021].detail },
+      { year: reddataTimeline["2022-2023"].year, title: reddataTimeline["2022-2023"].title, detailHtml: reddataTimeline["2022-2023"].detail },
+      { year: reddataTimeline["2024-2025"].year, title: reddataTimeline["2024-2025"].title, detailHtml: reddataTimeline["2024-2025"].detail },
     ],
     llms: [] as TimelineItem[]
   };
