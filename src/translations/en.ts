@@ -389,7 +389,7 @@ export default {
     companyInfo: "RedMaxx",
     experience: "15+ years of experience",
     nationalTech: "100% national technology",
-    certified: "ISO 27001 certified",
+    certified: "ISO 27001 and ISO 20000 compliant",
     methodology: "Data Driven Government Methodology",
     addresses: "Addresses",
     headquarters: "Headquarters",

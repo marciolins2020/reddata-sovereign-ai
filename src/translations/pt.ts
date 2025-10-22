@@ -389,7 +389,7 @@ export default {
     companyInfo: "RedMaxx",
     experience: "15+ anos de experiência",
     nationalTech: "100% tecnologia nacional",
-    certified: "ISO 27001 certificada",
+    certified: "Em conformidade ISO 27001 e ISO 20000",
     methodology: "Metodologia Data Driven Government",
     addresses: "Endereços",
     headquarters: "Matriz",
