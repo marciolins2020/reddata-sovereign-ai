@@ -9,7 +9,7 @@ export default {
     resources: "Recursos",
     faq: "FAQ",
     contact: "Contato",
-    requestDemo: "Solicitar Demonstração"
+    requestDemo: "Solicitar Demonstração",
   },
   hero: {
     badge: "Plataforma 100% Brasileira | Plataforma Data Driven Business",
@@ -27,14 +27,14 @@ export default {
     feature3Title: "100+ Implementações",
     feature3Desc: "Órgãos Públicos e Empresas Privadas",
     feature4Title: "Plataforma Data Driven Business",
-    feature4Desc: "Decisões Baseadas em Dados"
+    feature4Desc: "Decisões Baseadas em Dados",
   },
   stats: {
     highlight: "Mais de 100 implementações realizadas",
     implementations: "Implementações",
     yearsExperience: "Anos de Experiência",
     compliance: "Conformidade",
-    certified: "ISO 27001 e ISO 20000"
+    certified: "ISO 27001 e ISO 20000",
   },
   howItWorks: {
     title: "Como Funciona a RedData®",
@@ -43,22 +43,26 @@ export default {
     pillar1Title: "Infraestrutura Flexível e Soberana",
     pillar1Desc: "Roda em nuvem pública, privada, on-premises, em máquinas virtuais ou como appliance local.",
     pillar2Title: "Conector Universal de Dados",
-    pillar2Desc: "Poderoso motor de Big Data Analytics que integra dados estruturados e não estruturados de qualquer fonte: ERPs, APIs, CRMs, planilhas, sensores, redes sociais, bancos de dados e sistemas legados.",
+    pillar2Desc:
+      "Poderoso motor de Big Data Analytics que integra dados estruturados e não estruturados de qualquer fonte: ERPs, APIs, CRMs, planilhas, sensores, redes sociais, bancos de dados e sistemas legados.",
     pillar3Title: "Processamento com IA Preditiva",
-    pillar3Desc: "Machine Learning e modelos estatísticos transformam grandes volumes de dados em insights prontos para decisão.",
+    pillar3Desc:
+      "Machine Learning e modelos estatísticos transformam grandes volumes de dados em insights prontos para decisão.",
     pillar4Title: "Dashboards Interativos em Tempo Real",
     pillar4Desc: "Visualizações estratégicas personalizáveis, com alertas e relatórios acionáveis.",
     pillar5Title: "IA Generativa Local (sem internet)",
-    pillar5Desc: "Assistente embarcado que opera offline e responde em linguagem natural, com diagnósticos automatizados.",
+    pillar5Desc:
+      "Assistente embarcado que opera offline e responde em linguagem natural, com diagnósticos automatizados.",
     pillar6Title: "Segurança e Conformidade",
     pillar6Desc: "Totalmente aderente à LGPD, GDPR e ISO 27001. Arquitetura blindada para ambientes críticos.",
-    integrated: "6 pilares integrados em uma única plataforma"
+    integrated: "6 pilares integrados em uma única plataforma",
   },
   appliance: {
     badge: "Máxima Segurança",
     title: "RedData® Appliance",
     title2: "O poder do RedData®, 100% dentro do seu datacenter.",
-    description: "Para ambientes que exigem máxima segurança e controle total dos dados, o RedData® Appliance oferece toda a potência da plataforma em hardware dedicado.",
+    description:
+      "Para ambientes que exigem máxima segurança e controle total dos dados, o RedData® Appliance oferece toda a potência da plataforma em hardware dedicado.",
     highlight1Title: "Operação offline",
     highlight1Desc: "Ideal para ambientes sensíveis",
     highlight2Title: "SSD criptografado + GPU dedicada",
@@ -76,21 +80,23 @@ export default {
     security: "Segurança",
     finance: "Fazenda",
     justiceCourtis: "Tribunais de Justiça",
-    accountCourtis: "Tribunais de Contas"
+    accountCourtis: "Tribunais de Contas",
   },
   virtualMachines: {
     badge: "Máxima Flexibilidade",
     title: "Execução em Máquinas Virtuais",
-    subtitle: "RedData® roda em qualquer infraestrutura virtualizada existente, sem necessidade de mudanças técnicas ou aquisição de novos servidores.",
+    subtitle:
+      "RedData® roda em qualquer infraestrutura virtualizada existente, sem necessidade de mudanças técnicas ou aquisição de novos servidores.",
     benefit1Title: "Aproveite sua infraestrutura atual",
-    benefit1Desc: "Não há necessidade de investir em novos servidores. Use os recursos já disponíveis no seu datacenter.",
+    benefit1Desc:
+      "Não há necessidade de investir em novos servidores. Use os recursos já disponíveis no seu datacenter.",
     benefit2Title: "Implementação rápida",
     benefit2Desc: "Deploy em minutos na sua plataforma de virtualização preferida, seja on-premises ou na nuvem.",
     benefit3Title: "Escalabilidade dinâmica",
     benefit3Desc: "Ajuste recursos conforme a demanda, garantindo performance otimizada para suas análises de dados.",
     simulate: "Simular Implementação",
     compatibleWith: "Também pode ser Virtualizado em:",
-    manyMore: "E muitas outras plataformas de virtualização"
+    manyMore: "E muitas outras plataformas de virtualização",
   },
   useCases: {
     energy: "Energia",
@@ -101,7 +107,7 @@ export default {
     governmentDesc: "Transparência e eficiência na gestão pública",
     retail: "Varejo",
     retailDesc: "Pricing inteligente e otimização de mix por região",
-    exploreCase: "Explorar Caso"
+    exploreCase: "Explorar Caso",
   },
   dashboardDemo: {
     badge: "Demonstração",
@@ -114,7 +120,7 @@ export default {
     implementationTime: "Tempo de implementação",
     days: "dias",
     dataIntegrated: "Dados integrados",
-    monitoring: "Monitoramento ativo"
+    monitoring: "Monitoramento ativo",
   },
   comparison: {
     title: "Por Que Escolher a RedData®?",
@@ -131,11 +137,12 @@ export default {
     partial: "Parcial",
     uniqueSolution: "Única solução 100% brasileira com IA offline",
     licensingTitle: "Modelo de Licenciamento SaaS Revolucionário",
-    licensingDesc: "RedData® oferece um modelo de licenciamento SaaS único com usuários ilimitados e cores de servidor ilimitados, tudo em um preço fixo anual.",
+    licensingDesc:
+      "RedData® oferece um modelo de licenciamento SaaS único com usuários ilimitados e cores de servidor ilimitados, tudo em um preço fixo anual.",
     unlimitedUsers: "Usuários Ilimitados",
     unlimitedCores: "Cores Ilimitados",
     fixedPrice: "Preço Fixo Anual",
-    characteristics: "Características"
+    characteristics: "Características",
   },
   applications: {
     title: "Aplicações Reais",
@@ -167,73 +174,76 @@ export default {
     financeDesc: "Previsão de arrecadação, compliance automatizado e análise de riscos tributários.",
     financeBenefit1: "Projeções orçamentárias precisas",
     financeBenefit2: "Compliance automatizado",
-    financeBenefit3: "Análise de riscos fiscais"
+    financeBenefit3: "Análise de riscos fiscais",
   },
   testimonials: {
     title: "O Que Dizem Nossos Clientes",
     subtitle: "Empresas que transformaram seus negócios com RedData®",
     conclusion: "Mais de 100 implementações bem-sucedidas em diversos setores",
-    testimonial1Quote: "Com o RedData®, conseguimos antever gargalos, melhorar a predição de manutenção e evitar prejuízos de milhões.",
+    testimonial1Quote:
+      "Com o RedData®, conseguimos antever gargalos, melhorar a predição de manutenção e evitar prejuízos de milhões.",
     testimonial1Author: "Empresa Geração e Distribuição de Energia",
     testimonial1Role: "Setor Energético",
     testimonial2Quote: "Reduzimos em 40% o tempo de auditoria com IA local.",
     testimonial2Author: "Tribunal de Contas Estadual",
     testimonial2Role: "Controle Externo",
-    testimonial3Quote: "Conseguimos prever nossa arrecadação com dados reais, além de aumentá-la promovendo a justiça fiscal.",
+    testimonial3Quote:
+      "Conseguimos prever nossa arrecadação com dados reais, além de aumentá-la promovendo a justiça fiscal.",
     testimonial3Author: "Prefeitura",
-    testimonial3Role: "Gestão Municipal"
+    testimonial3Role: "Gestão Municipal",
   },
   technicalArchitecture: {
     title: "Arquitetura RedData®",
-    subtitle: "O RedData® vai além da coleta e análise de dados. Ele garante escala, confiabilidade, governança e inteligência contínua. Entre os componentes técnicos mais relevantes estão:",
+    subtitle:
+      "O RedData® vai além da coleta e análise de dados. Ele garante escala, confiabilidade, governança e inteligência contínua. Entre os componentes técnicos mais relevantes estão:",
     dataArchitecture: {
       title: "Arquitetura de Dados",
       items: [
         "Data Lake + Data Warehouse híbrido para lidar com dados estruturados, semi-estruturados e não estruturados.",
         "Pipelines ETL/ELT resilientes para ingestão, transformação e enriquecimento de dados.",
-        "Suporte a processamento em lote e em tempo real (streaming/micro-batch)."
-      ]
+        "Suporte a processamento em lote e em tempo real (streaming/micro-batch).",
+      ],
     },
     aiMl: {
       title: "Inteligência Artificial & Machine Learning",
       items: [
         "Modelos de ML/IA versionados e monitorados em produção (MLOps).",
         "Detecção de drift para identificar perda de performance dos modelos.",
-        "Re-treinamento automático com base em novos dados."
-      ]
+        "Re-treinamento automático com base em novos dados.",
+      ],
     },
     governance: {
       title: "Governança e Segurança",
       items: [
         "Data Quality: validação, regras de consistência e perfilagem de dados.",
         "Catálogo de metadados com rastreabilidade e auditoria de origem.",
-        "Controle de acesso e criptografia em repouso e em trânsito (LGPD, ISO 27001)."
-      ]
+        "Controle de acesso e criptografia em repouso e em trânsito (LGPD, ISO 27001).",
+      ],
     },
     scalability: {
       title: "Escalabilidade e Desempenho",
       items: [
         "Arquitetura distribuída com escalabilidade horizontal em clusters.",
         "Balanceamento de carga e alta disponibilidade, com failover automático.",
-        "Camada de caching e otimização de consultas para reduzir latência."
-      ]
+        "Camada de caching e otimização de consultas para reduzir latência.",
+      ],
     },
     integration: {
       title: "Integração e Flexibilidade",
       items: [
         "APIs e microsserviços para integração com sistemas externos (ERP, CRM, legados, apps).",
         "Suporte a múltiplos bancos de dados (SQL, NoSQL, grafos, timeseries).",
-        "Infraestrutura híbrida: nuvem, on-premises ou appliance dedicado."
-      ]
+        "Infraestrutura híbrida: nuvem, on-premises ou appliance dedicado.",
+      ],
     },
     continuousOps: {
       title: "Operação Contínua",
       items: [
         "CI/CD para pipelines de dados e modelos de IA, garantindo evolução sem interrupção.",
         "Monitoramento proativo de performance da plataforma e dos modelos.",
-        "Alertas inteligentes em caso de falhas, anomalias ou degradação de resultados."
-      ]
-    }
+        "Alertas inteligentes em caso de falhas, anomalias ou degradação de resultados.",
+      ],
+    },
   },
   faq: {
     title: "Perguntas Frequentes",
@@ -256,7 +266,7 @@ export default {
     a8: "O RedData® complementa e potencializa suas ferramentas atuais. Pode integrar com sistemas existentes ou substituir soluções de BI tradicionais, oferecendo capacidades avançadas de IA que outras ferramentas não possuem.",
     q9: "Desde quando o RedData® existe?",
     a9: "O RedData® começou a ser desenvolvido pela RedMaxx em 2018, a partir da experiência acumulada em projetos de Big Data e Inteligência Artificial com softwares de mercados (BigTechs). Após dois anos de validação e aprimoramento em ambientes reais, foi lançado oficialmente em 2020. Desde então, evolui continuamente e hoje é uma plataforma consolidada, utilizada por governos e empresas privadas em todo o Brasil.",
-    stillHaveQuestions: "Ainda tem dúvidas? Entre em contato conosco"
+    stillHaveQuestions: "Ainda tem dúvidas? Entre em contato conosco",
   },
   contact: {
     language: "pt",
@@ -284,16 +294,19 @@ export default {
     send: "Enviar Mensagem",
     sending: "Enviando...",
     successTitle: "Obrigado pelo interesse no RedData®!",
-    successMessage: "Recebemos suas informações e nossa equipe técnica entrará em contato nas próximas 24 horas para agendar uma demonstração personalizada.",
+    successMessage:
+      "Recebemos suas informações e nossa equipe técnica entrará em contato nas próximas 24 horas para agendar uma demonstração personalizada.",
     successSending: "Enviando material informativo por email...",
-    privacyText: "Ao enviar este formulário, você concorda com nossa política de privacidade e autoriza o contato da RedMaxx.",
-    errorMessage: "Erro ao enviar mensagem. Tente novamente."
+    privacyText:
+      "Ao enviar este formulário, você concorda com nossa política de privacidade e autoriza o contato da RedMaxx.",
+    errorMessage: "Erro ao enviar mensagem. Tente novamente.",
   },
   platformCapabilities: {
     title: "Plataforma Completa de Dados",
     subtitle: "Do dado bruto à decisão inteligente: todas as capacidades em uma única plataforma",
     connectTitle: "Conectar",
-    connectDesc: "Integração com 300+ fontes de dados: APIs governamentais, ERPs nacionais, bancos públicos, sistemas legados e muito mais.",
+    connectDesc:
+      "Integração com 300+ fontes de dados: APIs governamentais, ERPs nacionais, bancos públicos, sistemas legados e muito mais.",
     storeTitle: "Armazenar",
     storeDesc: "Data Lake + Data Warehouse híbrido com segurança máxima, criptografia e total conformidade com LGPD.",
     processTitle: "Processar",
@@ -303,28 +316,30 @@ export default {
     visualizeTitle: "Visualizar",
     visualizeDesc: "Dashboards interativos em tempo real, relatórios personalizados e integração com Power BI.",
     automateTitle: "Automatizar",
-    automateDesc: "Workflows inteligentes, alertas preditivos e ações automatizadas baseadas em eventos e anomalias."
+    automateDesc: "Workflows inteligentes, alertas preditivos e ações automatizadas baseadas em eventos e anomalias.",
   },
   dataConnectors: {
     badge: "Conectividade Total",
     title: "Conecte-se a Qualquer Fonte de Dados",
-    subtitle: "Integrações nativas com sistemas governamentais brasileiros, ERPs nacionais e internacionais, bancos de dados e APIs",
+    subtitle:
+      "Integrações nativas com sistemas governamentais brasileiros, ERPs nacionais e internacionais, bancos de dados e APIs",
     sourcesTitle: "Fontes de Dados",
-    sourcesDesc: "Conectores inteligentes prontos",
+    sourcesDesc: "Conectores inteligentes",
     files: "Arquivos e Planilhas",
     iot: "IoT e Sensores",
     apis: "APIs e Webhooks",
     governmentAPIs: "APIs Governamentais BR",
     databases: "Bancos de Dados",
     erps: "ERPs Nacionais / Internacionais",
-    footer: "E centenas de outros conectores personalizáveis para sua necessidade específica"
+    footer: "E centenas de outros conectores personalizáveis para sua necessidade específica",
   },
   automationAlerts: {
     badge: "Inteligência Automatizada",
     title: "Automação & Alertas Inteligentes",
     subtitle: "Notificações preditivas, workflows automatizados e ações em tempo real baseadas em IA",
     intelligentAlertsTitle: "Alertas Inteligentes",
-    intelligentAlertsDesc: "Notificações contextuais em tempo real via email, WhatsApp, SMS ou integração direta com seus sistemas.",
+    intelligentAlertsDesc:
+      "Notificações contextuais em tempo real via email, WhatsApp, SMS ou integração direta com seus sistemas.",
     alertItem1: "Detecção de anomalias com IA",
     alertItem2: "Limiares personalizáveis por KPI",
     alertItem3: "Priorização automática de criticidade",
@@ -340,24 +355,30 @@ export default {
     predItem3: "Detecção precoce de riscos",
     benefit1: "Redução de 70% no tempo de resposta a incidentes",
     benefit2: "Decisões proativas baseadas em previsões de IA",
-    benefit3: "Zero intervenção manual em processos repetitivos"
+    benefit3: "Zero intervenção manual em processos repetitivos",
   },
   whiteLabel: {
     badge: "Nuvem Soberana & Appliance",
     title: "Solução White Label Nacional",
     titleSuffix: "(somente para parceiros de negócio)",
-    subtitle: "O equivalente brasileiro ao BI de marca branca: total controle, soberania digital e infraestrutura própria",
+    subtitle:
+      "O equivalente brasileiro ao BI de marca branca: total controle, soberania digital e infraestrutura própria",
     applianceTitle: "RedData® Appliance",
-    applianceDesc: "Hardware dedicado com toda a plataforma embarcada. Opera 100% offline, ideal para ambientes críticos e sigilosos. Seus dados nunca saem do seu datacenter.",
+    applianceDesc:
+      "Hardware dedicado com toda a plataforma embarcada. Opera 100% offline, ideal para ambientes críticos e sigilosos. Seus dados nunca saem do seu datacenter.",
     sovereignTitle: "Nuvem Soberana",
-    sovereignDesc: "Implantação em nuvem privada nacional ou infraestrutura própria com total conformidade à LGPD, sem dependência de BigTechs estrangeiras.",
+    sovereignDesc:
+      "Implantação em nuvem privada nacional ou infraestrutura própria com total conformidade à LGPD, sem dependência de BigTechs estrangeiras.",
     brandedTitle: "Marca Própria",
-    brandedDesc: "Personalize a plataforma com sua identidade visual. Dashboards, relatórios e interfaces podem carregar sua marca institucional.",
+    brandedDesc:
+      "Personalize a plataforma com sua identidade visual. Dashboards, relatórios e interfaces podem carregar sua marca institucional.",
     performanceTitle: "Performance Dedicada",
-    performanceDesc: "Recursos computacionais exclusivos garantem máxima velocidade e processamento sem compartilhamento ou throttling.",
+    performanceDesc:
+      "Recursos computacionais exclusivos garantem máxima velocidade e processamento sem compartilhamento ou throttling.",
     ctaTitle: "Transforme sua organização com soberania digital",
-    ctaDesc: "Fale com nossos especialistas e descubra como o RedData® pode ser implantado com total controle e segurança na sua infraestrutura.",
-    ctaButton: "Solicitar Proposta White Label"
+    ctaDesc:
+      "Fale com nossos especialistas e descubra como o RedData® pode ser implantado com total controle e segurança na sua infraestrutura.",
+    ctaButton: "Solicitar Proposta White Label",
   },
   whatsappWidget: {
     supportTitle: "RedData® Support",
@@ -370,10 +391,11 @@ export default {
     service3: "• Consultoria em Big Data e IA",
     service4: "• Suporte pré e pós-venda",
     startChat: "Iniciar conversa no WhatsApp",
-    schedule: "Horário de atendimento: Segunda a Sexta, 8h às 18h"
+    schedule: "Horário de atendimento: Segunda a Sexta, 8h às 18h",
   },
   footer: {
-    description: "RedData® – A Plataforma Brasileira de Big Data & Inteligência Artificial para a transformação digital de organizações públicas e privadas.",
+    description:
+      "RedData® – A Plataforma Brasileira de Big Data & Inteligência Artificial para a transformação digital de organizações públicas e privadas.",
     product: "Produto",
     howItWorks: "Como Funciona",
     solutions: "Soluções",
@@ -405,14 +427,15 @@ export default {
     lgpd: "LGPD",
     copyright: "Direitos Autorais",
     nationalTechBadge: "Tecnologia Nacional",
-    poweredBy: "Powered by RedMaxx - Maxximizando Resultados"
+    poweredBy: "Powered by RedMaxx - Maxximizando Resultados",
   },
   casosUsoEnergia: {
     backHome: "Voltar para Home",
     badge: "Energia",
     title: "Transformação Digital no Setor Energético",
     subtitle: "RedMaxx RedData®: Otimizando operações e garantindo confiabilidade com Big Data e IA",
-    intro: "A plataforma RedMaxx RedData® revoluciona a gestão do setor energético ao integrar dados de múltiplas fontes, proporcionando insights em tempo real para tomada de decisão estratégica. Com foco em eficiência operacional, manutenção preditiva e automação de processos, nossa solução permite que empresas do setor energético alcancem níveis superiores de confiabilidade e performance.",
+    intro:
+      "A plataforma RedMaxx RedData® revoluciona a gestão do setor energético ao integrar dados de múltiplas fontes, proporcionando insights em tempo real para tomada de decisão estratégica. Com foco em eficiência operacional, manutenção preditiva e automação de processos, nossa solução permite que empresas do setor energético alcancem níveis superiores de confiabilidade e performance.",
     benefitsTitle: "Benefícios da RedData® para o Setor Energético",
     benefit1Title: "Eficiência Operacional",
     benefit1Desc: "Automação de processos e otimização de recursos com análise em tempo real",
@@ -423,9 +446,11 @@ export default {
     caseTitle: "Case: Enel",
     caseSubtitle: "Transformação digital com dashboards em tempo real e manutenção preditiva",
     challengeTitle: "Desafio",
-    challengeText: "A Enel precisava de uma solução integrada para monitoramento em tempo real de suas operações energéticas, com capacidade de processar grandes volumes de dados e gerar insights preditivos para manutenção.",
+    challengeText:
+      "A Enel precisava de uma solução integrada para monitoramento em tempo real de suas operações energéticas, com capacidade de processar grandes volumes de dados e gerar insights preditivos para manutenção.",
     solutionTitle: "Solução",
-    solutionText: "Implementação da plataforma RedMaxx RedData® com integração de múltiplas fontes de dados operacionais, criação de dashboards personalizados e desenvolvimento de modelos de IA para manutenção preditiva.",
+    solutionText:
+      "Implementação da plataforma RedMaxx RedData® com integração de múltiplas fontes de dados operacionais, criação de dashboards personalizados e desenvolvimento de modelos de IA para manutenção preditiva.",
     resultsTitle: "Resultados Chave",
     result1: "Dashboards em tempo real para monitoramento operacional",
     result2: "Manutenção preditiva com IA reduzindo falhas imprevistas",
@@ -433,19 +458,22 @@ export default {
     result4: "Redução de custos operacionais e de manutenção",
     imageAlt: "Dashboard RedData® - Projeto Enel",
     scientificArticle: "Artigo Científico Publicado",
-    articleDesc: "Este projeto resultou em um artigo científico que documenta a metodologia e os resultados alcançados.",
+    articleDesc:
+      "Este projeto resultou em um artigo científico que documenta a metodologia e os resultados alcançados.",
     downloadArticle: "Baixar Artigo (PDF)",
-    conclusionEnel: "Com o RedData®, a Enel passou a atuar de forma proativa e orientada por dados, garantindo maior eficiência, segurança e sustentabilidade em suas operações.",
+    conclusionEnel:
+      "Com o RedData®, a Enel passou a atuar de forma proativa e orientada por dados, garantindo maior eficiência, segurança e sustentabilidade em suas operações.",
     ctaTitle: "Transforme Suas Operações Energéticas",
     ctaSubtitle: "Descubra como a RedData® pode otimizar sua gestão energética com Big Data e IA",
-    requestDemo: "Solicitar Demonstração"
+    requestDemo: "Solicitar Demonstração",
   },
   casosUsoIndustria: {
     backHome: "Voltar para Home",
     badge: "Indústria",
     title: "Gestão Inteligente para a Indústria 4.0",
     subtitle: "RedMaxx RedData®: Transformando processos industriais com dados em tempo real",
-    intro: "A plataforma RedMaxx RedData® revoluciona a gestão industrial ao integrar dados de chão de fábrica, sistemas de gestão e dispositivos IoT. Nossa solução permite monitoramento em tempo real, controle de qualidade avançado e otimização de processos produtivos através de análise inteligente de dados.",
+    intro:
+      "A plataforma RedMaxx RedData® revoluciona a gestão industrial ao integrar dados de chão de fábrica, sistemas de gestão e dispositivos IoT. Nossa solução permite monitoramento em tempo real, controle de qualidade avançado e otimização de processos produtivos através de análise inteligente de dados.",
     benefitsTitle: "Benefícios da RedData® para a Indústria",
     benefit1Title: "Monitoramento em Tempo Real",
     benefit1Desc: "Acompanhe todos os processos produtivos com dashboards intuitivos e alertas inteligentes",
@@ -456,9 +484,11 @@ export default {
     caseFlexTitle: "Case: Flex Industries",
     caseFlexSubtitle: "Dashboard unificado integrando dados de múltiplas fontes para gestão industrial completa",
     challengeTitle: "Desafio",
-    challengeText: "A Flex Industries necessitava de uma solução para consolidar dados de diferentes sistemas (ERP, MES, IoT) e proporcionar uma visão única e em tempo real de toda a operação industrial.",
+    challengeText:
+      "A Flex Industries necessitava de uma solução para consolidar dados de diferentes sistemas (ERP, MES, IoT) e proporcionar uma visão única e em tempo real de toda a operação industrial.",
     solutionTitle: "Solução",
-    solutionText: "Implementação da plataforma RedMaxx RedData® com integração de múltiplas fontes de dados, criação de dashboards personalizados e desenvolvimento de algoritmos de IA para análise preditiva e otimização de processos.",
+    solutionText:
+      "Implementação da plataforma RedMaxx RedData® com integração de múltiplas fontes de dados, criação de dashboards personalizados e desenvolvimento de algoritmos de IA para análise preditiva e otimização de processos.",
     dashboardTitle: "Dashboard Unificado",
     dashboardDesc: "Visão consolidada de todos os processos industriais em tempo real",
     productionTitle: "Monitoramento de Produção",
@@ -516,9 +546,11 @@ export default {
     resultText: "Aumento da produtividade, redução de custos e maior competitividade global.",
     caseSuccessBadge: "Case de Sucesso",
     flexChallengeTitle: "O Desafio",
-    flexChallengeText: "A Flex, indústria referência no setor eletroeletrônico, buscava evoluir para um modelo de Indústria 4.0, mas enfrentava desafios na integração de informações de chão de fábrica com sistemas de gestão e na utilização estratégica dos dados disponíveis.",
+    flexChallengeText:
+      "A Flex, indústria referência no setor eletroeletrônico, buscava evoluir para um modelo de Indústria 4.0, mas enfrentava desafios na integração de informações de chão de fábrica com sistemas de gestão e na utilização estratégica dos dados disponíveis.",
     flexSolutionTitle: "A Solução",
-    flexSolutionText: "A RedMaxx implementou o RedData® como núcleo central de Big Data e Inteligência Artificial, consolidando dados de sensores IoT, linhas de produção, ERPs e cadeia logística em uma única plataforma analítica.",
+    flexSolutionText:
+      "A RedMaxx implementou o RedData® como núcleo central de Big Data e Inteligência Artificial, consolidando dados de sensores IoT, linhas de produção, ERPs e cadeia logística em uma única plataforma analítica.",
     dashboardProjectTitle: "Dashboard do Projeto",
     dashboardProjectDesc: "Visão consolidada em tempo real dos KPIs financeiros e operacionais",
     financialDashboard: "Dashboard Financeiro - Área Meio",
@@ -550,21 +582,25 @@ export default {
     flexResultsTitle: "Principais entregas e resultados:",
     flexResult1: "Monitoramento em tempo real do desempenho das linhas de produção.",
     flexResult2: "Manutenção preditiva aplicada a equipamentos críticos, reduzindo paradas não programadas.",
-    flexResult3: "Controle de qualidade avançado, com detecção de falhas e não conformidades ainda no processo produtivo.",
+    flexResult3:
+      "Controle de qualidade avançado, com detecção de falhas e não conformidades ainda no processo produtivo.",
     flexResult4: "Dashboards inteligentes para gestores, permitindo decisões rápidas e baseadas em dados.",
     flexResult5: "Eficiência operacional ampliada, com redução de custos de manutenção e aumento da produtividade.",
-    flexConclusion: "Com o RedData®, a Flex deu um passo decisivo rumo à Indústria 4.0, alcançando maior competitividade, eficiência e confiabilidade nos processos produtivos.",
+    flexConclusion:
+      "Com o RedData®, a Flex deu um passo decisivo rumo à Indústria 4.0, alcançando maior competitividade, eficiência e confiabilidade nos processos produtivos.",
     dashboardFooter: "Dashboard desenvolvido com RedData® | Powered by RedMaxx",
     lastUpdate: "Última atualização:",
     finalCtaTitle: "Pronto para transformar sua indústria?",
-    finalCtaSubtitle: "Entre em contato e descubra como o RedData® pode impulsionar sua manufatura rumo à Indústria 4.0."
+    finalCtaSubtitle:
+      "Entre em contato e descubra como o RedData® pode impulsionar sua manufatura rumo à Indústria 4.0.",
   },
   casosUsoGoverno: {
     backHome: "Voltar para Home",
     badge: "Governo",
     title: "Transformação Digital na Gestão Pública",
     subtitle: "RedMaxx RedData®: Modernizando a administração pública com inteligência de dados",
-    intro: "A plataforma RedMaxx RedData® revoluciona a gestão pública ao integrar dados de múltiplos sistemas governamentais, proporcionando transparência, eficiência e tomada de decisão baseada em dados. Nossa solução permite que órgãos públicos modernizem processos, melhorem o atendimento ao cidadão e otimizem a aplicação de recursos.",
+    intro:
+      "A plataforma RedMaxx RedData® revoluciona a gestão pública ao integrar dados de múltiplos sistemas governamentais, proporcionando transparência, eficiência e tomada de decisão baseada em dados. Nossa solução permite que órgãos públicos modernizem processos, melhorem o atendimento ao cidadão e otimizem a aplicação de recursos.",
     benefitsTitle: "Benefícios da RedData® para o Setor Público",
     benefit1Title: "Eficiência Operacional",
     benefit1Desc: "Automação de processos e otimização de recursos públicos com análise em tempo real",
@@ -575,9 +611,11 @@ export default {
     caseAdsTitle: "Case: ADS - Agência de Desenvolvimento Sustentável do Amazonas",
     caseAdsSubtitle: "Gestão inteligente de convênios e ações de fomento",
     challengeTitle: "Desafio",
-    challengeText: "A ADS gerencia centenas de convênios, contratos e ações de fomento simultaneamente, necessitando de uma solução para consolidar informações, automatizar processos e fornecer visibilidade em tempo real sobre o status de cada projeto.",
+    challengeText:
+      "A ADS gerencia centenas de convênios, contratos e ações de fomento simultaneamente, necessitando de uma solução para consolidar informações, automatizar processos e fornecer visibilidade em tempo real sobre o status de cada projeto.",
     solutionTitle: "Solução",
-    solutionText: "Implementação da plataforma RedMaxx RedData® para integração de dados de convênios, contratos e ações de fomento, com dashboards executivos e operacionais personalizados para diferentes perfis de usuários.",
+    solutionText:
+      "Implementação da plataforma RedMaxx RedData® para integração de dados de convênios, contratos e ações de fomento, com dashboards executivos e operacionais personalizados para diferentes perfis de usuários.",
     resultsTitle: "Resultados Chave",
     result1: "Dashboard unificado para gestão de 500+ convênios",
     result2: "Redução de 40% no tempo de análise de processos",
@@ -587,9 +625,11 @@ export default {
     casePrefeituraTitle: "Case: Prefeitura de Manaus - Secretaria de Finanças",
     casePrefeituraSubtitle: "Modernização da arrecadação de ITBI e IPTU com análise preditiva",
     challengeTitle2: "Desafio",
-    challengeText2: "A Secretaria Municipal de Fazenda (SEMEF) de Manaus precisava modernizar os processos de arrecadação de ITBI (Imposto de Transmissão de Bens Imóveis) e IPTU, melhorar a identificação de inconsistências e aumentar a eficiência da cobrança.",
+    challengeText2:
+      "A Secretaria Municipal de Fazenda (SEMEF) de Manaus precisava modernizar os processos de arrecadação de ITBI (Imposto de Transmissão de Bens Imóveis) e IPTU, melhorar a identificação de inconsistências e aumentar a eficiência da cobrança.",
     solutionTitle2: "Solução",
-    solutionText2: "Implementação da plataforma RedMaxx RedData® para consolidação de dados imobiliários, cruzamento de informações de múltiplas fontes e desenvolvimento de modelos de IA para identificação de inconsistências e análise preditiva de arrecadação.",
+    solutionText2:
+      "Implementação da plataforma RedMaxx RedData® para consolidação de dados imobiliários, cruzamento de informações de múltiplas fontes e desenvolvimento de modelos de IA para identificação de inconsistências e análise preditiva de arrecadação.",
     resultsTitle2: "Resultados Chave",
     result2_1: "Consolidação de dados de 400.000+ imóveis",
     result2_2: "Análise preditiva identificando R$ 50M em potencial de arrecadação",
@@ -598,7 +638,7 @@ export default {
     imageAlt2: "Dashboard RedData® - Prefeitura de Manaus SEMEF",
     ctaTitle: "Modernize Sua Gestão Pública",
     ctaSubtitle: "Descubra como a RedData® pode transformar a administração pública com inteligência de dados",
-    requestDemo: "Solicitar Demonstração"
+    requestDemo: "Solicitar Demonstração",
   },
   modules: {
     title: "Módulos Especializados",
@@ -614,7 +654,8 @@ export default {
       title: "Teto MAC - Gestão de Recursos Federais",
       menuTitle: "Teto Mac - Saúde | Gov",
       menuDescription: "Gestão estratégica de recursos do Fundo Nacional de Saúde",
-      description: "Sistema completo para gestão e maximização dos recursos do Fundo Nacional de Saúde (FNS). Solução especializada para secretarias municipais e estaduais de saúde.",
+      description:
+        "Sistema completo para gestão e maximização dos recursos do Fundo Nacional de Saúde (FNS). Solução especializada para secretarias municipais e estaduais de saúde.",
       features: {
         bigData: "Diagnóstico com Big Data",
         reports: "Relatórios oficiais automatizados com I.A",
@@ -631,7 +672,8 @@ export default {
       title: "RedData.Audit - IA para Tribunais de Contas",
       menuTitle: "RedData.Audit - Controle",
       menuDescription: "Auditoria inteligente com IA e Big Data",
-      description: "Sistema avançado de auditoria pública com Inteligência Artificial e Big Data para Tribunais de Contas e órgãos de controle. Automatiza análise de processos, gera pré-relatórios e identifica riscos com alta precisão.",
+      description:
+        "Sistema avançado de auditoria pública com Inteligência Artificial e Big Data para Tribunais de Contas e órgãos de controle. Automatiza análise de processos, gera pré-relatórios e identifica riscos com alta precisão.",
       features: {
         ai: "Análise de documentos com IA",
         jurisprudence: "Jurisprudência inteligente",
@@ -649,7 +691,8 @@ export default {
     badge: "Varejo",
     title: "Inteligência de Preços e Mix para o Varejo",
     subtitle: "RedMaxx RedData®: Competitividade e rentabilidade com pricing inteligente",
-    intro: "A plataforma RedMaxx RedData® revoluciona a gestão de preços no varejo ao integrar dados de mercado, concorrência e performance por ponto de venda. Nossa solução permite que redes varejistas otimizem preços e mix de produtos de forma dinâmica e localizada, mantendo competitividade e maximizando rentabilidade.",
+    intro:
+      "A plataforma RedMaxx RedData® revoluciona a gestão de preços no varejo ao integrar dados de mercado, concorrência e performance por ponto de venda. Nossa solução permite que redes varejistas otimizem preços e mix de produtos de forma dinâmica e localizada, mantendo competitividade e maximizando rentabilidade.",
     benefit1Title: "Pricing Inteligente",
     benefit1Desc: "Precificação dinâmica baseada em dados de mercado e elasticidade por SKU",
     benefit2Title: "Visão Geográfica",
@@ -657,23 +700,34 @@ export default {
     benefit3Title: "IA para Equivalência",
     benefit3Desc: "Matching automático de produtos entre diferentes fabricantes",
     caseTitle: "Case: Amanco",
-    challengeText: "No Rio de Janeiro e Região Metropolitana, a Amanco precisava garantir competitividade de preços e mix por ponto de venda, diante de um cenário de concorrência acirrada e dispersão de informações de mercado.",
+    challengeText:
+      "No Rio de Janeiro e Região Metropolitana, a Amanco precisava garantir competitividade de preços e mix por ponto de venda, diante de um cenário de concorrência acirrada e dispersão de informações de mercado.",
     challengeTitle: "Desafios",
-    challenge1: "Monitorar preços da concorrência em tempo quase real, utilizando apenas dados abertos (Preços ao Consumidor – SEFAZ).",
-    challenge2: "Equivalência de produtos entre fabricantes: diferentes códigos e descrições dificultavam a comparação SKU a SKU.",
-    challenge3: "Mapear geograficamente pontos de venda da Amanco e dos concorrentes, entendendo a dinâmica regional de preços e sortimento.",
+    challenge1:
+      "Monitorar preços da concorrência em tempo quase real, utilizando apenas dados abertos (Preços ao Consumidor – SEFAZ).",
+    challenge2:
+      "Equivalência de produtos entre fabricantes: diferentes códigos e descrições dificultavam a comparação SKU a SKU.",
+    challenge3:
+      "Mapear geograficamente pontos de venda da Amanco e dos concorrentes, entendendo a dinâmica regional de preços e sortimento.",
     solutionTitle: "Nossa Solução",
-    solutionIntro: "Com a plataforma RedData®, implementamos uma estratégia completa de Pricing Inteligente no Varejo:",
+    solutionIntro:
+      "Com a plataforma RedData®, implementamos uma estratégia completa de Pricing Inteligente no Varejo:",
     solution1: "Coleta automatizada dos preços de concorrentes via sistema de dados abertos da SEFAZ.",
-    solution2: "Matching inteligente de SKUs, usando IA (NLP, fuzzy matching e clusterização) para criar um dicionário dinâmico de equivalência entre produtos.",
-    solution3: "Geolocalização de PDVs, mapeando pontos de venda próprios e da concorrência para análises regionais detalhadas.",
-    solution4: "Modelos de precificação preditiva, calculando elasticidade por SKU e região, definindo corredores de preço e sugerindo o preço ótimo em cada localidade.",
-    solution5: "Otimização de mix, recomendando ajustes no sortimento de acordo com giro e potencial de margem em cada região.",
+    solution2:
+      "Matching inteligente de SKUs, usando IA (NLP, fuzzy matching e clusterização) para criar um dicionário dinâmico de equivalência entre produtos.",
+    solution3:
+      "Geolocalização de PDVs, mapeando pontos de venda próprios e da concorrência para análises regionais detalhadas.",
+    solution4:
+      "Modelos de precificação preditiva, calculando elasticidade por SKU e região, definindo corredores de preço e sugerindo o preço ótimo em cada localidade.",
+    solution5:
+      "Otimização de mix, recomendando ajustes no sortimento de acordo com giro e potencial de margem em cada região.",
     solution6: "Simulador de cenários, permitindo testar o impacto de alterações de preço e mix antes da implantação.",
-    solution7: "Dashboards e relatórios estratégicos no RedData®, além de chatbot para consultas rápidas da equipe comercial.",
+    solution7:
+      "Dashboards e relatórios estratégicos no RedData®, além de chatbot para consultas rápidas da equipe comercial.",
     resultsTitle: "Resultados & Benefícios",
     result1: "Margem Bruta ampliada em 3 a 5 p.p. nos SKUs estratégicos.",
-    result2: "Visão georreferenciada do mercado, permitindo comparar preços da Amanco e concorrentes por bairro e região metropolitana.",
+    result2:
+      "Visão georreferenciada do mercado, permitindo comparar preços da Amanco e concorrentes por bairro e região metropolitana.",
     result3: "Comparação justa SKU a SKU entre fabricantes, com equivalência automatizada de produtos.",
     result4: "Precificação localizada, ajustada à realidade do mercado, mantendo competitividade e rentabilidade.",
     result5: "Mix otimizado, com foco em itens de maior impacto e eliminação de SKUs de baixo desempenho.",
@@ -683,7 +737,7 @@ export default {
     differential2: "Geolocalização integrada de pontos de venda próprios e concorrentes.",
     differential3: "Pricing dinâmico com simulação de impacto em margem e vendas.",
     differential4: "Escalabilidade: solução replicável para outras regiões e redes de distribuição.",
-    ctaButton: "Solicitar Demonstração"
+    ctaButton: "Solicitar Demonstração",
   },
   ebook: {
     materialsTitle: "Materiais",
@@ -705,7 +759,7 @@ export default {
     invalidEmail: "Email inválido",
     invalidEmailDesc: "Por favor, insira um email válido para baixar o eBook.",
     downloadStarted: "Download iniciado!",
-    downloadStartedDesc: "Seu eBook está sendo baixado. Obrigado pelo interesse!"
+    downloadStartedDesc: "Seu eBook está sendo baixado. Obrigado pelo interesse!",
   },
   auth: {
     login: "Entrar",
@@ -727,7 +781,7 @@ export default {
     loginSuccessDesc: "Redirecionando para o dashboard...",
     signupSuccess: "Conta criada com sucesso!",
     signupSuccessDesc: "Você pode fazer login agora. Seu trial de 30 dias começou!",
-    error: "Erro"
+    error: "Erro",
   },
   dashboard: {
     title: "Dashboard RedData",
@@ -742,17 +796,19 @@ export default {
     myFiles: "Meus Arquivos",
     noFiles: "Nenhum arquivo carregado",
     deleteFile: "Excluir arquivo?",
-    deleteFileDesc: "Esta ação não pode ser desfeita. O arquivo e todos os dashboards associados serão permanentemente excluídos.",
+    deleteFileDesc:
+      "Esta ação não pode ser desfeita. O arquivo e todos os dashboards associados serão permanentemente excluídos.",
     cancel: "Cancelar",
     delete: "Excluir",
     fileDeleted: "Arquivo excluído",
     fileDeletedDesc: "O arquivo e seus dashboards foram excluídos com sucesso",
     deleteError: "Erro ao excluir",
-    deleteErrorDesc: "Não foi possível excluir o arquivo. Tente novamente."
+    deleteErrorDesc: "Não foi possível excluir o arquivo. Tente novamente.",
   },
   timeline: {
     title: "Linha do Tempo – RedData × Business Intelligence, Big Data, I.A: ML | LLMs (2017–2025)",
-    subtitle: "Evolução do RedData (acima) em paralelo aos marcos das LLMs open source (abaixo). Ao clicar nos pontos, abre um resumo. Abaixo, o conteúdo completo já expandido.",
+    subtitle:
+      "Evolução do RedData (acima) em paralelo aos marcos das LLMs open source (abaixo). Ao clicar nos pontos, abre um resumo. Abaixo, o conteúdo completo já expandido.",
     expandedSummary: "Resumo Expandido",
     reddataSection: "RedData",
     previous: "Anterior",
@@ -762,38 +818,45 @@ export default {
       2017: {
         year: "2017",
         title: "Concepção, Pesquisa Inicial e Desenvolvimento do KDD",
-        detail: "<ul class=\"list-disc pl-5 space-y-1\"><li>Início do projeto RedData em parceria com <strong>instituto designado pelo fundo de P&amp;D</strong>, com foco em Big Data e Inteligência Artificial aplicados ao setor público e privado.</li><li>Definição da <strong>arquitetura base da plataforma</strong> e do <strong>framework de integração de dados massivos</strong>, que viria a dar origem ao <strong>KDD – Knowledge Discovery in Databases</strong>.</li><li>Desenvolvimento inicial do <strong>KDD</strong>, processo estruturado para descoberta de conhecimento a partir de grandes volumes de dados, composto por etapas como:</li><ul class=\"list-[circle] pl-6 space-y-1\"><li>Seleção e integração de dados (extração de múltiplas fontes).</li><li>Limpeza e pré-processamento (padronização, tratamento de inconsistências).</li><li>Transformação e mineração de dados (uso de algoritmos para identificar padrões).</li><li>Interpretação e visualização (conversão em insights e relatórios estratégicos).</li></ul><li>Esse método serviu como <strong>base metodológica do RedData</strong>, permitindo pipelines automatizados e rastreáveis.</li></ul>"
+        detail:
+          '<ul class="list-disc pl-5 space-y-1"><li>Início do projeto RedData em parceria com <strong>instituto designado pelo fundo de P&amp;D</strong>, com foco em Big Data e Inteligência Artificial aplicados ao setor público e privado.</li><li>Definição da <strong>arquitetura base da plataforma</strong> e do <strong>framework de integração de dados massivos</strong>, que viria a dar origem ao <strong>KDD – Knowledge Discovery in Databases</strong>.</li><li>Desenvolvimento inicial do <strong>KDD</strong>, processo estruturado para descoberta de conhecimento a partir de grandes volumes de dados, composto por etapas como:</li><ul class="list-[circle] pl-6 space-y-1"><li>Seleção e integração de dados (extração de múltiplas fontes).</li><li>Limpeza e pré-processamento (padronização, tratamento de inconsistências).</li><li>Transformação e mineração de dados (uso de algoritmos para identificar padrões).</li><li>Interpretação e visualização (conversão em insights e relatórios estratégicos).</li></ul><li>Esse método serviu como <strong>base metodológica do RedData</strong>, permitindo pipelines automatizados e rastreáveis.</li></ul>',
       },
       2018: {
         year: "2018",
         title: "Desenvolvimento Colaborativo e Mentoria IBM",
-        detail: "<ul class=\"list-disc pl-5 space-y-1\"><li><strong>Entrada no programa de startups da IBM</strong>, com acesso à IBM Cloud e mentoria técnica (machine learning, arquitetura de dados, DevOps).</li><li>Otimização do pipeline KDD, adoção de <strong>boas práticas de governança de dados</strong> e estruturação da <strong>camada de inteligência analítica</strong> do RedData.</li><li>Conclusão de versões experimentais com apoio multidisciplinar e <strong>testes de desempenho</strong> em ambientes corporativos e governamentais.</li></ul>"
+        detail:
+          '<ul class="list-disc pl-5 space-y-1"><li><strong>Entrada no programa de startups da IBM</strong>, com acesso à IBM Cloud e mentoria técnica (machine learning, arquitetura de dados, DevOps).</li><li>Otimização do pipeline KDD, adoção de <strong>boas práticas de governança de dados</strong> e estruturação da <strong>camada de inteligência analítica</strong> do RedData.</li><li>Conclusão de versões experimentais com apoio multidisciplinar e <strong>testes de desempenho</strong> em ambientes corporativos e governamentais.</li></ul>',
       },
       2019: {
         year: "2019",
         title: "Desenvolvimento Interno e Provas de Conceito (PoCs)",
-        detail: "<ul class=\"list-disc pl-5 space-y-1\"><li><strong>Internalização total</strong> do desenvolvimento pela equipe RedMaxx.</li><li>PoCs em varejo, governo e indústria, validando <strong>escalabilidade</strong>.</li><li>Inclusão dos primeiros <strong>módulos de machine learning</strong> e modelagem preditiva.</li></ul>"
+        detail:
+          '<ul class="list-disc pl-5 space-y-1"><li><strong>Internalização total</strong> do desenvolvimento pela equipe RedMaxx.</li><li>PoCs em varejo, governo e indústria, validando <strong>escalabilidade</strong>.</li><li>Inclusão dos primeiros <strong>módulos de machine learning</strong> e modelagem preditiva.</li></ul>',
       },
       2020: {
         year: "2020",
         title: "Lançamento Comercial e Adoção Privada",
-        detail: "<ul class=\"list-disc pl-5 space-y-1\"><li>Lançamento da <strong>versão comercial</strong> do RedData.</li><li>Primeiros projetos em energia, indústria e varejo.</li><li>Consolidação do modelo <strong>SaaS</strong>, dos <strong>dashboards analíticos interativos</strong> e da <strong>IA preditiva baseada em Machine Learning</strong>.</li></ul>"
+        detail:
+          '<ul class="list-disc pl-5 space-y-1"><li>Lançamento da <strong>versão comercial</strong> do RedData.</li><li>Primeiros projetos em energia, indústria e varejo.</li><li>Consolidação do modelo <strong>SaaS</strong>, dos <strong>dashboards analíticos interativos</strong> e da <strong>IA preditiva baseada em Machine Learning</strong>.</li></ul>',
       },
       2021: {
         year: "2021",
         title: "Entrada no Setor Público e Avanço das LLMs Open Source",
-        detail: "<ul class=\"list-disc pl-5 space-y-1\"><li>Primeiro contrato público com órgãos pioneiros na adoção de IA nacional.</li><li>RedData reconhecido como <strong>plataforma 100% proprietária e soberana</strong>.</li><li>A <strong>RedMaxx</strong> dá início a testes, experimentos e adaptações com os modelos <strong>GPT-Neo (2021)</strong> e <strong>GPT-J (junho de 2021)</strong> da <strong>EleutherAI</strong>, consideradas as principais alternativas open source compatíveis com a arquitetura do RedData.</li><li>Início de <strong>experimentos internos</strong> com modelos de linguagem aplicados a dados governamentais.</li></ul>"
+        detail:
+          '<ul class="list-disc pl-5 space-y-1"><li>Primeiro contrato público com órgãos pioneiros na adoção de IA nacional.</li><li>RedData reconhecido como <strong>plataforma 100% proprietária e soberana</strong>.</li><li>A <strong>RedMaxx</strong> dá início a testes, experimentos e adaptações com os modelos <strong>GPT-Neo (2021)</strong> e <strong>GPT-J (junho de 2021)</strong> da <strong>EleutherAI</strong>, consideradas as principais alternativas open source compatíveis com a arquitetura do RedData.</li><li>Início de <strong>experimentos internos</strong> com modelos de linguagem aplicados a dados governamentais.</li></ul>',
       },
       "2022-2023": {
         year: "2022–2023",
         title: "Expansão, IA Generativa e Soberania Tecnológica",
-        detail: "<ul class=\"list-disc pl-5 space-y-1\"><li>Ampliação de projetos em governos estaduais, municipais, tribunais de contas e ministérios públicos.</li><li>Introdução de <strong>IA generativa</strong> e <strong>diagnósticos inteligentes</strong>.</li><li><strong>RedMaxx</strong> inicia testes, estudos e customizações com <strong>LLaMA (fev/2023)</strong> da Meta, explorando o ecossistema open source.</li><li><strong>RedMaxx</strong> realiza testes e customizações com <strong>Mistral 7B (out/2023)</strong> e <strong>Mixtral 8×7B (dez/2023)</strong> (Apache 2.0), viabilizando <strong>execução offline</strong> e estabelecendo a base do <strong>RedData Appliance</strong>.</li><li>Módulos embarcados de IA local para ambientes com <strong>alta restrição de rede</strong> e dados sensíveis.</li></ul>"
+        detail:
+          '<ul class="list-disc pl-5 space-y-1"><li>Ampliação de projetos em governos estaduais, municipais, tribunais de contas e ministérios públicos.</li><li>Introdução de <strong>IA generativa</strong> e <strong>diagnósticos inteligentes</strong>.</li><li><strong>RedMaxx</strong> inicia testes, estudos e customizações com <strong>LLaMA (fev/2023)</strong> da Meta, explorando o ecossistema open source.</li><li><strong>RedMaxx</strong> realiza testes e customizações com <strong>Mistral 7B (out/2023)</strong> e <strong>Mixtral 8×7B (dez/2023)</strong> (Apache 2.0), viabilizando <strong>execução offline</strong> e estabelecendo a base do <strong>RedData Appliance</strong>.</li><li>Módulos embarcados de IA local para ambientes com <strong>alta restrição de rede</strong> e dados sensíveis.</li></ul>',
       },
       "2024-2025": {
         year: "2024–2025",
         title: "Consolidação, Homologações e Soberania Digital",
-        detail: "<ul class=\"list-disc pl-5 space-y-1\"><li>RedData consolida-se como <strong>plataforma mais inovadora em Big data e I.A</strong> do setor público brasileiro.</li><li>Integração e transformação dos modelos <strong>LLaMA 3</strong> e <strong>Mistral 7B/Mixtral 8×7B</strong> em versões customizadas pela RedMaxx, dando origem ao modo único do RedData de IA Generativa, com algoritmos e scripts proprietários, <strong>execução 100% offline</strong> e <strong>soberania total</strong>.</li><li><strong>Homologação NVIDIA (2025) – em andamento</strong> – operação oficial em <strong>RTX e A100</strong>, com <strong>CUDA e TensorRT</strong>.</li><li><strong>Migração para SUSE Linux AI (2025)</strong> – substitui Debian; compatível com <strong>NVIDIA AI Enterprise</strong>.</li><li><strong>Parceria em andamento SERPRO (2025)</strong> – implantação na <strong>AWS</strong> em <strong>modelo de bilhetagem</strong>, com integração ao <strong>Marketplace SERPRO</strong> e <strong>PRODAM (conclusão em 2026)</strong>.</li><li>Reconhecimento por <strong>independência tecnológica</strong>, <strong>LGPD/ISO 27001</strong> e <strong>soberania digital</strong>.</li></ul>"
-      }
-    }
-  }
+        detail:
+          '<ul class="list-disc pl-5 space-y-1"><li>RedData consolida-se como <strong>plataforma mais inovadora em Big data e I.A</strong> do setor público brasileiro.</li><li>Integração e transformação dos modelos <strong>LLaMA 3</strong> e <strong>Mistral 7B/Mixtral 8×7B</strong> em versões customizadas pela RedMaxx, dando origem ao modo único do RedData de IA Generativa, com algoritmos e scripts proprietários, <strong>execução 100% offline</strong> e <strong>soberania total</strong>.</li><li><strong>Homologação NVIDIA (2025) – em andamento</strong> – operação oficial em <strong>RTX e A100</strong>, com <strong>CUDA e TensorRT</strong>.</li><li><strong>Migração para SUSE Linux AI (2025)</strong> – substitui Debian; compatível com <strong>NVIDIA AI Enterprise</strong>.</li><li><strong>Parceria em andamento SERPRO (2025)</strong> – implantação na <strong>AWS</strong> em <strong>modelo de bilhetagem</strong>, com integração ao <strong>Marketplace SERPRO</strong> e <strong>PRODAM (conclusão em 2026)</strong>.</li><li>Reconhecimento por <strong>independência tecnológica</strong>, <strong>LGPD/ISO 27001</strong> e <strong>soberania digital</strong>.</li></ul>',
+      },
+    },
+  },
 };
