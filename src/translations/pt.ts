@@ -322,7 +322,7 @@ export default {
     badge: "Conectividade Total",
     title: "Conecte-se a Qualquer Fonte de Dados",
     subtitle:
-      "Integrações nativas com sistemas governamentais brasileiros, ERPs nacionais e internacionais, bancos de dados e APIs",
+      "Integrações com sistemas governamentais brasileiros, ERPs nacionais e internacionais, bancos de dados e APIs",
     sourcesTitle: "Fontes de Dados",
     sourcesDesc: "Conectores inteligentes",
     files: "Arquivos e Planilhas",
