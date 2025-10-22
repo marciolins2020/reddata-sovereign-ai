@@ -42,8 +42,7 @@ export const StatsSection = () => {
                 <Award className="h-5 w-5 text-primary" />
               </div>
               <div className="text-center sm:text-left">
-                <div className="font-semibold text-lg">ISO</div>
-                <div className="text-sm text-muted-foreground">27001 {t('stats.certified')}</div>
+                <div className="font-semibold text-sm">{t('stats.certified')}</div>
               </div>
             </div>
           </div>
