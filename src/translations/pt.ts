@@ -331,7 +331,7 @@ export default {
     governmentAPIs: "APIs Governamentais BR",
     databases: "Bancos de Dados",
     erps: "ERPs Nacionais / Internacionais",
-    footer: "E centenas de outros conectores personalizáveis para sua necessidade específica",
+    footer: "Entre outros conectores personalizáveis para sua necessidade específica",
   },
   automationAlerts: {
     badge: "Inteligência Automatizada",
