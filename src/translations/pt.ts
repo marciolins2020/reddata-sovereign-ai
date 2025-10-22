@@ -316,7 +316,7 @@ export default {
     analyzeDesc: "Machine Learning, análise preditiva e estatística avançada com SQL e Python nativos.",
     visualizeTitle: "Visualizar",
     visualizeDesc:
-      "Dashboards interativos em tempo real, relatórios personalizados e integração com Power BI entre outros B.I de mercado. ",
+      "Dashboards interativos em tempo real, relatórios personalizados e integração com Power BI entre outras soluções de mercado. ",
     automateTitle: "Automatizar",
     automateDesc: "Workflows inteligentes, alertas preditivos e ações automatizadas baseadas em eventos e anomalias.",
   },
