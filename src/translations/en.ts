@@ -308,7 +308,8 @@ export default {
   dataConnectors: {
     badge: "Total Connectivity",
     title: "Connect to Any Data Source",
-    subtitle: "Native integrations with Brazilian government systems, national and international ERPs, databases and APIs",
+    subtitle: "Integrates data from any source: ERPs, APIs, CRMs, sensors, and legacy systems, without the need for a Data Warehouse. RedData features a lakehouse architecture with real-time ingestion, modeling, and analysis.",
+    dataTypes: "Structured or unstructured data, regardless of operating system or database (SQL or NoSQL)",
     sourcesTitle: "Data Sources",
     sourcesDesc: "Ready-to-use intelligent connectors",
     files: "Files and Spreadsheets",

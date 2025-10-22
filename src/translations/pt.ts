@@ -322,7 +322,8 @@ export default {
     badge: "Conectividade Total",
     title: "Conecte-se a Qualquer Fonte de Dados",
     subtitle:
-      "Integrações com sistemas governamentais brasileiros, ERPs nacionais e internacionais, bancos de dados e APIs",
+      "Integra dados de qualquer fonte: ERPs, APIs, CRMs, sensores e sistemas legados, sem necessidade de Data Warehouse. O RedData possui arquitetura lakehouse com ingestão, modelagem e análise em tempo real.",
+    dataTypes: "Dados estruturados ou não estruturados, independente do sistema operacional ou banco (SQL ou NoSQL)",
     sourcesTitle: "Fontes de Dados",
     sourcesDesc: "Conectores inteligentes",
     files: "Arquivos e Planilhas",
