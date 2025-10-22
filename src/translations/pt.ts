@@ -33,7 +33,8 @@ export default {
     highlight: "Mais de 100 implementações realizadas",
     implementations: "Implementações",
     yearsExperience: "Anos de Experiência",
-    certified: "Certificada"
+    compliance: "Conformidade",
+    certified: "ISO 27001 e ISO 20000"
   },
   howItWorks: {
     title: "Como Funciona a RedData®",
