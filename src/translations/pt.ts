@@ -199,7 +199,7 @@ export default {
     dataArchitecture: {
       title: "Arquitetura de Dados",
       items: [
-        "Data Lake + Data Warehouse híbrido para lidar com dados estruturados, semi-estruturados e não estruturados.",
+        "Data Lake para lidar com dados estruturados, semi-estruturados e não estruturados.",
         "Pipelines ETL/ELT resilientes para ingestão, transformação e enriquecimento de dados.",
         "Suporte a processamento em lote e em tempo real (streaming/micro-batch).",
       ],
@@ -308,7 +308,7 @@ export default {
     connectDesc:
       "Integração com 300+ fontes de dados: APIs governamentais, ERPs nacionais, bancos públicos, sistemas legados e muito mais.",
     storeTitle: "Armazenar",
-    storeDesc: "Data Lake + Data Warehouse híbrido com segurança máxima, criptografia e total conformidade com LGPD.",
+    storeDesc: "Data Lake com segurança máxima, criptografia e total conformidade com LGPD.",
     processTitle: "Processar",
     processDesc: "ETL/ELT inteligente com IA para limpeza, transformação e enriquecimento de dados em escala.",
     analyzeTitle: "Analisar",
