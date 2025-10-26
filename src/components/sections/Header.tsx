@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { scrollToElement } from "@/lib/scroll";
-import redmaxxLogo from "@/assets/redmaxx-logo-100.webp";
+import redmaxxLogo from "@/assets/redmaxx-logo-compressed.webp";
 import {
   NavigationMenu,
   NavigationMenuContent,

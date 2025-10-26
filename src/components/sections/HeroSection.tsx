@@ -20,7 +20,9 @@ export const HeroSection = () => {
           <div className="text-center lg:text-left">
             <div className="flex items-center justify-center lg:justify-start mb-8">
                 <img 
-                  src="/reddata-logo-597.webp" 
+                  src="/reddata-logo-mobile.webp"
+                  srcSet="/reddata-logo-mobile.webp 380w, /reddata-logo-597.webp 597w"
+                  sizes="(max-width: 768px) 380px, 597px"
                   alt="RedData® - Plataforma de Big Data e IA"
                   className="h-16 md:h-20 lg:h-24 w-auto"
                   width="597"
@@ -98,9 +100,9 @@ export const HeroSection = () => {
             <div className="relative bg-card border border-border rounded-2xl overflow-hidden shadow-large hero-image-container">
               <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-primary rounded-full opacity-20 blur-xl"></div>
               <img 
-                src="/reddata-dashboard-hero-634.webp"
-                srcSet="/reddata-dashboard-hero-634.webp 634w, /reddata-dashboard-hero-optimized.webp 1344w"
-                sizes="(max-width: 768px) 100vw, 634px"
+                src="/reddata-dashboard-hero-mobile.webp"
+                srcSet="/reddata-dashboard-hero-mobile.webp 378w, /reddata-dashboard-hero-634.webp 634w"
+                sizes="(max-width: 768px) 378px, 634px"
                 alt="RedData® Dashboard - Ministério Público do Amazonas"
                 className="w-full h-auto object-cover"
                 width="634"
