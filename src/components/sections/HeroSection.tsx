@@ -105,7 +105,6 @@ export const HeroSection = () => {
                 width="634"
                 height="362"
                 loading="eager"
-                fetchPriority="high"
                 decoding="async"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
