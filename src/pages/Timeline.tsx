@@ -9,6 +9,7 @@ import DOMPurify from "dompurify";
 import { useLanguage } from "@/contexts/LanguageContext";
 import pt from "@/translations/pt";
 import en from "@/translations/en";
+import { AuroraBackground } from "@/components/ui/AuroraBackground";
 
 // Sanitize HTML to prevent XSS attacks
 const sanitizeHtml = (html: string): string => {
@@ -132,7 +133,8 @@ const Timeline = () => {
   const canGoNext = currentIndex < timelineData[currentTrack].length - 1;
   
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <AuroraBackground className="min-h-screen flex flex-col">
+      <div className="w-full flex flex-col flex-1">
       <Header />
       
       <main className="flex-1 pt-16 md:pt-20 pb-8">
@@ -238,7 +240,8 @@ const Timeline = () => {
           </div>
         </DialogContent>
       </Dialog>
-    </div>
+      </div>
+    </AuroraBackground>
   );
 };
 

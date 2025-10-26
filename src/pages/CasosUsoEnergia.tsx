@@ -4,12 +4,14 @@ import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import enelDashboard from "@/assets/enel-dashboard.jpeg";
 import enelLogo from "@/assets/enel-logo.png";
+import { AuroraBackground } from "@/components/ui/AuroraBackground";
 
 const CasosUsoEnergia = () => {
   const { t } = useLanguage();
   
   return (
-    <div className="min-h-screen bg-background">
+    <AuroraBackground className="min-h-screen">
+      <div className="w-full">
       {/* Header with Back Button */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
         <div className="container mx-auto px-4 py-4">
@@ -184,7 +186,8 @@ const CasosUsoEnergia = () => {
           </Link>
         </div>
       </section>
-    </div>
+      </div>
+    </AuroraBackground>
   );
 };
 

@@ -7,12 +7,14 @@ import prefeituraDashboard from "@/assets/prefeitura-manaus-dashboard.png";
 import adsLogo from "@/assets/ads-logo.png";
 import semefLogo from "@/assets/semef-logo.png";
 import adsDashboard from "@/assets/ads-dashboard.png";
+import { AuroraBackground } from "@/components/ui/AuroraBackground";
 
 const CasosUsoGoverno = () => {
   const { t } = useLanguage();
   
   return (
-    <div className="min-h-screen bg-background">
+    <AuroraBackground className="min-h-screen">
+      <div className="w-full">
       {/* Header with Back Button */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
         <div className="container mx-auto px-4 py-4">
@@ -230,7 +232,8 @@ const CasosUsoGoverno = () => {
           </Link>
         </div>
       </section>
-    </div>
+      </div>
+    </AuroraBackground>
   );
 };
 
