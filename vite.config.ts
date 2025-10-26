@@ -23,7 +23,29 @@ export default defineConfig(({ mode }) => ({
     assetsDir: "assets",
     rollupOptions: {
       output: {
-        manualChunks: undefined,
+        manualChunks: (id) => {
+          // Split large vendor libraries into separate chunks
+          if (id.includes('node_modules')) {
+            // React core
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'react-vendor';
+            }
+            // Charting library
+            if (id.includes('recharts')) {
+              return 'recharts-vendor';
+            }
+            // UI components
+            if (id.includes('@radix-ui')) {
+              return 'ui-vendor';
+            }
+            // Supabase
+            if (id.includes('@supabase')) {
+              return 'supabase-vendor';
+            }
+            // Other vendors
+            return 'vendor';
+          }
+        },
       },
     },
   },
