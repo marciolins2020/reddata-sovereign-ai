@@ -133,11 +133,11 @@ export const Header = () => {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
-            <div className="flex items-center">
+            <div className="flex items-center min-w-0">
               <img
                 src={redmaxxLogo}
                 alt="RedMaxx"
-                className="h-8 md:h-10 w-auto cursor-pointer"
+                className="h-8 md:h-10 w-auto cursor-pointer object-contain max-w-none"
                 onClick={() => scrollToSection("#hero")}
                 width="80"
                 height="32"
