@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { supabase } from "@/integrations/supabase/client";
-import reddataChatIcon from "@/assets/reddata-chat-icon.png";
+import reddataChatIcon from "@/assets/reddata-chat-icon-56.webp";
 
 interface Message {
   role: "user" | "assistant";
