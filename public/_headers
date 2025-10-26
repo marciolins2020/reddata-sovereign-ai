@@ -1,8 +1,26 @@
-# All static assets with content hashes - cache for 1 year
-/assets/*
+# Cache all JS/CSS assets with content hashes for 1 year (immutable)
+/assets/*.js
+  Cache-Control: public, max-age=31536000, immutable
+/assets/*.css
   Cache-Control: public, max-age=31536000, immutable
 
-# Root-level static assets - cache for 1 year  
+# Cache all image assets for 1 year
+/assets/*.png
+  Cache-Control: public, max-age=31536000, immutable
+/assets/*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+/assets/*.jpeg
+  Cache-Control: public, max-age=31536000, immutable
+/assets/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+/assets/*.svg
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache video assets for 1 year
+/assets/*.mp4
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache root-level static assets (images, pdfs)
 /*.png
   Cache-Control: public, max-age=31536000, immutable
 /*.jpg
@@ -13,10 +31,12 @@
   Cache-Control: public, max-age=31536000, immutable
 /*.svg
   Cache-Control: public, max-age=31536000, immutable
+/*.mp4
+  Cache-Control: public, max-age=31536000, immutable
 /*.pdf
   Cache-Control: public, max-age=31536000, immutable
 
-# HTML - no cache
+# No cache for HTML files (entry points should always check for updates)
 /*.html
   Cache-Control: public, max-age=0, must-revalidate
 /

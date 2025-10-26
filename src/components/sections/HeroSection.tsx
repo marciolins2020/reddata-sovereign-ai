@@ -26,7 +26,6 @@ export const HeroSection = () => {
                   width="597"
                   height="96"
                   loading="eager"
-                  decoding="async"
               />
             </div>
             
@@ -105,7 +104,6 @@ export const HeroSection = () => {
                 width="634"
                 height="362"
                 loading="eager"
-                decoding="async"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
               <div className="absolute bottom-4 left-4 right-4">
