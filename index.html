@@ -21,10 +21,16 @@
     
     <!-- Inline critical CSS for faster FCP -->
     <style>
-      body{margin:0;font-family:system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;background:#000;color:#fff}
+      *,::before,::after{box-sizing:border-box;border-width:0;border-style:solid}
+      body{margin:0;font-family:Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;background:#000;color:#fff;line-height:1.5}
       #root{min-height:100vh;display:flex;flex-direction:column}
-      header{position:fixed;top:0;width:100%;z-index:50;background:rgba(0,0,0,0.8);backdrop-filter:blur(10px)}
-      main{flex:1}
+      header{position:fixed;top:0;width:100%;z-index:50;background:rgba(0,0,0,0.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.1)}
+      main{flex:1;padding-top:64px}
+      .container{width:100%;max-width:1280px;margin:0 auto;padding:0 1rem}
+      h1,h2,h3{font-weight:700;line-height:1.2;margin:0 0 1rem}
+      h1{font-size:2.25rem}
+      button{font-family:inherit;cursor:pointer;border-radius:0.5rem;padding:0.75rem 1.5rem;font-weight:600;transition:all 0.2s}
+      img{max-width:100%;height:auto;display:block}
     </style>
     
     <!-- Load fonts asynchronously -->
@@ -47,20 +53,6 @@
 
   <body>
     <div id="root"></div>
-    
-    <!-- Defer CSS loading to prevent render blocking -->
-    <script>
-      (function() {
-        var cssLinks = document.querySelectorAll('link[rel="stylesheet"]');
-        cssLinks.forEach(function(link) {
-          if (link.href.includes('/assets/index-') && link.href.includes('.css')) {
-            link.media = 'print';
-            link.onload = function() { this.media = 'all'; };
-          }
-        });
-      })();
-    </script>
-    
     <script type="module" src="/src/main.tsx"></script>
     
     <!-- Analytics scripts deferred to load after page interaction -->
