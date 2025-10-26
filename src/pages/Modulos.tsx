@@ -6,7 +6,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import dashboardManaus from "@/assets/dashboard-manaus.png";
 import dashboardAudit from "@/assets/reddata-audit-dashboard.png";
-import { AuroraBackground } from "@/components/ui/AuroraBackground";
 
 const Modulos = () => {
   const { t } = useLanguage();
@@ -57,8 +56,7 @@ const Modulos = () => {
   ];
   
   return (
-    <AuroraBackground className="min-h-screen">
-      <div className="w-full">
+    <div className="min-h-screen bg-background">
       {/* Header with Back Button */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
         <div className="container mx-auto px-4 py-4">
@@ -208,8 +206,7 @@ const Modulos = () => {
           </Link>
         </div>
       </section>
-      </div>
-    </AuroraBackground>
+    </div>
   );
 };
 

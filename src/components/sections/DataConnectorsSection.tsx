@@ -49,12 +49,8 @@ export const DataConnectorsSection = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             {t("dataConnectors.title")}
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-4">
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8">
             {t("dataConnectors.subtitle")}
-          </p>
-          
-          <p className="text-base text-muted-foreground max-w-3xl mx-auto mb-8 font-medium">
-            {t("dataConnectors.dataTypes")}
           </p>
           
           <div className="inline-flex items-center gap-4 p-6 rounded-2xl bg-primary/10 border-2 border-primary/20 mb-6">

@@ -107,7 +107,7 @@ export const Footer = () => {
               <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center">
                 <span className="text-xs text-primary-glow font-bold">ISO</span>
               </div>
-              <span className="text-xs text-gray-400">{t('footer.certified')}</span>
+              <span className="text-xs text-gray-400">ISO 27001</span>
             </div>
             
             <div className="flex items-center gap-2">

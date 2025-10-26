@@ -33,8 +33,7 @@ export default {
     highlight: "Over 100 implementations completed",
     implementations: "Implementations",
     yearsExperience: "Years of Experience",
-    compliance: "Compliance",
-    certified: "ISO 27001 and ISO 20000"
+    certified: "Certified"
   },
   howItWorks: {
     title: "How RedData® Works",
@@ -308,8 +307,7 @@ export default {
   dataConnectors: {
     badge: "Total Connectivity",
     title: "Connect to Any Data Source",
-    subtitle: "Integrates data from any source: ERPs, APIs, CRMs, sensors, and legacy systems, without the need for a Data Warehouse. RedData features a lakehouse architecture with real-time ingestion, modeling, and analysis.",
-    dataTypes: "Structured or unstructured data, regardless of operating system or database (SQL or NoSQL)",
+    subtitle: "Native integrations with Brazilian government systems, national and international ERPs, databases and APIs",
     sourcesTitle: "Data Sources",
     sourcesDesc: "Ready-to-use intelligent connectors",
     files: "Files and Spreadsheets",
@@ -391,7 +389,7 @@ export default {
     companyInfo: "RedMaxx",
     experience: "15+ years of experience",
     nationalTech: "100% national technology",
-    certified: "ISO 27001 and ISO 20000 compliant",
+    certified: "ISO 27001 certified",
     methodology: "Data Driven Government Methodology",
     addresses: "Addresses",
     headquarters: "Headquarters",
@@ -686,28 +684,6 @@ export default {
     differential4: "Scalability: replicable solution for other regions and distribution networks.",
     ctaButton: "Request Demo"
   },
-  ebook: {
-    materialsTitle: "Materials",
-    freeMaterial: "Free Material",
-    title: "Data-Driven Government",
-    subtitle: "Transforming Public Management in Health, Education, Finance and Security",
-    feature1: "Fundamental concepts of Data Driven Government",
-    feature2: "Practical applications in critical government sectors",
-    feature3: "Case studies and best practices",
-    feature4: "Implementation strategies and tools",
-    downloadTitle: "Download Free eBook",
-    downloadSubtitle: "Enter your email to receive the complete material",
-    emailPlaceholder: "your@email.com",
-    downloadButton: "Download eBook Now",
-    privacyNote: "By downloading, you agree to receive communications from RedMaxx. Your data is protected by LGPD.",
-    successTitle: "Download Started!",
-    successMessage: "Thank you for your interest. The eBook is being downloaded.",
-    downloadAgain: "Download Again",
-    invalidEmail: "Invalid email",
-    invalidEmailDesc: "Please enter a valid email to download the eBook.",
-    downloadStarted: "Download started!",
-    downloadStartedDesc: "Your eBook is being downloaded. Thank you for your interest!"
-  },
   auth: {
     login: "Login",
     signup: "Sign Up",
@@ -750,51 +726,5 @@ export default {
     fileDeletedDesc: "File and its dashboards were successfully deleted",
     deleteError: "Error deleting",
     deleteErrorDesc: "Could not delete file. Please try again."
-  },
-  timeline: {
-    title: "Timeline – RedData × Business Intelligence, Big Data, AI: ML | LLMs (2017–2025)",
-    subtitle: "Evolution of RedData (above) in parallel with open source LLM milestones (below). Click on the points to open a summary. Complete content is already expanded below.",
-    expandedSummary: "Expanded Summary",
-    reddataSection: "RedData",
-    previous: "Previous",
-    next: "Next",
-    of: "of",
-    reddata: {
-      2017: {
-        year: "2017",
-        title: "Conception, Initial Research and KDD Development",
-        detail: "<ul class=\"list-disc pl-5 space-y-1\"><li>RedData project start in partnership with <strong>institute designated by R&amp;D fund</strong>, focusing on Big Data and Artificial Intelligence applied to the public and private sectors.</li><li>Definition of the <strong>platform's base architecture</strong> and <strong>massive data integration framework</strong>, which would give rise to <strong>KDD – Knowledge Discovery in Databases</strong>.</li><li>Initial development of <strong>KDD</strong>, a structured process for knowledge discovery from large volumes of data, composed of stages such as:</li><ul class=\"list-[circle] pl-6 space-y-1\"><li>Data selection and integration (extraction from multiple sources).</li><li>Cleaning and preprocessing (standardization, handling inconsistencies).</li><li>Data transformation and mining (use of algorithms to identify patterns).</li><li>Interpretation and visualization (conversion into strategic insights and reports).</li></ul><li>This method served as <strong>RedData's methodological foundation</strong>, enabling automated and traceable pipelines.</li></ul>"
-      },
-      2018: {
-        year: "2018",
-        title: "Collaborative Development and IBM Mentorship",
-        detail: "<ul class=\"list-disc pl-5 space-y-1\"><li><strong>Entry into IBM's startup program</strong>, with access to IBM Cloud and technical mentorship (machine learning, data architecture, DevOps).</li><li>KDD pipeline optimization, adoption of <strong>data governance best practices</strong> and structuring of RedData's <strong>analytical intelligence layer</strong>.</li><li>Completion of experimental versions with multidisciplinary support and <strong>performance testing</strong> in corporate and governmental environments.</li></ul>"
-      },
-      2019: {
-        year: "2019",
-        title: "Internal Development and Proof of Concepts (PoCs)",
-        detail: "<ul class=\"list-disc pl-5 space-y-1\"><li><strong>Full internalization</strong> of development by the RedMaxx team.</li><li>PoCs in retail, government, and industry, validating <strong>scalability</strong>.</li><li>Inclusion of first <strong>machine learning modules</strong> and predictive modeling.</li></ul>"
-      },
-      2020: {
-        year: "2020",
-        title: "Commercial Launch and Private Adoption",
-        detail: "<ul class=\"list-disc pl-5 space-y-1\"><li>Launch of RedData's <strong>commercial version</strong>.</li><li>First projects in energy, industry, and retail.</li><li>Consolidation of <strong>SaaS model</strong>, <strong>interactive analytical dashboards</strong>, and <strong>Machine Learning-based predictive AI</strong>.</li></ul>"
-      },
-      2021: {
-        year: "2021",
-        title: "Entry into Public Sector and Advancement of Open Source LLMs",
-        detail: "<ul class=\"list-disc pl-5 space-y-1\"><li>First public contract with pioneering agencies in national AI adoption.</li><li>RedData recognized as <strong>100% proprietary and sovereign platform</strong>.</li><li><strong>RedMaxx</strong> starts testing, experiments, and adaptations with <strong>GPT-Neo (2021)</strong> and <strong>GPT-J (June 2021)</strong> models from <strong>EleutherAI</strong>, considered the main open source alternatives compatible with RedData's architecture.</li><li>Start of <strong>internal experiments</strong> with language models applied to governmental data.</li></ul>"
-      },
-      "2022-2023": {
-        year: "2022–2023",
-        title: "Expansion, Generative AI and Technological Sovereignty",
-        detail: "<ul class=\"list-disc pl-5 space-y-1\"><li>Expansion of projects in state governments, municipalities, courts of auditors, and public ministries.</li><li>Introduction of <strong>generative AI</strong> and <strong>intelligent diagnostics</strong>.</li><li><strong>RedMaxx</strong> starts testing, studies, and customizations with <strong>LLaMA (Feb/2023)</strong> from Meta, exploring the open source ecosystem.</li><li><strong>RedMaxx</strong> performs testing and customizations with <strong>Mistral 7B (Oct/2023)</strong> and <strong>Mixtral 8×7B (Dec/2023)</strong> (Apache 2.0), enabling <strong>offline execution</strong> and establishing the foundation of <strong>RedData Appliance</strong>.</li><li>Embedded local AI modules for environments with <strong>high network restrictions</strong> and sensitive data.</li></ul>"
-      },
-      "2024-2025": {
-        year: "2024–2025",
-        title: "Consolidation, Certifications and Digital Sovereignty",
-        detail: "<ul class=\"list-disc pl-5 space-y-1\"><li>RedData consolidates itself as <strong>the most innovative Big Data and AI platform</strong> in the Brazilian public sector.</li><li>Integration and transformation of <strong>LLaMA 3</strong> and <strong>Mistral 7B/Mixtral 8×7B</strong> models into customized versions by RedMaxx, giving rise to RedData's unique Generative AI mode, with proprietary algorithms and scripts, <strong>100% offline execution</strong>, and <strong>total sovereignty</strong>.</li><li><strong>NVIDIA certification (2025) – ongoing</strong> – official operation on <strong>RTX and A100</strong>, with <strong>CUDA and TensorRT</strong>.</li><li><strong>Migration to SUSE Linux AI (2025)</strong> – replaces Debian; compatible with <strong>NVIDIA AI Enterprise</strong>.</li><li><strong>Ongoing partnership with SERPRO (2025)</strong> – deployment on <strong>AWS</strong> in <strong>ticketing model</strong>, with integration to <strong>SERPRO Marketplace</strong> and <strong>PRODAM (completion in 2026)</strong>.</li><li>Recognition for <strong>technological independence</strong>, <strong>LGPD/ISO 27001</strong>, and <strong>digital sovereignty</strong>.</li></ul>"
-      }
-    }
   }
 };

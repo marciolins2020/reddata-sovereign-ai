@@ -7,7 +7,6 @@ import { RisksAlertsModule } from "@/components/audit/RisksAlertsModule";
 import { XAIModule } from "@/components/audit/XAIModule";
 import { ContinuousLearning } from "@/components/audit/ContinuousLearning";
 import { SidebarProvider } from "@/components/ui/sidebar";
-import { AuroraBackground } from "@/components/ui/AuroraBackground";
 
 export type AuditModule = "dashboard" | "documents" | "jurisprudence" | "risks" | "xai" | "learning";
 
@@ -34,15 +33,13 @@ export default function Audit() {
   };
 
   return (
-    <AuroraBackground className="min-h-screen w-full">
-      <SidebarProvider>
-        <div className="min-h-screen flex w-full">
-          <AuditSidebar activeModule={activeModule} onModuleChange={setActiveModule} />
-          <main className="flex-1 overflow-auto">
-            {renderModule()}
-          </main>
-        </div>
-      </SidebarProvider>
-    </AuroraBackground>
+    <SidebarProvider>
+      <div className="min-h-screen flex w-full bg-background">
+        <AuditSidebar activeModule={activeModule} onModuleChange={setActiveModule} />
+        <main className="flex-1 overflow-auto">
+          {renderModule()}
+        </main>
+      </div>
+    </SidebarProvider>
   );
 }

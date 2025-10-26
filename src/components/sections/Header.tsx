@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { scrollToElement } from "@/lib/scroll";
-import redmaxxLogo from "@/assets/redmaxx-logo-compressed.webp";
+import redmaxxLogo from "@/assets/redmaxx-logo.png";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -31,68 +31,47 @@ export const Header = () => {
     submenu?: Array<{ label: string; href: string }>;
   }> = [
     { label: t('header.mainNav'), href: "#hero", id: "hero" },
-    { label: t('header.howItWorks'), href: "#como-funciona", id: "como-funciona" },
-    { label: t('header.solutions'), href: "#casos-uso", id: "casos-uso" },
-    { label: t('header.trajectory'), href: "/trajetoria", id: "timeline", isRoute: true },
+    { label: "Como Funciona", href: "#como-funciona", id: "como-funciona" },
+    { label: "Aplicações", href: "#casos-uso", id: "casos-uso" },
+    { label: "Trajetória", href: "/trajetoria", id: "timeline", isRoute: true },
     { label: "Dashboard", href: "#dashboard-demo", id: "dashboard-demo" },
-    { label: t('header.modules'), href: "/modulos", id: "modulos", isRoute: true },
-    { label: t('header.cases'), href: "#cases", id: "cases", submenu: [
-      { label: t('useCases.government'), href: "/casos-uso/governo" },
-      { label: t('useCases.energy'), href: "/casos-uso/energia" },
-      { label: t('useCases.industry'), href: "/casos-uso/industria" },
-      { label: t('useCases.retail'), href: "/casos-uso/varejo" },
+    { label: "Módulos", href: "/modulos", id: "modulos", isRoute: true },
+    { label: "Casos de Uso", href: "#cases", id: "cases", submenu: [
+      { label: "Governo", href: "/casos-uso/governo" },
+      { label: "Energia", href: "/casos-uso/energia" },
+      { label: "Indústria", href: "/casos-uso/industria" },
+      { label: "Varejo", href: "/casos-uso/varejo" },
     ]},
-    { label: t('ebook.materialsTitle'), href: "#ebook", id: "ebook" },
-    { label: t('header.faq'), href: "#recursos", id: "recursos" },
-    { label: t('header.contact'), href: "#contact-form", id: "contact-form" },
+    { label: "Materiais", href: "#ebook", id: "ebook" },
+    { label: "FAQ", href: "#recursos", id: "recursos" },
+    { label: "Contato", href: "#contact-form", id: "contact-form" },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
       const scrolled = window.scrollY > 10;
       setIsScrolled(scrolled);
+
+      // ScrollSpy - detectar seção ativa apenas na página principal
+      if (location.pathname === "/") {
+        const sections = ["hero", "como-funciona", "casos-uso", "dashboard-demo", "modulos", "cases", "ebook", "recursos", "contact-form"];
+        
+        for (const section of sections) {
+          const element = document.getElementById(section);
+          if (element) {
+            const rect = element.getBoundingClientRect();
+            if (rect.top <= 120 && rect.bottom >= 120) {
+              setActiveSection(section);
+              break;
+            }
+          }
+        }
+      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Use Intersection Observer for scroll spy - prevents forced reflows
-  useEffect(() => {
-    if (location.pathname !== "/") {
-      setActiveSection("");
-      return;
-    }
-
-    const sections = ["hero", "como-funciona", "casos-uso", "dashboard-demo", "modulos", "cases", "ebook", "recursos", "contact-form"];
-    
-    const observerOptions = {
-      root: null,
-      rootMargin: '-120px 0px -50% 0px', // Trigger when section is near top of viewport
-      threshold: 0
-    };
-
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-    sections.forEach(sectionId => {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        observer.observe(element);
-      }
-    });
-
-    return () => {
-      observer.disconnect();
-    };
   }, [location.pathname]);
 
   const scrollToSection = (href: string, isRoute?: boolean) => {
@@ -131,17 +110,16 @@ export const Header = () => {
         }`}
       >
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16 md:h-20 overflow-visible">
+          <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
-            <div className="flex items-center shrink-0">
+            <div className="flex items-center">
               <img
                 src={redmaxxLogo}
                 alt="RedMaxx"
-                className="h-8 md:h-10 w-auto cursor-pointer object-contain"
-                style={{ maxWidth: 'none' }}
+                className="h-8 md:h-10 w-auto cursor-pointer"
                 onClick={() => scrollToSection("#hero")}
-                width="120"
-                height="40"
+                width="80"
+                height="32"
                 loading="eager"
               />
             </div>

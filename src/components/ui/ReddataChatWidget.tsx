@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { supabase } from "@/integrations/supabase/client";
-import reddataChatIcon from "@/assets/reddata-chat-icon-56-compressed.webp";
+import reddataChatIcon from "@/assets/reddata-chat-icon.png";
 
 interface Message {
   role: "user" | "assistant";
@@ -291,10 +291,11 @@ export const ReddataChatWidget = () => {
       {/* Widget Button */}
       <div className="fixed bottom-6 right-6 z-[9999]">
         {!isOpen && (
-          <button
+          <Button
             onClick={toggleChat}
+            size="lg"
             aria-label="Fale com o RedData (Beta)"
-            className="relative w-14 h-14 p-0 bg-transparent border-0 cursor-pointer transition-transform hover:scale-110 duration-300"
+            className="relative rounded-full w-14 h-14 bg-transparent hover:bg-transparent shadow-lg hover:shadow-xl transition-all duration-300 p-0 overflow-visible group border-0"
             style={{
               animation: 'pulse 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
             }}
@@ -302,12 +303,12 @@ export const ReddataChatWidget = () => {
             <img 
               src={reddataChatIcon} 
               alt="RedData Chat" 
-              className="w-14 h-14 rounded-full object-cover"
+              className="w-14 h-14 object-contain"
               style={{
                 filter: 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1))'
               }}
             />
-          </button>
+          </Button>
         )}
         
         {/* Chat Panel */}

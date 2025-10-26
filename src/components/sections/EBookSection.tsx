@@ -17,8 +17,8 @@ export const EBookSection = () => {
     
     if (!email || !email.includes("@")) {
       toast({
-        title: t('ebook.invalidEmail'),
-        description: t('ebook.invalidEmailDesc'),
+        title: "Email inválido",
+        description: "Por favor, insira um email válido para baixar o eBook.",
         variant: "destructive",
       });
       return;
@@ -34,8 +34,8 @@ export const EBookSection = () => {
 
     setDownloaded(true);
     toast({
-      title: t('ebook.downloadStarted'),
-      description: t('ebook.downloadStartedDesc'),
+      title: "Download iniciado!",
+      description: "Seu eBook está sendo baixado. Obrigado pelo interesse!",
     });
 
     // Optional: Send email to backend for lead capture
@@ -54,40 +54,40 @@ export const EBookSection = () => {
             <div className="space-y-6">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
                 <BookOpen className="w-4 h-4 text-primary" />
-                <span className="text-sm font-medium text-primary">{t('ebook.freeMaterial')}</span>
+                <span className="text-sm font-medium text-primary">Material Gratuito</span>
               </div>
               
               <h2 className="text-4xl md:text-5xl font-bold">
-                {t('ebook.title')}
+                Governo Impulsionado por Dados
               </h2>
               
               <p className="text-xl text-muted-foreground">
-                {t('ebook.subtitle')}
+                Transformando a Gestão Pública em Saúde, Educação, Fazenda e Segurança
               </p>
 
               <div className="space-y-3">
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
                   <p className="text-muted-foreground">
-                    {t('ebook.feature1')}
+                    Conceitos fundamentais de Data Driven Government
                   </p>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
                   <p className="text-muted-foreground">
-                    {t('ebook.feature2')}
+                    Aplicações práticas em setores críticos do governo
                   </p>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
                   <p className="text-muted-foreground">
-                    {t('ebook.feature3')}
+                    Estudos de caso e melhores práticas
                   </p>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
                   <p className="text-muted-foreground">
-                    {t('ebook.feature4')}
+                    Estratégias de implementação e ferramentas
                   </p>
                 </div>
               </div>
@@ -104,10 +104,10 @@ export const EBookSection = () => {
                       </div>
                       <div>
                         <h3 className="text-2xl font-bold mb-2">
-                          {t('ebook.downloadTitle')}
+                          Baixe o eBook Gratuito
                         </h3>
                         <p className="text-muted-foreground">
-                          {t('ebook.downloadSubtitle')}
+                          Insira seu email para receber o material completo
                         </p>
                       </div>
                     </div>
@@ -116,7 +116,7 @@ export const EBookSection = () => {
                       <div>
                         <Input
                           type="email"
-                          placeholder={t('ebook.emailPlaceholder')}
+                          placeholder="seu@email.com"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           className="h-12 text-base"
@@ -130,11 +130,12 @@ export const EBookSection = () => {
                         className="w-full h-12 text-base font-semibold"
                       >
                         <Download className="w-5 h-5 mr-2" />
-                        {t('ebook.downloadButton')}
+                        Baixar eBook Agora
                       </Button>
 
                       <p className="text-xs text-muted-foreground text-center">
-                        {t('ebook.privacyNote')}
+                        Ao baixar, você concorda em receber comunicações da RedMaxx. 
+                        Seus dados estão protegidos pela LGPD.
                       </p>
                     </div>
                   </form>
@@ -145,10 +146,10 @@ export const EBookSection = () => {
                     </div>
                     <div>
                       <h3 className="text-2xl font-bold mb-2">
-                        {t('ebook.successTitle')}
+                        Download Iniciado!
                       </h3>
                       <p className="text-muted-foreground">
-                        {t('ebook.successMessage')}
+                        Obrigado pelo interesse. O eBook está sendo baixado.
                       </p>
                     </div>
                     <Button
@@ -163,7 +164,7 @@ export const EBookSection = () => {
                       }}
                     >
                       <Download className="w-4 h-4 mr-2" />
-                      {t('ebook.downloadAgain')}
+                      Baixar Novamente
                     </Button>
                   </div>
                 )}
@@ -180,7 +181,7 @@ export const EBookSection = () => {
               size="lg" 
               onClick={() => scrollToElement('#contact-form')}
             >
-              {t('header.requestDemo')}
+              Solicitar Demonstração
             </Button>
           </div>
         </div>

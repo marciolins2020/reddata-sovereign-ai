@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import flexLogo from "@/assets/flex-industries-logo.png";
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
-import { AuroraBackground } from "@/components/ui/AuroraBackground";
 
 const CasosUsoIndustria = () => {
   // Dados de Fluxo de Caixa Projetado
@@ -55,8 +54,7 @@ const CasosUsoIndustria = () => {
   const { t } = useLanguage();
 
   return (
-    <AuroraBackground className="min-h-screen">
-      <div className="w-full">
+    <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -517,8 +515,7 @@ const CasosUsoIndustria = () => {
           </div>
         </div>
       </section>
-      </div>
-    </AuroraBackground>
+    </div>
   );
 };
 

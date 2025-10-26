@@ -4,14 +4,12 @@ import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import amancoLogo from "@/assets/amanco-logo.png";
 import amancoDashboard from "@/assets/amanco-dashboard.png";
-import { AuroraBackground } from "@/components/ui/AuroraBackground";
 
 const CasosUsoVarejo = () => {
   const { t } = useLanguage();
   
   return (
-    <AuroraBackground className="min-h-screen">
-      <div className="w-full">
+    <div className="min-h-screen bg-background">
       {/* Header with Back Button */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
         <div className="container mx-auto px-4 py-4">
@@ -292,8 +290,7 @@ const CasosUsoVarejo = () => {
           </div>
         </div>
       </section>
-      </div>
-    </AuroraBackground>
+    </div>
   );
 };
 
