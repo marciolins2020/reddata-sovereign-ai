@@ -3,6 +3,7 @@ import { Header } from "@/components/sections/Header";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { StatsSection } from "@/components/sections/StatsSection";
 import { OnboardingTour } from "@/components/ui/OnboardingTour";
+import { AuroraBackground } from "@/components/ui/AuroraBackground";
 
 // Lazy load all below-the-fold sections to reduce initial bundle
 const PlatformCapabilitiesSection = lazy(() => import("@/components/sections/PlatformCapabilitiesSection").then(m => ({ default: m.PlatformCapabilitiesSection })));
@@ -33,31 +34,33 @@ const Index = () => {
       >
         Pular para o conteúdo
       </a>
-      <main className="min-h-screen">
-        <Header />
-        {/* <OnboardingTour /> */}
-        <HeroSection />
-        <StatsSection />
-        <Suspense fallback={<div className="py-20" />}>
-          <PlatformCapabilitiesSection />
-          <DataConnectorsSection />
-          <HowItWorksSection />
-          <ApplianceSection />
-          <TechnicalDifferentialSection />
-          <VirtualMachinesSection />
-          <WhiteLabelSection />
-          <AutomationAlertsSection />
-          <TechnicalArchitectureSection />
-          <ApplicationsSection />
-          <DashboardDemoSection />
-          <ComparisonSection />
-          <TestimonialsSection />
-          <FAQSection />
-          <EBookSection />
-          <ContactFormSection />
-          <Footer />
-        </Suspense>
-      </main>
+      <AuroraBackground className="min-h-screen">
+        <main className="w-full">
+          <Header />
+          {/* <OnboardingTour /> */}
+          <HeroSection />
+          <StatsSection />
+          <Suspense fallback={<div className="py-20" />}>
+            <PlatformCapabilitiesSection />
+            <DataConnectorsSection />
+            <HowItWorksSection />
+            <ApplianceSection />
+            <TechnicalDifferentialSection />
+            <VirtualMachinesSection />
+            <WhiteLabelSection />
+            <AutomationAlertsSection />
+            <TechnicalArchitectureSection />
+            <ApplicationsSection />
+            <DashboardDemoSection />
+            <ComparisonSection />
+            <TestimonialsSection />
+            <FAQSection />
+            <EBookSection />
+            <ContactFormSection />
+            <Footer />
+          </Suspense>
+        </main>
+      </AuroraBackground>
     </>
   );
 };
