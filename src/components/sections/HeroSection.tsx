@@ -20,9 +20,7 @@ export const HeroSection = () => {
           <div className="text-center lg:text-left">
             <div className="flex items-center justify-center lg:justify-start mb-8 overflow-visible">
                 <img 
-                  src="/reddata-logo-mobile.webp"
-                  srcSet="/reddata-logo-mobile.webp 380w, /reddata-logo-597.webp 597w"
-                  sizes="(max-width: 768px) 380px, 597px"
+                  src="/reddata-logo-new.png"
                   alt="RedData® - Plataforma de Big Data e IA"
                   className="h-16 md:h-20 lg:h-24 w-auto object-contain"
                   style={{ maxWidth: 'none' }}

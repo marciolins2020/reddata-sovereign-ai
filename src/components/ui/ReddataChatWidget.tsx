@@ -291,11 +291,10 @@ export const ReddataChatWidget = () => {
       {/* Widget Button */}
       <div className="fixed bottom-6 right-6 z-[9999]">
         {!isOpen && (
-          <Button
+          <button
             onClick={toggleChat}
-            size="lg"
             aria-label="Fale com o RedData (Beta)"
-            className="relative rounded-full w-14 h-14 bg-transparent hover:bg-transparent shadow-lg hover:shadow-xl transition-all duration-300 p-0 overflow-visible group border-0"
+            className="relative w-14 h-14 p-0 bg-transparent border-0 cursor-pointer transition-transform hover:scale-110 duration-300"
             style={{
               animation: 'pulse 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
             }}
@@ -303,12 +302,12 @@ export const ReddataChatWidget = () => {
             <img 
               src={reddataChatIcon} 
               alt="RedData Chat" 
-              className="w-14 h-14 object-contain"
+              className="w-14 h-14 rounded-full object-cover"
               style={{
                 filter: 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1))'
               }}
             />
-          </Button>
+          </button>
         )}
         
         {/* Chat Panel */}
