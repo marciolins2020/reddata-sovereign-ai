@@ -51,27 +51,48 @@ export const Header = () => {
     const handleScroll = () => {
       const scrolled = window.scrollY > 10;
       setIsScrolled(scrolled);
-
-      // ScrollSpy - detectar seção ativa apenas na página principal
-      if (location.pathname === "/") {
-        const sections = ["hero", "como-funciona", "casos-uso", "dashboard-demo", "modulos", "cases", "ebook", "recursos", "contact-form"];
-        
-        for (const section of sections) {
-          const element = document.getElementById(section);
-          if (element) {
-            const rect = element.getBoundingClientRect();
-            if (rect.top <= 120 && rect.bottom >= 120) {
-              setActiveSection(section);
-              break;
-            }
-          }
-        }
-      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Use Intersection Observer for scroll spy - prevents forced reflows
+  useEffect(() => {
+    if (location.pathname !== "/") {
+      setActiveSection("");
+      return;
+    }
+
+    const sections = ["hero", "como-funciona", "casos-uso", "dashboard-demo", "modulos", "cases", "ebook", "recursos", "contact-form"];
+    
+    const observerOptions = {
+      root: null,
+      rootMargin: '-120px 0px -50% 0px', // Trigger when section is near top of viewport
+      threshold: 0
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    sections.forEach(sectionId => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        observer.observe(element);
+      }
+    });
+
+    return () => {
+      observer.disconnect();
+    };
   }, [location.pathname]);
 
   const scrollToSection = (href: string, isRoute?: boolean) => {
