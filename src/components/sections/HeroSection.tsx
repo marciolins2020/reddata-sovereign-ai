@@ -20,9 +20,11 @@ export const HeroSection = () => {
           <div className="text-center lg:text-left">
             <div className="flex items-center justify-center lg:justify-start mb-8 overflow-visible">
                 <img 
-                  src="/reddata-logo-new.png"
+                  src="/reddata-logo-597.webp"
                   alt="RedData® - Plataforma de Big Data e IA"
                   className="h-16 md:h-20 lg:h-24 w-auto object-contain"
+                  width="597"
+                  height="96"
                   loading="eager"
               />
             </div>
