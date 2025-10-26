@@ -131,16 +131,17 @@ export const Header = () => {
         }`}
       >
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16 md:h-20">
+          <div className="flex items-center justify-between h-16 md:h-20 overflow-visible">
             {/* Logo */}
-            <div className="flex items-center min-w-0">
+            <div className="flex items-center shrink-0">
               <img
                 src={redmaxxLogo}
                 alt="RedMaxx"
-                className="h-8 md:h-10 w-auto cursor-pointer object-contain max-w-none"
+                className="h-8 md:h-10 w-auto cursor-pointer object-contain"
+                style={{ maxWidth: 'none' }}
                 onClick={() => scrollToSection("#hero")}
-                width="80"
-                height="32"
+                width="120"
+                height="40"
                 loading="eager"
               />
             </div>
