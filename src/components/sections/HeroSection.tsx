@@ -23,9 +23,6 @@ export const HeroSection = () => {
                   src="/reddata-logo-new.png"
                   alt="RedData® - Plataforma de Big Data e IA"
                   className="h-16 md:h-20 lg:h-24 w-auto object-contain"
-                  style={{ maxWidth: 'none' }}
-                  width="597"
-                  height="96"
                   loading="eager"
               />
             </div>
