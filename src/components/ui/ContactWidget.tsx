@@ -57,25 +57,39 @@ export const ContactWidget = () => {
 
   if (!isVisible) return null;
 
+  // Cores: Azul Apple iMessage (#007AFF) ou Verde WhatsApp (#25D366)
+  const bgColor = isUSA ? '#007AFF' : '#25D366';
+  const hoverColor = isUSA ? '#0051D5' : '#20BA5A';
+
   return (
     <div className="fixed bottom-20 right-6 z-[9998] flex items-end gap-2">
       {/* Botão Principal */}
       <Button
         onClick={handleClick}
         size="lg"
-        className="rounded-full w-14 h-14 bg-[#25D366] hover:bg-[#20BA5A] shadow-lg hover:shadow-xl transition-all duration-300 p-0 group relative"
+        style={{ 
+          backgroundColor: bgColor,
+        }}
+        className="rounded-full w-14 h-14 shadow-lg hover:shadow-xl transition-all duration-300 p-0 group relative border-0"
+        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = hoverColor}
+        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = bgColor}
         aria-label={isUSA ? "Contato via iMessage" : "Contato via WhatsApp"}
         title={isUSA ? "Abrir iMessage" : "Abrir WhatsApp"}
       >
         <MessageCircle className="h-6 w-6 text-white" />
         
-        {/* Badge indicando o tipo de mensagem */}
-        <span className="absolute -top-1 -right-1 bg-white text-[#25D366] text-[8px] font-bold px-1.5 py-0.5 rounded-full shadow-md">
-          {isUSA ? 'iMessage' : 'WhatsApp'}
-        </span>
+        {/* Badge apenas para USA (iMessage) */}
+        {isUSA && (
+          <span className="absolute -top-1 -right-1 bg-white text-[#007AFF] text-[8px] font-bold px-1.5 py-0.5 rounded-full shadow-md">
+            iMessage
+          </span>
+        )}
         
         {/* Efeito de pulse */}
-        <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-20"></span>
+        <span 
+          className="absolute inset-0 rounded-full animate-ping opacity-20"
+          style={{ backgroundColor: bgColor }}
+        ></span>
       </Button>
 
       {/* Botão de fechar (opcional) */}
