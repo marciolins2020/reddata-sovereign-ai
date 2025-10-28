@@ -9,17 +9,26 @@ import {
 import { Cloud, Server, Settings } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { scrollToElement } from "@/lib/scroll";
+import hypervIcon from "@/assets/icons/hyperv-icon.png";
+import vmwareIcon from "@/assets/icons/vmware-icon.png";
+import proxmoxIcon from "@/assets/icons/proxmox-icon.png";
+import kvmIcon from "@/assets/icons/kvm-icon.png";
+import virtualboxIcon from "@/assets/icons/virtualbox-icon.png";
+import govbrIcon from "@/assets/icons/govbr-icon.png";
+import azureIcon from "@/assets/icons/azure-icon.png";
+import awsIcon from "@/assets/icons/aws-icon.png";
+import gcpIcon from "@/assets/icons/gcp-icon.png";
 
 const vmProviders = [
-  { name: "Hyper-V", logo: "🖥️" },
-  { name: "VMware", logo: "⚡" },
-  { name: "Proxmox", logo: "🔧" },
-  { name: "KVM", logo: "🐧" },
-  { name: "VirtualBox", logo: "📦" },
-  { name: "Gov.br", logo: "🇧🇷" },
-  { name: "Azure", logo: "☁️" },
-  { name: "AWS", logo: "🌐" },
-  { name: "GCP", logo: "🏗️" }
+  { name: "Hyper-V", logo: hypervIcon },
+  { name: "VMware", logo: vmwareIcon },
+  { name: "Proxmox", logo: proxmoxIcon },
+  { name: "KVM", logo: kvmIcon },
+  { name: "VirtualBox", logo: virtualboxIcon },
+  { name: "Gov.br", logo: govbrIcon },
+  { name: "Azure", logo: azureIcon },
+  { name: "AWS", logo: awsIcon },
+  { name: "GCP", logo: gcpIcon }
 ];
 
 export const VirtualMachinesSection = () => {
@@ -134,7 +143,12 @@ export const VirtualMachinesSection = () => {
                   key={index} 
                   className="p-6 text-center hover:shadow-medium transition-all duration-300 border-border/50 bg-card/30"
                 >
-                  <div className="text-2xl mb-2">{provider.logo}</div>
+                  <img 
+                    src={provider.logo} 
+                    alt={`${provider.name} logo`}
+                    className="w-16 h-16 mx-auto mb-3 object-contain"
+                    loading="lazy"
+                  />
                   <h4 className="text-sm font-medium text-foreground">{provider.name}</h4>
                 </Card>
               ))}
