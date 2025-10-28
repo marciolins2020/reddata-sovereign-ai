@@ -8,6 +8,7 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { lazy, Suspense } from "react";
 import Index from "./pages/Index";
 import { ReddataChatWidget } from "@/components/ui/ReddataChatWidget";
+import { ContactWidget } from "@/components/ui/ContactWidget";
 
 // Lazy load non-home page routes to reduce initial bundle size
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -34,6 +35,7 @@ const App = () => (
           <Toaster />
           <Sonner />
           <ReddataChatWidget />
+          <ContactWidget />
           <BrowserRouter>
             <Suspense fallback={<div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>}>
               <Routes>
