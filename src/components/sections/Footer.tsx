@@ -60,9 +60,8 @@ export const Footer = () => {
               
               <div className="text-gray-300 text-sm">
                 <p className="font-medium text-white mb-1">{t('footer.manaus')} ({t('footer.branch')}) 🇧🇷</p>
-                <p>R. Rio Purús, 458, Cj.Vieiralves</p>
-                <p>Nossa Sra. das Graças</p>
-                <p>69053-050 - Manaus/AM</p>
+                <p>Rua Rio Javari, 361, N. S. das Graças</p>
+                <p>Cep 69053-110 - Manaus/AM</p>
                 <p>(92) 98223-6695</p>
               </div>
               
