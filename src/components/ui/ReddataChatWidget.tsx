@@ -313,7 +313,7 @@ export const ReddataChatWidget = () => {
         
         {/* Chat Panel */}
         {isOpen && (
-          <Card className="fixed inset-0 md:relative md:w-[380px] md:h-[600px] w-full h-full md:shadow-2xl md:border-2 border-0 animate-in slide-in-from-bottom-2 md:slide-in-from-bottom-2 flex flex-col md:rounded-lg rounded-none">
+          <Card className="fixed inset-0 md:relative md:w-[380px] md:h-[600px] w-full h-full md:shadow-2xl md:border-2 border-0 animate-in slide-in-from-bottom-2 md:slide-in-from-bottom-2 flex flex-col md:rounded-lg rounded-none z-[10001]">
             <CardHeader className="bg-gradient-to-r from-primary to-primary/80 text-white pb-3 flex-shrink-0">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
