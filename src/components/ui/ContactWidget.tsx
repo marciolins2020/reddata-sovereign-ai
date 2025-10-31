@@ -62,7 +62,7 @@ export const ContactWidget = () => {
   const hoverColor = isUSA ? '#0051D5' : '#20BA5A';
 
   return (
-    <div className="fixed bottom-20 right-6 z-[9998] flex items-end gap-2">
+    <div className="fixed bottom-20 left-6 z-[9998] flex items-end gap-2">
       {/* Botão Principal */}
       <Button
         onClick={handleClick}
