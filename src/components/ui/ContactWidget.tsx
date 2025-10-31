@@ -42,27 +42,21 @@ export const ContactWidget = () => {
   }, []);
 
   const handleClick = () => {
-    if (isUSA) {
-      // iMessage - abre o app Messages no iOS/macOS
-      const phoneNumber = '+14077146552'; // Número dos EUA (Orlando)
-      const message = encodeURIComponent('Olá! Gostaria de saber mais sobre o RedData.');
-      window.open(`sms:${phoneNumber}&body=${message}`, '_blank');
-    } else {
-      // WhatsApp
-      const phoneNumber = '5511940764626'; // Brasil
-      const message = encodeURIComponent('Olá! Gostaria de saber mais sobre o RedData.');
-      window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
-    }
+    // iMessage - abre o app Messages no iOS/macOS
+    const phoneNumber = '+14077146552'; // Número dos EUA (Orlando)
+    const message = encodeURIComponent('Olá! Gostaria de saber mais sobre o RedData.');
+    window.open(`sms:${phoneNumber}&body=${message}`, '_blank');
   };
 
-  if (!isVisible) return null;
+  // Só mostra o widget nos EUA (iMessage)
+  if (!isVisible || !isUSA) return null;
 
-  // Cores: Azul Apple iMessage (#007AFF) ou Verde WhatsApp (#25D366)
-  const bgColor = isUSA ? '#007AFF' : '#25D366';
-  const hoverColor = isUSA ? '#0051D5' : '#20BA5A';
+  // Cor azul Apple iMessage
+  const bgColor = '#007AFF';
+  const hoverColor = '#0051D5';
 
   return (
-    <div className="fixed bottom-20 left-6 z-[9998] flex items-end gap-2">
+    <div className="fixed bottom-20 right-6 z-[9998] flex items-end gap-2">
       {/* Botão Principal */}
       <Button
         onClick={handleClick}
@@ -73,17 +67,15 @@ export const ContactWidget = () => {
         className="rounded-full w-14 h-14 shadow-lg hover:shadow-xl transition-all duration-300 p-0 group relative border-0"
         onMouseEnter={(e) => e.currentTarget.style.backgroundColor = hoverColor}
         onMouseLeave={(e) => e.currentTarget.style.backgroundColor = bgColor}
-        aria-label={isUSA ? "Contato via iMessage" : "Contato via WhatsApp"}
-        title={isUSA ? "Abrir iMessage" : "Abrir WhatsApp"}
+        aria-label="Contato via iMessage"
+        title="Abrir iMessage"
       >
         <MessageCircle className="h-6 w-6 text-white" />
         
-        {/* Badge apenas para USA (iMessage) */}
-        {isUSA && (
-          <span className="absolute -top-1 -right-1 bg-white text-[#007AFF] text-[8px] font-bold px-1.5 py-0.5 rounded-full shadow-md">
-            iMessage
-          </span>
-        )}
+        {/* Badge iMessage */}
+        <span className="absolute -top-1 -right-1 bg-white text-[#007AFF] text-[8px] font-bold px-1.5 py-0.5 rounded-full shadow-md">
+          iMessage
+        </span>
         
         {/* Efeito de pulse */}
         <span 
