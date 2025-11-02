@@ -63,3 +63,10 @@ export const scrollToElement = (selector: string, retries = 3) => {
   
   attemptScroll(retries);
 };
+
+/**
+ * Scrolls to the contact form section
+ */
+export const scrollToContact = () => {
+  scrollToElement('contato');
+};
