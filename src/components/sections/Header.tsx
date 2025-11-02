@@ -34,6 +34,7 @@ export const Header = () => {
     { label: "Como Funciona", href: "#como-funciona", id: "como-funciona" },
     { label: "Aplicações", href: "#casos-uso", id: "casos-uso" },
     { label: "Trajetória", href: "/trajetoria", id: "timeline", isRoute: true },
+    { label: "Corporativo", href: "/corporativo", id: "corporativo", isRoute: true },
     { label: "Dashboard", href: "#dashboard-demo", id: "dashboard-demo" },
     { label: "Módulos", href: "/modulos", id: "modulos", isRoute: true },
     { label: "Casos de Uso", href: "#cases", id: "cases", submenu: [
