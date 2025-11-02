@@ -151,6 +151,98 @@ const Corporativo = () => {
         </div>
       </section>
 
+      {/* OFERTA CORPORATIVA PREMIUM */}
+      <section id="corporativo-offer" className="w-full bg-background py-20">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <h2 className="text-4xl font-bold mb-4 text-primary">
+            RedData Infinity™ – Oferta Corporativa Premium
+          </h2>
+          <p className="text-lg mb-8">
+            Três pacotes sob medida para empresas médias a grandes —  
+            escolha o que melhor se adapta ao seu tamanho, maturidade e setor regulado.
+          </p>
+        </div>
+
+        <div className="max-w-7xl mx-auto mt-12 px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Pacote 1 */}
+          <Card className="p-6 text-center">
+            <h4 className="text-2xl font-semibold mb-2">Pacote Média Empresa</h4>
+            <p className="text-muted-foreground mb-4">
+              Para empresas entre 100–500 funcionários com necessidade de IA + Big Data privada.
+            </p>
+            <ul className="text-left list-disc list-inside text-muted-foreground mb-4 space-y-1">
+              <li>Implantação em até 8 semanas</li>
+              <li>Licença anual fixa – sem cobrança por usuário ou token</li>
+              <li>Suporte padrão + workshop de adoção 2 dias</li>
+            </ul>
+            <Button 
+              onClick={() => window.location.href = "/#contato"}
+              className="mt-4 w-full"
+            >
+              Selecionar este pacote
+            </Button>
+          </Card>
+
+          {/* Pacote 2 */}
+          <Card className="p-6 text-center">
+            <h4 className="text-2xl font-semibold mb-2">Pacote Grande Empresa</h4>
+            <p className="text-muted-foreground mb-4">
+              Para corporações com múltiplas unidades, alto volume de dados e múltiplos casos de uso.
+            </p>
+            <ul className="text-left list-disc list-inside text-muted-foreground mb-4 space-y-1">
+              <li>Implantação em até 12 semanas</li>
+              <li>Licença anual fixa – ilimitado usuários e uso</li>
+              <li>Suporte premium 24/7 + auditoria de governança IA</li>
+            </ul>
+            <Button 
+              onClick={() => window.location.href = "/#contato"}
+              className="mt-4 w-full"
+            >
+              Selecionar este pacote
+            </Button>
+          </Card>
+
+          {/* Pacote 3 */}
+          <Card className="p-6 text-center">
+            <h4 className="text-2xl font-semibold mb-2">Pacote Regulados & Críticos</h4>
+            <p className="text-muted-foreground mb-4">
+              Para empresas de setores regulados (financeiro, saúde, energia) com exigências de privacidade e soberania máxima.
+            </p>
+            <ul className="text-left list-disc list-inside text-muted-foreground mb-4 space-y-1">
+              <li>Modelo Appliance ou On-Premises com GPU dedicadas</li>
+              <li>Auditoria anual + conformidade LGPD/GDPR + ISO 27001</li>
+              <li>Upgrades incluídos + garantia de ROI ou devolução parcial</li>
+            </ul>
+            <Button 
+              onClick={() => window.location.href = "/#contato"}
+              className="mt-4 w-full"
+            >
+              Selecionar este pacote
+            </Button>
+          </Card>
+        </div>
+
+        <div className="max-w-5xl mx-auto mt-16 px-6 text-center">
+          <p className="text-base text-muted-foreground">
+            Todos os pacotes incluem o motor técnico da plataforma RedData – IA Generativa + Big Data privada – com suporte direto da RedMaxx como fabricante.
+          </p>
+        </div>
+
+        <div className="max-w-5xl mx-auto mt-12 text-center px-6">
+          <h3 className="text-3xl font-bold mb-6">Transforme seu negócio com inteligência própria.</h3>
+          <p className="text-lg mb-8 text-muted-foreground">
+            Solicite uma demonstração personalizada e veja como o RedData Infinity™ pode se tornar o ativo estratégico da sua empresa.
+          </p>
+          <Button 
+            onClick={() => window.location.href = "/#contato"}
+            size="lg"
+            className="bg-primary hover:bg-primary/90"
+          >
+            Solicitar demonstração
+          </Button>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
