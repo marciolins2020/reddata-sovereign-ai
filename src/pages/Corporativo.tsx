@@ -211,7 +211,7 @@ const Corporativo = () => {
             <ul className="text-left list-disc list-inside text-muted-foreground mb-4 space-y-1">
               <li>Modelo Appliance ou On-Premises com GPU dedicadas</li>
               <li>Auditoria anual + conformidade LGPD/GDPR + ISO 27001</li>
-              <li>Upgrades incluídos + garantia de ROI ou devolução parcial</li>
+              <li>Upgrades incluídos + garantia de ROI</li>
             </ul>
             <Button 
               onClick={() => window.location.href = "/#contato"}
