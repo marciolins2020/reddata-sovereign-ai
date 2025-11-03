@@ -45,7 +45,7 @@ const Corporativo = () => {
     <div className="min-h-screen">
       <Header />
       
-      <section id="corporativo" className="w-full bg-background py-20 mt-20">
+      <section id="corporativo" className="w-full bg-background py-20 mt-20 pb-8">
         <div className="max-w-6xl mx-auto px-6 text-center">
           {/* HERO */}
           <h1 className="text-4xl font-bold mb-4 text-primary">
@@ -152,7 +152,7 @@ const Corporativo = () => {
       </section>
 
       {/* OFERTA CORPORATIVA PREMIUM */}
-      <section id="corporativo-offer" className="w-full bg-background py-20">
+      <section id="corporativo-offer" className="w-full bg-background pt-8 pb-20">
         <div className="max-w-6xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold mb-4 text-primary">
             RedData Infinity™ – Oferta Corporativa Premium
