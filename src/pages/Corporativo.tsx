@@ -54,7 +54,7 @@ const Corporativo = () => {
           </h1>
           
           {/* Server Image */}
-          <div className="w-full max-w-5xl mx-auto mb-12">
+          <div className="w-full max-w-4xl mx-auto mb-12">
             <img 
               src={infinityServerImage} 
               alt="RedData Infinity Server Appliance" 
