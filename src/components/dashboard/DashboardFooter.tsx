@@ -10,9 +10,14 @@ export function DashboardFooter() {
             <img src={reddataIcon} alt="RedData" className="h-8" width="32" height="32" loading="lazy" />
           </div>
           
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <span>Um produto da</span>
-            <img src={redmaxxLogo} alt="RedMaxx" className="h-6" width="60" height="24" loading="lazy" />
+          <div className="flex flex-col items-end gap-1">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <span>Um produto da</span>
+              <img src={redmaxxLogo} alt="RedMaxx" className="h-6" width="60" height="24" loading="lazy" />
+            </div>
+            <p className="text-xs text-muted-foreground">
+              RedData by RedMaxx — Plataforma Brasileira de Big Data & Inteligência Artificial
+            </p>
           </div>
         </div>
       </div>
