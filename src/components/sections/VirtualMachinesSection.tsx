@@ -9,15 +9,15 @@ import {
 import { Cloud, Server, Settings } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { scrollToElement } from "@/lib/scroll";
-import hypervIcon from "@/assets/icons/hyperv-icon.png";
+import hypervIcon from "@/assets/icons/hyperv-icon-clean.png";
 import vmwareIcon from "@/assets/icons/vmware-icon-transparent.png";
-import proxmoxIcon from "@/assets/icons/proxmox-icon.png";
+import proxmoxIcon from "@/assets/icons/proxmox-icon-clean.png";
 import kvmIcon from "@/assets/icons/kvm-icon.png";
 import virtualboxIcon from "@/assets/icons/virtualbox-icon-alt.png";
-import govbrIcon from "@/assets/icons/govbr-icon.png";
-import azureIcon from "@/assets/icons/azure-icon.png";
-import awsIcon from "@/assets/icons/aws-icon.png";
-import gcpIcon from "@/assets/icons/gcp-icon.png";
+import govbrIcon from "@/assets/icons/govbr-icon-clean.png";
+import azureIcon from "@/assets/icons/azure-icon-clean.png";
+import awsIcon from "@/assets/icons/aws-icon-clean.png";
+import gcpIcon from "@/assets/icons/gcp-icon-clean.png";
 
 const vmProviders = [
   { name: "Hyper-V", logo: hypervIcon },
