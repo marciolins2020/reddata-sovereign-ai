@@ -3,6 +3,7 @@ import { Footer } from "@/components/sections/Footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { scrollToContact } from "@/lib/scroll";
+import infinityServerImage from "@/assets/reddata-infinity-server.png";
 
 const Corporativo = () => {
   const features = [
@@ -48,9 +49,19 @@ const Corporativo = () => {
       <section id="corporativo" className="w-full bg-background py-20 mt-20 pb-8">
         <div className="max-w-6xl mx-auto px-6 text-center">
           {/* HERO */}
-          <h1 className="text-4xl font-bold mb-4 text-primary">
+          <h1 className="text-4xl font-bold mb-8 text-primary">
             RedData Infinity™ – A Inteligência Privada das Empresas
           </h1>
+          
+          {/* Server Image */}
+          <div className="w-full max-w-5xl mx-auto mb-12">
+            <img 
+              src={infinityServerImage} 
+              alt="RedData Infinity Server Appliance" 
+              className="w-full h-auto object-contain"
+            />
+          </div>
+
           <p className="text-lg mb-8">
             A RedMaxx entrega às corporações o que nenhuma Big Tech oferece:<br />
             <strong>IA e Big Data privados, ilimitados e sob total controle.</strong>
