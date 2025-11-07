@@ -67,7 +67,9 @@ const Corporativo = () => {
             <strong>IA e Big Data privados, ilimitados e sob total controle.</strong>
           </p>
           <Button 
-            onClick={() => window.location.href = "/#contato"}
+            onClick={() => {
+              window.location.href = "/#contato";
+            }}
             size="lg"
             className="bg-primary hover:bg-primary/90"
           >
@@ -153,7 +155,9 @@ const Corporativo = () => {
           </h2>
           <p className="text-lg mb-8 text-muted-foreground">O futuro da IA corporativa é soberano.</p>
           <Button 
-            onClick={() => window.location.href = "/#contato"}
+            onClick={() => {
+              window.location.href = "/#contato";
+            }}
             size="lg"
             className="bg-primary hover:bg-primary/90"
           >
@@ -187,7 +191,9 @@ const Corporativo = () => {
               <li>Suporte padrão + workshop de adoção 2 dias</li>
             </ul>
             <Button 
-              onClick={() => window.location.href = "/#contato"}
+              onClick={() => {
+                window.location.href = "/#contato";
+              }}
               className="mt-4 w-full"
             >
               Selecionar este pacote
@@ -206,7 +212,9 @@ const Corporativo = () => {
               <li>Suporte premium 24/7 + auditoria de governança IA</li>
             </ul>
             <Button 
-              onClick={() => window.location.href = "/#contato"}
+              onClick={() => {
+                window.location.href = "/#contato";
+              }}
               className="mt-4 w-full"
             >
               Selecionar este pacote
@@ -225,7 +233,9 @@ const Corporativo = () => {
               <li>Upgrades incluídos + garantia de ROI</li>
             </ul>
             <Button 
-              onClick={() => window.location.href = "/#contato"}
+              onClick={() => {
+                window.location.href = "/#contato";
+              }}
               className="mt-4 w-full"
             >
               Selecionar este pacote
@@ -245,7 +255,9 @@ const Corporativo = () => {
             Solicite uma demonstração personalizada e veja como o RedData Infinity™ pode se tornar o ativo estratégico da sua empresa.
           </p>
           <Button 
-            onClick={() => window.location.href = "/#contato"}
+            onClick={() => {
+              window.location.href = "/#contato";
+            }}
             size="lg"
             className="bg-primary hover:bg-primary/90"
           >
