@@ -37,7 +37,7 @@ export const HeroSection = () => {
               {t('hero.subtitle')}
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-4">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12">
               <Button 
                 size="lg" 
                 onClick={() => scrollToElement('#contact-form')} 
@@ -46,19 +46,7 @@ export const HeroSection = () => {
                 {t('hero.cta')}
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
-                onClick={() => window.open('https://reddata-production.lovable.app/dashboard/view/08deabbb-3a42-4c7b-8f13-7ad1ddc4eea2', '_blank')}
-                className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-              >
-                Ver Painel ao Vivo
-              </Button>
             </div>
-            
-            <p className="text-center lg:text-left text-sm text-muted-foreground mb-12">
-              {t('hero.noCreditCard')}
-            </p>
             
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center lg:text-left">
               <div className="flex flex-col sm:flex-row items-center gap-3">
