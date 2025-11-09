@@ -260,39 +260,88 @@ const CasosUsoIndustria = () => {
                       </div>
                     </CardHeader>
 
-                    <CardContent className="p-6 space-y-6">
-                      {/* KPIs Header */}
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <div className="bg-background p-6 rounded-2xl shadow-lg hover:scale-105 transition-transform duration-300 border">
-                          <p className="text-sm text-muted-foreground mb-1">Faturamento</p>
-                          <h2 className="text-3xl font-bold mt-2">R$ 1.240.000</h2>
-                          <p className="text-green-600 text-sm mt-1 flex items-center gap-1">▲ +12% <span className="text-muted-foreground">vs mês anterior</span></p>
+                    <CardContent className="p-8 space-y-8">
+                      {/* KPIs Header - Modern Premium Design */}
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        <div className="group relative bg-gradient-to-br from-primary/10 via-primary/5 to-background p-6 rounded-3xl shadow-lg hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 border border-primary/20 backdrop-blur-sm overflow-hidden">
+                          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                          <div className="relative z-10">
+                            <div className="flex items-center justify-between mb-3">
+                              <div className="p-3 rounded-2xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                                <DollarSign className="h-6 w-6 text-primary" />
+                              </div>
+                              <TrendingUp className="h-5 w-5 text-green-600" />
+                            </div>
+                            <p className="text-sm font-medium text-muted-foreground mb-2">{t('casosUsoIndustria.kpiFinalBalance')}</p>
+                            <h2 className="text-3xl font-bold bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text">R$ 9,0M</h2>
+                            <p className="text-xs text-green-600 mt-2 flex items-center gap-1 font-semibold">
+                              ▲ +12.5% <span className="text-muted-foreground font-normal">{t('casosUsoIndustria.vsPrevious')}</span>
+                            </p>
+                          </div>
                         </div>
 
-                        <div className="bg-background p-6 rounded-2xl shadow-lg hover:scale-105 transition-transform duration-300 border">
-                          <p className="text-sm text-muted-foreground mb-1">Lucro Líquido</p>
-                          <h2 className="text-3xl font-bold mt-2">R$ 350.000</h2>
-                          <p className="text-green-600 text-sm mt-1 flex items-center gap-1">▲ +8% <span className="text-muted-foreground">vs mês anterior</span></p>
+                        <div className="group relative bg-gradient-to-br from-blue-500/10 via-blue-500/5 to-background p-6 rounded-3xl shadow-lg hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 border border-blue-500/20 backdrop-blur-sm overflow-hidden">
+                          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                          <div className="relative z-10">
+                            <div className="flex items-center justify-between mb-3">
+                              <div className="p-3 rounded-2xl bg-blue-500/10 group-hover:bg-blue-500/20 transition-colors">
+                                <Package className="h-6 w-6 text-blue-600" />
+                              </div>
+                              <TrendingUp className="h-5 w-5 text-green-600" />
+                            </div>
+                            <p className="text-sm font-medium text-muted-foreground mb-2">{t('casosUsoIndustria.kpiProductionCost')}</p>
+                            <h2 className="text-3xl font-bold bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text">R$ 4,4M</h2>
+                            <p className="text-xs text-green-600 mt-2 flex items-center gap-1 font-semibold">
+                              ▼ -8.2% <span className="text-muted-foreground font-normal">{t('casosUsoIndustria.reduction')}</span>
+                            </p>
+                          </div>
                         </div>
 
-                        <div className="bg-background p-6 rounded-2xl shadow-lg hover:scale-105 transition-transform duration-300 border">
-                          <p className="text-sm text-muted-foreground mb-1">Clientes Ativos</p>
-                          <h2 className="text-3xl font-bold mt-2">247</h2>
-                          <p className="text-red-600 text-sm mt-1 flex items-center gap-1">▼ -3% <span className="text-muted-foreground">vs mês anterior</span></p>
+                        <div className="group relative bg-gradient-to-br from-amber-500/10 via-amber-500/5 to-background p-6 rounded-3xl shadow-lg hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 border border-amber-500/20 backdrop-blur-sm overflow-hidden">
+                          <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                          <div className="relative z-10">
+                            <div className="flex items-center justify-between mb-3">
+                              <div className="p-3 rounded-2xl bg-amber-500/10 group-hover:bg-amber-500/20 transition-colors">
+                                <Factory className="h-6 w-6 text-amber-600" />
+                              </div>
+                              <TrendingUp className="h-5 w-5 text-green-600" />
+                            </div>
+                            <p className="text-sm font-medium text-muted-foreground mb-2">{t('casosUsoIndustria.kpiEfficiency')}</p>
+                            <h2 className="text-3xl font-bold bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text">94.7%</h2>
+                            <p className="text-xs text-green-600 mt-2 flex items-center gap-1 font-semibold">
+                              ▲ +5.3% <span className="text-muted-foreground font-normal">{t('casosUsoIndustria.improvement')}</span>
+                            </p>
+                          </div>
                         </div>
 
-                        <div className="bg-background p-6 rounded-2xl shadow-lg hover:scale-105 transition-transform duration-300 border">
-                          <p className="text-sm text-muted-foreground mb-1">Crescimento</p>
-                          <h2 className="text-3xl font-bold mt-2">+18%</h2>
-                          <p className="text-green-600 text-sm mt-1 flex items-center gap-1">▲ +2% <span className="text-muted-foreground">vs trimestre anterior</span></p>
+                        <div className="group relative bg-gradient-to-br from-green-500/10 via-green-500/5 to-background p-6 rounded-3xl shadow-lg hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 border border-green-500/20 backdrop-blur-sm overflow-hidden">
+                          <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                          <div className="relative z-10">
+                            <div className="flex items-center justify-between mb-3">
+                              <div className="p-3 rounded-2xl bg-green-500/10 group-hover:bg-green-500/20 transition-colors">
+                                <Wrench className="h-6 w-6 text-green-600" />
+                              </div>
+                              <TrendingUp className="h-5 w-5 text-green-600" />
+                            </div>
+                            <p className="text-sm font-medium text-muted-foreground mb-2">{t('casosUsoIndustria.kpiAvailability')}</p>
+                            <h2 className="text-3xl font-bold bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text">98.2%</h2>
+                            <p className="text-xs text-green-600 mt-2 flex items-center gap-1 font-semibold">
+                              ▲ +3.1% <span className="text-muted-foreground font-normal">{t('casosUsoIndustria.uptime')}</span>
+                            </p>
+                          </div>
                         </div>
                       </div>
 
                       {/* Main Charts Row */}
-                      <div className="grid md:grid-cols-2 gap-6">
+                      <div className="grid md:grid-cols-2 gap-8">
                         {/* Evolução de Vendas */}
-                        <div className="bg-background p-6 rounded-2xl shadow-lg border">
-                          <h3 className="text-xl font-semibold mb-4 text-primary">Evolução de Vendas</h3>
+                        <div className="group relative bg-gradient-to-br from-card via-card to-muted/20 p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-border/50 backdrop-blur-sm overflow-hidden">
+                          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                          <div className="relative z-10">
+                            <div className="flex items-center gap-3 mb-6">
+                              <div className="h-1 w-12 bg-gradient-to-r from-primary to-primary/50 rounded-full" />
+                              <h3 className="text-xl font-bold text-foreground">Evolução de Vendas</h3>
+                            </div>
                           <ResponsiveContainer width="100%" height={320}>
                             <LineChart data={fluxoCaixaProjetado}>
                               <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
@@ -340,11 +389,17 @@ const CasosUsoIndustria = () => {
                               />
                             </LineChart>
                           </ResponsiveContainer>
+                          </div>
                         </div>
 
                         {/* Top Produtos */}
-                        <div className="bg-background p-6 rounded-2xl shadow-lg border">
-                          <h3 className="text-xl font-semibold mb-4 text-primary">Top Produtos</h3>
+                        <div className="group relative bg-gradient-to-br from-card via-card to-muted/20 p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-border/50 backdrop-blur-sm overflow-hidden">
+                          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                          <div className="relative z-10">
+                            <div className="flex items-center gap-3 mb-6">
+                              <div className="h-1 w-12 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full" />
+                              <h3 className="text-xl font-bold text-foreground">Top Produtos</h3>
+                            </div>
                           <ResponsiveContainer width="100%" height={320}>
                             <BarChart data={custosProducao}>
                               <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
@@ -363,41 +418,56 @@ const CasosUsoIndustria = () => {
                               <Bar dataKey="indireta" fill="#10b981" name={t('casosUsoIndustria.indirectCost')} radius={[8, 8, 0, 0]} />
                             </BarChart>
                           </ResponsiveContainer>
+                          </div>
                         </div>
                       </div>
 
                       {/* Tabela de Últimas Vendas */}
-                      <div className="bg-background p-6 rounded-2xl shadow-lg border">
-                        <h3 className="text-xl font-semibold mb-4 text-primary">Últimas Vendas</h3>
-                        <div className="overflow-x-auto">
-                          <table className="w-full text-left border-collapse">
-                            <thead className="text-muted-foreground border-b border-border">
-                              <tr>
-                                <th className="pb-3">Cliente</th>
-                                <th className="pb-3">Produto</th>
-                                <th className="pb-3">Valor</th>
-                                <th className="pb-3">Data</th>
-                                <th className="pb-3 text-right">Status</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {ultimasVendas.map((venda, index) => (
-                                <tr key={index} className="hover:bg-muted/50 transition-colors">
-                                  <td className="py-3">{venda.cliente}</td>
-                                  <td>{venda.produto}</td>
-                                  <td>R$ {venda.valor.toLocaleString('pt-BR')}</td>
-                                  <td>{venda.data}</td>
-                                  <td className={`text-right ${venda.statusColor}`}>{venda.status}</td>
+                      <div className="group relative bg-gradient-to-br from-card via-card to-muted/20 p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-border/50 backdrop-blur-sm overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <div className="relative z-10">
+                          <div className="flex items-center gap-3 mb-6">
+                            <div className="h-1 w-12 bg-gradient-to-r from-primary to-primary/50 rounded-full" />
+                            <h3 className="text-xl font-bold text-foreground">Últimas Vendas</h3>
+                          </div>
+                          <div className="overflow-x-auto">
+                            <table className="w-full text-left border-collapse">
+                              <thead className="text-muted-foreground border-b-2 border-primary/20">
+                                <tr>
+                                  <th className="pb-4 font-semibold">Cliente</th>
+                                  <th className="pb-4 font-semibold">Produto</th>
+                                  <th className="pb-4 font-semibold">Valor</th>
+                                  <th className="pb-4 font-semibold">Data</th>
+                                  <th className="pb-4 text-right font-semibold">Status</th>
                                 </tr>
-                              ))}
-                            </tbody>
-                          </table>
+                              </thead>
+                              <tbody>
+                                {ultimasVendas.map((venda, index) => (
+                                  <tr key={index} className="group hover:bg-primary/5 transition-all duration-200 border-b border-border/50 last:border-0">
+                                    <td className="py-4 font-medium">{venda.cliente}</td>
+                                    <td className="py-4 text-muted-foreground">{venda.produto}</td>
+                                    <td className="py-4 font-semibold">R$ {venda.valor.toLocaleString('pt-BR')}</td>
+                                    <td className="py-4 text-muted-foreground text-sm">{venda.data}</td>
+                                    <td className={`py-4 text-right font-semibold ${venda.statusColor}`}>
+                                      <span className="px-3 py-1 rounded-full bg-current/10">{venda.status}</span>
+                                    </td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </div>
                         </div>
                       </div>
 
                       {/* Insight Footer */}
-                      <div className="text-muted-foreground italic text-sm">
-                        💡 <strong className="text-foreground">Insight:</strong> As vendas corporativas compensaram a leve queda no varejo. Lucro líquido em alta pelo terceiro mês consecutivo.
+                      <div className="relative bg-gradient-to-r from-primary/10 via-primary/5 to-transparent p-5 rounded-2xl border-l-4 border-primary">
+                        <div className="flex items-start gap-3">
+                          <span className="text-2xl">💡</span>
+                          <div>
+                            <strong className="text-foreground font-semibold">Insight:</strong>
+                            <span className="text-muted-foreground ml-2">As vendas corporativas compensaram a leve queda no varejo. Lucro líquido em alta pelo terceiro mês consecutivo.</span>
+                          </div>
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
