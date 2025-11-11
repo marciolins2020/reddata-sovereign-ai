@@ -7,6 +7,7 @@ import flexLogo from "@/assets/flex-industries-logo.png";
 import redmaxxLogo from "@/assets/redmaxx-logo.png";
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { useState } from "react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const CasosUsoIndustria = () => {
   // Dados de Fluxo de Caixa Projetado
@@ -62,6 +63,12 @@ const CasosUsoIndustria = () => {
   const COLORS = ["#3b82f6", "#06b6d4", "#dc2626"];
   const { t } = useLanguage();
   const [periodoSelecionado, setPeriodoSelecionado] = useState("ultimos-6-meses");
+  
+  const headerAnim = useScrollAnimation({ threshold: 0.2 });
+  const kpisAnim = useScrollAnimation({ threshold: 0.1 });
+  const chartsAnim = useScrollAnimation({ threshold: 0.1 });
+  const tableAnim = useScrollAnimation({ threshold: 0.1 });
+  const insightAnim = useScrollAnimation({ threshold: 0.2 });
 
   return (
     <div className="min-h-screen bg-background">
@@ -262,7 +269,12 @@ const CasosUsoIndustria = () => {
 
                     <CardContent className="p-8 space-y-8">
                       {/* KPIs Header - Modern Premium Design */}
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                      <div 
+                        ref={kpisAnim.ref}
+                        className={`grid grid-cols-2 md:grid-cols-4 gap-6 transition-all duration-700 delay-100 ${
+                          kpisAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                        }`}
+                      >
                         <div className="group relative bg-gradient-to-br from-primary/10 via-primary/5 to-background p-6 rounded-3xl shadow-lg hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 border border-primary/20 backdrop-blur-sm overflow-hidden">
                           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                           <div className="relative z-10">
@@ -332,8 +344,13 @@ const CasosUsoIndustria = () => {
                         </div>
                       </div>
 
-                      {/* Main Charts Row */}
-                      <div className="grid md:grid-cols-2 gap-8">
+                       {/* Main Charts Row */}
+                      <div 
+                        ref={chartsAnim.ref}
+                        className={`grid md:grid-cols-2 gap-8 transition-all duration-700 delay-200 ${
+                          chartsAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                        }`}
+                      >
                         {/* Evolução de Vendas */}
                         <div className="group relative bg-gradient-to-br from-card via-card to-muted/20 p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-border/50 backdrop-blur-sm overflow-hidden">
                           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -422,8 +439,13 @@ const CasosUsoIndustria = () => {
                         </div>
                       </div>
 
-                      {/* Tabela de Últimas Vendas */}
-                      <div className="group relative bg-gradient-to-br from-card via-card to-muted/20 p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-border/50 backdrop-blur-sm overflow-hidden">
+                       {/* Tabela de Últimas Vendas */}
+                      <div
+                        ref={tableAnim.ref}
+                        className={`group relative bg-gradient-to-br from-card via-card to-muted/20 p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-700 delay-300 border border-border/50 backdrop-blur-sm overflow-hidden ${
+                          tableAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                        }`}
+                      >
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         <div className="relative z-10">
                           <div className="flex items-center gap-3 mb-6">
@@ -459,8 +481,13 @@ const CasosUsoIndustria = () => {
                         </div>
                       </div>
 
-                      {/* Insight Footer */}
-                      <div className="relative bg-gradient-to-r from-primary/10 via-primary/5 to-transparent p-5 rounded-2xl border-l-4 border-primary">
+                       {/* Insight Footer */}
+                      <div 
+                        ref={insightAnim.ref}
+                        className={`relative bg-gradient-to-r from-primary/10 via-primary/5 to-transparent p-5 rounded-2xl border-l-4 border-primary transition-all duration-700 delay-[400ms] ${
+                          insightAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                        }`}
+                      >
                         <div className="flex items-start gap-3">
                           <span className="text-2xl">💡</span>
                           <div>
