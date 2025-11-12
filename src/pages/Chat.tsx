@@ -67,6 +67,16 @@ const Chat = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  // Mostrar mensagem de trial para usuários não logados
+  useEffect(() => {
+    if (!user && messages.length === 0) {
+      setMessages([{
+        role: "assistant",
+        content: `👋 Olá! Você está no período de teste gratuito de 5 minutos do RedData AI.\n\n✨ Após fazer login, você pode:\n• Usar gratuitamente com ${ACCOUNT_MAX_TOKENS_PER_DAY.toLocaleString()} tokens/dia\n• Conversar sem limitações de tempo\n• Salvar todo o histórico de conversas\n\nComo posso ajudar?`
+      }]);
+    }
+  }, [user]);
+
   const getStorageKey = () => user ? `reddata_usage_${user.id}` : 'reddata_usage_device';
   const getMaxTokens = () => user ? ACCOUNT_MAX_TOKENS_PER_DAY : DEVICE_MAX_TOKENS_PER_DAY;
 
