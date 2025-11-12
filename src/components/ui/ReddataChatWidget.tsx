@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
 import reddataChatIcon from "@/assets/reddata-chat-icon.png";
 
 interface Message {
@@ -29,6 +30,7 @@ const RATE_LIMIT_MS = 3000;
 const TRIAL_DURATION_MS = 5 * 60 * 1000; // 5 minutos
 
 export const ReddataChatWidget = () => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -506,19 +508,32 @@ export const ReddataChatWidget = () => {
                 {messages.length > 0 && (
                   <div className="space-y-4">
                     {messages.map((msg, idx) => (
-                      <div
-                        key={idx}
-                        className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
-                      >
+                      <div key={idx}>
                         <div
-                          className={`max-w-[85%] rounded-lg p-3 text-sm ${
-                            msg.role === "user"
-                              ? "bg-primary text-white"
-                              : "bg-muted text-foreground"
-                          }`}
+                          className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
                         >
-                          <div className="whitespace-pre-wrap break-words">{msg.content}</div>
+                          <div
+                            className={`max-w-[85%] rounded-lg p-3 text-sm ${
+                              msg.role === "user"
+                                ? "bg-primary text-white"
+                                : "bg-muted text-foreground"
+                            }`}
+                          >
+                            <div className="whitespace-pre-wrap break-words">{msg.content}</div>
+                          </div>
                         </div>
+                        {/* Mostrar botão de login após primeira mensagem de boas-vindas */}
+                        {idx === 0 && !isLoggedIn && msg.role === "assistant" && msg.content.includes("período de teste gratuito") && (
+                          <div className="flex justify-start mt-2 ml-1">
+                            <Button 
+                              size="sm" 
+                              onClick={() => navigate("/auth")}
+                              className="text-xs"
+                            >
+                              Criar Conta Grátis
+                            </Button>
+                          </div>
+                        )}
                       </div>
                     ))}
                     {isLoading && (

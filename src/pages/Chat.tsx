@@ -433,15 +433,27 @@ const Chat = () => {
         )}
         
         {messages.map((message, idx) => (
-          <div key={idx} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
-            <div className={`max-w-[80%] rounded-lg px-4 py-3 ${
-              message.role === "user" 
-                ? "bg-primary text-primary-foreground" 
-                : "bg-muted text-foreground"
-            }`}>
-              <p className="text-sm font-medium mb-1">{message.role === "user" ? "Você" : "RedData AI"}</p>
-              <p className="whitespace-pre-wrap">{message.content}</p>
+          <div key={idx}>
+            <div className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
+              <div className={`max-w-[80%] rounded-lg px-4 py-3 ${
+                message.role === "user" 
+                  ? "bg-primary text-primary-foreground" 
+                  : "bg-muted text-foreground"
+              }`}>
+                <p className="text-sm font-medium mb-1">{message.role === "user" ? "Você" : "RedData AI"}</p>
+                <p className="whitespace-pre-wrap">{message.content}</p>
+              </div>
             </div>
+            {/* Mostrar botão de login após primeira mensagem de boas-vindas */}
+            {idx === 0 && !user && message.role === "assistant" && message.content.includes("período de teste gratuito") && (
+              <div className="flex justify-start mt-2 ml-1">
+                <Link to="/auth">
+                  <Button size="sm">
+                    Criar Conta Grátis
+                  </Button>
+                </Link>
+              </div>
+            )}
           </div>
         ))}
         
