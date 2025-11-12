@@ -413,36 +413,36 @@ export const ReddataChatWidget = () => {
         
         {/* Chat Panel */}
         {isOpen && (
-          <Card className="fixed inset-0 md:relative md:w-[380px] md:h-[600px] w-full h-full md:shadow-2xl md:border-2 border-0 animate-in slide-in-from-bottom-2 md:slide-in-from-bottom-2 flex flex-col md:rounded-lg rounded-none z-[10001]">
+          <Card className="fixed inset-0 md:relative md:w-[380px] md:h-[600px] w-screen h-screen md:shadow-2xl md:border-2 border-0 animate-in slide-in-from-bottom-2 md:slide-in-from-bottom-2 flex flex-col md:rounded-lg rounded-none z-[10001] overflow-hidden">
             <CardHeader className="bg-gradient-to-r from-primary to-primary/80 text-white pb-3 flex-shrink-0">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <img src={reddataChatIcon} alt="RedData" className="w-8 h-8 object-contain" />
-                  <div>
-                    <CardTitle className="text-lg">RedData Chat</CardTitle>
-                    <CardDescription className="text-white/80 text-xs">
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2 md:gap-3 min-w-0 flex-1">
+                  <img src={reddataChatIcon} alt="RedData" className="w-7 h-7 md:w-8 md:h-8 object-contain flex-shrink-0" />
+                  <div className="min-w-0 flex-1">
+                    <CardTitle className="text-base md:text-lg truncate">RedData AI</CardTitle>
+                    <CardDescription className="text-white/80 text-xs truncate">
                       {!isLoggedIn && trialData ? `Trial: ${formatTime(trialTimeLeft)}` : 'Versão Basic'}
                     </CardDescription>
                   </div>
                 </div>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1 flex-shrink-0">
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={() => window.location.href = '/chat'}
-                    className="text-white hover:bg-white/20 h-8 w-8 p-0"
+                    className="text-white hover:bg-white/20 h-7 w-7 md:h-8 md:w-8 p-0"
                     aria-label="Expandir chat"
                   >
-                    <Maximize2 className="h-4 w-4" />
+                    <Maximize2 className="h-3.5 w-3.5 md:h-4 md:w-4" />
                   </Button>
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={toggleChat}
-                    className="text-white hover:bg-white/20 h-8 w-8 p-0"
+                    className="text-white hover:bg-white/20 h-7 w-7 md:h-8 md:w-8 p-0"
                     aria-label="Fechar chat"
                   >
-                    <X className="h-4 w-4" />
+                    <X className="h-3.5 w-3.5 md:h-4 md:w-4" />
                   </Button>
                 </div>
               </div>
