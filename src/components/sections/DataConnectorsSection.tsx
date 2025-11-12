@@ -53,7 +53,7 @@ export const DataConnectorsSection = () => {
             {t("dataConnectors.subtitle")}
           </p>
           
-          <div className="inline-flex items-center gap-4 p-6 rounded-2xl bg-primary/10 border-2 border-primary/20 mb-6">
+          <div className="inline-flex items-center gap-4 p-6 rounded-2xl bg-icon-bg border-2 border-border mb-6">
             <div className="text-6xl font-bold text-primary">300+</div>
             <div className="text-left">
               <div className="text-xl font-semibold">{t("dataConnectors.sourcesTitle")}</div>
@@ -69,7 +69,7 @@ export const DataConnectorsSection = () => {
               <Card key={index} className="hover:shadow-xl transition-all duration-300 hover:scale-105 border-2">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-xl bg-primary/10 shrink-0">
+                    <div className="p-3 rounded-xl bg-icon-bg shrink-0">
                       <Icon className="w-8 h-8 text-primary" />
                     </div>
                     <div className="flex-1">

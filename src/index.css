@@ -34,6 +34,9 @@
     --primary-glow: 355 85% 65%;
     --primary-dark: 355 85% 30%;
     --primary-muted: 355 85% 95%;
+    
+    /* Icon backgrounds - neutral gray for professional look */
+    --icon-background: 210 16% 95%;
 
     /* Semantic Colors */
     --secondary: 210 16% 93%;
@@ -122,6 +125,8 @@
     --primary: 355 85% 45%;
     --primary-foreground: 0 0% 100%;
     --primary-muted: 355 85% 15%;
+    
+    --icon-background: 210 16% 18%;
 
     --secondary: 210 16% 20%;
     --secondary-foreground: 210 18% 96%;

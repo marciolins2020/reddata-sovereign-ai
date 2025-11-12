@@ -50,7 +50,7 @@ export const HeroSection = () => {
             
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center lg:text-left">
               <div className="flex flex-col sm:flex-row items-center gap-3">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                <div className="w-12 h-12 bg-icon-bg rounded-lg flex items-center justify-center">
                   <TrendingUp className="h-6 w-6 text-primary" />
                 </div>
                 <div>
@@ -60,7 +60,7 @@ export const HeroSection = () => {
               </div>
               
               <div className="flex flex-col sm:flex-row items-center gap-3">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                <div className="w-12 h-12 bg-icon-bg rounded-lg flex items-center justify-center">
                   <Zap className="h-6 w-6 text-primary" />
                 </div>
                 <div>
@@ -70,7 +70,7 @@ export const HeroSection = () => {
               </div>
               
               <div className="flex flex-col sm:flex-row items-center gap-3">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                <div className="w-12 h-12 bg-icon-bg rounded-lg flex items-center justify-center">
                   <Database className="h-6 w-6 text-primary" />
                 </div>
                 <div>

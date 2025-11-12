@@ -51,7 +51,7 @@ export const TestimonialsSection = () => {
               </div>
               
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-xl">
+                <div className="w-12 h-12 bg-icon-bg rounded-full flex items-center justify-center text-xl">
                   {testimonial.image}
                 </div>
                 <div>

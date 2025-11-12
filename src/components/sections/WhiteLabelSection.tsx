@@ -56,7 +56,7 @@ export const WhiteLabelSection = () => {
               <Card key={index} className="border-2 hover:shadow-xl transition-all duration-300 md:hover:scale-105">
                 <CardContent className="p-4 md:p-8">
                   <div className="flex items-start gap-3 md:gap-6">
-                    <div className="p-2 md:p-4 rounded-xl md:rounded-2xl bg-primary/10 shrink-0">
+                    <div className="p-2 md:p-4 rounded-xl md:rounded-2xl bg-icon-bg shrink-0">
                       <Icon className="w-6 h-6 md:w-10 md:h-10 text-primary" />
                     </div>
                     <div>

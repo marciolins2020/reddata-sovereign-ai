@@ -16,7 +16,7 @@ export const DashboardDemoSection = () => {
           <p className="text-xl text-muted-foreground mb-8">
             {t('dashboardDemo.realDashboard')}
           </p>
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-icon-bg rounded-full">
             <Play className="h-4 w-4 text-primary" />
             <span className="text-sm font-medium text-primary">{t('dashboardDemo.pocProduction')}</span>
           </div>

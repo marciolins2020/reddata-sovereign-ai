@@ -51,7 +51,7 @@ export const TechnicalDifferentialSection = () => {
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-icon-bg rounded-full mb-6">
               <Cpu className="h-5 w-5 text-primary" />
               <span className="text-sm font-semibold text-primary uppercase tracking-wide">
                 Diferencial Técnico
@@ -108,7 +108,7 @@ export const TechnicalDifferentialSection = () => {
                     <div className="flex items-start gap-4">
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 cursor-help">
+                          <div className="w-12 h-12 bg-icon-bg rounded-lg flex items-center justify-center flex-shrink-0 cursor-help">
                             <point.icon className="h-6 w-6 text-primary" aria-hidden="true" />
                           </div>
                         </TooltipTrigger>

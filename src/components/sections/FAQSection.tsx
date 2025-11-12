@@ -56,7 +56,7 @@ export const FAQSection = () => {
         </div>
         
         <div className="text-center mt-12 space-y-6">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-icon-bg rounded-full">
             <span className="text-sm text-primary font-medium">
               {t('faq.stillHaveQuestions')}
             </span>

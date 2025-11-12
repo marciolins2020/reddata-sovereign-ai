@@ -52,7 +52,7 @@ export const EBookSection = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left side - Info */}
             <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-icon-bg border border-border">
                 <BookOpen className="w-4 h-4 text-primary" />
                 <span className="text-sm font-medium text-primary">Material Gratuito</span>
               </div>
@@ -99,7 +99,7 @@ export const EBookSection = () => {
                 {!downloaded ? (
                   <form onSubmit={handleDownload} className="space-y-6">
                     <div className="text-center space-y-4">
-                      <div className="mx-auto w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center">
+                      <div className="mx-auto w-20 h-20 bg-icon-bg rounded-full flex items-center justify-center">
                         <BookOpen className="w-10 h-10 text-primary" />
                       </div>
                       <div>
@@ -141,7 +141,7 @@ export const EBookSection = () => {
                   </form>
                 ) : (
                   <div className="text-center space-y-6 py-8">
-                    <div className="mx-auto w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center">
+                    <div className="mx-auto w-20 h-20 bg-icon-bg rounded-full flex items-center justify-center">
                       <CheckCircle2 className="w-10 h-10 text-primary" />
                     </div>
                     <div>

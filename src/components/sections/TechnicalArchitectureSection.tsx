@@ -62,7 +62,7 @@ const TechnicalArchitectureSection = () => {
               >
                 <CardContent className="p-6">
                   <div className="flex flex-col items-start gap-4">
-                    <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                    <div className="p-3 rounded-lg bg-icon-bg group-hover:bg-gray-200 dark:group-hover:bg-gray-700 transition-colors">
                       <Icon className="h-8 w-8 text-primary" />
                     </div>
                     

@@ -66,7 +66,7 @@ export const AutomationAlertsSection = () => {
             return (
               <Card key={index} className="border-2 hover:shadow-xl transition-all duration-300">
                 <CardHeader>
-                  <div className="p-3 rounded-xl bg-primary/10 w-fit mb-4">
+                  <div className="p-3 rounded-xl bg-icon-bg w-fit mb-4">
                     <Icon className="w-8 h-8 text-primary" />
                   </div>
                   <CardTitle className="text-2xl">{t(feature.titleKey)}</CardTitle>

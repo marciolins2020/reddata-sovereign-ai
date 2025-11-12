@@ -63,7 +63,7 @@ export const HowItWorksSection = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {pillars.map((pillar, index) => (
             <Card key={index} className="p-6 hover:shadow-medium transition-all duration-300 border-0 bg-card/50 backdrop-blur-sm">
-              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+              <div className="w-12 h-12 bg-icon-bg rounded-lg flex items-center justify-center mb-4">
                 <pillar.icon className="h-6 w-6 text-primary" />
               </div>
               <h3 className="text-lg font-semibold text-foreground mb-3">
@@ -77,7 +77,7 @@ export const HowItWorksSection = () => {
         </div>
         
         <div className="text-center mt-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-icon-bg rounded-full mb-8">
             <span className="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
             <span className="text-sm font-medium text-primary">{t('howItWorks.integrated')}</span>
           </div>

@@ -18,7 +18,7 @@ export const StatsSection = () => {
           {/* Stats Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-icon-bg rounded-lg flex items-center justify-center">
                 <Building className="h-5 w-5 text-primary" />
               </div>
               <div className="text-center sm:text-left">
@@ -28,7 +28,7 @@ export const StatsSection = () => {
             </div>
             
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-icon-bg rounded-lg flex items-center justify-center">
                 <Users className="h-5 w-5 text-primary" />
               </div>
               <div className="text-center sm:text-left">
@@ -38,7 +38,7 @@ export const StatsSection = () => {
             </div>
             
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-icon-bg rounded-lg flex items-center justify-center">
                 <Award className="h-5 w-5 text-primary" />
               </div>
               <div className="text-center sm:text-left">

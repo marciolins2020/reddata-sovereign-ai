@@ -171,7 +171,7 @@ export const ContactFormSection = () => {
               <p className="text-muted-foreground mb-6">
                 {t('contact.successMessage')}
               </p>
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-icon-bg rounded-full">
                 <span className="text-sm text-primary font-medium">
                   {t('contact.successSending')}
                 </span>

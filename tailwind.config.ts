@@ -43,6 +43,7 @@ export default {
           dark: "hsl(var(--primary-dark))",
           muted: "hsl(var(--primary-muted))",
         },
+        "icon-bg": "hsl(var(--icon-background))",
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",

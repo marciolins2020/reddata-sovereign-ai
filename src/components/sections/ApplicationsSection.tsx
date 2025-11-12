@@ -75,7 +75,7 @@ export const ApplicationsSection = () => {
           {applications.map((app, index) => (
             <Card key={index} className="p-8 border-0 bg-card/50 backdrop-blur-sm hover:shadow-medium transition-all duration-300">
               <div className="flex items-start gap-4 mb-6">
-                <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                <div className="w-16 h-16 bg-icon-bg rounded-xl flex items-center justify-center flex-shrink-0">
                   <app.icon className="h-8 w-8 text-primary" />
                 </div>
                 <div>
@@ -101,7 +101,7 @@ export const ApplicationsSection = () => {
         </div>
         
         <div className="text-center mt-12">
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 rounded-full mb-8">
+          <div className="inline-flex items-center gap-2 px-6 py-3 bg-icon-bg rounded-full mb-8">
             <span className="text-primary font-semibold">{t('applications.experienceBadge')}</span>
             <span className="text-muted-foreground">{t('applications.experienceText')}</span>
           </div>
