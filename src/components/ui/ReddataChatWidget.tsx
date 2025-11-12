@@ -42,9 +42,9 @@ export const ReddataChatWidget = () => {
   const [trialData, setTrialData] = useState<TrialData | null>(null);
   const [trialTimeLeft, setTrialTimeLeft] = useState<number>(0);
   const [showTrialWarning, setShowTrialWarning] = useState(false);
-  const [hasShownWelcome, setHasShownWelcome] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
+  const hasShownWelcomeRef = useRef(false);
 
   const maxTokens = isLoggedIn ? ACCOUNT_MAX_TOKENS_PER_DAY : DEVICE_MAX_TOKENS_PER_DAY;
   const isLimitReached = usageData.usedTokens >= maxTokens;
@@ -92,14 +92,14 @@ export const ReddataChatWidget = () => {
 
   // Mostrar mensagem de trial ao abrir o widget pela primeira vez
   useEffect(() => {
-    if (isOpen && !isLoggedIn && !hasShownWelcome) {
+    if (isOpen && !isLoggedIn && !hasShownWelcomeRef.current && messages.length === 0) {
       setMessages([{
         role: "assistant",
         content: `👋 Olá! Você está no período de teste gratuito de 5 minutos do RedData AI.\n\n✨ Após fazer login, você pode:\n• Usar gratuitamente com ${ACCOUNT_MAX_TOKENS_PER_DAY.toLocaleString()} tokens/dia\n• Conversar sem limitações de tempo\n• Salvar todo o histórico de conversas\n\nComo posso ajudar?`
       }]);
-      setHasShownWelcome(true);
+      hasShownWelcomeRef.current = true;
     }
-  }, [isOpen, isLoggedIn, hasShownWelcome]);
+  }, [isOpen, isLoggedIn, messages.length]);
 
   useEffect(() => {
     const usagePercentage = (usageData.usedTokens / maxTokens) * 100;
