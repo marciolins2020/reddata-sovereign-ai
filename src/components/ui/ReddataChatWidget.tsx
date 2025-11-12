@@ -6,7 +6,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { supabase } from "@/integrations/supabase/client";
-import { Link } from "react-router-dom";
 import reddataChatIcon from "@/assets/reddata-chat-icon.png";
 
 interface Message {
@@ -325,16 +324,15 @@ export const ReddataChatWidget = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-1">
-                  <Link to="/chat">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="text-white hover:bg-white/20 h-8 w-8 p-0"
-                      aria-label="Expandir chat"
-                    >
-                      <Maximize2 className="h-4 w-4" />
-                    </Button>
-                  </Link>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => window.location.href = '/chat'}
+                    className="text-white hover:bg-white/20 h-8 w-8 p-0"
+                    aria-label="Expandir chat"
+                  >
+                    <Maximize2 className="h-4 w-4" />
+                  </Button>
                   <Button
                     variant="ghost"
                     size="sm"
