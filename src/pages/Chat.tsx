@@ -254,13 +254,21 @@ const Chat = () => {
     }
 
     try {
-      const { data, error } = await supabase.functions.invoke('reddata-chat', {
-        body: { messages: [...messages, userMessage] }
+      const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/reddata-chat`;
+      const resp = await fetch(CHAT_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+        },
+        body: JSON.stringify({ messages: [...messages, userMessage] }),
       });
 
-      if (error) throw error;
+      if (!resp.ok || !resp.body) {
+        throw new Error("Failed to start stream");
+      }
 
-      const reader = data.getReader();
+      const reader = resp.body.getReader();
       const decoder = new TextDecoder();
       let assistantMessage = "";
 

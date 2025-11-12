@@ -89,6 +89,16 @@ export const ReddataChatWidget = () => {
     }
   }, [messages]);
 
+  // Mostrar mensagem de trial ao abrir o widget pela primeira vez
+  useEffect(() => {
+    if (isOpen && !isLoggedIn && trialData && messages.length === 0) {
+      setMessages([{
+        role: "assistant",
+        content: `👋 Olá! Você está no período de teste gratuito de 5 minutos do RedData AI.\n\n✨ Após o teste, você pode:\n• Fazer login e usar gratuitamente com ${ACCOUNT_MAX_TOKENS_PER_DAY.toLocaleString()} tokens/dia\n• Continuar conversando sem limitações de tempo\n• Salvar todo o histórico de conversas\n\nVamos começar! Como posso ajudar?`
+      }]);
+    }
+  }, [isOpen, isLoggedIn, trialData]);
+
   useEffect(() => {
     const usagePercentage = (usageData.usedTokens / maxTokens) * 100;
     if (usagePercentage >= 90 && !hasShown90Warning && usageData.usedTokens > 0) {
@@ -218,19 +228,7 @@ export const ReddataChatWidget = () => {
       return;
     }
 
-    // Adicionar mensagem de trial na primeira interação sem login
-    const isFirstMessage = messages.length === 0;
-    if (!isLoggedIn && isFirstMessage && trialData) {
-      setMessages(prev => [
-        {
-          role: "assistant",
-          content: `👋 Olá! Você está no período de teste gratuito de 5 minutos do RedData AI.\n\n✨ Após o teste, você pode:\n• Fazer login e usar gratuitamente com ${ACCOUNT_MAX_TOKENS_PER_DAY.toLocaleString()} tokens/dia\n• Continuar conversando sem limitações de tempo\n• Salvar todo o histórico de conversas\n\nVamos começar! Como posso ajudar?`
-        },
-        userMessage
-      ]);
-    } else {
-      setMessages(prev => [...prev, userMessage]);
-    }
+    setMessages(prev => [...prev, userMessage]);
     
     setInput("");
     setIsLoading(true);
