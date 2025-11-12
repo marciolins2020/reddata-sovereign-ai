@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { supabase } from "@/integrations/supabase/client";
+import { useLocation } from "react-router-dom";
 import reddataChatIcon from "@/assets/reddata-chat-icon.png";
 
 interface Message {
@@ -29,6 +30,7 @@ const RATE_LIMIT_MS = 3000;
 const TRIAL_DURATION_MS = 5 * 60 * 1000; // 5 minutos
 
 export const ReddataChatWidget = () => {
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -46,6 +48,11 @@ export const ReddataChatWidget = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
   const hasShownWelcomeRef = useRef(false);
+
+  // Não renderizar o widget na página de chat expandido
+  if (location.pathname === '/chat') {
+    return null;
+  }
 
   const maxTokens = isLoggedIn ? ACCOUNT_MAX_TOKENS_PER_DAY : DEVICE_MAX_TOKENS_PER_DAY;
   const isLimitReached = usageData.usedTokens >= maxTokens;
