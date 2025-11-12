@@ -42,6 +42,7 @@ export const ReddataChatWidget = () => {
   const [trialData, setTrialData] = useState<TrialData | null>(null);
   const [trialTimeLeft, setTrialTimeLeft] = useState<number>(0);
   const [showTrialWarning, setShowTrialWarning] = useState(false);
+  const [showAuthOptions, setShowAuthOptions] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
   const hasShownWelcomeRef = useRef(false);
@@ -98,6 +99,7 @@ export const ReddataChatWidget = () => {
         content: `👋 Olá! Você está no período de teste gratuito de 5 minutos do RedData AI.\n\n✨ Após fazer login, você pode:\n• Usar gratuitamente com ${ACCOUNT_MAX_TOKENS_PER_DAY.toLocaleString()} tokens/dia\n• Conversar sem limitações de tempo\n• Salvar todo o histórico de conversas\n\nComo posso ajudar?`
       }]);
       hasShownWelcomeRef.current = true;
+      setShowAuthOptions(false); // Reset auth options when showing welcome
     }
   }, [isOpen, isLoggedIn, messages.length]);
 
@@ -479,24 +481,7 @@ export const ReddataChatWidget = () => {
               )}
 
               <ScrollArea className="flex-1 p-2 md:p-4 min-h-0" ref={scrollRef}>
-                {showTrialWarning && !isLoggedIn && messages.length === 0 && (
-                  <Alert className="mb-4 border-blue-500 bg-blue-50">
-                    <AlertDescription className="text-sm">
-                      🎉 <strong>Teste grátis de 5 minutos!</strong><br />
-                      Você pode experimentar o RedData AI por 5 minutos. Após isso, faça login para continuar usando gratuitamente com {ACCOUNT_MAX_TOKENS_PER_DAY.toLocaleString()} tokens/dia.
-                      <Button
-                        variant="link"
-                        size="sm"
-                        onClick={markTrialWarningSeen}
-                        className="ml-2 h-auto p-0 text-blue-700"
-                      >
-                        Entendi
-                      </Button>
-                    </AlertDescription>
-                  </Alert>
-                )}
-                
-                {messages.length === 0 && !showTrialWarning && (
+                {messages.length === 0 && (
                   <div className="text-center text-muted-foreground py-12 text-sm">
                     <MessageCircle className="h-12 w-12 mx-auto mb-3 opacity-20" />
                     Olá! Sou o assistente RedData. Como posso ajudar?
@@ -520,16 +505,39 @@ export const ReddataChatWidget = () => {
                             <div className="whitespace-pre-wrap break-words">{msg.content}</div>
                           </div>
                         </div>
-                        {/* Mostrar botão de login após primeira mensagem de boas-vindas */}
+                        {/* Mostrar opções de autenticação após primeira mensagem de boas-vindas */}
                         {idx === 0 && !isLoggedIn && msg.role === "assistant" && msg.content.includes("período de teste gratuito") && (
-                          <div className="flex justify-start mt-2 ml-1">
-                            <Button 
-                              size="sm" 
-                              onClick={() => window.location.href = '/auth'}
-                              className="text-xs"
-                            >
-                              Criar Conta Grátis
-                            </Button>
+                          <div className="flex flex-col gap-2 mt-3 ml-1">
+                            {!showAuthOptions ? (
+                              <Button 
+                                size="sm" 
+                                onClick={() => setShowAuthOptions(true)}
+                                className="text-xs w-fit"
+                              >
+                                Criar Conta Grátis
+                              </Button>
+                            ) : (
+                              <div className="space-y-2">
+                                <p className="text-xs text-muted-foreground">Você já tem cadastro?</p>
+                                <div className="flex gap-2">
+                                  <Button 
+                                    size="sm" 
+                                    variant="outline"
+                                    onClick={() => window.location.href = '/auth?mode=login'}
+                                    className="text-xs"
+                                  >
+                                    Sim, fazer login
+                                  </Button>
+                                  <Button 
+                                    size="sm" 
+                                    onClick={() => window.location.href = '/auth?mode=signup'}
+                                    className="text-xs"
+                                  >
+                                    Não, criar conta
+                                  </Button>
+                                </div>
+                              </div>
+                            )}
                           </div>
                         )}
                       </div>
