@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect } from "react";
-import { MessageCircle, X, Send, AlertCircle } from "lucide-react";
+import { MessageCircle, X, Send, AlertCircle, Maximize2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { supabase } from "@/integrations/supabase/client";
+import { Link } from "react-router-dom";
 import reddataChatIcon from "@/assets/reddata-chat-icon.png";
 
 interface Message {
@@ -18,8 +19,8 @@ interface UsageData {
   lastUpdateISO: string;
 }
 
-const ACCOUNT_MAX_TOKENS_PER_DAY = 1000;
-const DEVICE_MAX_TOKENS_PER_DAY = 200;
+const ACCOUNT_MAX_TOKENS_PER_DAY = 10000; // ~25 conversas/dia - Plano FREE
+const DEVICE_MAX_TOKENS_PER_DAY = 2000; // ~5 conversas/dia - Anônimos
 const RATE_LIMIT_MS = 3000;
 
 export const ReddataChatWidget = () => {
@@ -323,15 +324,27 @@ export const ReddataChatWidget = () => {
                     <CardDescription className="text-white/80 text-xs">Versão Basic</CardDescription>
                   </div>
                 </div>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={toggleChat}
-                  className="text-white hover:bg-white/20 h-8 w-8 p-0"
-                  aria-label="Fechar chat"
-                >
-                  <X className="h-4 w-4" />
-                </Button>
+                <div className="flex items-center gap-1">
+                  <Link to="/chat">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="text-white hover:bg-white/20 h-8 w-8 p-0"
+                      aria-label="Expandir chat"
+                    >
+                      <Maximize2 className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={toggleChat}
+                    className="text-white hover:bg-white/20 h-8 w-8 p-0"
+                    aria-label="Fechar chat"
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                </div>
               </div>
             </CardHeader>
             
