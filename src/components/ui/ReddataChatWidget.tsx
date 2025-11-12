@@ -91,13 +91,13 @@ export const ReddataChatWidget = () => {
 
   // Mostrar mensagem de trial ao abrir o widget pela primeira vez
   useEffect(() => {
-    if (isOpen && !isLoggedIn && trialData && messages.length === 0) {
+    if (isOpen && !isLoggedIn && messages.length === 0) {
       setMessages([{
         role: "assistant",
-        content: `👋 Olá! Você está no período de teste gratuito de 5 minutos do RedData AI.\n\n✨ Após o teste, você pode:\n• Fazer login e usar gratuitamente com ${ACCOUNT_MAX_TOKENS_PER_DAY.toLocaleString()} tokens/dia\n• Continuar conversando sem limitações de tempo\n• Salvar todo o histórico de conversas\n\nVamos começar! Como posso ajudar?`
+        content: `👋 Olá! Você está no período de teste gratuito de 5 minutos do RedData AI.\n\n✨ Após fazer login, você pode:\n• Usar gratuitamente com ${ACCOUNT_MAX_TOKENS_PER_DAY.toLocaleString()} tokens/dia\n• Conversar sem limitações de tempo\n• Salvar todo o histórico de conversas\n\nComo posso ajudar?`
       }]);
     }
-  }, [isOpen, isLoggedIn, trialData]);
+  }, [isOpen, isLoggedIn]);
 
   useEffect(() => {
     const usagePercentage = (usageData.usedTokens / maxTokens) * 100;
