@@ -2,10 +2,18 @@ import { useState, useEffect, useRef } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Loader2, Send, Maximize2, Minimize2, Trash2, Download } from "lucide-react";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Loader2, Send, Maximize2, Minimize2, Trash2, Download, Plus, MessageSquare } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
 import chatIcon from "@/assets/reddata-chat-icon.png";
+
+interface Conversation {
+  id: string;
+  title: string;
+  created_at: string;
+  updated_at: string;
+}
 
 interface Message {
   role: "user" | "assistant";
@@ -30,6 +38,9 @@ const Chat = () => {
   const [user, setUser] = useState<any>(null);
   const [usageData, setUsageData] = useState<UsageData>({ tokens: 0, lastUpdate: new Date().toISOString() });
   const [lastRequestTime, setLastRequestTime] = useState<number>(0);
+  const [conversations, setConversations] = useState<Conversation[]>([]);
+  const [currentConversationId, setCurrentConversationId] = useState<string | null>(null);
+  const [showSidebar, setShowSidebar] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
@@ -47,6 +58,9 @@ const Chat = () => {
 
   useEffect(() => {
     loadUsageData();
+    if (user) {
+      loadConversations();
+    }
   }, [user]);
 
   useEffect(() => {
@@ -85,9 +99,110 @@ const Chat = () => {
 
   const estimateTokens = (text: string) => Math.ceil(text.length / 4);
 
-  const clearConversation = () => {
+  const loadConversations = async () => {
+    if (!user) return;
+    
+    const { data, error } = await (supabase as any)
+      .from('conversations')
+      .select('*')
+      .order('updated_at', { ascending: false });
+    
+    if (error) {
+      console.error('Error loading conversations:', error);
+      return;
+    }
+    
+    setConversations(data || []);
+  };
+
+  const loadConversation = async (conversationId: string) => {
+    const { data, error } = await (supabase as any)
+      .from('messages')
+      .select('*')
+      .eq('conversation_id', conversationId)
+      .order('created_at', { ascending: true });
+    
+    if (error) {
+      console.error('Error loading messages:', error);
+      toast({ title: "Erro", description: "Falha ao carregar conversa", variant: "destructive" });
+      return;
+    }
+    
+    setMessages((data || []).map((m: any) => ({ role: m.role as "user" | "assistant", content: m.content })));
+    setCurrentConversationId(conversationId);
+  };
+
+  const createNewConversation = () => {
     setMessages([]);
-    toast({ title: "Conversa limpa", description: "O histórico foi removido." });
+    setCurrentConversationId(null);
+  };
+
+  const deleteConversation = async (conversationId: string) => {
+    const { error } = await (supabase as any)
+      .from('conversations')
+      .delete()
+      .eq('id', conversationId);
+    
+    if (error) {
+      toast({ title: "Erro", description: "Falha ao deletar conversa", variant: "destructive" });
+      return;
+    }
+    
+    if (currentConversationId === conversationId) {
+      createNewConversation();
+    }
+    
+    loadConversations();
+    toast({ title: "Conversa deletada", description: "Histórico removido com sucesso." });
+  };
+
+  const saveConversation = async (newMessages: Message[]) => {
+    if (!user || newMessages.length === 0) return;
+
+    try {
+      let conversationId = currentConversationId;
+      
+      if (!conversationId) {
+        // Criar nova conversa com título baseado na primeira mensagem
+        const title = newMessages[0].content.slice(0, 50) + (newMessages[0].content.length > 50 ? '...' : '');
+        
+        const { data: conversation, error: convError } = await (supabase as any)
+          .from('conversations')
+          .insert({ user_id: user.id, title })
+          .select()
+          .single();
+        
+        if (convError) throw convError;
+        
+        conversationId = conversation.id;
+        setCurrentConversationId(conversationId);
+      } else {
+        // Atualizar updated_at
+        await (supabase as any)
+          .from('conversations')
+          .update({ updated_at: new Date().toISOString() })
+          .eq('id', conversationId);
+      }
+
+      // Salvar apenas as novas mensagens
+      const lastMessage = newMessages[newMessages.length - 1];
+      await (supabase as any)
+        .from('messages')
+        .insert({
+          conversation_id: conversationId,
+          role: lastMessage.role,
+          content: lastMessage.content
+        });
+
+      loadConversations();
+    } catch (error) {
+      console.error('Error saving conversation:', error);
+    }
+  };
+
+  const clearConversation = () => {
+    createNewConversation();
+    toast({ title: "Conversa limpa", description: "Iniciada nova conversa." });
   };
 
   const exportConversation = () => {
@@ -127,10 +242,16 @@ const Chat = () => {
     }
 
     const userMessage: Message = { role: "user", content: input };
-    setMessages(prev => [...prev, userMessage]);
+    const newMessages = [...messages, userMessage];
+    setMessages(newMessages);
     setInput("");
     setIsLoading(true);
     setLastRequestTime(now);
+
+    // Salvar mensagem do usuário
+    if (user) {
+      await saveConversation(newMessages);
+    }
 
     try {
       const { data, error } = await supabase.functions.invoke('reddata-chat', {
@@ -177,6 +298,14 @@ const Chat = () => {
 
       updateUsageData(estimatedTokens + estimateTokens(assistantMessage));
 
+      // Salvar resposta do assistente
+      if (user) {
+        setMessages(prev => {
+          saveConversation(prev);
+          return prev;
+        });
+      }
+
     } catch (error: any) {
       console.error('Chat error:', error);
       toast({
@@ -194,9 +323,51 @@ const Chat = () => {
   const usagePercentage = (usageData.tokens / getMaxTokens()) * 100;
 
   return (
-    <div className={`flex flex-col h-screen bg-background ${isFullscreen ? 'fixed inset-0 z-50' : ''}`}>
-      {/* Header */}
-      <div className="border-b bg-card px-6 py-4 flex items-center justify-between">
+    <div className={`flex h-screen bg-background ${isFullscreen ? 'fixed inset-0 z-50' : ''}`}>
+      {/* Sidebar */}
+      {user && showSidebar && (
+        <div className="w-64 border-r bg-card flex flex-col">
+          <div className="p-4 border-b">
+            <Button onClick={createNewConversation} className="w-full" size="sm">
+              <Plus className="h-4 w-4 mr-2" />
+              Nova Conversa
+            </Button>
+          </div>
+          <ScrollArea className="flex-1">
+            <div className="p-2 space-y-1">
+              {conversations.map((conv) => (
+                <div key={conv.id} className="group relative">
+                  <Button
+                    variant={currentConversationId === conv.id ? "secondary" : "ghost"}
+                    className="w-full justify-start text-left pr-8"
+                    size="sm"
+                    onClick={() => loadConversation(conv.id)}
+                  >
+                    <MessageSquare className="h-4 w-4 mr-2 flex-shrink-0" />
+                    <span className="truncate">{conv.title}</span>
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="absolute right-1 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 h-7 w-7 p-0"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      deleteConversation(conv.id);
+                    }}
+                  >
+                    <Trash2 className="h-3 w-3" />
+                  </Button>
+                </div>
+              ))}
+            </div>
+          </ScrollArea>
+        </div>
+      )}
+
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col">
+        {/* Header */}
+        <div className="border-b bg-card px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <img src={chatIcon} alt="RedData" className="w-10 h-10" />
           <div>
@@ -208,13 +379,19 @@ const Chat = () => {
         </div>
         
         <div className="flex items-center gap-2">
+          {user && (
+            <Button variant="outline" size="sm" onClick={() => setShowSidebar(!showSidebar)}>
+              <MessageSquare className="h-4 w-4 mr-2" />
+              {showSidebar ? 'Ocultar' : 'Histórico'}
+            </Button>
+          )}
           <Button variant="outline" size="sm" onClick={exportConversation} disabled={messages.length === 0}>
             <Download className="h-4 w-4 mr-2" />
             Exportar
           </Button>
           <Button variant="outline" size="sm" onClick={clearConversation} disabled={messages.length === 0}>
-            <Trash2 className="h-4 w-4 mr-2" />
-            Limpar
+            <Plus className="h-4 w-4 mr-2" />
+            Nova
           </Button>
           <Button variant="outline" size="sm" onClick={() => setIsFullscreen(!isFullscreen)}>
             {isFullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
@@ -278,9 +455,10 @@ const Chat = () => {
         </div>
         {!user && (
           <p className="text-xs text-muted-foreground mt-2">
-            💡 Faça login para ter acesso a mais tokens diários
+            💡 Faça login para ter acesso a mais tokens diários e salvar suas conversas
           </p>
         )}
+      </div>
       </div>
     </div>
   );

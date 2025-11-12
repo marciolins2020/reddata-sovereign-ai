@@ -18,9 +18,15 @@ interface UsageData {
   lastUpdateISO: string;
 }
 
-const ACCOUNT_MAX_TOKENS_PER_DAY = 10000; // ~25 conversas/dia - Plano FREE
-const DEVICE_MAX_TOKENS_PER_DAY = 2000; // ~5 conversas/dia - Anônimos
+interface TrialData {
+  startTime: number;
+  hasSeenWarning: boolean;
+}
+
+const ACCOUNT_MAX_TOKENS_PER_DAY = 10000;
+const DEVICE_MAX_TOKENS_PER_DAY = 2000;
 const RATE_LIMIT_MS = 3000;
+const TRIAL_DURATION_MS = 5 * 60 * 1000; // 5 minutos
 
 export const ReddataChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,6 +39,9 @@ export const ReddataChatWidget = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
   const [hasShown90Warning, setHasShown90Warning] = useState(false);
+  const [trialData, setTrialData] = useState<TrialData | null>(null);
+  const [trialTimeLeft, setTrialTimeLeft] = useState<number>(0);
+  const [showTrialWarning, setShowTrialWarning] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
 
@@ -55,7 +64,24 @@ export const ReddataChatWidget = () => {
 
   useEffect(() => {
     loadUsageData();
+    loadTrialData();
   }, [isLoggedIn, userId]);
+
+  useEffect(() => {
+    if (!isLoggedIn && trialData) {
+      const interval = setInterval(() => {
+        const elapsed = Date.now() - trialData.startTime;
+        const remaining = Math.max(0, TRIAL_DURATION_MS - elapsed);
+        setTrialTimeLeft(remaining);
+        
+        if (remaining === 0) {
+          clearInterval(interval);
+        }
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }
+  }, [isLoggedIn, trialData]);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -98,6 +124,45 @@ export const ReddataChatWidget = () => {
     }
   };
 
+  const loadTrialData = () => {
+    if (isLoggedIn) {
+      localStorage.removeItem('reddata_trial');
+      setTrialData(null);
+      return;
+    }
+
+    const stored = localStorage.getItem('reddata_trial');
+    if (stored) {
+      const data = JSON.parse(stored);
+      setTrialData(data);
+      const elapsed = Date.now() - data.startTime;
+      const remaining = Math.max(0, TRIAL_DURATION_MS - elapsed);
+      setTrialTimeLeft(remaining);
+      
+      if (!data.hasSeenWarning && messages.length === 0) {
+        setShowTrialWarning(true);
+      }
+    } else {
+      const newData: TrialData = {
+        startTime: Date.now(),
+        hasSeenWarning: false
+      };
+      localStorage.setItem('reddata_trial', JSON.stringify(newData));
+      setTrialData(newData);
+      setTrialTimeLeft(TRIAL_DURATION_MS);
+      setShowTrialWarning(true);
+    }
+  };
+
+  const markTrialWarningSeen = () => {
+    if (trialData) {
+      const updated = { ...trialData, hasSeenWarning: true };
+      localStorage.setItem('reddata_trial', JSON.stringify(updated));
+      setTrialData(updated);
+      setShowTrialWarning(false);
+    }
+  };
+
   const updateUsageData = (tokens: number) => {
     const newUsage = {
       usedTokens: usageData.usedTokens + tokens,
@@ -106,7 +171,6 @@ export const ReddataChatWidget = () => {
     setUsageData(newUsage);
     localStorage.setItem(getStorageKey(), JSON.stringify(newUsage));
 
-    // Telemetria opcional
     if (typeof window !== 'undefined' && (window as any).gtag) {
       (window as any).gtag('event', 'rdchat_message_sent', {
         tokens_used: tokens,
@@ -120,8 +184,20 @@ export const ReddataChatWidget = () => {
     return Math.ceil(text.length / 4);
   };
 
+  const formatTime = (ms: number) => {
+    const minutes = Math.floor(ms / 60000);
+    const seconds = Math.floor((ms % 60000) / 1000);
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  };
+
   const sendMessage = async () => {
     if (!input.trim() || isLoading || isLimitReached) return;
+
+    // Verificar trial expirado
+    if (!isLoggedIn && trialTimeLeft === 0) {
+      setError("Seu período de teste de 5 minutos acabou. Faça login para continuar usando gratuitamente.");
+      return;
+    }
 
     const now = Date.now();
     if (now - lastSendTime < RATE_LIMIT_MS) {
@@ -320,7 +396,9 @@ export const ReddataChatWidget = () => {
                   <img src={reddataChatIcon} alt="RedData" className="w-8 h-8 object-contain" />
                   <div>
                     <CardTitle className="text-lg">RedData Chat</CardTitle>
-                    <CardDescription className="text-white/80 text-xs">Versão Basic</CardDescription>
+                    <CardDescription className="text-white/80 text-xs">
+                      {!isLoggedIn && trialData ? `Trial: ${formatTime(trialTimeLeft)}` : 'Versão Basic'}
+                    </CardDescription>
                   </div>
                 </div>
                 <div className="flex items-center gap-1">
@@ -344,6 +422,18 @@ export const ReddataChatWidget = () => {
                   </Button>
                 </div>
               </div>
+              {!isLoggedIn && trialData && (
+                <div className="mt-2">
+                  <div className="w-full bg-white/20 rounded-full h-1.5">
+                    <div
+                      className={`h-1.5 rounded-full transition-all ${
+                        trialTimeLeft < 60000 ? 'bg-red-400' : 'bg-white'
+                      }`}
+                      style={{ width: `${Math.min((trialTimeLeft / TRIAL_DURATION_MS) * 100, 100)}%` }}
+                    />
+                  </div>
+                </div>
+              )}
             </CardHeader>
             
             <CardContent className="flex-1 flex flex-col p-0 overflow-hidden min-h-0">
@@ -352,6 +442,16 @@ export const ReddataChatWidget = () => {
                   <AlertCircle className="h-4 w-4 text-orange-600" />
                   <AlertDescription className="text-xs md:text-sm text-orange-800 dark:text-orange-200">
                     Limite gratuito diário atingido. Para continuar, entre em contato com a RedMaxx.
+                  </AlertDescription>
+                </Alert>
+              )}
+
+              {!isLoggedIn && trialTimeLeft === 0 && (
+                <Alert className="m-2 md:m-4 mb-2 border-red-500 bg-red-50 dark:bg-red-950 flex-shrink-0">
+                  <AlertCircle className="h-4 w-4 text-red-600" />
+                  <AlertDescription className="text-xs md:text-sm text-red-800 dark:text-red-200">
+                    ⏱️ <strong>Período de teste encerrado!</strong><br />
+                    <a href="/auth" className="underline font-medium">Faça login ou cadastre-se</a> para continuar usando gratuitamente com mais tokens disponíveis.
                   </AlertDescription>
                 </Alert>
               )}
@@ -366,12 +466,31 @@ export const ReddataChatWidget = () => {
               )}
 
               <ScrollArea className="flex-1 p-2 md:p-4 min-h-0" ref={scrollRef}>
-                {messages.length === 0 ? (
+                {showTrialWarning && !isLoggedIn && messages.length === 0 && (
+                  <Alert className="mb-4 border-blue-500 bg-blue-50">
+                    <AlertDescription className="text-sm">
+                      🎉 <strong>Teste grátis de 5 minutos!</strong><br />
+                      Você pode experimentar o RedData AI por 5 minutos. Após isso, faça login para continuar usando gratuitamente com {ACCOUNT_MAX_TOKENS_PER_DAY.toLocaleString()} tokens/dia.
+                      <Button
+                        variant="link"
+                        size="sm"
+                        onClick={markTrialWarningSeen}
+                        className="ml-2 h-auto p-0 text-blue-700"
+                      >
+                        Entendi
+                      </Button>
+                    </AlertDescription>
+                  </Alert>
+                )}
+                
+                {messages.length === 0 && !showTrialWarning && (
                   <div className="text-center text-muted-foreground py-12 text-sm">
                     <MessageCircle className="h-12 w-12 mx-auto mb-3 opacity-20" />
                     Olá! Sou o assistente RedData. Como posso ajudar?
                   </div>
-                ) : (
+                )}
+                
+                {messages.length > 0 && (
                   <div className="space-y-4">
                     {messages.map((msg, idx) => (
                       <div
@@ -413,14 +532,14 @@ export const ReddataChatWidget = () => {
                     onPaste={handlePaste}
                     onDrop={handleDrop}
                     onDragOver={handleDragOver}
-                    placeholder="Digite sua pergunta…"
+                    placeholder={!isLoggedIn && trialTimeLeft === 0 ? "Faça login para continuar..." : "Digite sua pergunta…"}
                     className="min-h-[50px] md:min-h-[60px] max-h-[100px] md:max-h-[120px] resize-none text-sm"
-                    disabled={isLoading || isLimitReached}
+                    disabled={isLoading || isLimitReached || (!isLoggedIn && trialTimeLeft === 0)}
                     aria-label="Digite sua mensagem"
                   />
                   <Button 
                     onClick={sendMessage} 
-                    disabled={!input.trim() || isLoading || isLimitReached}
+                    disabled={!input.trim() || isLoading || isLimitReached || (!isLoggedIn && trialTimeLeft === 0)}
                     size="icon"
                     className="h-[50px] w-[50px] md:h-[60px] md:w-[60px] flex-shrink-0"
                     aria-label="Enviar mensagem"
