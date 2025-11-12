@@ -91,6 +91,15 @@ export const ReddataChatWidget = () => {
     }
   }, [messages]);
 
+  // Resetar estado quando widget é fechado
+  useEffect(() => {
+    if (!isOpen) {
+      hasShownWelcomeRef.current = false;
+      setMessages([]); // Limpar mensagens ao fechar
+      setShowAuthOptions(false);
+    }
+  }, [isOpen]);
+
   // Mostrar mensagem de trial ao abrir o widget pela primeira vez
   useEffect(() => {
     if (isOpen && !isLoggedIn && !hasShownWelcomeRef.current && messages.length === 0) {
