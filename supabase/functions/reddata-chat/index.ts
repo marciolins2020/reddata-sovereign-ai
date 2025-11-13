@@ -104,6 +104,8 @@ serve(async (req) => {
     }
 
     console.log("RedData Chat - Processing request with OpenRouter");
+    console.log("API Key exists:", !!apiKey);
+    console.log("API Key length:", apiKey?.length);
 
     // Chamada ao OpenRouter (backend apenas, nunca no front)
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
@@ -140,6 +142,8 @@ Seja sempre claro, direto e profissional.`
 
     const data = await response.json();
     console.log("OpenRouter response received");
+    console.log("Response status:", response.status);
+    console.log("Response data:", JSON.stringify(data).substring(0, 200));
 
     // Sanitiza o JSON original do OpenRouter
     const safeOutput = sanitizeLLMResponse(data);
