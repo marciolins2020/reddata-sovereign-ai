@@ -18,15 +18,9 @@ interface UsageData {
   lastUpdateISO: string;
 }
 
-interface TrialData {
-  startTime: number;
-  hasSeenWarning: boolean;
-}
-
 const ACCOUNT_MAX_TOKENS_PER_DAY = 10000;
-const DEVICE_MAX_TOKENS_PER_DAY = 2000;
+const ANONYMOUS_TOKEN_LIMIT = 200;
 const RATE_LIMIT_MS = 3000;
-const TRIAL_DURATION_MS = 5 * 60 * 1000; // 5 minutos
 
 export const ReddataChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,21 +33,18 @@ export const ReddataChatWidget = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
   const [hasShown90Warning, setHasShown90Warning] = useState(false);
-  const [trialData, setTrialData] = useState<TrialData | null>(null);
-  const [trialTimeLeft, setTrialTimeLeft] = useState<number>(0);
-  const [showTrialWarning, setShowTrialWarning] = useState(false);
+  const [anonymousTokensUsed, setAnonymousTokensUsed] = useState(0);
   const [showAuthOptions, setShowAuthOptions] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
   const hasShownWelcomeRef = useRef(false);
 
-  // Não renderizar o widget na página de chat expandido
   if (typeof window !== 'undefined' && window.location.pathname === '/chat') {
     return null;
   }
 
-  const maxTokens = isLoggedIn ? ACCOUNT_MAX_TOKENS_PER_DAY : DEVICE_MAX_TOKENS_PER_DAY;
-  const isLimitReached = usageData.usedTokens >= maxTokens;
+  const maxTokens = isLoggedIn ? ACCOUNT_MAX_TOKENS_PER_DAY : ANONYMOUS_TOKEN_LIMIT;
+  const isLimitReached = isLoggedIn ? usageData.usedTokens >= maxTokens : anonymousTokensUsed >= ANONYMOUS_TOKEN_LIMIT;
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -71,24 +62,8 @@ export const ReddataChatWidget = () => {
 
   useEffect(() => {
     loadUsageData();
-    loadTrialData();
+    loadAnonymousTokens();
   }, [isLoggedIn, userId]);
-
-  useEffect(() => {
-    if (!isLoggedIn && trialData) {
-      const interval = setInterval(() => {
-        const elapsed = Date.now() - trialData.startTime;
-        const remaining = Math.max(0, TRIAL_DURATION_MS - elapsed);
-        setTrialTimeLeft(remaining);
-        
-        if (remaining === 0) {
-          clearInterval(interval);
-        }
-      }, 1000);
-
-      return () => clearInterval(interval);
-    }
-  }, [isLoggedIn, trialData]);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -96,37 +71,46 @@ export const ReddataChatWidget = () => {
     }
   }, [messages]);
 
-  // Resetar estado quando widget é fechado
   useEffect(() => {
     if (!isOpen) {
       hasShownWelcomeRef.current = false;
-      setMessages([]); // Limpar mensagens ao fechar
+      setMessages([]);
       setShowAuthOptions(false);
     }
   }, [isOpen]);
 
-  // Mostrar mensagem de trial ao abrir o widget pela primeira vez
   useEffect(() => {
     if (isOpen && !isLoggedIn && !hasShownWelcomeRef.current && messages.length === 0) {
+      const tokensRemaining = ANONYMOUS_TOKEN_LIMIT - anonymousTokensUsed;
       setMessages([{
         role: "assistant",
-        content: `👋 Olá! Você está no período de teste gratuito de 5 minutos do RedData AI.\n\n✨ Após fazer login, você pode:\n• Usar gratuitamente com ${ACCOUNT_MAX_TOKENS_PER_DAY.toLocaleString()} tokens/dia\n• Conversar sem limitações de tempo\n• Salvar todo o histórico de conversas\n\nComo posso ajudar?`
+        content: `👋 **Bem-vindo ao RedData AI!**
+
+Você tem **${tokensRemaining} tokens gratuitos** para testar nossas capacidades de IA.
+
+**Ao criar uma conta gratuita:**
+- 🔓 **10.000 tokens/dia** (50x mais!)
+- 💾 **Histórico de conversas** salvo
+- ⏰ **Sem limites**
+- 🔄 **Renovação diária** automática
+
+**Você já tem uma conta?`
       }]);
       hasShownWelcomeRef.current = true;
-      setShowAuthOptions(false); // Reset auth options when showing welcome
+      setShowAuthOptions(true);
     }
-  }, [isOpen, isLoggedIn, messages.length]);
+  }, [isOpen, isLoggedIn, messages.length, anonymousTokensUsed]);
 
   useEffect(() => {
     const usagePercentage = (usageData.usedTokens / maxTokens) * 100;
-    if (usagePercentage >= 90 && !hasShown90Warning && usageData.usedTokens > 0) {
+    if (usagePercentage >= 90 && !hasShown90Warning && usageData.usedTokens > 0 && isLoggedIn) {
       setMessages(prev => [...prev, {
         role: "assistant",
-        content: "⚠️ Atenção: Você já utilizou 90% do seu limite diário de tokens. Entre em contato com a RedMaxx para continuar usando o chat após atingir o limite."
+        content: "⚠️ Atenção: Você já utilizou 90% do seu limite diário de tokens."
       }]);
       setHasShown90Warning(true);
     }
-  }, [usageData.usedTokens, maxTokens, hasShown90Warning]);
+  }, [usageData.usedTokens, maxTokens, hasShown90Warning, isLoggedIn]);
 
   const getStorageKey = () => {
     const today = new Date().toISOString().split('T')[0].replace(/-/g, '');
@@ -152,42 +136,15 @@ export const ReddataChatWidget = () => {
     }
   };
 
-  const loadTrialData = () => {
+  const loadAnonymousTokens = () => {
     if (isLoggedIn) {
-      localStorage.removeItem('reddata_trial');
-      setTrialData(null);
+      setAnonymousTokensUsed(0);
       return;
     }
 
-    const stored = localStorage.getItem('reddata_trial');
+    const stored = localStorage.getItem('reddata_anonymous_tokens');
     if (stored) {
-      const data = JSON.parse(stored);
-      setTrialData(data);
-      const elapsed = Date.now() - data.startTime;
-      const remaining = Math.max(0, TRIAL_DURATION_MS - elapsed);
-      setTrialTimeLeft(remaining);
-      
-      if (!data.hasSeenWarning && messages.length === 0) {
-        setShowTrialWarning(true);
-      }
-    } else {
-      const newData: TrialData = {
-        startTime: Date.now(),
-        hasSeenWarning: false
-      };
-      localStorage.setItem('reddata_trial', JSON.stringify(newData));
-      setTrialData(newData);
-      setTrialTimeLeft(TRIAL_DURATION_MS);
-      setShowTrialWarning(true);
-    }
-  };
-
-  const markTrialWarningSeen = () => {
-    if (trialData) {
-      const updated = { ...trialData, hasSeenWarning: true };
-      localStorage.setItem('reddata_trial', JSON.stringify(updated));
-      setTrialData(updated);
-      setShowTrialWarning(false);
+      setAnonymousTokensUsed(parseInt(stored, 10));
     }
   };
 
@@ -198,32 +155,21 @@ export const ReddataChatWidget = () => {
     };
     setUsageData(newUsage);
     localStorage.setItem(getStorageKey(), JSON.stringify(newUsage));
-
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'rdchat_message_sent', {
-        tokens_used: tokens,
-        total_tokens: newUsage.usedTokens,
-        is_logged_in: isLoggedIn
-      });
-    }
   };
 
   const estimateTokens = (text: string) => {
     return Math.ceil(text.length / 4);
   };
 
-  const formatTime = (ms: number) => {
-    const minutes = Math.floor(ms / 60000);
-    const seconds = Math.floor((ms % 60000) / 1000);
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-  };
-
   const sendMessage = async () => {
     if (!input.trim() || isLoading || isLimitReached) return;
 
-    // Verificar trial expirado
-    if (!isLoggedIn && trialTimeLeft === 0) {
-      setError("Seu período de teste de 5 minutos acabou. Faça login para continuar usando gratuitamente.");
+    if (!isLoggedIn && anonymousTokensUsed >= ANONYMOUS_TOKEN_LIMIT) {
+      setMessages(prev => [...prev, {
+        role: "assistant",
+        content: "🎯 **Você usou seus tokens gratuitos!**\n\nPara continuar com **10.000 tokens/dia**, faça login ou crie sua conta gratuita."
+      }]);
+      setShowAuthOptions(true);
       return;
     }
 
@@ -236,373 +182,191 @@ export const ReddataChatWidget = () => {
     const userMessage: Message = { role: "user", content: input.trim() };
     const inputTokens = estimateTokens(input);
 
-    if (usageData.usedTokens + inputTokens > maxTokens) {
+    if (isLoggedIn && usageData.usedTokens + inputTokens > maxTokens) {
       setError("Limite de tokens atingido. Tente novamente amanhã.");
-      if (typeof window !== 'undefined' && (window as any).gtag) {
-        (window as any).gtag('event', 'rdchat_limit_reached', {
-          is_logged_in: isLoggedIn
-        });
-      }
       return;
     }
 
     setMessages(prev => [...prev, userMessage]);
-    
     setInput("");
     setIsLoading(true);
     setError(null);
     setLastSendTime(now);
 
+    setMessages(prev => [...prev, { role: "assistant", content: "" }]);
     abortControllerRef.current = new AbortController();
-    const timeoutId = setTimeout(() => {
-      abortControllerRef.current?.abort();
-      setError("Serviço temporariamente indisponível. Tente novamente.");
-      setIsLoading(false);
-    }, 30000);
 
     try {
-      const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/reddata-chat`;
-      const resp = await fetch(CHAT_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
-        },
-        body: JSON.stringify({ messages: [...messages, userMessage] }),
-        signal: abortControllerRef.current.signal,
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/reddata-chat`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...(isLoggedIn && {
+              "Authorization": `Bearer ${(await supabase.auth.getSession()).data.session?.access_token}`
+            })
+          },
+          body: JSON.stringify({ messages: [...messages, userMessage] }),
+          signal: abortControllerRef.current.signal
+        }
+      );
 
-      clearTimeout(timeoutId);
-
-      if (resp.status === 429 || resp.status === 402) {
-        const errData = await resp.json();
-        setError(errData.error || "Limite de uso excedido. Tente mais tarde.");
-        setIsLoading(false);
-        return;
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Erro ao processar mensagem");
       }
 
-      if (!resp.ok || !resp.body) {
-        throw new Error("Failed to start stream");
-      }
-
-      const reader = resp.body.getReader();
+      const reader = response.body!.getReader();
       const decoder = new TextDecoder();
-      let textBuffer = "";
-      let streamDone = false;
-      let assistantContent = "";
+      let assistantMessage = "";
 
-      while (!streamDone) {
+      while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-        textBuffer += decoder.decode(value, { stream: true });
 
-        let newlineIndex: number;
-        while ((newlineIndex = textBuffer.indexOf("\n")) !== -1) {
-          let line = textBuffer.slice(0, newlineIndex);
-          textBuffer = textBuffer.slice(newlineIndex + 1);
-
-          if (line.endsWith("\r")) line = line.slice(0, -1);
-          if (line.startsWith(":") || line.trim() === "") continue;
-          if (!line.startsWith("data: ")) continue;
-
-          const jsonStr = line.slice(6).trim();
-          if (jsonStr === "[DONE]") {
-            streamDone = true;
-            break;
-          }
-
-          try {
-            const parsed = JSON.parse(jsonStr);
-            const content = parsed.choices?.[0]?.delta?.content as string | undefined;
-            if (content) {
-              assistantContent += content;
-              setMessages(prev => {
-                const last = prev[prev.length - 1];
-                if (last?.role === "assistant") {
-                  return prev.map((m, i) => (i === prev.length - 1 ? { ...m, content: assistantContent } : m));
-                }
-                return [...prev, { role: "assistant", content: assistantContent }];
-              });
-            }
-          } catch {
-            textBuffer = line + "\n" + textBuffer;
-            break;
+        const chunk = decoder.decode(value);
+        const lines = chunk.split('\n');
+        
+        for (const line of lines) {
+          if (line.startsWith('data: ')) {
+            const data = line.slice(6);
+            if (data === '[DONE]') continue;
+            
+            try {
+              const parsed = JSON.parse(data);
+              const content = parsed.choices?.[0]?.delta?.content;
+              if (content) {
+                assistantMessage += content;
+                setMessages(prev => {
+                  const newMessages = [...prev];
+                  newMessages[newMessages.length - 1] = { role: "assistant", content: assistantMessage };
+                  return newMessages;
+                });
+              }
+            } catch {}
           }
         }
       }
 
-      const outputTokens = estimateTokens(assistantContent);
-      updateUsageData(inputTokens + outputTokens);
-      setIsLoading(false);
+      const totalTokens = inputTokens + estimateTokens(assistantMessage);
+
+      if (isLoggedIn) {
+        updateUsageData(totalTokens);
+      } else {
+        const newTotal = anonymousTokensUsed + totalTokens;
+        setAnonymousTokensUsed(newTotal);
+        localStorage.setItem('reddata_anonymous_tokens', newTotal.toString());
+      }
 
     } catch (err: any) {
-      clearTimeout(timeoutId);
-      if (err.name === 'AbortError') {
-        setError("Timeout: A resposta demorou muito. Tente novamente.");
-      } else {
-        setError("Erro ao processar mensagem. Tente novamente.");
-      }
-      setIsLoading(false);
+      if (err.name === 'AbortError') return;
       
-      if (typeof window !== 'undefined' && (window as any).gtag) {
-        (window as any).gtag('event', 'rdchat_error', {
-          error_type: err.name || 'unknown'
-        });
-      }
+      setError(err.message || "Erro ao enviar mensagem.");
+      setMessages(prev => prev.slice(0, -1));
+    } finally {
+      setIsLoading(false);
+      abortControllerRef.current = null;
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      sendMessage();
-    }
-  };
-
-  const handlePaste = (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
-    const items = e.clipboardData?.items;
-    if (items) {
-      for (let i = 0; i < items.length; i++) {
-        if (items[i].type.indexOf('image') !== -1) {
-          e.preventDefault();
-          setError("Envio de imagens não é permitido na versão Basic do RedData. Entre em contato com a RedMaxx para mais recursos.");
-          return;
-        }
-      }
-    }
-  };
-
-  const handleDrop = (e: React.DragEvent<HTMLTextAreaElement>) => {
-    e.preventDefault();
-    const files = e.dataTransfer?.files;
-    if (files && files.length > 0) {
-      setError("Envio de arquivos não é permitido na versão Basic do RedData. Entre em contato com a RedMaxx para mais recursos.");
-    }
-  };
-
-  const handleDragOver = (e: React.DragEvent<HTMLTextAreaElement>) => {
-    e.preventDefault();
-  };
-
-  const toggleChat = () => {
-    setIsOpen(!isOpen);
-    if (!isOpen && typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'rdchat_opened');
-    }
-  };
+  const toggleChat = () => setIsOpen(!isOpen);
 
   return (
-    <>
-      {/* Widget Button */}
-      <div className="fixed bottom-6 right-6 z-[9999]">
-        {!isOpen && (
-          <Button
-            onClick={toggleChat}
-            size="lg"
-            aria-label="Fale com o RedData (Beta)"
-            className="relative rounded-full w-14 h-14 bg-transparent hover:bg-transparent shadow-lg hover:shadow-xl transition-all duration-300 p-0 overflow-visible group border-0"
-            style={{
-              animation: 'pulse 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-            }}
-          >
-            <img 
-              src={reddataChatIcon} 
-              alt="RedData Chat" 
-              className="w-14 h-14 object-contain"
-              style={{
-                filter: 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1))'
-              }}
-            />
-          </Button>
-        )}
-        
-        {/* Chat Panel */}
-        {isOpen && (
-          <Card className="fixed inset-0 w-full h-full md:relative md:w-[380px] md:h-[600px] md:shadow-2xl md:border-2 border-0 animate-in slide-in-from-bottom-2 md:slide-in-from-bottom-2 flex flex-col md:rounded-lg rounded-none z-[10001] overflow-hidden">
-            <CardHeader className="bg-gradient-to-r from-primary to-primary/80 text-white pb-2 md:pb-3 pt-3 md:pt-4 flex-shrink-0">
-              <div className="flex items-center justify-between gap-1.5 md:gap-2">
-                <div className="flex items-center gap-1.5 md:gap-3 min-w-0 flex-1">
-                  <img src={reddataChatIcon} alt="RedData" className="w-6 h-6 md:w-8 md:h-8 object-contain flex-shrink-0" />
-                  <div className="min-w-0 flex-1 overflow-hidden">
-                    <CardTitle className="text-sm md:text-lg truncate leading-tight">RedData AI</CardTitle>
-                    <CardDescription className="text-white/80 text-[10px] md:text-xs truncate leading-tight">
-                      {!isLoggedIn && trialData ? `Trial: ${formatTime(trialTimeLeft)}` : 'Versão Basic'}
-                    </CardDescription>
-                  </div>
-                </div>
-                <div className="flex items-center gap-0.5 md:gap-1 flex-shrink-0">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => window.location.href = '/chat'}
-                    className="text-white hover:bg-white/20 h-7 w-7 md:h-8 md:w-8 p-0"
-                    aria-label="Expandir chat"
-                  >
-                    <Maximize2 className="h-3 w-3 md:h-4 md:w-4" />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={toggleChat}
-                    className="text-white hover:bg-white/20 h-7 w-7 md:h-8 md:w-8 p-0"
-                    aria-label="Fechar chat"
-                  >
-                    <X className="h-3 w-3 md:h-4 md:w-4" />
-                  </Button>
+    <div className="fixed bottom-4 right-4 z-[10000] flex flex-col items-end gap-2">
+      {!isOpen && (
+        <Button onClick={toggleChat} className="h-14 w-14 rounded-full shadow-lg bg-primary hover:bg-primary/90">
+          <MessageCircle className="h-6 w-6 text-white" />
+        </Button>
+      )}
+
+      {isOpen && (
+        <Card className="fixed inset-0 w-full h-full md:relative md:w-[380px] md:h-[600px] md:shadow-2xl flex flex-col md:rounded-lg rounded-none z-[10001]">
+          <CardHeader className="bg-gradient-to-r from-primary to-primary/80 text-white pb-2 md:pb-3 pt-3 md:pt-4">
+            <div className="flex items-center justify-between gap-1.5 md:gap-2">
+              <div className="flex items-center gap-1.5 md:gap-3 min-w-0 flex-1">
+                <img src={reddataChatIcon} alt="RedData" className="w-6 h-6 md:w-8 md:h-8 flex-shrink-0" />
+                <div className="min-w-0 flex-1 overflow-hidden">
+                  <CardTitle className="text-sm md:text-lg truncate leading-tight">RedData AI</CardTitle>
+                  <CardDescription className="text-white/80 text-[10px] md:text-xs truncate leading-tight">
+                    {!isLoggedIn ? `${Math.max(0, ANONYMOUS_TOKEN_LIMIT - anonymousTokensUsed)} tokens restantes` : 'Versão Basic'}
+                  </CardDescription>
                 </div>
               </div>
-              {!isLoggedIn && trialData && (
-                <div className="mt-2">
-                  <div className="w-full bg-white/20 rounded-full h-1.5">
-                    <div
-                      className={`h-1.5 rounded-full transition-all ${
-                        trialTimeLeft < 60000 ? 'bg-red-400' : 'bg-white'
-                      }`}
-                      style={{ width: `${Math.min((trialTimeLeft / TRIAL_DURATION_MS) * 100, 100)}%` }}
-                    />
-                  </div>
-                </div>
-              )}
-            </CardHeader>
-            
-            <CardContent className="flex-1 flex flex-col p-0 overflow-hidden min-h-0">
-              {isLimitReached && (
-                <Alert className="m-2 md:m-4 mb-2 border-orange-500 bg-orange-50 dark:bg-orange-950 flex-shrink-0">
-                  <AlertCircle className="h-4 w-4 text-orange-600" />
-                  <AlertDescription className="text-xs md:text-sm text-orange-800 dark:text-orange-200">
-                    Limite gratuito diário atingido. Para continuar, entre em contato com a RedMaxx.
-                  </AlertDescription>
-                </Alert>
-              )}
-
-              {!isLoggedIn && trialTimeLeft === 0 && (
-                <Alert className="m-2 md:m-4 mb-2 border-red-500 bg-red-50 dark:bg-red-950 flex-shrink-0">
-                  <AlertCircle className="h-4 w-4 text-red-600" />
-                  <AlertDescription className="text-xs md:text-sm text-red-800 dark:text-red-200">
-                    ⏱️ <strong>Período de teste encerrado!</strong><br />
-                    <a href="/auth" className="underline font-medium">Faça login ou cadastre-se</a> para continuar usando gratuitamente com mais tokens disponíveis.
-                  </AlertDescription>
-                </Alert>
-              )}
-
-              {error && (
-                <Alert className="m-2 md:m-4 mb-2 border-red-500 bg-red-50 dark:bg-red-950 flex-shrink-0">
-                  <AlertCircle className="h-4 w-4 text-red-600" />
-                  <AlertDescription className="text-xs md:text-sm text-red-800 dark:text-red-200">
-                    {error}
-                  </AlertDescription>
-                </Alert>
-              )}
-
-              <ScrollArea className="flex-1 p-2 md:p-4 min-h-0" ref={scrollRef}>
-                {messages.length === 0 && (
-                  <div className="text-center text-muted-foreground py-12 text-sm">
-                    <MessageCircle className="h-12 w-12 mx-auto mb-3 opacity-20" />
-                    Olá! Sou o assistente RedData. Como posso ajudar?
-                  </div>
-                )}
-                
-                {messages.length > 0 && (
-                  <div className="space-y-4">
-                    {messages.map((msg, idx) => (
-                      <div key={idx}>
-                        <div
-                          className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
-                        >
-                          <div
-                            className={`max-w-[85%] rounded-lg p-3 text-sm ${
-                              msg.role === "user"
-                                ? "bg-primary text-white"
-                                : "bg-muted text-foreground"
-                            }`}
-                          >
-                            <div className="whitespace-pre-wrap break-words">{msg.content}</div>
-                          </div>
-                        </div>
-                        {/* Mostrar opções de autenticação após primeira mensagem de boas-vindas */}
-                        {idx === 0 && !isLoggedIn && msg.role === "assistant" && msg.content.includes("período de teste gratuito") && (
-                          <div className="flex flex-col gap-2 mt-3 ml-1">
-                            {!showAuthOptions ? (
-                              <Button 
-                                size="sm" 
-                                onClick={() => setShowAuthOptions(true)}
-                                className="text-xs w-fit"
-                              >
-                                Criar Conta Grátis
-                              </Button>
-                            ) : (
-                              <div className="space-y-2">
-                                <p className="text-xs text-muted-foreground">Você já tem cadastro?</p>
-                                <div className="flex gap-2">
-                                  <Button 
-                                    size="sm" 
-                                    variant="outline"
-                                    onClick={() => window.location.href = '/auth?mode=login'}
-                                    className="text-xs"
-                                  >
-                                    Sim, fazer login
-                                  </Button>
-                                  <Button 
-                                    size="sm" 
-                                    onClick={() => window.location.href = '/auth?mode=signup'}
-                                    className="text-xs"
-                                  >
-                                    Não, criar conta
-                                  </Button>
-                                </div>
-                              </div>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                    {isLoading && (
-                      <div className="flex justify-start">
-                        <div className="bg-muted rounded-lg p-3 text-sm">
-                          <div className="flex gap-1">
-                            <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                            <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                            <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </ScrollArea>
-
-              <div className="border-t p-2 md:p-4 space-y-2 flex-shrink-0 bg-background">
-                <div className="flex gap-2">
-                  <Textarea
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    onKeyDown={handleKeyDown}
-                    onPaste={handlePaste}
-                    onDrop={handleDrop}
-                    onDragOver={handleDragOver}
-                    placeholder={!isLoggedIn && trialTimeLeft === 0 ? "Faça login para continuar..." : "Digite sua pergunta…"}
-                    className="min-h-[50px] md:min-h-[60px] max-h-[100px] md:max-h-[120px] resize-none text-sm"
-                    disabled={isLoading || isLimitReached || (!isLoggedIn && trialTimeLeft === 0)}
-                    aria-label="Digite sua mensagem"
-                  />
-                  <Button 
-                    onClick={sendMessage} 
-                    disabled={!input.trim() || isLoading || isLimitReached || (!isLoggedIn && trialTimeLeft === 0)}
-                    size="icon"
-                    className="h-[50px] w-[50px] md:h-[60px] md:w-[60px] flex-shrink-0"
-                    aria-label="Enviar mensagem"
-                  >
-                    <Send className="h-4 w-4" />
-                  </Button>
-                </div>
-                <p className="text-[10px] md:text-xs text-muted-foreground text-center leading-tight">
-                  As conversas podem ser registradas para melhoria do serviço. Não compartilhe dados sensíveis.
-                </p>
+              <div className="flex items-center gap-0.5 md:gap-1 flex-shrink-0">
+                <Button variant="ghost" size="sm" onClick={() => window.location.href = '/chat'} className="text-white hover:bg-white/20 h-7 w-7 p-0">
+                  <Maximize2 className="h-3 w-3 md:h-4 md:w-4" />
+                </Button>
+                <Button variant="ghost" size="sm" onClick={toggleChat} className="text-white hover:bg-white/20 h-7 w-7 p-0">
+                  <X className="h-3 w-3 md:h-4 md:w-4" />
+                </Button>
               </div>
-            </CardContent>
-          </Card>
-        )}
-      </div>
-    </>
+            </div>
+          </CardHeader>
+
+          <CardContent className="flex-1 p-3 md:p-4 flex flex-col gap-3 overflow-hidden">
+            {error && (
+              <Alert variant="destructive">
+                <AlertCircle className="h-4 w-4" />
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+
+            <ScrollArea ref={scrollRef} className="flex-1 pr-3">
+              <div className="space-y-4">
+                {messages.map((msg, idx) => (
+                  <div key={idx} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
+                    <div className={`max-w-[85%] rounded-2xl px-3 py-2 text-sm whitespace-pre-wrap ${msg.role === "user" ? "bg-primary text-white" : "bg-muted text-foreground"}`}>
+                      {msg.content}
+                    </div>
+                  </div>
+                ))}
+                {isLoading && (
+                  <div className="flex justify-start">
+                    <div className="bg-muted rounded-2xl px-4 py-2.5">
+                      <div className="flex gap-1">
+                        <div className="w-2 h-2 rounded-full bg-foreground/40 animate-bounce" />
+                        <div className="w-2 h-2 rounded-full bg-foreground/40 animate-bounce" style={{ animationDelay: "150ms" }} />
+                        <div className="w-2 h-2 rounded-full bg-foreground/40 animate-bounce" style={{ animationDelay: "300ms" }} />
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </ScrollArea>
+
+            {showAuthOptions && (
+              <div className="flex gap-2 mb-2">
+                <Button variant="outline" size="sm" onClick={() => window.location.href = '/auth?mode=login'} className="flex-1 text-xs">
+                  Sim, fazer login
+                </Button>
+                <Button variant="default" size="sm" onClick={() => window.location.href = '/auth?mode=signup'} className="flex-1 text-xs">
+                  Não, criar conta
+                </Button>
+              </div>
+            )}
+
+            <div className="flex gap-2">
+              <Textarea
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                  }
+                }}
+                placeholder={isLimitReached ? "Limite atingido" : "Digite sua mensagem..."}
+                className="flex-1 min-h-[44px] max-h-32 resize-none"
+                disabled={isLoading || isLimitReached}
+              />
+              <Button onClick={sendMessage} disabled={isLoading || !input.trim() || isLimitReached} size="icon" className="h-[44px] w-[44px]">
+                <Send className="h-4 w-4" />
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+    </div>
   );
 };
