@@ -688,7 +688,7 @@ export default {
     login: "Entrar",
     signup: "Criar Conta",
     loginSubtitle: "Acesse seu dashboard",
-    signupSubtitle: "Teste grátis por 30 dias",
+    signupSubtitle: "Comece a usar gratuitamente",
     fullNameLabel: "Nome Completo",
     fullNamePlaceholder: "Seu nome completo",
     emailLabel: "E-mail",

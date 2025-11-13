@@ -23,7 +23,7 @@ const getWelcomeMessage = (tokensRemaining: number, isLoggedIn: boolean): Messag
 Você tem **${tokensRemaining} tokens gratuitos** para testar nossas capacidades de IA.
 
 **Ao criar uma conta gratuita:**
-- 🔓 **10.000 tokens/dia** (50x mais!)
+- 🔓 **10.000 tokens/dia** (10x mais!)
 - 💾 **Histórico de conversas** salvo
 - ⏰ **Sem limites**
 - 🔄 **Renovação diária** automática
@@ -45,12 +45,12 @@ export default function RedDataChatPage() {
     startNewConversation
   } = useChatConversation();
 
-  const [messages, setMessages] = useState<Message[]>([getWelcomeMessage(200, false)]);
+  const [messages, setMessages] = useState<Message[]>([getWelcomeMessage(1000, false)]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showAuthOptions, setShowAuthOptions] = useState(true);
-  const [tokensRemaining, setTokensRemaining] = useState(200);
+  const [tokensRemaining, setTokensRemaining] = useState(1000);
   const endRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -64,7 +64,7 @@ export default function RedDataChatPage() {
       setMessages(savedMessages);
       setShowAuthOptions(false);
     } else {
-      const tokens = isLoggedIn ? 10000 : 200;
+      const tokens = isLoggedIn ? 10000 : 1000;
       setTokensRemaining(tokens);
       setMessages([getWelcomeMessage(tokens, isLoggedIn)]);
       setShowAuthOptions(!isLoggedIn);
@@ -154,7 +154,7 @@ export default function RedDataChatPage() {
 
   const handleNewConversation = () => {
     startNewConversation();
-    const tokens = isLoggedIn ? 10000 : 200;
+    const tokens = isLoggedIn ? 10000 : 1000;
     setTokensRemaining(tokens);
     setMessages([getWelcomeMessage(tokens, isLoggedIn)]);
     setShowAuthOptions(!isLoggedIn);
