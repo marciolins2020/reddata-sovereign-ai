@@ -1,5 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Menu } from "lucide-react";
 import reddataLogo from "@/assets/reddata-logo.png";
+import { ConversationSidebar } from "@/components/chat/ConversationSidebar";
+import { useChatConversation } from "@/hooks/useChatConversation";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 type Message = {
   id: string;
@@ -13,13 +18,26 @@ const initialAssistantMessage: Message = {
   role: "assistant",
   createdAt: new Date().toISOString(),
   content:
-    "Olá, eu sou o Assistente RedData.\n\nIA 100% proprietária da RedMaxx, e posso ser executada dentro da sua infraestrutura, com segurança total de seus dados.\n\nPor hoje, como posso te ajudar hoje?"
+    "Olá, eu sou o Assistente RedData.\n\nIA 100% proprietária da RedMaxx, e posso ser executada dentro da sua infraestrutura, com segurança total de seus dados.\n\nPor hoje, como posso te ajudar?"
 };
 
 export default function RedDataChatPage() {
+  const {
+    conversationId,
+    messages: savedMessages,
+    setMessages: setSavedMessages,
+    isLoggedIn,
+    userId,
+    createNewConversation,
+    saveMessage,
+    loadConversation,
+    startNewConversation
+  } = useChatConversation();
+
   const [messages, setMessages] = useState<Message[]>([initialAssistantMessage]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const endRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -27,6 +45,14 @@ export default function RedDataChatPage() {
       endRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
     }
   }, [messages.length, isLoading]);
+
+  useEffect(() => {
+    if (savedMessages.length > 0) {
+      setMessages(savedMessages);
+    } else {
+      setMessages([initialAssistantMessage]);
+    }
+  }, [savedMessages]);
 
   const handleSend = async (fromSuggestion?: string) => {
     const text = (fromSuggestion ?? input).trim();
@@ -43,6 +69,21 @@ export default function RedDataChatPage() {
     setMessages(updatedMessages);
     setInput("");
     setIsLoading(true);
+
+    // Criar ou usar conversa existente (apenas para usuários logados)
+    let currentConvId = conversationId;
+    if (isLoggedIn && userId && !conversationId) {
+      currentConvId = await createNewConversation(text);
+      if (!currentConvId) {
+        setIsLoading(false);
+        return;
+      }
+    }
+
+    // Salvar mensagem do usuário
+    if (isLoggedIn && currentConvId) {
+      await saveMessage(currentConvId, "user", text);
+    }
 
     try {
       const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/reddata-chat`, {
@@ -71,6 +112,11 @@ export default function RedDataChatPage() {
       };
 
       setMessages((prev) => [...prev, assistantMessage]);
+
+      // Salvar resposta do assistente
+      if (isLoggedIn && currentConvId) {
+        await saveMessage(currentConvId, "assistant", answerText);
+      }
     } catch (error) {
       console.error(error);
       const errorMessage: Message = {
@@ -86,6 +132,17 @@ export default function RedDataChatPage() {
     }
   };
 
+  const handleSelectConversation = async (convId: string) => {
+    await loadConversation(convId);
+    setIsSidebarOpen(false);
+  };
+
+  const handleNewConversation = () => {
+    startNewConversation();
+    setMessages([initialAssistantMessage]);
+    setIsSidebarOpen(false);
+  };
+
   const handleKeyDown: React.KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -95,11 +152,41 @@ export default function RedDataChatPage() {
 
 
   return (
-    <div className="min-h-screen bg-[#F8F8F9] pt-16 sm:pt-20">
-      <div className="mx-auto max-w-6xl px-3 sm:px-4 lg:px-6 py-2 sm:py-3 space-y-2 sm:space-y-2.5">
-        
-        {/* Header interno */}
-        <header className="bg-white border border-gray-200 rounded-xl sm:rounded-2xl shadow-sm px-3 sm:px-4 py-2 sm:py-3 flex items-center justify-between gap-2 sm:gap-3">
+    <div className="min-h-screen bg-[#F8F8F9] flex">
+      {/* Sidebar Desktop */}
+      {isLoggedIn && (
+        <aside className="hidden lg:block w-64 border-r border-gray-200 bg-white">
+          <ConversationSidebar
+            currentConversationId={conversationId}
+            onSelectConversation={handleSelectConversation}
+            onNewConversation={handleNewConversation}
+          />
+        </aside>
+      )}
+
+      {/* Conteúdo Principal */}
+      <div className="flex-1 flex flex-col pt-16 sm:pt-20">
+        <div className="mx-auto w-full max-w-6xl px-3 sm:px-4 lg:px-6 py-2 sm:py-3 space-y-2 sm:space-y-2.5 flex-1 flex flex-col">
+          
+          {/* Header interno */}
+          <header className="bg-white border border-gray-200 rounded-xl sm:rounded-2xl shadow-sm px-3 sm:px-4 py-2 sm:py-3 flex items-center justify-between gap-2 sm:gap-3">
+            {/* Menu Mobile */}
+            {isLoggedIn && (
+              <Sheet open={isSidebarOpen} onOpenChange={setIsSidebarOpen}>
+                <SheetTrigger asChild>
+                  <Button variant="ghost" size="icon" className="lg:hidden">
+                    <Menu className="h-5 w-5" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="left" className="p-0 w-80">
+                  <ConversationSidebar
+                    currentConversationId={conversationId}
+                    onSelectConversation={handleSelectConversation}
+                    onNewConversation={handleNewConversation}
+                  />
+                </SheetContent>
+              </Sheet>
+            )}
           <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
             <img 
               src={reddataLogo} 
