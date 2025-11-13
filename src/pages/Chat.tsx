@@ -96,7 +96,7 @@ export default function RedDataChatPage() {
 
   return (
     <div className="min-h-screen bg-[#F8F8F9] pt-16 sm:pt-20">
-      <div className="mx-auto max-w-6xl px-3 sm:px-4 lg:px-6 py-3 sm:py-6 lg:py-8 space-y-3 sm:space-y-4">
+      <div className="mx-auto max-w-6xl px-3 sm:px-4 lg:px-6 py-2 sm:py-3 space-y-2 sm:space-y-2.5">
         
         {/* Header interno */}
         <header className="bg-white border border-gray-200 rounded-xl sm:rounded-2xl shadow-sm px-3 sm:px-4 py-2 sm:py-3 flex items-center justify-between gap-2 sm:gap-3">
