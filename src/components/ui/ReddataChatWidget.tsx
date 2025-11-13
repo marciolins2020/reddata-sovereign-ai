@@ -277,7 +277,7 @@ Você tem **${tokensRemaining} tokens gratuitos** para testar nossas capacidades
                   </div>
                 </div>
                 <div className="flex items-center gap-1 flex-shrink-0">
-                  <Button variant="ghost" size="sm" onClick={() => window.location.href = '/chat'} className="text-white hover:bg-white/20 h-8 w-8 p-0 hidden md:flex">
+                  <Button variant="ghost" size="sm" onClick={() => window.location.href = '/chat'} className="text-white hover:bg-white/20 h-8 w-8 p-0">
                     <Maximize2 className="h-4 w-4" />
                   </Button>
                   <Button variant="ghost" size="sm" onClick={toggleChat} className="text-white hover:bg-white/20 h-8 w-8 p-0">
