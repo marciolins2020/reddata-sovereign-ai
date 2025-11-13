@@ -253,100 +253,104 @@ Você tem **${tokensRemaining} tokens gratuitos** para testar nossas capacidades
   const toggleChat = () => setIsOpen(!isOpen);
 
   return (
-    <div className="fixed bottom-4 right-4 z-[10000] flex flex-col items-end gap-2">
+    <>
       {!isOpen && (
-        <button onClick={toggleChat} className="h-14 w-14 rounded-full shadow-lg hover:scale-110 transition-transform duration-200">
-          <img src={reddataChatIcon} alt="RedData" className="w-full h-full object-contain" />
-        </button>
+        <div className="fixed bottom-4 right-4 z-[10000]">
+          <button onClick={toggleChat} className="h-14 w-14 rounded-full shadow-lg hover:scale-110 transition-transform duration-200">
+            <img src={reddataChatIcon} alt="RedData" className="w-full h-full object-contain" />
+          </button>
+        </div>
       )}
 
       {isOpen && (
-        <Card className="fixed inset-0 w-full h-full md:relative md:w-[380px] md:h-[600px] md:shadow-2xl flex flex-col md:rounded-lg rounded-none z-[10001]">
-          <CardHeader className="bg-gradient-to-r from-primary to-primary/80 text-white pb-2 md:pb-3 pt-3 md:pt-4">
-            <div className="flex items-center justify-between gap-1.5 md:gap-2">
-              <div className="flex items-center gap-1.5 md:gap-3 min-w-0 flex-1">
-                <img src={reddataChatIcon} alt="RedData" className="w-6 h-6 md:w-8 md:h-8 flex-shrink-0" />
-                <div className="min-w-0 flex-1 overflow-hidden">
-                  <CardTitle className="text-sm md:text-lg truncate leading-tight">RedData AI</CardTitle>
-                  <CardDescription className="text-white/80 text-[10px] md:text-xs truncate leading-tight">
-                    {!isLoggedIn ? `${Math.max(0, ANONYMOUS_TOKEN_LIMIT - anonymousTokensUsed)} tokens restantes` : 'Versão Basic'}
-                  </CardDescription>
+        <div className="fixed inset-0 md:bottom-4 md:right-4 md:top-auto md:left-auto md:inset-auto z-[10001]">
+          <Card className="w-full h-full md:w-[380px] md:h-[600px] md:shadow-2xl flex flex-col md:rounded-lg rounded-none">
+            <CardHeader className="bg-gradient-to-r from-primary to-primary/80 text-white pb-3 pt-4 flex-shrink-0">
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-3 min-w-0 flex-1">
+                  <img src={reddataChatIcon} alt="RedData" className="w-8 h-8 flex-shrink-0" />
+                  <div className="min-w-0 flex-1 overflow-hidden">
+                    <CardTitle className="text-base md:text-lg truncate">RedData AI</CardTitle>
+                    <CardDescription className="text-white/80 text-xs truncate">
+                      {!isLoggedIn ? `${Math.max(0, ANONYMOUS_TOKEN_LIMIT - anonymousTokensUsed)} tokens restantes` : 'Versão Basic'}
+                    </CardDescription>
+                  </div>
+                </div>
+                <div className="flex items-center gap-1 flex-shrink-0">
+                  <Button variant="ghost" size="sm" onClick={() => window.location.href = '/chat'} className="text-white hover:bg-white/20 h-8 w-8 p-0 hidden md:flex">
+                    <Maximize2 className="h-4 w-4" />
+                  </Button>
+                  <Button variant="ghost" size="sm" onClick={toggleChat} className="text-white hover:bg-white/20 h-8 w-8 p-0">
+                    <X className="h-4 w-4" />
+                  </Button>
                 </div>
               </div>
-              <div className="flex items-center gap-0.5 md:gap-1 flex-shrink-0">
-                <Button variant="ghost" size="sm" onClick={() => window.location.href = '/chat'} className="text-white hover:bg-white/20 h-7 w-7 p-0">
-                  <Maximize2 className="h-3 w-3 md:h-4 md:w-4" />
-                </Button>
-                <Button variant="ghost" size="sm" onClick={toggleChat} className="text-white hover:bg-white/20 h-7 w-7 p-0">
-                  <X className="h-3 w-3 md:h-4 md:w-4" />
-                </Button>
-              </div>
-            </div>
-          </CardHeader>
+            </CardHeader>
 
-          <CardContent className="flex-1 p-3 md:p-4 flex flex-col gap-3 overflow-hidden">
-            {error && (
-              <Alert variant="destructive">
-                <AlertCircle className="h-4 w-4" />
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )}
+            <CardContent className="flex-1 p-4 flex flex-col gap-3 overflow-hidden min-h-0">
+              {error && (
+                <Alert variant="destructive" className="flex-shrink-0">
+                  <AlertCircle className="h-4 w-4" />
+                  <AlertDescription>{error}</AlertDescription>
+                </Alert>
+              )}
 
-            <ScrollArea ref={scrollRef} className="flex-1 pr-3">
-              <div className="space-y-4">
-                {messages.map((msg, idx) => (
-                  <div key={idx} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
-                    <div className={`max-w-[85%] rounded-2xl px-3 py-2 text-sm whitespace-pre-wrap ${msg.role === "user" ? "bg-primary text-white" : "bg-muted text-foreground"}`}>
-                      {msg.content}
-                    </div>
-                  </div>
-                ))}
-                {isLoading && (
-                  <div className="flex justify-start">
-                    <div className="bg-muted rounded-2xl px-4 py-2.5">
-                      <div className="flex gap-1">
-                        <div className="w-2 h-2 rounded-full bg-foreground/40 animate-bounce" />
-                        <div className="w-2 h-2 rounded-full bg-foreground/40 animate-bounce" style={{ animationDelay: "150ms" }} />
-                        <div className="w-2 h-2 rounded-full bg-foreground/40 animate-bounce" style={{ animationDelay: "300ms" }} />
+              <ScrollArea ref={scrollRef} className="flex-1 pr-3 min-h-0">
+                <div className="space-y-4 pb-2">
+                  {messages.map((msg, idx) => (
+                    <div key={idx} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
+                      <div className={`max-w-[85%] rounded-2xl px-3 py-2 text-sm whitespace-pre-wrap ${msg.role === "user" ? "bg-primary text-white" : "bg-muted text-foreground"}`}>
+                        {msg.content}
                       </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            </ScrollArea>
+                  ))}
+                  {isLoading && (
+                    <div className="flex justify-start">
+                      <div className="bg-muted rounded-2xl px-4 py-2.5">
+                        <div className="flex gap-1">
+                          <div className="w-2 h-2 rounded-full bg-foreground/40 animate-bounce" />
+                          <div className="w-2 h-2 rounded-full bg-foreground/40 animate-bounce" style={{ animationDelay: "150ms" }} />
+                          <div className="w-2 h-2 rounded-full bg-foreground/40 animate-bounce" style={{ animationDelay: "300ms" }} />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </ScrollArea>
 
-            {showAuthOptions && (
-              <div className="flex gap-2 mb-2">
-                <Button variant="outline" size="sm" onClick={() => window.location.href = '/auth?mode=login'} className="flex-1 text-xs">
-                  Sim, fazer login
-                </Button>
-                <Button variant="default" size="sm" onClick={() => window.location.href = '/auth?mode=signup'} className="flex-1 text-xs">
-                  Não, criar conta
+              {showAuthOptions && (
+                <div className="flex gap-2 flex-shrink-0">
+                  <Button variant="outline" size="sm" onClick={() => window.location.href = '/auth?mode=login'} className="flex-1 text-sm">
+                    Sim, fazer login
+                  </Button>
+                  <Button variant="default" size="sm" onClick={() => window.location.href = '/auth?mode=signup'} className="flex-1 text-sm">
+                    Não, criar conta
+                  </Button>
+                </div>
+              )}
+
+              <div className="flex gap-2 flex-shrink-0">
+                <Textarea
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      e.preventDefault();
+                      sendMessage();
+                    }
+                  }}
+                  placeholder={isLimitReached ? "Limite atingido" : "Digite sua mensagem..."}
+                  className="flex-1 min-h-[44px] max-h-32 resize-none text-sm"
+                  disabled={isLoading || isLimitReached}
+                />
+                <Button onClick={sendMessage} disabled={isLoading || !input.trim() || isLimitReached} size="icon" className="h-[44px] w-[44px] flex-shrink-0">
+                  <Send className="h-4 w-4" />
                 </Button>
               </div>
-            )}
-
-            <div className="flex gap-2">
-              <Textarea
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" && !e.shiftKey) {
-                    e.preventDefault();
-                    sendMessage();
-                  }
-                }}
-                placeholder={isLimitReached ? "Limite atingido" : "Digite sua mensagem..."}
-                className="flex-1 min-h-[44px] max-h-32 resize-none"
-                disabled={isLoading || isLimitReached}
-              />
-              <Button onClick={sendMessage} disabled={isLoading || !input.trim() || isLimitReached} size="icon" className="h-[44px] w-[44px]">
-                <Send className="h-4 w-4" />
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        </div>
       )}
-    </div>
+    </>
   );
 };
