@@ -45,7 +45,10 @@ export function useChatConversation() {
         .single();
 
       if (error) throw error;
-      return (data as any).id;
+      
+      const newConvId = (data as any).id;
+      setConversationId(newConvId);
+      return newConvId;
     } catch (error) {
       console.error("Erro ao criar conversa:", error);
       toast.error("Erro ao criar conversa");
