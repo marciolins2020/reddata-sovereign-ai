@@ -36,13 +36,13 @@ export function ConversationSidebar({
       if (!user) return;
 
       const { data, error } = await supabase
-        .from("conversations")
+        .from("conversations" as any)
         .select("*")
         .eq("user_id", user.id)
         .order("updated_at", { ascending: false });
 
       if (error) throw error;
-      setConversations(data || []);
+      setConversations((data as any) || []);
     } catch (error) {
       console.error("Erro ao carregar conversas:", error);
       toast.error("Erro ao carregar histórico");
@@ -66,7 +66,7 @@ export function ConversationSidebar({
     
     try {
       const { error } = await supabase
-        .from("conversations")
+        .from("conversations" as any)
         .delete()
         .eq("id", conversationId);
 

@@ -24,6 +24,11 @@ function sanitizeLLMResponse(raw: any) {
     output = String(raw);
   }
 
+  // Remove tags HTML indesejadas que o modelo pode gerar
+  output = output.replace(/<\/?s>/g, ''); // Remove <s> e </s>
+  output = output.replace(/<\/?[^>]+(>|$)/g, ''); // Remove outras tags HTML
+  output = output.trim();
+
   return {
     answer: output,
     metadata: {
