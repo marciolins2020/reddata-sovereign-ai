@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import reddataLogo from "@/assets/reddata-logo.png";
 
 type Message = {
   id: string;
@@ -102,18 +103,25 @@ export default function RedDataChatPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8F8F9]">
+    <div className="min-h-screen bg-[#F8F8F9] pt-20">
       <div className="mx-auto max-w-6xl px-4 lg:px-6 py-6 lg:py-8 space-y-4">
         
         {/* Header interno */}
         <header className="bg-white border border-gray-200 rounded-2xl shadow-sm px-4 py-3 flex items-center justify-between gap-3">
-          <div>
-            <h1 className="text-base lg:text-lg font-semibold text-gray-900">
-              Assistente RedData – IA Soberana
-            </h1>
-            <p className="text-xs lg:text-sm text-gray-500">
-              IA 100% proprietária, executada dentro da sua infraestrutura.
-            </p>
+          <div className="flex items-center gap-3">
+            <img 
+              src={reddataLogo} 
+              alt="RedData" 
+              className="h-8 lg:h-10 w-auto object-contain"
+            />
+            <div>
+              <h1 className="text-base lg:text-lg font-semibold text-gray-900">
+                Assistente RedData – IA Soberana
+              </h1>
+              <p className="text-xs lg:text-sm text-gray-500">
+                IA 100% proprietária, executada dentro da sua infraestrutura.
+              </p>
+            </div>
           </div>
           <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-green-50 text-[10px] lg:text-xs text-green-700 border border-green-100">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
