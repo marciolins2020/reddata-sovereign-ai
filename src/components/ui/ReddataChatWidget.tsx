@@ -19,7 +19,7 @@ interface UsageData {
 }
 
 const ACCOUNT_MAX_TOKENS_PER_DAY = 10000;
-const ANONYMOUS_TOKEN_LIMIT = 200;
+const ANONYMOUS_TOKEN_LIMIT = 1000;
 const RATE_LIMIT_MS = 3000;
 
 export const ReddataChatWidget = () => {
@@ -92,7 +92,7 @@ export const ReddataChatWidget = () => {
 Você tem **${tokensRemaining} tokens gratuitos** para testar nossas capacidades de IA.
 
 **Ao criar uma conta gratuita:**
-- 🔓 **10.000 tokens/dia** (50x mais!)
+- 🔓 **10.000 tokens/dia** (10x mais!)
 - 💾 **Histórico de conversas** salvo
 - ⏰ **Sem limites**
 - 🔄 **Renovação diária** automática
@@ -170,7 +170,7 @@ Você tem **${tokensRemaining} tokens gratuitos** para testar nossas capacidades
     if (!isLoggedIn && anonymousTokensUsed >= ANONYMOUS_TOKEN_LIMIT) {
       setMessages(prev => [...prev, {
         role: "assistant",
-        content: "🎯 **Você usou seus tokens gratuitos!**\n\nPara continuar com **10.000 tokens/dia**, faça login ou crie sua conta gratuita."
+        content: "🎯 **Você usou seus 1000 tokens gratuitos!**\n\nPara continuar com **10.000 tokens/dia**, faça login ou crie sua conta gratuita."
       }]);
       setShowAuthOptions(true);
       return;
