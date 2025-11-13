@@ -61,14 +61,15 @@ export function UploadSection({ userId, profile, onUploadSuccess, onViewDashboar
   const handleUpload = async () => {
     if (!file) return;
 
-    if (!profile.is_trial_active) {
-      toast({
-        title: "Trial expirado",
-        description: "Seu período de teste expirou. Entre em contato para continuar.",
-        variant: "destructive",
-      });
-      return;
-    }
+    // TRIAL DESABILITADO TEMPORARIAMENTE
+    // if (!profile.is_trial_active) {
+    //   toast({
+    //     title: "Trial expirado",
+    //     description: "Seu período de teste expirou. Entre em contato para continuar.",
+    //     variant: "destructive",
+    //   });
+    //   return;
+    // }
 
     setUploading(true);
 
@@ -172,7 +173,7 @@ export function UploadSection({ userId, profile, onUploadSuccess, onViewDashboar
               type="file"
               onChange={handleFileChange}
               accept=".csv,.txt,.xls,.xlsx"
-              disabled={uploading || !profile.is_trial_active}
+              disabled={uploading /* || !profile.is_trial_active */} // Trial desabilitado
             />
             {file && (
               <p className="text-sm text-muted-foreground mt-2">
@@ -183,7 +184,7 @@ export function UploadSection({ userId, profile, onUploadSuccess, onViewDashboar
 
           <Button
             onClick={handleUpload}
-            disabled={!file || uploading || !profile.is_trial_active}
+            disabled={!file || uploading /* || !profile.is_trial_active */} // Trial desabilitado
             className="w-full"
             size="lg"
           >
@@ -211,13 +212,14 @@ export function UploadSection({ userId, profile, onUploadSuccess, onViewDashboar
           </Button>
         </div>
 
-        {!profile.is_trial_active && (
+        {/* TRIAL DESABILITADO TEMPORARIAMENTE */}
+        {/* {!profile.is_trial_active && (
           <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-4 text-center">
             <p className="text-sm text-destructive font-medium">
               Seu período de teste expirou. Entre em contato para continuar usando o RedData.
             </p>
           </div>
-        )}
+        )} */}
       </div>
     </Card>
   );

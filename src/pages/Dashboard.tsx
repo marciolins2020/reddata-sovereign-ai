@@ -90,13 +90,14 @@ export default function Dashboard() {
 
     setProfile(data);
 
-    if (data && !data.is_trial_active) {
-      toast({
-        title: t("dashboard.trialExpired"),
-        description: t("dashboard.trialExpiredMessage"),
-        variant: "destructive",
-      });
-    }
+    // TRIAL DESABILITADO TEMPORARIAMENTE
+    // if (data && !data.is_trial_active) {
+    //   toast({
+    //     title: t("dashboard.trialExpired"),
+    //     description: t("dashboard.trialExpiredMessage"),
+    //     variant: "destructive",
+    //   });
+    // }
 
     // Fetch user files
     fetchUserFiles(userId);
@@ -198,9 +199,10 @@ export default function Dashboard() {
     );
   }
 
-  const trialDaysLeft = profile.trial_expires_at
-    ? Math.max(0, Math.ceil((new Date(profile.trial_expires_at).getTime() - Date.now()) / (1000 * 60 * 60 * 24)))
-    : 0;
+  // TRIAL DESABILITADO TEMPORARIAMENTE
+  // const trialDaysLeft = profile.trial_expires_at
+  //   ? Math.max(0, Math.ceil((new Date(profile.trial_expires_at).getTime() - Date.now()) / (1000 * 60 * 60 * 24)))
+  //   : 0;
 
   return (
     <div className="min-h-screen bg-gradient-hero flex flex-col">
@@ -212,7 +214,8 @@ export default function Dashboard() {
             <div>
               <h1 className="text-xl font-bold text-foreground">{t("dashboard.title")}</h1>
               <p className="text-xs text-muted-foreground">
-                {profile.is_trial_active ? `${trialDaysLeft} ${t("dashboard.trialDaysLeft")}` : t("dashboard.trialExpired")}
+                {/* TRIAL DESABILITADO: {profile.is_trial_active ? `${trialDaysLeft} ${t("dashboard.trialDaysLeft")}` : t("dashboard.trialExpired")} */}
+                Dashboard Manager
               </p>
             </div>
           </div>
