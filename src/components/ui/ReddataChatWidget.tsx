@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { supabase } from "@/integrations/supabase/client";
-import reddataChatIcon from "@/assets/reddata-chat-icon.png";
+import reddataIcon from "@/assets/reddata-icon.png";
 
 interface Message {
   role: "user" | "assistant";
@@ -257,7 +257,7 @@ Você tem **${tokensRemaining} tokens gratuitos** para testar nossas capacidades
       {!isOpen && (
         <div className="fixed bottom-4 right-4 z-[10000]">
           <button onClick={toggleChat} className="h-14 w-14 rounded-full shadow-lg hover:scale-110 transition-transform duration-200">
-            <img src={reddataChatIcon} alt="RedData" className="w-full h-full object-contain" />
+            <img src={reddataIcon} alt="RedData" className="w-full h-full object-contain" />
           </button>
         </div>
       )}
@@ -268,7 +268,7 @@ Você tem **${tokensRemaining} tokens gratuitos** para testar nossas capacidades
             <CardHeader className="bg-gradient-to-r from-primary to-primary/80 text-white pb-3 pt-4 flex-shrink-0">
               <div className="flex items-center justify-between gap-2">
                 <div className="flex items-center gap-3 min-w-0 flex-1">
-                  <img src={reddataChatIcon} alt="RedData" className="w-8 h-8 flex-shrink-0" />
+                  <img src={reddataIcon} alt="RedData" className="w-8 h-8 flex-shrink-0" />
                   <div className="min-w-0 flex-1 overflow-hidden">
                     <CardTitle className="text-base md:text-lg truncate">RedData AI</CardTitle>
                     <CardDescription className="text-white/80 text-xs truncate">
