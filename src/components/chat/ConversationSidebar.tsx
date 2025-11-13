@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Plus, MessageSquare, Trash2 } from "lucide-react";
+import { Plus, MessageSquare, Trash2, Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { format } from "date-fns";
@@ -29,6 +30,7 @@ export function ConversationSidebar({
 }: ConversationSidebarProps) {
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const loadConversations = async () => {
     try {
@@ -105,9 +107,13 @@ export function ConversationSidebar({
     }
   };
 
+  const filteredConversations = conversations.filter(conv =>
+    conv.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="w-full lg:w-64 bg-white border-r border-gray-200 flex flex-col h-full">
-      <div className="p-4 border-b border-gray-200">
+      <div className="p-4 border-b border-gray-200 space-y-3">
         <Button
           onClick={onNewConversation}
           className="w-full bg-[#D8232A] hover:bg-[#B01D23] text-white"
@@ -116,6 +122,27 @@ export function ConversationSidebar({
           <Plus className="h-4 w-4 mr-2" />
           Nova Conversa
         </Button>
+
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+          <Input
+            type="text"
+            placeholder="Buscar conversas..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="pl-9 pr-9 h-9 text-sm"
+          />
+          {searchQuery && (
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute right-1 top-1/2 -translate-y-1/2 h-7 w-7"
+              onClick={() => setSearchQuery("")}
+            >
+              <X className="h-3.5 w-3.5" />
+            </Button>
+          )}
+        </div>
       </div>
 
       <ScrollArea className="flex-1">
@@ -124,15 +151,15 @@ export function ConversationSidebar({
             <div className="text-center py-8 text-sm text-gray-500">
               Carregando...
             </div>
-          ) : conversations.length === 0 ? (
+          ) : filteredConversations.length === 0 ? (
             <div className="text-center py-8 px-4">
               <MessageSquare className="h-8 w-8 mx-auto text-gray-400 mb-2" />
               <p className="text-sm text-gray-500">
-                Nenhuma conversa ainda
+                {searchQuery ? "Nenhuma conversa encontrada" : "Nenhuma conversa ainda"}
               </p>
             </div>
           ) : (
-            conversations.map((conversation) => (
+            filteredConversations.map((conversation) => (
               <div
                 key={conversation.id}
                 className={`
