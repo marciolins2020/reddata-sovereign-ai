@@ -80,8 +80,11 @@ export const ReddataChatWidget = () => {
   }, [isOpen]);
 
   useEffect(() => {
-    if (isOpen && !isLoggedIn && !hasShownWelcomeRef.current && messages.length === 0) {
-      const tokensRemaining = ANONYMOUS_TOKEN_LIMIT - anonymousTokensUsed;
+    if (isOpen && !hasShownWelcomeRef.current && messages.length === 0) {
+      const tokensRemaining = isLoggedIn 
+        ? ACCOUNT_MAX_TOKENS_PER_DAY - usageData.usedTokens 
+        : ANONYMOUS_TOKEN_LIMIT - anonymousTokensUsed;
+      
       setMessages([{
         role: "assistant",
         content: `👋 **Bem-vindo ao RedData AI!**
@@ -97,9 +100,9 @@ Você tem **${tokensRemaining} tokens gratuitos** para testar nossas capacidades
 **Você já tem uma conta?`
       }]);
       hasShownWelcomeRef.current = true;
-      setShowAuthOptions(true);
+      setShowAuthOptions(!isLoggedIn);
     }
-  }, [isOpen, isLoggedIn, messages.length, anonymousTokensUsed]);
+  }, [isOpen, isLoggedIn, messages.length, anonymousTokensUsed, usageData.usedTokens]);
 
   useEffect(() => {
     const usagePercentage = (usageData.usedTokens / maxTokens) * 100;
