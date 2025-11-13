@@ -5,42 +5,18 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
-// Lista de campos de JSON típicos de provedores externos que não devem vazar
-const suspiciousFields = [
-  "id",
-  "object",
-  "model",
-  "choices",
-  "usage",
-  "created",
-  "index",
-  "finish_reason",
-  "provider",
-];
-
-// Função para sanitizar a resposta vinda do OpenRouter
+// Função para limpar a resposta e remover traces do OpenRouter
 function sanitizeLLMResponse(raw: any) {
   let output = "";
 
   try {
     if (typeof raw === "object" && raw !== null) {
-      // Remove campos suspeitos
-      const safe = JSON.parse(
-        JSON.stringify(raw, (key, val) => {
-          if (suspiciousFields.includes(key)) return undefined;
-          return val;
-        })
-      );
-
-      // Extrai texto em vários formatos possíveis (OpenRouter/OpenAI-like)
+      // Extrai conteúdo da resposta
       output =
-        (safe as any)?.answer ||
-        (safe as any)?.response ||
-        (safe as any)?.content ||
-        (safe as any)?.output ||
         raw?.choices?.[0]?.message?.content ||
         raw?.choices?.[0]?.text ||
-        JSON.stringify(safe);
+        raw?.content ||
+        JSON.stringify(raw);
     } else {
       output = String(raw);
     }
@@ -59,7 +35,7 @@ function sanitizeLLMResponse(raw: any) {
 }
 
 serve(async (req) => {
-  // Handle CORS preflight requests
+  // Handle CORS
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
@@ -71,10 +47,18 @@ serve(async (req) => {
     });
   }
 
+  // Pega a chave API do ambiente
   const apiKey = Deno.env.get('OPENROUTER_API_KEY');
+  
+  console.log("=== RedData Chat Debug ===");
+  console.log("API Key exists:", !!apiKey);
+  console.log("API Key length:", apiKey?.length || 0);
+  console.log("API Key prefix:", apiKey?.substring(0, 10) || "N/A");
+
   if (!apiKey) {
+    console.error("OPENROUTER_API_KEY não configurada!");
     return new Response(JSON.stringify({
-      answer: "Configuração interna incompleta do mecanismo RedData. Contate o administrador.",
+      answer: "Configuração interna incompleta. A chave API não está configurada.",
       metadata: {
         engine: "RedData Sovereign AI",
         secure: false,
@@ -91,7 +75,7 @@ serve(async (req) => {
     
     if (!Array.isArray(messages) || messages.length === 0) {
       return new Response(JSON.stringify({
-        answer: "Nenhuma mensagem válida foi enviada ao mecanismo RedData.",
+        answer: "Nenhuma mensagem válida foi enviada.",
         metadata: {
           engine: "RedData Sovereign AI",
           secure: true,
@@ -103,23 +87,16 @@ serve(async (req) => {
       });
     }
 
-    console.log("RedData Chat - Processing request with OpenRouter");
-    console.log("API Key exists:", !!apiKey);
-    console.log("API Key length:", apiKey?.length);
+    console.log("Enviando request ao OpenRouter...");
+    console.log("Número de mensagens:", messages.length);
 
-    // Chamada ao OpenRouter (backend apenas, nunca no front)
-    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: "mistralai/mistral-7b-instruct",
-        messages: [
-          {
-            role: "system",
-            content: `Você é o assistente RedData. Responda de forma objetiva, técnica e educada. 
+    // Monta o payload para OpenRouter
+    const payload = {
+      model: "mistralai/mistral-7b-instruct",
+      messages: [
+        {
+          role: "system",
+          content: `Você é o assistente RedData. Responda de forma objetiva, técnica e educada. 
 
 IMPORTANTE - Fontes de informação:
 - Se perguntarem sobre a REDMAXX (a empresa): Informe que a RedMaxx é a empresa desenvolvedora do RedData e para mais informações institucionais, eles podem visitar www.redmaxx.com.br
@@ -132,23 +109,52 @@ Seu papel:
 4. Responder perguntas sobre Big Data, BI, Analytics
 
 Seja sempre claro, direto e profissional.`
-          },
-          ...messages
-        ],
-        max_tokens: 2048,
-        temperature: 0.2,
-      }),
+        },
+        ...messages
+      ],
+      max_tokens: 2048,
+      temperature: 0.7,
+    };
+
+    console.log("Payload preparado:", JSON.stringify(payload).substring(0, 200));
+
+    // Chama o OpenRouter
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+        "HTTP-Referer": "https://reddata.redmaxx.com.br",
+        "X-Title": "RedData Chat",
+      },
+      body: JSON.stringify(payload),
     });
 
-    const data = await response.json();
-    console.log("OpenRouter response received");
     console.log("Response status:", response.status);
-    console.log("Response data:", JSON.stringify(data).substring(0, 200));
+    console.log("Response headers:", JSON.stringify(Object.fromEntries(response.headers.entries())));
 
-    // Sanitiza o JSON original do OpenRouter
-    const safeOutput = sanitizeLLMResponse(data);
+    const data = await response.json();
+    console.log("Response data:", JSON.stringify(data).substring(0, 500));
 
-    return new Response(JSON.stringify(safeOutput), {
+    if (!response.ok) {
+      console.error("Erro do OpenRouter:", data);
+      return new Response(JSON.stringify({
+        answer: `Erro ao processar sua mensagem: ${data.error?.message || "Erro desconhecido"}`,
+        metadata: {
+          engine: "RedData Sovereign AI",
+          secure: true,
+          timestamp: Date.now(),
+        },
+      }), {
+        status: 200,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    // Sanitiza e retorna
+    const sanitized = sanitizeLLMResponse(data);
+
+    return new Response(JSON.stringify(sanitized), {
       status: 200,
       headers: {
         ...corsHeaders,
@@ -160,10 +166,10 @@ Seja sempre claro, direto e profissional.`
     });
 
   } catch (error: any) {
-    console.error("Erro ao chamar LLM via OpenRouter:", error?.message || error);
+    console.error("Erro crítico:", error?.message || error);
 
     return new Response(JSON.stringify({
-      answer: "O mecanismo RedData encontrou uma inconsistência momentânea e reiniciou o processamento. Tente novamente.",
+      answer: "Erro interno ao processar sua mensagem. Tente novamente.",
       metadata: {
         engine: "RedData Sovereign AI",
         secure: true,
