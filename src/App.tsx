@@ -18,6 +18,7 @@ const CasosUsoGoverno = lazy(() => import("./pages/CasosUsoGoverno"));
 const CasosUsoVarejo = lazy(() => import("./pages/CasosUsoVarejo"));
 const Modulos = lazy(() => import("./pages/Modulos"));
 const Auth = lazy(() => import("./pages/Auth"));
+const ResetPassword = lazy(() => import("./pages/ResetPassword"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const DashboardView = lazy(() => import("./pages/DashboardView"));
 const PublicDashboard = lazy(() => import("./pages/PublicDashboard"));
@@ -43,6 +44,7 @@ const App = () => (
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/auth" element={<Auth />} />
+                <Route path="/reset-password" element={<ResetPassword />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/dashboard/:slug" element={<DashboardView />} />
                 <Route path="/view/:id" element={<DashboardView />} />
