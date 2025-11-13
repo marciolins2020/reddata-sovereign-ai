@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Menu } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import reddataLogo from "@/assets/reddata-logo.png";
+import reddataIcon from "@/assets/reddata-icon.png";
 import { ConversationSidebar } from "@/components/chat/ConversationSidebar";
 import { useChatConversation } from "@/hooks/useChatConversation";
 import { Button } from "@/components/ui/button";
@@ -279,8 +280,8 @@ export default function RedDataChatPage() {
                     className={`flex items-start gap-2 sm:gap-3 ${isUser ? "justify-end" : "justify-start"}`}
                   >
                     {!isUser && (
-                      <div className="flex-shrink-0 w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#D8232A] flex items-center justify-center text-white text-[9px] sm:text-[10px] font-semibold">
-                        RD
+                      <div className="flex-shrink-0 w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white flex items-center justify-center border border-gray-200">
+                        <img src={reddataIcon} alt="RedData" className="w-4 h-4 sm:w-5 sm:h-5 object-contain" />
                       </div>
                     )}
                     
@@ -326,8 +327,8 @@ export default function RedDataChatPage() {
 
               {isLoading && (
                 <div className="flex items-start gap-2 sm:gap-3">
-                  <div className="flex-shrink-0 w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#D8232A] flex items-center justify-center text-white text-[9px] sm:text-[10px] font-semibold">
-                    RD
+                  <div className="flex-shrink-0 w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white flex items-center justify-center border border-gray-200">
+                    <img src={reddataIcon} alt="RedData" className="w-4 h-4 sm:w-5 sm:h-5 object-contain" />
                   </div>
                   <div className="flex gap-1 px-3 py-2 rounded-xl bg-gray-50 border border-gray-200">
                     <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
