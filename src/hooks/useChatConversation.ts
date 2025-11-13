@@ -36,7 +36,7 @@ export function useChatConversation() {
       const title = firstMessage.slice(0, 50) + (firstMessage.length > 50 ? "..." : "");
       
       const { data, error } = await supabase
-        .from("conversations")
+        .from("conversations" as any)
         .insert({
           user_id: userId,
           title
@@ -45,7 +45,7 @@ export function useChatConversation() {
         .single();
 
       if (error) throw error;
-      return data.id;
+      return (data as any).id;
     } catch (error) {
       console.error("Erro ao criar conversa:", error);
       toast.error("Erro ao criar conversa");
@@ -58,7 +58,7 @@ export function useChatConversation() {
 
     try {
       const { error } = await supabase
-        .from("messages")
+        .from("messages" as any)
         .insert({
           conversation_id: convId,
           role,
@@ -69,7 +69,7 @@ export function useChatConversation() {
 
       // Atualiza o updated_at da conversa
       await supabase
-        .from("conversations")
+        .from("conversations" as any)
         .update({ updated_at: new Date().toISOString() })
         .eq("id", convId);
     } catch (error) {
@@ -80,14 +80,14 @@ export function useChatConversation() {
   const loadConversation = async (convId: string) => {
     try {
       const { data, error } = await supabase
-        .from("messages")
+        .from("messages" as any)
         .select("*")
         .eq("conversation_id", convId)
         .order("created_at", { ascending: true });
 
       if (error) throw error;
 
-      const loadedMessages: Message[] = data.map((msg) => ({
+      const loadedMessages: Message[] = (data as any[]).map((msg: any) => ({
         id: msg.id,
         role: msg.role as "user" | "assistant",
         content: msg.content,
