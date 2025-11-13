@@ -1,497 +1,253 @@
-import { useState, useEffect, useRef } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Loader2, Send, Maximize2, Minimize2, Trash2, Download, Plus, MessageSquare } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
-import { Link } from "react-router-dom";
-import chatIcon from "@/assets/reddata-chat-icon.png";
+import React, { useEffect, useRef, useState } from "react";
 
-interface Conversation {
+type Message = {
   id: string;
-  title: string;
-  created_at: string;
-  updated_at: string;
-}
-
-interface Message {
   role: "user" | "assistant";
   content: string;
-}
+  createdAt: string;
+};
 
-interface UsageData {
-  tokens: number;
-  lastUpdate: string;
-}
+const initialAssistantMessage: Message = {
+  id: "welcome",
+  role: "assistant",
+  createdAt: new Date().toISOString(),
+  content:
+    "Olá, eu sou o Assistente RedData.\n\nIA 100% proprietária, executada dentro da sua infraestrutura.\nComo posso te ajudar hoje?"
+};
 
-// Token limits - Plano FREE
-const ACCOUNT_MAX_TOKENS_PER_DAY = 10000;
-const DEVICE_MAX_TOKENS_PER_DAY = 200;
-const RATE_LIMIT_MS = 3000;
-
-const Chat = () => {
-  const [messages, setMessages] = useState<Message[]>([]);
+export default function RedDataChatPage() {
+  const [messages, setMessages] = useState<Message[]>([initialAssistantMessage]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const [user, setUser] = useState<any>(null);
-  const [usageData, setUsageData] = useState<UsageData>({ tokens: 0, lastUpdate: new Date().toISOString() });
-  const [lastRequestTime, setLastRequestTime] = useState<number>(0);
-  const [conversations, setConversations] = useState<Conversation[]>([]);
-  const [currentConversationId, setCurrentConversationId] = useState<string | null>(null);
-  const [showSidebar, setShowSidebar] = useState(true);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const { toast } = useToast();
+  const endRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-    });
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
-
-  useEffect(() => {
-    loadUsageData();
-    if (user) {
-      loadConversations();
+    if (endRef.current) {
+      endRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
     }
-  }, [user]);
+  }, [messages.length, isLoading]);
 
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  const handleSend = async (fromSuggestion?: string) => {
+    const text = (fromSuggestion ?? input).trim();
+    if (!text || isLoading) return;
 
-  // Mostrar mensagem de trial para usuários não logados
-  useEffect(() => {
-    if (!user && messages.length === 0) {
-      setMessages([{
-        role: "assistant",
-        content: `👋 **Bem-vindo ao RedData AI!**\n\nVocê tem **200 tokens gratuitos** para testar nossas capacidades de IA.\n\n**Ao criar uma conta gratuita:**\n- 🔒 **10.000 tokens/dia** (50x mais!)\n- 💾 **Histórico de conversas** salvo\n- ⏰ **Sem limites**\n- 🔄 **Renovação diária** automática\n\n**Você já tem uma conta?`
-      }]);
-    }
-  }, [user]);
-
-  const getStorageKey = () => user ? `reddata_usage_${user.id}` : 'reddata_usage_device';
-  const getMaxTokens = () => user ? ACCOUNT_MAX_TOKENS_PER_DAY : DEVICE_MAX_TOKENS_PER_DAY;
-
-  const loadUsageData = () => {
-    const key = getStorageKey();
-    const stored = localStorage.getItem(key);
-    if (stored) {
-      const data = JSON.parse(stored);
-      const lastUpdate = new Date(data.lastUpdate);
-      const now = new Date();
-      if (now.toDateString() === lastUpdate.toDateString()) {
-        setUsageData(data);
-      } else {
-        const newData = { tokens: 0, lastUpdate: now.toISOString() };
-        localStorage.setItem(key, JSON.stringify(newData));
-        setUsageData(newData);
-      }
-    }
-  };
-
-  const updateUsageData = (newTokens: number) => {
-    const key = getStorageKey();
-    const newData = {
-      tokens: usageData.tokens + newTokens,
-      lastUpdate: new Date().toISOString()
+    const userMessage: Message = {
+      id: `u-${Date.now()}`,
+      role: "user",
+      content: text,
+      createdAt: new Date().toISOString()
     };
-    localStorage.setItem(key, JSON.stringify(newData));
-    setUsageData(newData);
-  };
 
-  const estimateTokens = (text: string) => Math.ceil(text.length / 4);
-
-  const loadConversations = async () => {
-    if (!user) return;
-    
-    const { data, error } = await (supabase as any)
-      .from('conversations')
-      .select('*')
-      .order('updated_at', { ascending: false });
-    
-    if (error) {
-      console.error('Error loading conversations:', error);
-      return;
-    }
-    
-    setConversations(data || []);
-  };
-
-  const loadConversation = async (conversationId: string) => {
-    const { data, error } = await (supabase as any)
-      .from('messages')
-      .select('*')
-      .eq('conversation_id', conversationId)
-      .order('created_at', { ascending: true });
-    
-    if (error) {
-      console.error('Error loading messages:', error);
-      toast({ title: "Erro", description: "Falha ao carregar conversa", variant: "destructive" });
-      return;
-    }
-    
-    setMessages((data || []).map((m: any) => ({ role: m.role as "user" | "assistant", content: m.content })));
-    setCurrentConversationId(conversationId);
-  };
-
-  const createNewConversation = () => {
-    setMessages([]);
-    setCurrentConversationId(null);
-  };
-
-  const deleteConversation = async (conversationId: string) => {
-    const { error } = await (supabase as any)
-      .from('conversations')
-      .delete()
-      .eq('id', conversationId);
-    
-    if (error) {
-      toast({ title: "Erro", description: "Falha ao deletar conversa", variant: "destructive" });
-      return;
-    }
-    
-    if (currentConversationId === conversationId) {
-      createNewConversation();
-    }
-    
-    loadConversations();
-    toast({ title: "Conversa deletada", description: "Histórico removido com sucesso." });
-  };
-
-  const saveConversation = async (newMessages: Message[]) => {
-    if (!user || newMessages.length === 0) return;
-
-    try {
-      let conversationId = currentConversationId;
-      
-      if (!conversationId) {
-        // Criar nova conversa com título baseado na primeira mensagem
-        const title = newMessages[0].content.slice(0, 50) + (newMessages[0].content.length > 50 ? '...' : '');
-        
-        const { data: conversation, error: convError } = await (supabase as any)
-          .from('conversations')
-          .insert({ user_id: user.id, title })
-          .select()
-          .single();
-        
-        if (convError) throw convError;
-        
-        conversationId = conversation.id;
-        setCurrentConversationId(conversationId);
-      } else {
-        // Atualizar updated_at
-        await (supabase as any)
-          .from('conversations')
-          .update({ updated_at: new Date().toISOString() })
-          .eq('id', conversationId);
-      }
-
-      // Salvar apenas as novas mensagens
-      const lastMessage = newMessages[newMessages.length - 1];
-      await (supabase as any)
-        .from('messages')
-        .insert({
-          conversation_id: conversationId,
-          role: lastMessage.role,
-          content: lastMessage.content
-        });
-
-      loadConversations();
-    } catch (error) {
-      console.error('Error saving conversation:', error);
-    }
-  };
-
-  const clearConversation = () => {
-    createNewConversation();
-    toast({ title: "Conversa limpa", description: "Iniciada nova conversa." });
-  };
-
-  const exportConversation = () => {
-    const content = messages.map(m => `${m.role.toUpperCase()}: ${m.content}`).join('\n\n');
-    const blob = new Blob([content], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `reddata-chat-${new Date().toISOString()}.txt`;
-    a.click();
-    toast({ title: "Exportado", description: "Conversa salva com sucesso." });
-  };
-
-  const sendMessage = async () => {
-    if (!input.trim() || isLoading) return;
-
-    const now = Date.now();
-    if (now - lastRequestTime < RATE_LIMIT_MS) {
-      toast({
-        title: "Aguarde",
-        description: "Por favor, aguarde alguns segundos entre mensagens.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    const estimatedTokens = estimateTokens(input);
-    const maxTokens = getMaxTokens();
-    
-    if (usageData.tokens + estimatedTokens > maxTokens) {
-      toast({
-        title: "Limite diário atingido",
-        description: `Você atingiu o limite de ${maxTokens} tokens por dia. ${user ? 'O limite será renovado amanhã.' : 'Faça login para ter mais tokens disponíveis.'}`,
-        variant: "destructive",
-      });
-      return;
-    }
-
-    const userMessage: Message = { role: "user", content: input };
-    const newMessages = [...messages, userMessage];
-    setMessages(newMessages);
+    const updatedMessages = [...messages, userMessage];
+    setMessages(updatedMessages);
     setInput("");
     setIsLoading(true);
-    setLastRequestTime(now);
-
-    // Salvar mensagem do usuário
-    if (user) {
-      await saveConversation(newMessages);
-    }
 
     try {
-      const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/reddata-chat`;
-      const resp = await fetch(CHAT_URL, {
+      // TODO: Ajustar para endpoint real do RedData LLM
+      const response = await fetch("/api/reddata/chat", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-        },
-        body: JSON.stringify({ messages: [...messages, userMessage] }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: updatedMessages.map(({ role, content }) => ({ role, content }))
+        })
       });
 
-      if (!resp.ok || !resp.body) {
-        throw new Error("Failed to start stream");
+      if (!response.ok) {
+        throw new Error("Erro da API");
       }
 
-      const reader = resp.body.getReader();
-      const decoder = new TextDecoder();
-      let assistantMessage = "";
+      const data = await response.json();
+      const answerText: string = data.answer ?? "Resposta recebida do RedData.";
 
-      setMessages(prev => [...prev, { role: "assistant", content: "" }]);
+      const assistantMessage: Message = {
+        id: `a-${Date.now()}`,
+        role: "assistant",
+        content: answerText,
+        createdAt: new Date().toISOString()
+      };
 
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-
-        const chunk = decoder.decode(value);
-        const lines = chunk.split('\n');
-
-        for (const line of lines) {
-          if (line.startsWith('data: ')) {
-            const data = line.slice(6);
-            if (data === '[DONE]') continue;
-            
-            try {
-              const parsed = JSON.parse(data);
-              const content = parsed.choices?.[0]?.delta?.content;
-              if (content) {
-                assistantMessage += content;
-                setMessages(prev => {
-                  const newMessages = [...prev];
-                  newMessages[newMessages.length - 1].content = assistantMessage;
-                  return newMessages;
-                });
-              }
-            } catch (e) {
-              console.error('Parse error:', e);
-            }
-          }
-        }
-      }
-
-      updateUsageData(estimatedTokens + estimateTokens(assistantMessage));
-
-      // Salvar resposta do assistente
-      if (user) {
-        setMessages(prev => {
-          saveConversation(prev);
-          return prev;
-        });
-      }
-
-    } catch (error: any) {
-      console.error('Chat error:', error);
-      toast({
-        title: "Erro",
-        description: error.message || "Erro ao processar mensagem",
-        variant: "destructive",
-      });
-      setMessages(prev => prev.slice(0, -1));
+      setMessages((prev) => [...prev, assistantMessage]);
+    } catch (error) {
+      console.error(error);
+      const errorMessage: Message = {
+        id: `err-${Date.now()}`,
+        role: "assistant",
+        content:
+          "Não consegui processar sua solicitação agora. Tente novamente em alguns instantes.",
+        createdAt: new Date().toISOString()
+      };
+      setMessages((prev) => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const remainingTokens = getMaxTokens() - usageData.tokens;
-  const usagePercentage = (usageData.tokens / getMaxTokens()) * 100;
+  const handleKeyDown: React.KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  };
+
+  const suggestions = [
+    "📊 Gerar análise de indicadores",
+    "🧠 Explicar um insight do painel",
+    "🏛️ Simular cenário de arrecadação",
+    "⚙️ Perguntar sobre integrações de dados"
+  ];
+
+  const handleSuggestionClick = (s: string) => {
+    handleSend(s);
+  };
 
   return (
-    <div className={`flex h-screen bg-background ${isFullscreen ? 'fixed inset-0 z-50' : ''}`}>
-      {/* Sidebar */}
-      {user && showSidebar && (
-        <div className="w-64 border-r bg-card flex flex-col">
-          <div className="p-4 border-b">
-            <Button onClick={createNewConversation} className="w-full" size="sm">
-              <Plus className="h-4 w-4 mr-2" />
-              Nova Conversa
-            </Button>
-          </div>
-          <ScrollArea className="flex-1">
-            <div className="p-2 space-y-1">
-              {conversations.map((conv) => (
-                <div key={conv.id} className="group relative">
-                  <Button
-                    variant={currentConversationId === conv.id ? "secondary" : "ghost"}
-                    className="w-full justify-start text-left pr-8"
-                    size="sm"
-                    onClick={() => loadConversation(conv.id)}
-                  >
-                    <MessageSquare className="h-4 w-4 mr-2 flex-shrink-0" />
-                    <span className="truncate">{conv.title}</span>
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="absolute right-1 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 h-7 w-7 p-0"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      deleteConversation(conv.id);
-                    }}
-                  >
-                    <Trash2 className="h-3 w-3" />
-                  </Button>
-                </div>
-              ))}
-            </div>
-          </ScrollArea>
-        </div>
-      )}
-
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col">
-        {/* Header */}
-        <div className="border-b bg-card px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <img src={chatIcon} alt="RedData" className="w-10 h-10" />
+    <div className="min-h-screen bg-[#F8F8F9]">
+      <div className="mx-auto max-w-6xl px-4 lg:px-6 py-6 lg:py-8 space-y-4">
+        
+        {/* Header interno */}
+        <header className="bg-white border border-gray-200 rounded-2xl shadow-sm px-4 py-3 flex items-center justify-between gap-3">
           <div>
-            <h1 className="text-xl font-semibold text-foreground">RedData AI Assistant</h1>
-            <p className="text-sm text-muted-foreground">
-              {remainingTokens} tokens restantes ({Math.round(usagePercentage)}% usado)
+            <h1 className="text-base lg:text-lg font-semibold text-gray-900">
+              Assistente RedData – IA Soberana
+            </h1>
+            <p className="text-xs lg:text-sm text-gray-500">
+              IA 100% proprietária, executada dentro da sua infraestrutura.
             </p>
           </div>
-        </div>
-        
-        <div className="flex items-center gap-2">
-          {user && (
-            <Button variant="outline" size="sm" onClick={() => setShowSidebar(!showSidebar)}>
-              <MessageSquare className="h-4 w-4 mr-2" />
-              {showSidebar ? 'Ocultar' : 'Histórico'}
-            </Button>
-          )}
-          <Button variant="outline" size="sm" onClick={exportConversation} disabled={messages.length === 0}>
-            <Download className="h-4 w-4 mr-2" />
-            Exportar
-          </Button>
-          <Button variant="outline" size="sm" onClick={clearConversation} disabled={messages.length === 0}>
-            <Plus className="h-4 w-4 mr-2" />
-            Nova
-          </Button>
-          <Button variant="outline" size="sm" onClick={() => setIsFullscreen(!isFullscreen)}>
-            {isFullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
-          </Button>
-          {!isFullscreen && (
-            <Link to="/">
-              <Button variant="outline" size="sm">Voltar</Button>
-            </Link>
-          )}
-        </div>
-      </div>
+          <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-green-50 text-[10px] lg:text-xs text-green-700 border border-green-100">
+            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+            Online
+          </span>
+        </header>
 
-      {/* Messages */}
-      <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4">
-        {messages.length === 0 && (
-          <div className="text-center text-muted-foreground mt-20">
-            <img src={chatIcon} alt="RedData" className="w-20 h-20 mx-auto mb-4 opacity-50" />
-            <p className="text-lg font-medium mb-2">Bem-vindo ao RedData AI</p>
-            <p className="text-sm">Faça perguntas sobre análise de dados, dashboards ou a plataforma RedData</p>
-          </div>
-        )}
-        
-        {messages.map((message, idx) => (
-          <div key={idx}>
-            <div className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
-              <div className={`max-w-[80%] rounded-lg px-4 py-3 ${
-                message.role === "user" 
-                  ? "bg-primary text-primary-foreground" 
-                  : "bg-muted text-foreground"
-              }`}>
-                <p className="text-sm font-medium mb-1">{message.role === "user" ? "Você" : "RedData AI"}</p>
-                <p className="whitespace-pre-wrap">{message.content}</p>
-              </div>
-            </div>
-            {/* Mostrar botão de login após primeira mensagem de boas-vindas */}
-            {idx === 0 && !user && message.role === "assistant" && message.content.includes("período de teste gratuito") && (
-              <div className="flex justify-start mt-2 ml-1">
-                <Link to="/auth">
-                  <Button size="sm">
-                    Criar Conta Grátis
-                  </Button>
-                </Link>
+        {/* Banner inicial */}
+        <section className="bg-white border border-gray-200 rounded-2xl shadow-sm px-4 py-4 lg:px-5 lg:py-5">
+          <h2 className="text-sm lg:text-base font-semibold text-gray-900">
+            Converse com o RedData
+          </h2>
+          <p className="text-xs lg:text-sm text-gray-600 mt-1">
+            Faça perguntas em linguagem natural sobre dados, indicadores e cenários 
+            de gestão. O RedData responde usando seu LLM interno, com total 
+            privacidade e soberania.
+          </p>
+          <span className="inline-flex items-center w-fit mt-3 px-3 py-1 rounded-full bg-gray-50 border border-gray-200 text-[10px] lg:text-xs text-gray-600">
+            🔒 Processamento local, sem modelos externos
+          </span>
+        </section>
+
+        {/* Chat principal */}
+        <section className="bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col h-[65vh] min-h-[360px]">
+          
+          {/* Lista de mensagens */}
+          <div className="flex-1 overflow-y-auto px-3 lg:px-5 pt-4 pb-2 space-y-3">
+            {messages.map((msg) => {
+              const isUser = msg.role === "user";
+              return (
+                <div
+                  key={msg.id}
+                  className={`flex w-full ${isUser ? "justify-end" : "justify-start"}`}
+                >
+                  {!isUser && (
+                    <div className="flex mr-2">
+                      <div className="w-9 h-9 rounded-full bg-[#D8232A] flex items-center justify-center text-xs font-semibold text-white shadow-sm">
+                        RD
+                      </div>
+                    </div>
+                  )}
+
+                  <div
+                    className={`max-w-[80%] text-sm whitespace-pre-wrap ${
+                      isUser
+                        ? "bg-red-50 text-gray-900 rounded-2xl rounded-br-sm shadow-sm px-3 py-2"
+                        : "bg-white text-gray-900 border border-gray-200 rounded-2xl rounded-bl-sm shadow-sm px-3 py-2"
+                    }`}
+                  >
+                    {!isUser && msg.id === "welcome" && (
+                      <div className="mb-1 text-[10px] uppercase tracking-wide text-gray-400">
+                        RedData • IA Soberana
+                      </div>
+                    )}
+                    <p className="leading-relaxed">{msg.content}</p>
+                  </div>
+                </div>
+              );
+            })}
+
+            {/* Digitando */}
+            {isLoading && (
+              <div className="flex w-full justify-start">
+                <div className="flex mr-2">
+                  <div className="w-9 h-9 rounded-full bg-[#D8232A] flex items-center justify-center text-xs font-semibold text-white shadow-sm">
+                    RD
+                  </div>
+                </div>
+                <div className="max-w-[80%] bg-white text-gray-500 border border-gray-200 rounded-2xl rounded-bl-sm shadow-sm px-3 py-2 text-xs flex items-center gap-2">
+                  <span>RedData está analisando sua pergunta</span>
+                  <span className="flex gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce [animation-delay:-0.2s]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce [animation-delay:-0.1s]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce" />
+                  </span>
+                </div>
               </div>
             )}
+
+            <div ref={endRef} />
           </div>
-        ))}
-        
-        {isLoading && (
-          <div className="flex justify-start">
-            <div className="bg-muted rounded-lg px-4 py-3">
-              <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
+
+          {/* Sugestões */}
+          <div className="px-3 lg:px-5 pb-2 space-y-2 border-t border-gray-100 bg-gray-50">
+            <p className="text-[11px] lg:text-xs text-gray-500">
+              Comece com uma destas perguntas:
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {suggestions.map((s) => (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => handleSuggestionClick(s)}
+                  className="inline-flex items-center px-3 py-1.5 rounded-full bg-white border border-gray-200 text-[11px] lg:text-xs text-gray-700 hover:border-red-500 hover:text-red-600 transition"
+                >
+                  {s}
+                </button>
+              ))}
             </div>
           </div>
-        )}
-        
-        <div ref={messagesEndRef} />
-      </div>
 
-      {/* Input */}
-      <div className="border-t bg-card px-6 py-4">
-        <div className="flex gap-2">
-          <Input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
-            placeholder="Digite sua mensagem..."
-            disabled={isLoading}
-            className="flex-1"
-          />
-          <Button onClick={sendMessage} disabled={isLoading || !input.trim()}>
-            {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Send className="h-5 w-5" />}
-          </Button>
+          {/* Input */}
+          <form
+            className="border-t border-gray-200 bg-gray-50 px-3 lg:px-5 py-2 flex items-end gap-2"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSend();
+            }}
+          >
+            <textarea
+              rows={1}
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Pergunte qualquer coisa ao RedData…"
+              className="flex-1 resize-none bg-white border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+            />
+
+            <button
+              type="submit"
+              disabled={!input.trim() || isLoading}
+              className="bg-[#D8232A] text-white rounded-xl px-3 h-10 flex items-center justify-center text-sm font-medium hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              ➤
+            </button>
+          </form>
+        </section>
+
+        {/* Selo */}
+        <div className="flex justify-between items-center text-[10px] lg:text-xs text-gray-500 px-1">
+          <span>🔒 IA soberana • processamento dentro do cliente</span>
+          <span>RedData • Plataforma de Big Data & IA da RedMaxx</span>
         </div>
-        {!user && (
-          <p className="text-xs text-muted-foreground mt-2">
-            💡 Faça login para ter acesso a mais tokens diários e salvar suas conversas
-          </p>
-        )}
-      </div>
       </div>
     </div>
   );
-};
-
-export default Chat;
+}
