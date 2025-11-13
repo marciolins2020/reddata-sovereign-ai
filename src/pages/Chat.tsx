@@ -13,13 +13,22 @@ type Message = {
   createdAt: string;
 };
 
-const initialAssistantMessage: Message = {
+const getWelcomeMessage = (tokensRemaining: number, isLoggedIn: boolean): Message => ({
   id: "welcome",
   role: "assistant",
   createdAt: new Date().toISOString(),
-  content:
-    "Olá, eu sou o Assistente RedData.\n\nIA 100% proprietária da RedMaxx, e posso ser executada dentro da sua infraestrutura, com segurança total de seus dados.\n\nPor hoje, como posso te ajudar?"
-};
+  content: `👋 **Bem-vindo ao RedData AI!**
+
+Você tem **${tokensRemaining} tokens gratuitos** para testar nossas capacidades de IA.
+
+**Ao criar uma conta gratuita:**
+- 🔓 **10.000 tokens/dia** (50x mais!)
+- 💾 **Histórico de conversas** salvo
+- ⏰ **Sem limites**
+- 🔄 **Renovação diária** automática
+
+**Você já tem uma conta?`
+});
 
 export default function RedDataChatPage() {
   const {
@@ -34,10 +43,11 @@ export default function RedDataChatPage() {
     startNewConversation
   } = useChatConversation();
 
-  const [messages, setMessages] = useState<Message[]>([initialAssistantMessage]);
+  const [messages, setMessages] = useState<Message[]>([getWelcomeMessage(200, false)]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [showAuthOptions, setShowAuthOptions] = useState(true);
   const endRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -49,10 +59,13 @@ export default function RedDataChatPage() {
   useEffect(() => {
     if (savedMessages.length > 0) {
       setMessages(savedMessages);
+      setShowAuthOptions(false);
     } else {
-      setMessages([initialAssistantMessage]);
+      const tokensRemaining = isLoggedIn ? 10000 : 200;
+      setMessages([getWelcomeMessage(tokensRemaining, isLoggedIn)]);
+      setShowAuthOptions(!isLoggedIn);
     }
-  }, [savedMessages]);
+  }, [savedMessages, isLoggedIn]);
 
   const handleSend = async (fromSuggestion?: string) => {
     const text = (fromSuggestion ?? input).trim();
@@ -69,8 +82,8 @@ export default function RedDataChatPage() {
     setMessages(updatedMessages);
     setInput("");
     setIsLoading(true);
+    setShowAuthOptions(false);
 
-    // Criar ou usar conversa existente (apenas para usuários logados)
     let currentConvId = conversationId;
     if (isLoggedIn && userId && !conversationId) {
       currentConvId = await createNewConversation(text);
@@ -80,7 +93,6 @@ export default function RedDataChatPage() {
       }
     }
 
-    // Salvar mensagem do usuário
     if (isLoggedIn && currentConvId) {
       await saveMessage(currentConvId, "user", text);
     }
@@ -113,7 +125,6 @@ export default function RedDataChatPage() {
 
       setMessages((prev) => [...prev, assistantMessage]);
 
-      // Salvar resposta do assistente
       if (isLoggedIn && currentConvId) {
         await saveMessage(currentConvId, "assistant", answerText);
       }
@@ -139,7 +150,9 @@ export default function RedDataChatPage() {
 
   const handleNewConversation = () => {
     startNewConversation();
-    setMessages([initialAssistantMessage]);
+    const tokensRemaining = isLoggedIn ? 10000 : 200;
+    setMessages([getWelcomeMessage(tokensRemaining, isLoggedIn)]);
+    setShowAuthOptions(!isLoggedIn);
     setIsSidebarOpen(false);
   };
 
@@ -150,12 +163,10 @@ export default function RedDataChatPage() {
     }
   };
 
-
   return (
     <div className="min-h-screen bg-[#F8F8F9] flex">
-      {/* Sidebar Desktop */}
       {isLoggedIn && (
-        <aside className="hidden lg:block w-64 border-r border-gray-200 bg-white">
+        <aside className="hidden lg:block w-64 border-r border-gray-200 bg-white h-screen sticky top-0">
           <ConversationSidebar
             currentConversationId={conversationId}
             onSelectConversation={handleSelectConversation}
@@ -164,157 +175,175 @@ export default function RedDataChatPage() {
         </aside>
       )}
 
-      {/* Conteúdo Principal */}
       <div className="flex-1 flex flex-col pt-16 sm:pt-20">
         <div className="mx-auto w-full max-w-6xl px-3 sm:px-4 lg:px-6 py-2 sm:py-3 space-y-2 sm:space-y-2.5 flex-1 flex flex-col">
           
-          {/* Header interno */}
           <header className="bg-white border border-gray-200 rounded-xl sm:rounded-2xl shadow-sm px-3 sm:px-4 py-2 sm:py-3 flex items-center justify-between gap-2 sm:gap-3">
-            {/* Menu Mobile */}
-            {isLoggedIn && (
-              <Sheet open={isSidebarOpen} onOpenChange={setIsSidebarOpen}>
-                <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon" className="lg:hidden">
-                    <Menu className="h-5 w-5" />
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="left" className="p-0 w-80">
-                  <ConversationSidebar
-                    currentConversationId={conversationId}
-                    onSelectConversation={handleSelectConversation}
-                    onNewConversation={handleNewConversation}
-                  />
-                </SheetContent>
-              </Sheet>
-            )}
-          <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
-            <img 
-              src={reddataLogo} 
-              alt="RedData" 
-              className="h-7 sm:h-8 lg:h-10 w-auto object-contain flex-shrink-0"
-            />
-            <div className="min-w-0 flex-1">
-              <h1 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-900 truncate">
-                Assistente RedData – IA Soberana
-              </h1>
-              <p className="text-[10px] sm:text-xs lg:text-sm text-gray-500 truncate">
-                IA 100% proprietária, executada dentro da sua infraestrutura.
-              </p>
+            <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
+              {isLoggedIn && (
+                <Sheet open={isSidebarOpen} onOpenChange={setIsSidebarOpen}>
+                  <SheetTrigger asChild>
+                    <Button variant="ghost" size="icon" className="lg:hidden">
+                      <Menu className="h-5 w-5" />
+                    </Button>
+                  </SheetTrigger>
+                  <SheetContent side="left" className="p-0 w-80">
+                    <ConversationSidebar
+                      currentConversationId={conversationId}
+                      onSelectConversation={handleSelectConversation}
+                      onNewConversation={handleNewConversation}
+                    />
+                  </SheetContent>
+                </Sheet>
+              )}
+              
+              <img 
+                src={reddataLogo} 
+                alt="RedData" 
+                className="h-7 sm:h-8 lg:h-10 w-auto object-contain flex-shrink-0"
+              />
+              <div className="min-w-0 flex-1">
+                <h1 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-900 truncate">
+                  Assistente RedData – IA Soberana
+                </h1>
+                <p className="text-[10px] sm:text-xs lg:text-sm text-gray-500 truncate">
+                  IA 100% proprietária, executada dentro da sua infraestrutura.
+                </p>
+              </div>
             </div>
-          </div>
-          <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-green-50 text-[9px] sm:text-[10px] lg:text-xs text-green-700 border border-green-100 flex-shrink-0">
-            <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-green-500 animate-pulse" />
-            <span className="hidden sm:inline">Online</span>
-          </span>
-        </header>
+            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-green-50 text-[9px] sm:text-[10px] lg:text-xs text-green-700 border border-green-100 flex-shrink-0">
+              <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-green-500 animate-pulse" />
+              <span className="hidden sm:inline">Online</span>
+            </span>
+          </header>
 
-        {/* Banner inicial */}
-        <section className="bg-white border border-gray-200 rounded-xl sm:rounded-2xl shadow-sm px-3 sm:px-4 py-3 sm:py-4 lg:px-5 lg:py-5">
-          <h2 className="text-sm sm:text-sm lg:text-base font-semibold text-gray-900">
-            Converse com o RedData
-          </h2>
-          <p className="text-[11px] sm:text-xs lg:text-sm text-gray-600 mt-1 leading-relaxed">
-            Faça perguntas em linguagem natural sobre dados, indicadores e cenários 
-            de gestão. O RedData responde usando seu LLM interno, com total 
-            privacidade e soberania.
-          </p>
-          <span className="inline-flex items-center w-fit mt-2 sm:mt-3 px-2.5 sm:px-3 py-1 rounded-full bg-gray-50 border border-gray-200 text-[9px] sm:text-[10px] lg:text-xs text-gray-600">
-            🔒 Processamento local, sem modelos externos
-          </span>
-        </section>
+          <section className="bg-white border border-gray-200 rounded-xl sm:rounded-2xl shadow-sm px-3 sm:px-4 py-3 sm:py-4 lg:px-5 lg:py-5">
+            <h2 className="text-sm sm:text-sm lg:text-base font-semibold text-gray-900">
+              Converse com o RedData
+            </h2>
+            <p className="text-[11px] sm:text-xs lg:text-sm text-gray-600 mt-1 leading-relaxed">
+              Faça perguntas em linguagem natural sobre dados, indicadores e cenários 
+              de gestão. O RedData responde usando seu LLM interno, com total 
+              privacidade e soberania.
+            </p>
+            <span className="inline-flex items-center w-fit mt-2 sm:mt-3 px-2.5 sm:px-3 py-1 rounded-full bg-gray-50 border border-gray-200 text-[9px] sm:text-[10px] lg:text-xs text-gray-600">
+              🔒 Processamento local, sem modelos externos
+            </span>
+          </section>
 
-        {/* Chat principal */}
-        <section className="bg-white border border-gray-200 rounded-xl sm:rounded-2xl shadow-sm flex flex-col h-[calc(100vh-280px)] sm:h-[65vh] min-h-[360px]">
-          
-          {/* Lista de mensagens */}
-          <div className="flex-1 overflow-y-auto px-3 sm:px-3 lg:px-5 pt-3 sm:pt-4 pb-2 space-y-2.5 sm:space-y-3">
-            {messages.map((msg) => {
-              const isUser = msg.role === "user";
-              return (
-                <div
-                  key={msg.id}
-                  className={`flex w-full ${isUser ? "justify-end" : "justify-start"}`}
-                >
-                  {!isUser && (
-                    <div className="flex mr-1.5 sm:mr-2">
-                      <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#D8232A] flex items-center justify-center text-[10px] sm:text-xs font-semibold text-white shadow-sm flex-shrink-0">
+          <section className="bg-white border border-gray-200 rounded-xl sm:rounded-2xl shadow-sm flex flex-col h-[calc(100vh-280px)] sm:h-[65vh] min-h-[360px]">
+            
+            <div className="flex-1 overflow-y-auto px-3 sm:px-3 lg:px-5 pt-3 sm:pt-4 pb-2 space-y-2.5 sm:space-y-3">
+              {messages.map((msg) => {
+                const isUser = msg.role === "user";
+                return (
+                  <div
+                    key={msg.id}
+                    className={`flex items-start gap-2 sm:gap-3 ${isUser ? "justify-end" : "justify-start"}`}
+                  >
+                    {!isUser && (
+                      <div className="flex-shrink-0 w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#D8232A] flex items-center justify-center text-white text-[9px] sm:text-[10px] font-semibold">
                         RD
                       </div>
-                    </div>
-                  )}
-
-                  <div
-                    className={`max-w-[85%] sm:max-w-[80%] text-xs sm:text-sm whitespace-pre-wrap ${
-                      isUser
-                        ? "bg-red-50 text-gray-900 rounded-2xl rounded-br-sm shadow-sm px-2.5 sm:px-3 py-2"
-                        : "bg-white text-gray-900 border border-gray-200 rounded-2xl rounded-bl-sm shadow-sm px-2.5 sm:px-3 py-2"
-                    }`}
-                  >
-                    {!isUser && msg.id === "welcome" && (
-                      <div className="mb-1 text-[9px] sm:text-[10px] uppercase tracking-wide text-gray-400">
-                        RedData • IA Soberana
-                      </div>
                     )}
-                    <p className="leading-relaxed">{msg.content}</p>
-                  </div>
-                </div>
-              );
-            })}
+                    
+                    <div
+                      className={`
+                        max-w-[78%] sm:max-w-[70%] px-2.5 sm:px-3.5 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl
+                        text-[11px] sm:text-xs lg:text-sm leading-relaxed
+                        ${
+                          isUser
+                            ? "bg-gradient-to-br from-red-50 to-red-100/70 text-gray-900 border border-[#D8232A]/20 rounded-br-sm"
+                            : "bg-gray-50 text-gray-800 border border-gray-200 rounded-bl-sm"
+                        }
+                      `}
+                    >
+                      <p className="whitespace-pre-wrap break-words">{msg.content}</p>
+                    </div>
 
-            {/* Digitando */}
-            {isLoading && (
-              <div className="flex w-full justify-start">
-                <div className="flex mr-1.5 sm:mr-2">
-                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#D8232A] flex items-center justify-center text-[10px] sm:text-xs font-semibold text-white shadow-sm flex-shrink-0">
+                    {isUser && <div className="flex-shrink-0 w-6 h-6 sm:w-7 sm:h-7" />}
+                  </div>
+                );
+              })}
+
+              {showAuthOptions && messages.length === 1 && !isLoading && (
+                <div className="flex gap-2 justify-start pl-9">
+                  <Button
+                    onClick={() => window.location.href = "/auth?mode=login"}
+                    variant="outline"
+                    size="sm"
+                    className="text-xs"
+                  >
+                    Sim, fazer login
+                  </Button>
+                  <Button
+                    onClick={() => window.location.href = "/auth?mode=signup"}
+                    variant="default"
+                    size="sm"
+                    className="bg-[#D8232A] hover:bg-[#B01D23] text-xs"
+                  >
+                    Não, criar conta
+                  </Button>
+                </div>
+              )}
+
+              {isLoading && (
+                <div className="flex items-start gap-2 sm:gap-3">
+                  <div className="flex-shrink-0 w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#D8232A] flex items-center justify-center text-white text-[9px] sm:text-[10px] font-semibold">
                     RD
                   </div>
+                  <div className="flex gap-1 px-3 py-2 rounded-xl bg-gray-50 border border-gray-200">
+                    <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+                    <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+                    <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+                  </div>
                 </div>
-                <div className="max-w-[85%] sm:max-w-[80%] bg-white text-gray-500 border border-gray-200 rounded-2xl rounded-bl-sm shadow-sm px-2.5 sm:px-3 py-2 text-[11px] sm:text-xs flex items-center gap-2">
-                  <span className="hidden sm:inline">RedData está analisando sua pergunta</span>
-                  <span className="sm:hidden">Analisando...</span>
-                  <span className="flex gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce [animation-delay:-0.2s]" />
-                    <span className="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce [animation-delay:-0.1s]" />
-                    <span className="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce" />
-                  </span>
-                </div>
+              )}
+
+              <div ref={endRef} />
+            </div>
+
+            {messages.length === 1 && !isLoading && (
+              <div className="px-3 sm:px-4 py-2 border-t border-gray-200 flex flex-wrap gap-1.5 sm:gap-2">
+                {["Como configurar dashboards?", "Análise de dados em tempo real", "Segurança de dados"].map((sugestao, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => handleSend(sugestao)}
+                    className="px-2 sm:px-3 py-1 sm:py-1.5 rounded-full bg-gray-50 hover:bg-gray-100 border border-gray-200 text-[10px] sm:text-xs text-gray-700 transition-colors"
+                  >
+                    {sugestao}
+                  </button>
+                ))}
               </div>
             )}
 
-            <div ref={endRef} />
-          </div>
+            <footer className="border-t border-gray-200 p-2 sm:p-3 bg-gray-50/50">
+              <div className="flex gap-2">
+                <textarea
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  placeholder="Digite sua mensagem... (Enter para enviar, Shift+Enter para nova linha)"
+                  disabled={isLoading}
+                  rows={1}
+                  className="flex-1 px-2.5 sm:px-3.5 py-2 sm:py-2.5 text-[11px] sm:text-xs lg:text-sm bg-white border border-gray-300 rounded-lg sm:rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-[#D8232A] focus:border-transparent placeholder:text-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
+                />
+                <button
+                  onClick={() => handleSend()}
+                  disabled={!input.trim() || isLoading}
+                  className="flex-shrink-0 px-3 sm:px-4 py-2 sm:py-2.5 bg-[#D8232A] hover:bg-[#B01D23] text-white rounded-lg sm:rounded-xl text-[11px] sm:text-xs font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-[#D8232A]"
+                >
+                  Enviar
+                </button>
+              </div>
+            </footer>
+          </section>
 
-          {/* Input */}
-          <form
-            className="border-t border-gray-200 bg-gray-50 px-2.5 sm:px-3 lg:px-5 py-2 flex items-end gap-1.5 sm:gap-2"
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleSend();
-            }}
-          >
-            <textarea
-              rows={1}
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder="Pergunte qualquer coisa ao RedData…"
-              className="flex-1 resize-none bg-white border border-gray-200 rounded-lg sm:rounded-xl px-2.5 sm:px-3 py-2 text-xs sm:text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-            />
-
-            <button
-              type="submit"
-              disabled={!input.trim() || isLoading}
-              className="bg-[#D8232A] text-white rounded-lg sm:rounded-xl px-2.5 sm:px-3 h-9 sm:h-10 flex items-center justify-center text-sm font-medium hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0"
-            >
-              ➤
-            </button>
-          </form>
-        </section>
-
-        {/* Selo */}
-        <div className="flex flex-col sm:flex-row justify-between items-center text-[9px] sm:text-[10px] lg:text-xs text-gray-500 px-1 gap-1 sm:gap-0">
-          <span className="text-center sm:text-left">🔒 IA soberana • processamento dentro do cliente</span>
-          <span className="text-center sm:text-right">RedData • Plataforma de Big Data & IA da RedMaxx</span>
+          <footer className="text-center py-2 sm:py-3">
+            <p className="text-[9px] sm:text-[10px] lg:text-xs text-gray-500">
+              🔐 <span className="font-medium">RedData Sovereign AI</span> · Processamento local, sem envio de dados para serviços externos.
+            </p>
+          </footer>
         </div>
       </div>
     </div>
