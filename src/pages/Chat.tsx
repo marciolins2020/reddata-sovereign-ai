@@ -13,7 +13,7 @@ const initialAssistantMessage: Message = {
   role: "assistant",
   createdAt: new Date().toISOString(),
   content:
-    "Olá, eu sou o Assistente RedData.\n\nIA 100% proprietária, executada dentro da sua infraestrutura.\nComo posso te ajudar hoje?"
+    "Olá, eu sou o Assistente RedData.\n\nIA 100% proprietária da RedMaxx, e posso ser executada dentro da sua infraestrutura, com segurança total de seus dados.\n\nPor hoje, como posso te ajudar hoje?"
 };
 
 export default function RedDataChatPage() {
