@@ -89,6 +89,8 @@ export default function RedDataChatPage() {
     setShowAuthOptions(false);
 
     let currentConvId = conversationId;
+    const wasNewConversation = !conversationId;
+    
     if (isLoggedIn && userId && !conversationId) {
       currentConvId = await createNewConversation(text);
       if (!currentConvId) {
@@ -131,6 +133,11 @@ export default function RedDataChatPage() {
 
       if (isLoggedIn && currentConvId) {
         await saveMessage(currentConvId, "assistant", answerText);
+        
+        // Se foi uma nova conversa, recarregar a lista
+        if (wasNewConversation) {
+          // O realtime vai atualizar automaticamente
+        }
       }
     } catch (error) {
       console.error(error);

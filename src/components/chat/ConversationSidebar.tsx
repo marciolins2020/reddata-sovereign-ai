@@ -53,6 +53,27 @@ export function ConversationSidebar({
 
   useEffect(() => {
     loadConversations();
+
+    // Setup realtime subscription for conversations
+    const channel = supabase
+      .channel('conversations-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'conversations'
+        },
+        (payload) => {
+          console.log('Conversation change detected:', payload);
+          loadConversations();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   useEffect(() => {
