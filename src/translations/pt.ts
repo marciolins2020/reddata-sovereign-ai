@@ -687,7 +687,7 @@ export default {
   auth: {
     login: "Entrar",
     signup: "Criar Conta",
-    loginSubtitle: "Acesse seu dashboard",
+    loginSubtitle: "Acesse sua área de usuário",
     signupSubtitle: "Comece a usar gratuitamente",
     fullNameLabel: "Nome Completo",
     fullNamePlaceholder: "Seu nome completo",
