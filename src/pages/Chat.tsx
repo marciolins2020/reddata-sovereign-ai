@@ -256,7 +256,7 @@ export default function RedDataChatPage() {
 
           <section className="bg-white border border-gray-200 rounded-xl sm:rounded-2xl shadow-sm px-3 sm:px-4 py-3 sm:py-4 lg:px-5 lg:py-5">
             <h2 className="text-sm sm:text-sm lg:text-base font-semibold text-gray-900">
-              Converse com o RedData
+              Converse com o RedData.A.I
             </h2>
             <p className="text-[11px] sm:text-xs lg:text-sm text-gray-600 mt-1 leading-relaxed">
               Faça perguntas em linguagem natural sobre dados, indicadores e cenários 
