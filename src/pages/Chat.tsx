@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Menu } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import reddataLogo from "@/assets/reddata-logo.png";
 import { ConversationSidebar } from "@/components/chat/ConversationSidebar";
 import { useChatConversation } from "@/hooks/useChatConversation";
@@ -31,6 +32,7 @@ Você tem **${tokensRemaining} tokens gratuitos** para testar nossas capacidades
 });
 
 export default function RedDataChatPage() {
+  const navigate = useNavigate();
   const {
     conversationId,
     messages: savedMessages,
@@ -48,6 +50,7 @@ export default function RedDataChatPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showAuthOptions, setShowAuthOptions] = useState(true);
+  const [tokensRemaining, setTokensRemaining] = useState(200);
   const endRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -61,8 +64,9 @@ export default function RedDataChatPage() {
       setMessages(savedMessages);
       setShowAuthOptions(false);
     } else {
-      const tokensRemaining = isLoggedIn ? 10000 : 200;
-      setMessages([getWelcomeMessage(tokensRemaining, isLoggedIn)]);
+      const tokens = isLoggedIn ? 10000 : 200;
+      setTokensRemaining(tokens);
+      setMessages([getWelcomeMessage(tokens, isLoggedIn)]);
       setShowAuthOptions(!isLoggedIn);
     }
   }, [savedMessages, isLoggedIn]);
@@ -150,8 +154,9 @@ export default function RedDataChatPage() {
 
   const handleNewConversation = () => {
     startNewConversation();
-    const tokensRemaining = isLoggedIn ? 10000 : 200;
-    setMessages([getWelcomeMessage(tokensRemaining, isLoggedIn)]);
+    const tokens = isLoggedIn ? 10000 : 200;
+    setTokensRemaining(tokens);
+    setMessages([getWelcomeMessage(tokens, isLoggedIn)]);
     setShowAuthOptions(!isLoggedIn);
     setIsSidebarOpen(false);
   };
@@ -211,10 +216,35 @@ export default function RedDataChatPage() {
                 </p>
               </div>
             </div>
-            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-green-50 text-[9px] sm:text-[10px] lg:text-xs text-green-700 border border-green-100 flex-shrink-0">
-              <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-green-500 animate-pulse" />
-              <span className="hidden sm:inline">Online</span>
-            </span>
+            
+            <div className="flex items-center gap-2 flex-shrink-0">
+              {/* Token Counter */}
+              <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 bg-gray-50 border border-gray-200 rounded-lg">
+                <span className="text-xs lg:text-sm font-medium text-gray-700">
+                  {isLoggedIn 
+                    ? `${tokensRemaining.toLocaleString()} tokens`
+                    : `${tokensRemaining} tokens (trial)`
+                  }
+                </span>
+              </div>
+
+              {/* Login Button */}
+              {!isLoggedIn && (
+                <Button
+                  onClick={() => navigate('/auth')}
+                  size="sm"
+                  className="bg-[#D8232A] hover:bg-[#B01E24] text-white text-xs lg:text-sm px-3 py-1.5"
+                >
+                  Login
+                </Button>
+              )}
+
+              {/* Online Status */}
+              <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-green-50 text-[9px] sm:text-[10px] lg:text-xs text-green-700 border border-green-100 flex-shrink-0">
+                <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-green-500 animate-pulse" />
+                <span className="hidden sm:inline">Online</span>
+              </span>
+            </div>
           </header>
 
           <section className="bg-white border border-gray-200 rounded-xl sm:rounded-2xl shadow-sm px-3 sm:px-4 py-3 sm:py-4 lg:px-5 lg:py-5">
