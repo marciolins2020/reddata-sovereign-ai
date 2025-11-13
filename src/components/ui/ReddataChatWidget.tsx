@@ -275,8 +275,8 @@ Você tem **${tokensRemaining} tokens gratuitos** para testar nossas capacidades
   return (
     <div className="fixed bottom-4 right-4 z-[10000] flex flex-col items-end gap-2">
       {!isOpen && (
-        <Button onClick={toggleChat} className="h-14 w-14 rounded-full shadow-lg bg-primary hover:bg-primary/90">
-          <MessageCircle className="h-6 w-6 text-white" />
+        <Button onClick={toggleChat} className="h-14 w-14 rounded-full shadow-lg bg-primary hover:bg-primary/90 p-2">
+          <img src={reddataChatIcon} alt="RedData" className="w-full h-full object-contain" />
         </Button>
       )}
 
