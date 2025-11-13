@@ -82,7 +82,8 @@ export default function Auth() {
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
-        navigate("/dashboard");
+        navigate("/chat"); // Redirecionando para chat em vez de dashboard
+        // navigate("/dashboard"); // Desabilitado temporariamente
       }
     };
     checkUser();
@@ -156,7 +157,8 @@ export default function Auth() {
           title: t("auth.loginSuccess"),
           description: t("auth.loginSuccessDesc"),
         });
-        navigate("/dashboard");
+        navigate("/chat"); // Redirecionando para chat
+        // navigate("/dashboard"); // Desabilitado temporariamente
       } else {
         // Check if password has been compromised
         const isPwned = await checkPasswordPwned(password);
@@ -170,7 +172,8 @@ export default function Auth() {
           return;
         }
         
-        const redirectUrl = `${window.location.origin}/dashboard`;
+        const redirectUrl = `${window.location.origin}/chat`; // Redirecionando para chat
+        // const redirectUrl = `${window.location.origin}/dashboard`; // Desabilitado temporariamente
         
         const { error } = await supabase.auth.signUp({
           email,
