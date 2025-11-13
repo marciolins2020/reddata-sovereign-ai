@@ -27,7 +27,7 @@ interface UsageData {
 
 // Token limits - Plano FREE
 const ACCOUNT_MAX_TOKENS_PER_DAY = 10000;
-const DEVICE_MAX_TOKENS_PER_DAY = 2000;
+const DEVICE_MAX_TOKENS_PER_DAY = 200;
 const RATE_LIMIT_MS = 3000;
 
 const Chat = () => {
@@ -72,7 +72,7 @@ const Chat = () => {
     if (!user && messages.length === 0) {
       setMessages([{
         role: "assistant",
-        content: `👋 Olá! Você está no período de teste gratuito de 5 minutos do RedData AI.\n\n✨ Após fazer login, você pode:\n• Usar gratuitamente com ${ACCOUNT_MAX_TOKENS_PER_DAY.toLocaleString()} tokens/dia\n• Conversar sem limitações de tempo\n• Salvar todo o histórico de conversas\n\nComo posso ajudar?`
+        content: `👋 **Bem-vindo ao RedData AI!**\n\nVocê tem **200 tokens gratuitos** para testar nossas capacidades de IA.\n\n**Ao criar uma conta gratuita:**\n- 🔒 **10.000 tokens/dia** (50x mais!)\n- 💾 **Histórico de conversas** salvo\n- ⏰ **Sem limites**\n- 🔄 **Renovação diária** automática\n\n**Você já tem uma conta?`
       }]);
     }
   }, [user]);
