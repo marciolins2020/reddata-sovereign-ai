@@ -95,52 +95,52 @@ export default function RedDataChatPage() {
 
 
   return (
-    <div className="min-h-screen bg-[#F8F8F9] pt-20">
-      <div className="mx-auto max-w-6xl px-4 lg:px-6 py-6 lg:py-8 space-y-4">
+    <div className="min-h-screen bg-[#F8F8F9] pt-16 sm:pt-20">
+      <div className="mx-auto max-w-6xl px-3 sm:px-4 lg:px-6 py-3 sm:py-6 lg:py-8 space-y-3 sm:space-y-4">
         
         {/* Header interno */}
-        <header className="bg-white border border-gray-200 rounded-2xl shadow-sm px-4 py-3 flex items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
+        <header className="bg-white border border-gray-200 rounded-xl sm:rounded-2xl shadow-sm px-3 sm:px-4 py-2 sm:py-3 flex items-center justify-between gap-2 sm:gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
             <img 
               src={reddataLogo} 
               alt="RedData" 
-              className="h-8 lg:h-10 w-auto object-contain"
+              className="h-7 sm:h-8 lg:h-10 w-auto object-contain flex-shrink-0"
             />
-            <div>
-              <h1 className="text-base lg:text-lg font-semibold text-gray-900">
+            <div className="min-w-0 flex-1">
+              <h1 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-900 truncate">
                 Assistente RedData – IA Soberana
               </h1>
-              <p className="text-xs lg:text-sm text-gray-500">
+              <p className="text-[10px] sm:text-xs lg:text-sm text-gray-500 truncate">
                 IA 100% proprietária, executada dentro da sua infraestrutura.
               </p>
             </div>
           </div>
-          <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-green-50 text-[10px] lg:text-xs text-green-700 border border-green-100">
-            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-            Online
+          <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-green-50 text-[9px] sm:text-[10px] lg:text-xs text-green-700 border border-green-100 flex-shrink-0">
+            <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-green-500 animate-pulse" />
+            <span className="hidden sm:inline">Online</span>
           </span>
         </header>
 
         {/* Banner inicial */}
-        <section className="bg-white border border-gray-200 rounded-2xl shadow-sm px-4 py-4 lg:px-5 lg:py-5">
-          <h2 className="text-sm lg:text-base font-semibold text-gray-900">
+        <section className="bg-white border border-gray-200 rounded-xl sm:rounded-2xl shadow-sm px-3 sm:px-4 py-3 sm:py-4 lg:px-5 lg:py-5">
+          <h2 className="text-sm sm:text-sm lg:text-base font-semibold text-gray-900">
             Converse com o RedData
           </h2>
-          <p className="text-xs lg:text-sm text-gray-600 mt-1">
+          <p className="text-[11px] sm:text-xs lg:text-sm text-gray-600 mt-1 leading-relaxed">
             Faça perguntas em linguagem natural sobre dados, indicadores e cenários 
             de gestão. O RedData responde usando seu LLM interno, com total 
             privacidade e soberania.
           </p>
-          <span className="inline-flex items-center w-fit mt-3 px-3 py-1 rounded-full bg-gray-50 border border-gray-200 text-[10px] lg:text-xs text-gray-600">
+          <span className="inline-flex items-center w-fit mt-2 sm:mt-3 px-2.5 sm:px-3 py-1 rounded-full bg-gray-50 border border-gray-200 text-[9px] sm:text-[10px] lg:text-xs text-gray-600">
             🔒 Processamento local, sem modelos externos
           </span>
         </section>
 
         {/* Chat principal */}
-        <section className="bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col h-[65vh] min-h-[360px]">
+        <section className="bg-white border border-gray-200 rounded-xl sm:rounded-2xl shadow-sm flex flex-col h-[calc(100vh-280px)] sm:h-[65vh] min-h-[360px]">
           
           {/* Lista de mensagens */}
-          <div className="flex-1 overflow-y-auto px-3 lg:px-5 pt-4 pb-2 space-y-3">
+          <div className="flex-1 overflow-y-auto px-3 sm:px-3 lg:px-5 pt-3 sm:pt-4 pb-2 space-y-2.5 sm:space-y-3">
             {messages.map((msg) => {
               const isUser = msg.role === "user";
               return (
@@ -149,22 +149,22 @@ export default function RedDataChatPage() {
                   className={`flex w-full ${isUser ? "justify-end" : "justify-start"}`}
                 >
                   {!isUser && (
-                    <div className="flex mr-2">
-                      <div className="w-9 h-9 rounded-full bg-[#D8232A] flex items-center justify-center text-xs font-semibold text-white shadow-sm">
+                    <div className="flex mr-1.5 sm:mr-2">
+                      <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#D8232A] flex items-center justify-center text-[10px] sm:text-xs font-semibold text-white shadow-sm flex-shrink-0">
                         RD
                       </div>
                     </div>
                   )}
 
                   <div
-                    className={`max-w-[80%] text-sm whitespace-pre-wrap ${
+                    className={`max-w-[85%] sm:max-w-[80%] text-xs sm:text-sm whitespace-pre-wrap ${
                       isUser
-                        ? "bg-red-50 text-gray-900 rounded-2xl rounded-br-sm shadow-sm px-3 py-2"
-                        : "bg-white text-gray-900 border border-gray-200 rounded-2xl rounded-bl-sm shadow-sm px-3 py-2"
+                        ? "bg-red-50 text-gray-900 rounded-2xl rounded-br-sm shadow-sm px-2.5 sm:px-3 py-2"
+                        : "bg-white text-gray-900 border border-gray-200 rounded-2xl rounded-bl-sm shadow-sm px-2.5 sm:px-3 py-2"
                     }`}
                   >
                     {!isUser && msg.id === "welcome" && (
-                      <div className="mb-1 text-[10px] uppercase tracking-wide text-gray-400">
+                      <div className="mb-1 text-[9px] sm:text-[10px] uppercase tracking-wide text-gray-400">
                         RedData • IA Soberana
                       </div>
                     )}
@@ -177,13 +177,14 @@ export default function RedDataChatPage() {
             {/* Digitando */}
             {isLoading && (
               <div className="flex w-full justify-start">
-                <div className="flex mr-2">
-                  <div className="w-9 h-9 rounded-full bg-[#D8232A] flex items-center justify-center text-xs font-semibold text-white shadow-sm">
+                <div className="flex mr-1.5 sm:mr-2">
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#D8232A] flex items-center justify-center text-[10px] sm:text-xs font-semibold text-white shadow-sm flex-shrink-0">
                     RD
                   </div>
                 </div>
-                <div className="max-w-[80%] bg-white text-gray-500 border border-gray-200 rounded-2xl rounded-bl-sm shadow-sm px-3 py-2 text-xs flex items-center gap-2">
-                  <span>RedData está analisando sua pergunta</span>
+                <div className="max-w-[85%] sm:max-w-[80%] bg-white text-gray-500 border border-gray-200 rounded-2xl rounded-bl-sm shadow-sm px-2.5 sm:px-3 py-2 text-[11px] sm:text-xs flex items-center gap-2">
+                  <span className="hidden sm:inline">RedData está analisando sua pergunta</span>
+                  <span className="sm:hidden">Analisando...</span>
                   <span className="flex gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce [animation-delay:-0.2s]" />
                     <span className="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce [animation-delay:-0.1s]" />
@@ -198,7 +199,7 @@ export default function RedDataChatPage() {
 
           {/* Input */}
           <form
-            className="border-t border-gray-200 bg-gray-50 px-3 lg:px-5 py-2 flex items-end gap-2"
+            className="border-t border-gray-200 bg-gray-50 px-2.5 sm:px-3 lg:px-5 py-2 flex items-end gap-1.5 sm:gap-2"
             onSubmit={(e) => {
               e.preventDefault();
               handleSend();
@@ -210,13 +211,13 @@ export default function RedDataChatPage() {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Pergunte qualquer coisa ao RedData…"
-              className="flex-1 resize-none bg-white border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+              className="flex-1 resize-none bg-white border border-gray-200 rounded-lg sm:rounded-xl px-2.5 sm:px-3 py-2 text-xs sm:text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
             />
 
             <button
               type="submit"
               disabled={!input.trim() || isLoading}
-              className="bg-[#D8232A] text-white rounded-xl px-3 h-10 flex items-center justify-center text-sm font-medium hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="bg-[#D8232A] text-white rounded-lg sm:rounded-xl px-2.5 sm:px-3 h-9 sm:h-10 flex items-center justify-center text-sm font-medium hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0"
             >
               ➤
             </button>
@@ -224,9 +225,9 @@ export default function RedDataChatPage() {
         </section>
 
         {/* Selo */}
-        <div className="flex justify-between items-center text-[10px] lg:text-xs text-gray-500 px-1">
-          <span>🔒 IA soberana • processamento dentro do cliente</span>
-          <span>RedData • Plataforma de Big Data & IA da RedMaxx</span>
+        <div className="flex flex-col sm:flex-row justify-between items-center text-[9px] sm:text-[10px] lg:text-xs text-gray-500 px-1 gap-1 sm:gap-0">
+          <span className="text-center sm:text-left">🔒 IA soberana • processamento dentro do cliente</span>
+          <span className="text-center sm:text-right">RedData • Plataforma de Big Data & IA da RedMaxx</span>
         </div>
       </div>
     </div>
