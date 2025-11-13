@@ -45,10 +45,12 @@ export default function RedDataChatPage() {
     setIsLoading(true);
 
     try {
-      // TODO: Ajustar para endpoint real do RedData LLM
-      const response = await fetch("/api/reddata/chat", {
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/reddata-chat`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`
+        },
         body: JSON.stringify({
           messages: updatedMessages.map(({ role, content }) => ({ role, content }))
         })
@@ -91,16 +93,6 @@ export default function RedDataChatPage() {
     }
   };
 
-  const suggestions = [
-    "📊 Gerar análise de indicadores",
-    "🧠 Explicar um insight do painel",
-    "🏛️ Simular cenário de arrecadação",
-    "⚙️ Perguntar sobre integrações de dados"
-  ];
-
-  const handleSuggestionClick = (s: string) => {
-    handleSend(s);
-  };
 
   return (
     <div className="min-h-screen bg-[#F8F8F9] pt-20">
@@ -202,25 +194,6 @@ export default function RedDataChatPage() {
             )}
 
             <div ref={endRef} />
-          </div>
-
-          {/* Sugestões */}
-          <div className="px-3 lg:px-5 pb-2 space-y-2 border-t border-gray-100 bg-gray-50">
-            <p className="text-[11px] lg:text-xs text-gray-500">
-              Comece com uma destas perguntas:
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {suggestions.map((s) => (
-                <button
-                  key={s}
-                  type="button"
-                  onClick={() => handleSuggestionClick(s)}
-                  className="inline-flex items-center px-3 py-1.5 rounded-full bg-white border border-gray-200 text-[11px] lg:text-xs text-gray-700 hover:border-red-500 hover:text-red-600 transition"
-                >
-                  {s}
-                </button>
-              ))}
-            </div>
           </div>
 
           {/* Input */}
