@@ -220,37 +220,14 @@ Você tem **${tokensRemaining} tokens gratuitos** para testar nossas capacidades
         throw new Error(errorData.error || "Erro ao processar mensagem");
       }
 
-      const reader = response.body!.getReader();
-      const decoder = new TextDecoder();
-      let assistantMessage = "";
+      const data = await response.json();
+      const assistantMessage = data.answer || "";
 
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-
-        const chunk = decoder.decode(value);
-        const lines = chunk.split('\n');
-        
-        for (const line of lines) {
-          if (line.startsWith('data: ')) {
-            const data = line.slice(6);
-            if (data === '[DONE]') continue;
-            
-            try {
-              const parsed = JSON.parse(data);
-              const content = parsed.choices?.[0]?.delta?.content;
-              if (content) {
-                assistantMessage += content;
-                setMessages(prev => {
-                  const newMessages = [...prev];
-                  newMessages[newMessages.length - 1] = { role: "assistant", content: assistantMessage };
-                  return newMessages;
-                });
-              }
-            } catch {}
-          }
-        }
-      }
+      setMessages(prev => {
+        const newMessages = [...prev];
+        newMessages[newMessages.length - 1] = { role: "assistant", content: assistantMessage };
+        return newMessages;
+      });
 
       const totalTokens = inputTokens + estimateTokens(assistantMessage);
 
