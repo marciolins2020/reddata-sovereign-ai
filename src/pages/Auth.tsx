@@ -15,6 +15,7 @@ const authSchema = z.object({
   email: z.string().email("Por favor, insira um e-mail válido"),
   password: z.string().min(6, "A senha deve ter no mínimo 6 caracteres"),
   fullName: z.string().optional(),
+  phone: z.string().regex(/^\+?[1-9]\d{1,14}$/, "Formato de celular inválido. Use formato internacional (ex: +5511999999999)").optional(),
 });
 
 // Check if password has been compromised using Have I Been Pwned API
@@ -64,6 +65,7 @@ export default function Auth() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
+  const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -131,7 +133,7 @@ export default function Auth() {
     e.preventDefault();
     
     // Validate inputs
-    const validation = authSchema.safeParse({ email, password, fullName });
+    const validation = authSchema.safeParse({ email, password, fullName, phone });
     if (!validation.success) {
       const firstError = validation.error.errors[0];
       toast({
@@ -182,6 +184,7 @@ export default function Auth() {
             emailRedirectTo: redirectUrl,
             data: {
               full_name: fullName,
+              phone: phone,
             }
           }
         });
@@ -223,17 +226,30 @@ export default function Auth() {
 
         <form onSubmit={isForgotPassword ? handleForgotPassword : handleSubmit} className="space-y-4">
           {!isLogin && (
-            <div>
-              <Label htmlFor="fullName">{t("auth.fullNameLabel")}</Label>
-              <Input
-                id="fullName"
-                type="text"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                placeholder={t("auth.fullNamePlaceholder")}
-                required={!isLogin}
-              />
-            </div>
+            <>
+              <div>
+                <Label htmlFor="fullName">{t("auth.fullNameLabel")}</Label>
+                <Input
+                  id="fullName"
+                  type="text"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  placeholder={t("auth.fullNamePlaceholder")}
+                  required={!isLogin}
+                />
+              </div>
+              <div>
+                <Label htmlFor="phone">Celular</Label>
+                <Input
+                  id="phone"
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="+55 11 99999-9999"
+                  required={!isLogin}
+                />
+              </div>
+            </>
           )}
           
           <div>
