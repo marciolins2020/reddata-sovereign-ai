@@ -218,8 +218,17 @@ export const Header = () => {
 
           {/* Mobile Menu */}
           {isMobileMenuOpen && (
-            <div className="lg:hidden py-4 border-t border-border bg-background/80 backdrop-blur-xl">
+            <div className="lg:hidden py-4 border-t border-border bg-background/80 backdrop-blur-xl max-h-[80vh] overflow-y-auto">
               <nav className="flex flex-col space-y-2" aria-label="Mobile navigation">
+                {/* Login Button - Destaque no topo */}
+                <div className="px-4 pb-3 border-b border-border mb-2">
+                  <Link to="/auth" onClick={() => setIsMobileMenuOpen(false)}>
+                    <Button variant="default" size="lg" className="w-full">
+                      Login / Cadastro
+                    </Button>
+                  </Link>
+                </div>
+
                 {menuItems.map((item) => (
                   <div key={item.href}>
                     {item.isRoute ? (
@@ -265,8 +274,8 @@ export const Header = () => {
                   </div>
                 ))}
                 
-                
-                <div className="px-4 pt-2">
+                {/* Language Switcher no final */}
+                <div className="px-4 pt-2 mt-2 border-t border-border">
                   <button
                     onClick={() => setLanguage(language === 'pt' ? 'en' : 'pt')}
                     className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-md border border-border hover:bg-accent transition-colors"
@@ -275,11 +284,6 @@ export const Header = () => {
                     <span className="text-xl">{language === 'pt' ? '🇺🇸' : '🇧🇷'}</span>
                     <span>{language === 'pt' ? 'English' : 'Português'}</span>
                   </button>
-                  <Link to="/auth" onClick={() => setIsMobileMenuOpen(false)} className="block mt-2">
-                    <Button variant="default" size="sm" className="w-full">
-                      Login
-                    </Button>
-                  </Link>
                 </div>
               </nav>
             </div>
