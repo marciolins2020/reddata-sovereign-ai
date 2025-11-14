@@ -177,130 +177,102 @@ export default function RedDataChatPage() {
   };
 
   return (
-    <div className="flex h-screen bg-[var(--rd-bg)]">
+    <div className="chat-wrapper">
+      
+      {/* Desktop Sidebar */}
       {isLoggedIn && (
-        <aside className="hidden lg:block w-64 border-r border-gray-200 bg-white h-screen sticky top-0">
+        <div className="hidden md:block chat-sidebar-desktop">
           <ConversationSidebar
             currentConversationId={conversationId}
             onSelectConversation={handleSelectConversation}
             onNewConversation={handleNewConversation}
           />
-        </aside>
+        </div>
       )}
 
-      <div className="chat-wrapper flex-1">
-        {/* HEADER */}
-        <header className="bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between gap-3 flex-shrink-0">
-          <div className="flex items-center gap-3 flex-1 min-w-0">
-            {isLoggedIn && (
-              <Sheet open={isSidebarOpen} onOpenChange={setIsSidebarOpen}>
-                <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon" className="lg:hidden">
-                    <Menu className="h-5 w-5" />
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="left" className="p-0 w-80">
-                  <ConversationSidebar
-                    currentConversationId={conversationId}
-                    onSelectConversation={handleSelectConversation}
-                    onNewConversation={handleNewConversation}
-                  />
-                </SheetContent>
-              </Sheet>
-            )}
-            
-            <img 
-              src={reddataLogo} 
-              alt="RedData" 
-              className="h-8 w-auto object-contain flex-shrink-0"
-            />
-            <div className="min-w-0 flex-1">
-              <h1 className="text-base font-semibold text-gray-900 truncate">
-                Assistente RedData
-              </h1>
-              <p className="text-xs text-gray-500 truncate">
-                IA 100% proprietária
-              </p>
+      {/* Main Chat Area */}
+      <div className="chat-main-area flex-1 flex flex-col">
+        
+        {/* Header Desktop */}
+        <div className="hidden md:flex chat-header-desktop">
+          <div className="chat-header-left">
+            <img src={reddataIcon} alt="RedData" className="h-8 w-8" />
+            <div>
+              <div className="font-semibold text-foreground">Assistente RedData</div>
+              <div className="text-xs text-muted-foreground">IA 100% proprietária</div>
             </div>
           </div>
-          
-          <div className="flex items-center gap-2 flex-shrink-0">
-            <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 bg-gray-50 border border-gray-200 rounded-lg">
-              <span className="text-xs font-medium text-gray-700">
-                {isLoggedIn 
-                  ? `${tokensRemaining.toLocaleString()} tokens`
-                  : `${tokensRemaining} tokens`
-                }
-              </span>
-            </div>
-
+          <div className="chat-header-right">
+            <span className="text-muted-foreground">{tokensRemaining.toLocaleString()} tokens</span>
+            <span className="flex items-center gap-1.5 text-success">
+              <span className="w-2 h-2 rounded-full bg-success"></span>
+              Online
+            </span>
             {!isLoggedIn && (
               <Button
                 onClick={() => navigate('/auth')}
                 size="sm"
-                className="bg-[#D8232A] hover:bg-[#B01E24] text-white text-xs px-3 py-1.5"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground"
               >
                 Login
               </Button>
             )}
-
-            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-green-50 text-xs text-green-700 border border-green-100 flex-shrink-0">
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-              <span className="hidden sm:inline">Online</span>
-            </span>
           </div>
-        </header>
+        </div>
+
+        {/* Mobile Header */}
+        <div className="flex md:hidden items-center justify-between p-4 border-b bg-background">
+          {isLoggedIn && (
+            <Sheet open={isSidebarOpen} onOpenChange={setIsSidebarOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="p-0 w-80">
+                <ConversationSidebar
+                  currentConversationId={conversationId}
+                  onSelectConversation={handleSelectConversation}
+                  onNewConversation={handleNewConversation}
+                />
+              </SheetContent>
+            </Sheet>
+          )}
+          <img 
+            src={reddataLogo} 
+            alt="RedData" 
+            className="h-8 cursor-pointer"
+            onClick={() => navigate("/")}
+          />
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-muted-foreground">{tokensRemaining.toLocaleString()}</span>
+            {!isLoggedIn && (
+              <Button
+                onClick={() => navigate('/auth')}
+                size="sm"
+                className="bg-primary text-primary-foreground text-xs"
+              >
+                Login
+              </Button>
+            )}
+          </div>
+        </div>
 
         {/* MESSAGES */}
         <div className="chat-messages" ref={endRef}>
-          {messages.map((msg) => {
-            const isUser = msg.role === "user";
-            return (
-              <div
-                key={msg.id}
-                className={`flex items-start gap-2 ${isUser ? "justify-end" : "justify-start"}`}
-              >
-                {!isUser && (
-                  <div className="flex-shrink-0 w-7 h-7 rounded-full bg-white flex items-center justify-center border border-gray-200">
-                    <img src={reddataIcon} alt="RedData" className="w-5 h-5 object-contain" />
-                  </div>
-                )}
-                
-                <div className={`chat-bubble ${isUser ? "chat-user" : "chat-ai"}`}>
-                  <p className="whitespace-pre-wrap break-words">{msg.content}</p>
-                </div>
-
-                {isUser && <div className="flex-shrink-0 w-7 h-7" />}
-              </div>
-            );
-          })}
-
-          {showAuthOptions && messages.length === 1 && !isLoading && (
-            <div className="flex gap-2 justify-start pl-9">
-              <Button
-                onClick={() => window.location.href = "/auth?mode=login"}
-                variant="outline"
-                size="sm"
-                className="text-xs"
-              >
-                Sim, fazer login
-              </Button>
-              <Button
-                onClick={() => window.location.href = "/auth?mode=signup"}
-                variant="default"
-                size="sm"
-                className="bg-[#D8232A] hover:bg-[#B01D23] text-xs"
-              >
-                Não, criar conta
-              </Button>
+          {messages.map((msg) => (
+            <div
+              key={msg.id}
+              className={`chat-bubble ${
+                msg.role === "user" ? "chat-user" : "chat-ai"
+              }`}
+            >
+              <p className="whitespace-pre-wrap break-words">{msg.content}</p>
             </div>
-          )}
+          ))}
 
           {isLoading && (
-            <div className="flex items-start gap-2">
-              <div className="flex-shrink-0 w-7 h-7 rounded-full bg-white flex items-center justify-center border border-gray-200">
-                <img src={reddataIcon} alt="RedData" className="w-5 h-5 object-contain" />
-              </div>
+            <div className="chat-ai">
               <div className="typing-indicator">
                 <span></span><span></span><span></span>
               </div>
@@ -308,16 +280,33 @@ export default function RedDataChatPage() {
           )}
 
           {messages.length === 1 && !isLoading && (
-            <div className="flex flex-wrap gap-2 pl-9">
+            <div className="flex flex-wrap justify-center gap-2 mt-6">
               {["Como configurar dashboards?", "Análise de dados em tempo real", "Segurança de dados"].map((sugestao, idx) => (
                 <button
                   key={idx}
                   onClick={() => handleSend(sugestao)}
-                  className="px-3 py-1.5 rounded-full bg-gray-50 hover:bg-gray-100 border border-gray-200 text-xs text-gray-700 transition-colors"
+                  className="px-4 py-2 text-sm border border-border rounded-lg hover:bg-accent transition-colors"
                 >
                   {sugestao}
                 </button>
               ))}
+            </div>
+          )}
+
+          {showAuthOptions && (
+            <div className="flex justify-center gap-2 mt-4">
+              <button
+                onClick={() => navigate("/auth")}
+                className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
+              >
+                Criar conta grátis
+              </button>
+              <button
+                onClick={() => navigate("/auth")}
+                className="px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary/5 transition-colors"
+              >
+                Já tenho conta
+              </button>
             </div>
           )}
         </div>

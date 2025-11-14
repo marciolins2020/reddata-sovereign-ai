@@ -35,6 +35,59 @@
   overflow: hidden;
 }
 
+/* Desktop Layout */
+@media (min-width: 768px) {
+  .chat-wrapper {
+    flex-direction: row;
+  }
+  
+  .chat-sidebar-desktop {
+    width: 280px;
+    border-right: 1px solid rgba(0,0,0,.08);
+    background: #fafafa;
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+  
+  .chat-main-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  .chat-header-desktop {
+    padding: 16px 24px;
+    border-bottom: 1px solid rgba(0,0,0,.08);
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  
+  .chat-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .chat-header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .chat-messages {
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
 /* Área de mensagens */
 .chat-messages {
   flex: 1;
