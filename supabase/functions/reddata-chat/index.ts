@@ -27,6 +27,14 @@ function sanitizeLLMResponse(raw: any) {
   // Remove tags HTML indesejadas que o modelo pode gerar
   output = output.replace(/<\/?s>/g, ''); // Remove <s> e </s>
   output = output.replace(/<\/?[^>]+(>|$)/g, ''); // Remove outras tags HTML
+  
+  // Remove tokens de instrução do Mistral e outros modelos
+  output = output.replace(/\[INST\]/g, '');
+  output = output.replace(/\[\/INST\]/g, '');
+  output = output.replace(/<<SYS>>/g, '');
+  output = output.replace(/<\/SYS>>/g, '');
+  output = output.replace(/\[\/SYS\]/g, '');
+  
   output = output.trim();
 
   return {
