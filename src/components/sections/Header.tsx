@@ -195,6 +195,11 @@ export const Header = () => {
               >
                 <span className="text-2xl">{language === 'pt' ? '🇺🇸' : '🇧🇷'}</span>
               </button>
+              <Link to="/auth">
+                <Button variant="default" size="sm">
+                  Login
+                </Button>
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -270,6 +275,11 @@ export const Header = () => {
                     <span className="text-xl">{language === 'pt' ? '🇺🇸' : '🇧🇷'}</span>
                     <span>{language === 'pt' ? 'English' : 'Português'}</span>
                   </button>
+                  <Link to="/auth" onClick={() => setIsMobileMenuOpen(false)} className="block mt-2">
+                    <Button variant="default" size="sm" className="w-full">
+                      Login
+                    </Button>
+                  </Link>
                 </div>
               </nav>
             </div>

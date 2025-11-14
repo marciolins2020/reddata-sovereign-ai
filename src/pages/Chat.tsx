@@ -13,11 +13,13 @@ type Message = {
   createdAt: string;
 };
 
-const getWelcomeMessage = (tokens: number): Message => ({
+const getWelcomeMessage = (tokens: number, isLoggedIn: boolean): Message => ({
   id: "welcome",
   role: "assistant",
   createdAt: new Date().toISOString(),
-  content: `👋 Bem-vindo ao RedData AI! Você tem ${tokens.toLocaleString()} tokens disponíveis.`
+  content: isLoggedIn 
+    ? `👋 Bem-vindo ao RedData AI! Você tem ${tokens.toLocaleString()} tokens disponíveis.`
+    : `👋 Bem-vindo ao RedData AI! Você tem ${tokens.toLocaleString()} tokens disponíveis.\n\nQuer ter mais tokens? Cadastre-se!`
 });
 
 export default function RedDataChatPage() {
@@ -33,7 +35,7 @@ export default function RedDataChatPage() {
     startNewConversation
   } = useChatConversation();
 
-  const [messages, setMessages] = useState<Message[]>([getWelcomeMessage(1000)]);
+  const [messages, setMessages] = useState<Message[]>([getWelcomeMessage(1000, false)]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const chatRef = useRef<HTMLDivElement>(null);
@@ -54,7 +56,7 @@ export default function RedDataChatPage() {
       setMessages(savedMessages);
     } else {
       const tokens = isLoggedIn ? 10000 : 1000;
-      setMessages([getWelcomeMessage(tokens)]);
+      setMessages([getWelcomeMessage(tokens, isLoggedIn)]);
     }
   }, [savedMessages, isLoggedIn]);
 
@@ -138,7 +140,7 @@ export default function RedDataChatPage() {
 
   const handleNewConversation = () => {
     startNewConversation();
-    setMessages([getWelcomeMessage(isLoggedIn ? 10000 : 1000)]);
+    setMessages([getWelcomeMessage(isLoggedIn ? 10000 : 1000, isLoggedIn)]);
   };
 
   return (
