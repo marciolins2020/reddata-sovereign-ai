@@ -5,6 +5,7 @@ import { ConversationSidebar } from "@/components/chat/ConversationSidebar";
 import { useChatConversation } from "@/hooks/useChatConversation";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Header } from "@/components/sections/Header";
 
 type Message = {
   id: string;
@@ -165,6 +166,17 @@ export default function RedDataChatPage() {
           
           <h1>Assistente RedData</h1>
           <p>IA Soberana para insights e análise segura</p>
+          
+          {!isLoggedIn && (
+            <Button 
+              variant="default" 
+              size="sm" 
+              onClick={() => navigate('/auth')}
+              className="absolute right-2 top-2"
+            >
+              Login
+            </Button>
+          )}
         </div>
 
         <div className="chat-messages" ref={chatRef}>
