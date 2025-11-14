@@ -46,8 +46,8 @@
   flex-direction: column;
   gap: 12px;
   /* Altura máxima reduzida para mobile - garante que input apareça */
-  max-height: calc(100vh - 220px);
-  min-height: 120px;
+  max-height: calc(100vh - 260px);
+  min-height: 100px;
 }
 
 @media (min-width: 640px) {
