@@ -12,10 +12,14 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { z } from "zod";
 
 const authSchema = z.object({
-  email: z.string().email("Por favor, insira um e-mail válido"),
-  password: z.string().min(6, "A senha deve ter no mínimo 6 caracteres"),
-  fullName: z.string().optional(),
-  phone: z.string().regex(/^\+?[1-9]\d{1,14}$/, "Formato de celular inválido. Use formato internacional (ex: +5511999999999)").optional(),
+  email: z.string().trim().email("Por favor, insira um e-mail válido").max(255, "Email muito longo"),
+  password: z.string().min(6, "A senha deve ter no mínimo 6 caracteres").max(100, "Senha muito longa"),
+  fullName: z.string().trim().min(1, "Nome completo é obrigatório").max(100, "Nome muito longo"),
+  phone: z.string()
+    .trim()
+    .min(10, "Celular deve ter no mínimo 10 dígitos")
+    .max(20, "Celular muito longo")
+    .regex(/^[\d\s()+\-]+$/, "Use apenas números, espaços, parênteses, + ou -"),
 });
 
 // Check if password has been compromised using Have I Been Pwned API
