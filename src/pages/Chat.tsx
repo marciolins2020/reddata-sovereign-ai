@@ -213,7 +213,17 @@ export default function RedDataChatPage() {
       {/* Desktop Layout */}
       <div className="hidden md:flex chat-wrapper">
         <div className="chat-sidebar-desktop">
-          <div className="p-4 border-b">
+          <div className="p-4 border-b space-y-2">
+            {!isLoggedIn && (
+              <Button 
+                onClick={() => navigate('/auth')}
+                className="w-full"
+                variant="outline"
+                size="sm"
+              >
+                Login / Cadastro
+              </Button>
+            )}
             <Button 
               onClick={handleNewConversation}
               className="w-full bg-primary hover:bg-primary/90"
