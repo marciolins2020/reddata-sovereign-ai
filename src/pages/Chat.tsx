@@ -6,6 +6,7 @@ import { useChatConversation } from "@/hooks/useChatConversation";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Header } from "@/components/sections/Header";
+import { UserProfileDropdown } from "@/components/chat/UserProfileDropdown";
 
 type Message = {
   id: string;
@@ -246,7 +247,7 @@ export default function RedDataChatPage() {
               <h1 className="font-semibold text-base">Assistente RedData</h1>
               <span className="text-sm text-muted-foreground">IA Soberana</span>
             </div>
-            <div className="chat-header-right">
+            <div className="chat-header-right flex items-center gap-3">
               {!isLoggedIn ? (
                 <Button 
                   variant="ghost" 
@@ -256,7 +257,10 @@ export default function RedDataChatPage() {
                   Login
                 </Button>
               ) : (
-                <span className="text-sm text-muted-foreground">10k tokens</span>
+                <>
+                  <span className="text-sm text-muted-foreground">10k tokens</span>
+                  <UserProfileDropdown />
+                </>
               )}
             </div>
           </div>
