@@ -113,16 +113,7 @@ export function ConversationSidebar({
 
   return (
     <div className="w-full lg:w-64 bg-white border-r border-gray-200 flex flex-col h-full">
-      <div className="p-4 border-b border-gray-200 space-y-3">
-        <Button
-          onClick={onNewConversation}
-          className="w-full bg-[#D8232A] hover:bg-[#B01D23] text-white"
-          size="sm"
-        >
-          <Plus className="h-4 w-4 mr-2" />
-          Nova Conversa
-        </Button>
-
+      <div className="p-4 border-b border-gray-200">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
           <Input
