@@ -1,8 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Menu } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Menu, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import reddataLogo from "@/assets/reddata-logo.png";
-import reddataIcon from "@/assets/reddata-icon.png";
 import { ConversationSidebar } from "@/components/chat/ConversationSidebar";
 import { useChatConversation } from "@/hooks/useChatConversation";
 import { Button } from "@/components/ui/button";
@@ -15,21 +13,11 @@ type Message = {
   createdAt: string;
 };
 
-const getWelcomeMessage = (tokensRemaining: number, isLoggedIn: boolean): Message => ({
+const getWelcomeMessage = (tokens: number): Message => ({
   id: "welcome",
   role: "assistant",
   createdAt: new Date().toISOString(),
-  content: `👋 **Bem-vindo ao RedData AI!**
-
-Você tem **${tokensRemaining} tokens gratuitos** para testar nossas capacidades de IA.
-
-**Ao criar uma conta gratuita:**
-- 🔓 **10.000 tokens/dia** (10x mais!)
-- 💾 **Histórico de conversas** salvo
-- ⏰ **Sem limites**
-- 🔄 **Renovação diária** automática
-
-**Você já tem uma conta?`
+  content: `👋 Bem-vindo ao RedData AI! Você tem ${tokens.toLocaleString()} tokens disponíveis.`
 });
 
 export default function RedDataChatPage() {
@@ -37,7 +25,6 @@ export default function RedDataChatPage() {
   const {
     conversationId,
     messages: savedMessages,
-    setMessages: setSavedMessages,
     isLoggedIn,
     userId,
     createNewConversation,
@@ -46,40 +33,38 @@ export default function RedDataChatPage() {
     startNewConversation
   } = useChatConversation();
 
-  const [messages, setMessages] = useState<Message[]>([getWelcomeMessage(1000, false)]);
+  const [messages, setMessages] = useState<Message[]>([getWelcomeMessage(1000)]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [showAuthOptions, setShowAuthOptions] = useState(true);
-  const [tokensRemaining, setTokensRemaining] = useState(1000);
-  const endRef = useRef<HTMLDivElement | null>(null);
+  const chatRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (endRef.current) {
-      endRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
-    }
-  }, [messages.length, isLoading]);
+  const scrollToBottom = () => {
+    setTimeout(() => {
+      chatRef.current?.scrollTo({
+        top: chatRef.current.scrollHeight,
+        behavior: "smooth"
+      });
+    }, 70);
+  };
+
+  useEffect(scrollToBottom, [messages, isLoading]);
 
   useEffect(() => {
     if (savedMessages.length > 0) {
       setMessages(savedMessages);
-      setShowAuthOptions(false);
     } else {
       const tokens = isLoggedIn ? 10000 : 1000;
-      setTokensRemaining(tokens);
-      setMessages([getWelcomeMessage(tokens, isLoggedIn)]);
-      setShowAuthOptions(!isLoggedIn);
+      setMessages([getWelcomeMessage(tokens)]);
     }
   }, [savedMessages, isLoggedIn]);
 
-  const handleSend = async (fromSuggestion?: string) => {
-    const text = (fromSuggestion ?? input).trim();
-    if (!text || isLoading) return;
+  const sendMessage = async () => {
+    if (!input.trim() || isLoading) return;
 
     const userMessage: Message = {
       id: `u-${Date.now()}`,
       role: "user",
-      content: text,
+      content: input,
       createdAt: new Date().toISOString()
     };
 
@@ -87,13 +72,11 @@ export default function RedDataChatPage() {
     setMessages(updatedMessages);
     setInput("");
     setIsLoading(true);
-    setShowAuthOptions(false);
 
     let currentConvId = conversationId;
-    const wasNewConversation = !conversationId;
     
     if (isLoggedIn && userId && !conversationId) {
-      currentConvId = await createNewConversation(text);
+      currentConvId = await createNewConversation(input);
       if (!currentConvId) {
         setIsLoading(false);
         return;
@@ -101,7 +84,7 @@ export default function RedDataChatPage() {
     }
 
     if (isLoggedIn && currentConvId) {
-      await saveMessage(currentConvId, "user", text);
+      await saveMessage(currentConvId, "user", input);
     }
 
     try {
@@ -121,153 +104,74 @@ export default function RedDataChatPage() {
       }
 
       const data = await response.json();
-      const answerText: string = data.answer ?? "Resposta recebida do RedData.";
 
-      const assistantMessage: Message = {
+      const aiMessage: Message = {
         id: `a-${Date.now()}`,
         role: "assistant",
-        content: answerText,
+        content: data.answer || data.message || "Desculpe, não consegui processar sua mensagem.",
         createdAt: new Date().toISOString()
       };
 
-      setMessages((prev) => [...prev, assistantMessage]);
+      const finalMessages = [...updatedMessages, aiMessage];
+      setMessages(finalMessages);
 
       if (isLoggedIn && currentConvId) {
-        await saveMessage(currentConvId, "assistant", answerText);
-        
-        // Se foi uma nova conversa, recarregar a lista
-        if (wasNewConversation) {
-          // O realtime vai atualizar automaticamente
-        }
+        await saveMessage(currentConvId, "assistant", aiMessage.content);
       }
     } catch (error) {
-      console.error(error);
-      const errorMessage: Message = {
-        id: `err-${Date.now()}`,
+      console.error("Erro ao enviar mensagem:", error);
+      const errorMsg: Message = {
+        id: `e-${Date.now()}`,
         role: "assistant",
-        content:
-          "Não consegui processar sua solicitação agora. Tente novamente em alguns instantes.",
+        content: "Desculpe, houve um erro. Tente novamente.",
         createdAt: new Date().toISOString()
       };
-      setMessages((prev) => [...prev, errorMessage]);
+      setMessages([...updatedMessages, errorMsg]);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleSelectConversation = async (convId: string) => {
-    await loadConversation(convId);
-    setIsSidebarOpen(false);
+  const handleSelectConversation = (convId: string) => {
+    loadConversation(convId);
   };
 
   const handleNewConversation = () => {
     startNewConversation();
-    const tokens = isLoggedIn ? 10000 : 1000;
-    setTokensRemaining(tokens);
-    setMessages([getWelcomeMessage(tokens, isLoggedIn)]);
-    setShowAuthOptions(!isLoggedIn);
-    setIsSidebarOpen(false);
-  };
-
-  const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      handleSend();
-    }
+    setMessages([getWelcomeMessage(isLoggedIn ? 10000 : 1000)]);
   };
 
   return (
-    <div className="chat-wrapper">
-      
-      {/* Desktop Sidebar */}
-      {isLoggedIn && (
-        <div className="hidden md:block chat-sidebar-desktop">
-          <ConversationSidebar
-            currentConversationId={conversationId}
-            onSelectConversation={handleSelectConversation}
-            onNewConversation={handleNewConversation}
-          />
-        </div>
-      )}
-
-      {/* Main Chat Area */}
-      <div className="chat-main-area flex-1 flex flex-col">
-        
-        {/* Header Desktop */}
-        <div className="hidden md:flex chat-header-desktop">
-          <div className="chat-header-left">
-            <img src={reddataIcon} alt="RedData" className="h-8 w-8" />
-            <div>
-              <div className="font-semibold text-foreground">Assistente RedData</div>
-              <div className="text-xs text-muted-foreground">IA 100% proprietária</div>
-            </div>
-          </div>
-          <div className="chat-header-right">
-            <span className="text-muted-foreground">{tokensRemaining.toLocaleString()} tokens</span>
-            <span className="flex items-center gap-1.5 text-success">
-              <span className="w-2 h-2 rounded-full bg-success"></span>
-              Online
-            </span>
-            {!isLoggedIn && (
-              <Button
-                onClick={() => navigate('/auth')}
-                size="sm"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground"
-              >
-                Login
+    <>
+      {/* Mobile Layout */}
+      <div className="md:hidden chat-wrapper">
+        <div className="chat-header">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="absolute left-2 top-2">
+                <Menu className="h-5 w-5" />
               </Button>
-            )}
-          </div>
+            </SheetTrigger>
+            <SheetContent side="left" className="p-0 w-[280px]">
+              <ConversationSidebar 
+                onSelectConversation={handleSelectConversation}
+                onNewConversation={handleNewConversation}
+                currentConversationId={conversationId}
+              />
+            </SheetContent>
+          </Sheet>
+          
+          <h1>Assistente RedData</h1>
+          <p>IA Soberana para insights e análise segura</p>
         </div>
 
-        {/* Mobile Header */}
-        <div className="flex md:hidden items-center justify-between p-4 border-b bg-background">
-          {isLoggedIn && (
-            <Sheet open={isSidebarOpen} onOpenChange={setIsSidebarOpen}>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <Menu className="h-5 w-5" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="left" className="p-0 w-80">
-                <ConversationSidebar
-                  currentConversationId={conversationId}
-                  onSelectConversation={handleSelectConversation}
-                  onNewConversation={handleNewConversation}
-                />
-              </SheetContent>
-            </Sheet>
-          )}
-          <img 
-            src={reddataLogo} 
-            alt="RedData" 
-            className="h-8 cursor-pointer"
-            onClick={() => navigate("/")}
-          />
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-muted-foreground">{tokensRemaining.toLocaleString()}</span>
-            {!isLoggedIn && (
-              <Button
-                onClick={() => navigate('/auth')}
-                size="sm"
-                className="bg-primary text-primary-foreground text-xs"
-              >
-                Login
-              </Button>
-            )}
-          </div>
-        </div>
-
-        {/* MESSAGES */}
-        <div className="chat-messages" ref={endRef}>
-          {messages.map((msg) => (
+        <div className="chat-messages" ref={chatRef}>
+          {messages.map((msg, index) => (
             <div
-              key={msg.id}
-              className={`chat-bubble ${
-                msg.role === "user" ? "chat-user" : "chat-ai"
-              }`}
+              key={msg.id || index}
+              className={`chat-bubble ${msg.role === "user" ? "chat-user" : "chat-ai"}`}
             >
-              <p className="whitespace-pre-wrap break-words">{msg.content}</p>
+              {msg.content}
             </div>
           ))}
 
@@ -278,58 +182,92 @@ export default function RedDataChatPage() {
               </div>
             </div>
           )}
-
-          {messages.length === 1 && !isLoading && (
-            <div className="flex flex-wrap justify-center gap-2 mt-6">
-              {["Como configurar dashboards?", "Análise de dados em tempo real", "Segurança de dados"].map((sugestao, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => handleSend(sugestao)}
-                  className="px-4 py-2 text-sm border border-border rounded-lg hover:bg-accent transition-colors"
-                >
-                  {sugestao}
-                </button>
-              ))}
-            </div>
-          )}
-
-          {showAuthOptions && (
-            <div className="flex justify-center gap-2 mt-4">
-              <button
-                onClick={() => navigate("/auth")}
-                className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
-              >
-                Criar conta grátis
-              </button>
-              <button
-                onClick={() => navigate("/auth")}
-                className="px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary/5 transition-colors"
-              >
-                Já tenho conta
-              </button>
-            </div>
-          )}
         </div>
 
-        {/* INPUT FIXO */}
         <div className="chat-input-bar">
           <input
             className="chat-input"
-            placeholder="Pergunte ao RedData…"
+            placeholder="Pergunte ao RedData..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            disabled={isLoading}
+            onKeyDown={(e) => e.key === "Enter" && sendMessage()}
           />
-          <button 
-            className="chat-send-btn" 
-            onClick={() => handleSend()}
-            disabled={!input.trim() || isLoading}
-          >
-            ➤
-          </button>
+          <button className="chat-send-btn" onClick={sendMessage}>➤</button>
         </div>
       </div>
-    </div>
+
+      {/* Desktop Layout */}
+      <div className="hidden md:flex chat-wrapper">
+        <div className="chat-sidebar-desktop">
+          <div className="p-4 border-b">
+            <Button 
+              onClick={handleNewConversation}
+              className="w-full bg-primary hover:bg-primary/90"
+              size="sm"
+            >
+              <Plus className="h-4 w-4 mr-2" />
+              Nova Conversa
+            </Button>
+          </div>
+          <ConversationSidebar 
+            onSelectConversation={handleSelectConversation}
+            onNewConversation={handleNewConversation}
+            currentConversationId={conversationId}
+          />
+        </div>
+
+        <div className="chat-main-area">
+          <div className="chat-header-desktop">
+            <div className="chat-header-left">
+              <h1 className="font-semibold text-base">Assistente RedData</h1>
+              <span className="text-sm text-muted-foreground">IA Soberana</span>
+            </div>
+            <div className="chat-header-right">
+              {!isLoggedIn ? (
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={() => navigate('/auth')}
+                >
+                  Login
+                </Button>
+              ) : (
+                <span className="text-sm text-muted-foreground">10k tokens</span>
+              )}
+            </div>
+          </div>
+
+          <div className="chat-messages" ref={chatRef}>
+            {messages.map((msg, index) => (
+              <div
+                key={msg.id || index}
+                className={`chat-bubble ${msg.role === "user" ? "chat-user" : "chat-ai"}`}
+              >
+                {msg.content}
+              </div>
+            ))}
+
+            {isLoading && (
+              <div className="chat-ai">
+                <div className="typing-indicator">
+                  <span></span><span></span><span></span>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className="chat-input-bar">
+            <input
+              className="chat-input"
+              placeholder="Pergunte ao RedData..."
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+            />
+            <button className="chat-send-btn" onClick={sendMessage}>➤</button>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
