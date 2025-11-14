@@ -126,6 +126,7 @@ export type Database = {
           full_name: string | null
           id: string
           is_trial_active: boolean
+          phone: string | null
           storage_limit_mb: number
           storage_used_mb: number
           trial_expires_at: string
@@ -136,6 +137,7 @@ export type Database = {
           full_name?: string | null
           id: string
           is_trial_active?: boolean
+          phone?: string | null
           storage_limit_mb?: number
           storage_used_mb?: number
           trial_expires_at?: string
@@ -146,6 +148,7 @@ export type Database = {
           full_name?: string | null
           id?: string
           is_trial_active?: boolean
+          phone?: string | null
           storage_limit_mb?: number
           storage_used_mb?: number
           trial_expires_at?: string
