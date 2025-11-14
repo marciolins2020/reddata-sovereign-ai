@@ -46,13 +46,13 @@
   flex-direction: column;
   gap: 12px;
   /* Altura máxima reduzida para mobile - garante que input apareça */
-  max-height: calc(100vh - 180px);
-  min-height: 150px;
+  max-height: calc(100vh - 220px);
+  min-height: 120px;
 }
 
 @media (min-width: 640px) {
   .chat-messages {
-    max-height: calc(100vh - 160px);
+    max-height: calc(100vh - 180px);
   }
 }
 
