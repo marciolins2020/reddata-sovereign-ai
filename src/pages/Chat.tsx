@@ -153,7 +153,7 @@ export default function RedDataChatPage() {
         <div className="chat-header">
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="absolute left-2 top-2">
+              <Button variant="ghost" size="icon" className="absolute left-2 top-2.5 z-10">
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
@@ -166,10 +166,12 @@ export default function RedDataChatPage() {
             </SheetContent>
           </Sheet>
           
-          <h1>Assistente RedData</h1>
-          <div className="flex items-center gap-2">
-            <p>IA Soberana by RedMaxx®</p>
-            <img src={redmaxxLogo} alt="RedMaxx" className="h-8 w-auto rounded-lg" />
+          <div className="flex flex-col items-center justify-center gap-1">
+            <h1 className="text-sm font-semibold">Assistente RedData</h1>
+            <div className="flex items-center gap-1.5">
+              <span className="text-[10px] text-muted-foreground">IA Soberana by RedMaxx®</span>
+              <img src={redmaxxLogo} alt="RedMaxx" className="h-5 w-auto rounded-md" />
+            </div>
           </div>
           
           {!isLoggedIn && (
@@ -177,7 +179,7 @@ export default function RedDataChatPage() {
               variant="default" 
               size="sm" 
               onClick={() => navigate('/auth')}
-              className="absolute right-2 top-2"
+              className="absolute right-2 top-2 z-10 text-xs h-7 px-3"
             >
               Login
             </Button>
