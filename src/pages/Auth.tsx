@@ -11,7 +11,12 @@ import reddataLogo from "@/assets/reddata-logo-optimized.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { z } from "zod";
 
-const authSchema = z.object({
+const loginSchema = z.object({
+  email: z.string().trim().email("Por favor, insira um e-mail válido").max(255, "Email muito longo"),
+  password: z.string().min(6, "A senha deve ter no mínimo 6 caracteres").max(100, "Senha muito longa"),
+});
+
+const signupSchema = z.object({
   email: z.string().trim().email("Por favor, insira um e-mail válido").max(255, "Email muito longo"),
   password: z.string().min(6, "A senha deve ter no mínimo 6 caracteres").max(100, "Senha muito longa"),
   fullName: z.string().trim().min(1, "Nome completo é obrigatório").max(100, "Nome muito longo"),
@@ -137,7 +142,10 @@ export default function Auth() {
     e.preventDefault();
     
     // Validate inputs
-    const validation = authSchema.safeParse({ email, password, fullName, phone });
+    const validation = isLogin 
+      ? loginSchema.safeParse({ email, password })
+      : signupSchema.safeParse({ email, password, fullName, phone });
+      
     if (!validation.success) {
       const firstError = validation.error.errors[0];
       toast({
