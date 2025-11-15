@@ -218,8 +218,7 @@ export default function RedDataChatPage() {
             {!isLoggedIn && (
               <Button 
                 onClick={() => navigate('/auth')}
-                className="w-full"
-                variant="outline"
+                className="w-full bg-primary hover:bg-primary/90"
                 size="sm"
               >
                 Login / Cadastro
