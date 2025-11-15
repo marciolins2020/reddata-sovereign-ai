@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -70,7 +70,6 @@ async function checkPasswordPwned(password: string): Promise<boolean> {
 export default function Auth() {
   const { t } = useLanguage();
   const [isLogin, setIsLogin] = useState(true);
-  const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
@@ -93,50 +92,11 @@ export default function Auth() {
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
-        navigate("/chat"); // Redirecionando para chat em vez de dashboard
-        // navigate("/dashboard"); // Desabilitado temporariamente
+        navigate("/chat");
       }
     };
     checkUser();
   }, [navigate]);
-
-  const handleForgotPassword = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!email) {
-      toast({
-        title: "Erro",
-        description: "Por favor, insira seu e-mail",
-        variant: "destructive",
-      });
-      return;
-    }
-    
-    setLoading(true);
-
-    try {
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/reset-password`,
-      });
-      
-      if (error) throw error;
-      
-      toast({
-        title: "Email enviado!",
-        description: "Verifique sua caixa de entrada para redefinir sua senha.",
-      });
-      
-      setIsForgotPassword(false);
-    } catch (error: any) {
-      toast({
-        title: "Erro",
-        description: error.message || "Não foi possível enviar o email. Tente novamente.",
-        variant: "destructive",
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -254,17 +214,14 @@ export default function Auth() {
         <div className="flex flex-col items-center mb-8">
           <img src={reddataLogo} alt="RedData" className="h-12 mb-4" />
           <h1 className="text-2xl font-bold text-foreground">
-            {isForgotPassword ? "Recuperar Senha" : (isLogin ? t("auth.login") : t("auth.signup"))}
+            {isLogin ? t("auth.login") : t("auth.signup")}
           </h1>
           <p className="text-muted-foreground text-center mt-2">
-            {isForgotPassword 
-              ? "Digite seu e-mail para receber o link de recuperação"
-              : (isLogin ? t("auth.loginSubtitle") : t("auth.signupSubtitle"))
-            }
+            {isLogin ? t("auth.loginSubtitle") : t("auth.signupSubtitle")}
           </p>
         </div>
 
-        <form onSubmit={isForgotPassword ? handleForgotPassword : handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           {!isLogin && (
             <>
               <div>
@@ -303,62 +260,46 @@ export default function Auth() {
               required
             />
           </div>
-          
-          {!isForgotPassword && (
-            <div>
-              <Label htmlFor="password">{t("auth.passwordLabel")}</Label>
-              <Input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder={t("auth.passwordPlaceholder")}
-                required
-                minLength={6}
-              />
-              {isLogin && (
-                <div className="mt-2 text-right">
-                  <button
-                    type="button"
-                    onClick={() => setIsForgotPassword(true)}
-                    className="text-xs text-[#D8232A] hover:underline"
-                  >
-                    Esqueci minha senha
-                  </button>
-                </div>
-              )}
-            </div>
-          )}
+
+          <div>
+            <Label htmlFor="password">{t("auth.passwordLabel")}</Label>
+            <Input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder={t("auth.passwordPlaceholder")}
+              required
+              minLength={6}
+            />
+            {isLogin && (
+              <div className="mt-2 text-right">
+                <Link
+                  to="/forgot-password"
+                  className="text-xs text-[#D8232A] hover:underline"
+                >
+                  Esqueci minha senha
+                </Link>
+              </div>
+            )}
+          </div>
 
           <Button type="submit" className="w-full" disabled={loading}>
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            {isForgotPassword 
-              ? "Enviar Link de Recuperação"
-              : (isLogin ? t("auth.loginButton") : t("auth.signupButton"))
-            }
+            {isLogin ? t("auth.loginButton") : t("auth.signupButton")}
           </Button>
         </form>
 
         <div className="mt-6 text-center">
-          {isForgotPassword ? (
-            <button
-              type="button"
-              onClick={() => setIsForgotPassword(false)}
-              className="text-sm text-primary hover:underline"
-            >
-              Voltar para o login
-            </button>
-          ) : (
-            <button
-              type="button"
-              onClick={() => setIsLogin(!isLogin)}
-              className="text-sm text-primary hover:underline"
-            >
-              {isLogin
+          <button
+            type="button"
+            onClick={() => setIsLogin(!isLogin)}
+            className="text-sm text-primary hover:underline"
+          >
+            {isLogin
                 ? t("auth.noAccount")
                 : t("auth.hasAccount")}
-            </button>
-          )}
+          </button>
         </div>
 
         <div className="mt-6 text-center text-xs text-muted-foreground">
