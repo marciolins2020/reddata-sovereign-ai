@@ -160,12 +160,40 @@ export default function Auth() {
 
     try {
       if (isLogin) {
-        const { error } = await supabase.auth.signInWithPassword({
+        const { data, error } = await supabase.auth.signInWithPassword({
           email,
           password,
         });
         
         if (error) throw error;
+        
+        // Check if this is the user's first login
+        if (data.user) {
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('created_at')
+            .eq('id', data.user.id)
+            .single();
+            
+          // If profile was created recently (within last 5 minutes), send welcome email
+          if (profile) {
+            const createdAt = new Date(profile.created_at);
+            const now = new Date();
+            const diffMinutes = (now.getTime() - createdAt.getTime()) / (1000 * 60);
+            
+            if (diffMinutes < 5) {
+              // Send welcome email in background (don't wait for it)
+              supabase.functions.invoke('send-welcome-email', {
+                body: {
+                  email: data.user.email,
+                  fullName: data.user.user_metadata?.full_name || 'Usuário'
+                }
+              }).catch(err => {
+                console.error('Failed to send welcome email:', err);
+              });
+            }
+          }
+        }
         
         toast({
           title: t("auth.loginSuccess"),
