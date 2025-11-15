@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Header } from "@/components/sections/Header";
 import { UserProfileDropdown } from "@/components/chat/UserProfileDropdown";
+import redmaxxLogo from "@/assets/redmaxx-logo-header.jpg";
 
 type Message = {
   id: string;
@@ -166,7 +167,10 @@ export default function RedDataChatPage() {
           </Sheet>
           
           <h1>Assistente RedData</h1>
-          <p>IA Soberana para insights e análise segura</p>
+          <div className="flex items-center gap-2">
+            <p>IA Soberana by RedMaxx®</p>
+            <img src={redmaxxLogo} alt="RedMaxx" className="h-6 w-auto" />
+          </div>
           
           {!isLoggedIn && (
             <Button 
@@ -244,7 +248,10 @@ export default function RedDataChatPage() {
           <div className="chat-header-desktop">
             <div className="chat-header-left">
               <h1 className="font-semibold text-base">Assistente RedData</h1>
-              <span className="text-sm text-muted-foreground">IA Soberana</span>
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-muted-foreground">IA Soberana by RedMaxx®</span>
+                <img src={redmaxxLogo} alt="RedMaxx" className="h-4 w-auto" />
+              </div>
             </div>
             <div className="chat-header-right flex items-center gap-3">
               {isLoggedIn && (
