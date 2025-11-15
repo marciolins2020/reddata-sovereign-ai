@@ -169,7 +169,7 @@ export default function RedDataChatPage() {
           <h1>Assistente RedData</h1>
           <div className="flex items-center gap-2">
             <p>IA Soberana by RedMaxx®</p>
-            <img src={redmaxxLogo} alt="RedMaxx" className="h-8 w-auto" />
+            <img src={redmaxxLogo} alt="RedMaxx" className="h-8 w-auto rounded-lg" />
           </div>
           
           {!isLoggedIn && (
@@ -250,7 +250,7 @@ export default function RedDataChatPage() {
               <h1 className="font-semibold text-base">Assistente RedData</h1>
               <div className="flex items-center gap-2">
                 <span className="text-sm text-muted-foreground">IA Soberana by RedMaxx®</span>
-                <img src={redmaxxLogo} alt="RedMaxx" className="h-8 w-auto" />
+                <img src={redmaxxLogo} alt="RedMaxx" className="h-8 w-auto rounded-lg" />
               </div>
             </div>
             <div className="chat-header-right flex items-center gap-3">
