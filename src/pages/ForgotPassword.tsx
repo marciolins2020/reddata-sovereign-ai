@@ -1,30 +1,30 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { ArrowLeft, Mail } from "lucide-react";
+import { ArrowLeft, Phone } from "lucide-react";
 import { z } from "zod";
 
-const emailSchema = z.object({
-  email: z.string().trim().email({ message: "Email inválido" }).max(255),
+const phoneSchema = z.object({
+  phone: z.string().trim().min(10, { message: "Número inválido" }).max(15, { message: "Número muito longo" }),
 });
 
 export default function ForgotPassword() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
-  const [emailSent, setEmailSent] = useState(false);
+  const [codeSent, setCodeSent] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validar email
+    // Validar telefone
     try {
-      emailSchema.parse({ email });
+      phoneSchema.parse({ phone });
     } catch (error) {
       if (error instanceof z.ZodError) {
         toast.error(error.errors[0].message);
@@ -35,38 +35,46 @@ export default function ForgotPassword() {
     setLoading(true);
 
     try {
-      const { error } = await supabase.functions.invoke("request-password-reset", {
-        body: { email: email.trim() },
+      const { error } = await supabase.functions.invoke("request-whatsapp-reset", {
+        body: { phone: phone.trim() },
       });
 
       if (error) throw error;
 
-      setEmailSent(true);
-      toast.success("Se o email existir, um link de redefinição foi enviado");
+      setCodeSent(true);
+      toast.success("Se o número existir, um código foi enviado via WhatsApp");
+      
+      // Redirecionar para página de validação após 2 segundos
+      setTimeout(() => {
+        navigate("/reset-password");
+      }, 2000);
     } catch (error: any) {
-      console.error("Erro ao solicitar redefinição:", error);
+      console.error("Erro ao solicitar código:", error);
       toast.error("Erro ao processar solicitação. Tente novamente.");
     } finally {
       setLoading(false);
     }
   };
 
-  if (emailSent) {
+  if (codeSent) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-background to-secondary/5 p-4">
         <Card className="w-full max-w-md">
           <CardHeader className="text-center">
             <div className="mx-auto w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-              <Mail className="w-6 h-6 text-primary" />
+              <Phone className="w-6 h-6 text-primary" />
             </div>
-            <CardTitle>Verifique seu email</CardTitle>
+            <CardTitle>Código Enviado</CardTitle>
             <CardDescription>
-              Se o email fornecido estiver cadastrado, você receberá um link para redefinir sua senha.
+              Verifique seu WhatsApp
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="text-sm text-muted-foreground text-center">
-              Não recebeu o email? Verifique sua caixa de spam ou tente novamente em alguns minutos.
+              Se o número <strong>{phone}</strong> estiver cadastrado, você receberá um código de 6 dígitos via WhatsApp.
+            </div>
+            <div className="text-sm text-muted-foreground text-center">
+              O código é válido por <strong>10 minutos</strong>.
             </div>
             <Button
               onClick={() => navigate("/auth")}
@@ -88,38 +96,41 @@ export default function ForgotPassword() {
         <CardHeader>
           <CardTitle>Esqueceu sua senha?</CardTitle>
           <CardDescription>
-            Digite seu email e enviaremos um link para redefinir sua senha
+            Digite seu número do WhatsApp para receber um código de verificação
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="phone">WhatsApp</Label>
               <Input
-                id="email"
-                type="email"
-                placeholder="seu@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                id="phone"
+                type="tel"
+                placeholder="5511999999999"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
                 required
-                maxLength={255}
+                maxLength={15}
                 disabled={loading}
               />
+              <p className="text-xs text-muted-foreground">
+                Digite apenas números, com código do país e DDD (ex: 5511999999999)
+              </p>
             </div>
 
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Enviando..." : "Enviar link de redefinição"}
+              {loading ? "Enviando..." : "Enviar Código via WhatsApp"}
             </Button>
 
-            <div className="text-center">
-              <Link
-                to="/auth"
-                className="text-sm text-muted-foreground hover:text-primary transition-colors inline-flex items-center"
-              >
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Voltar para o login
-              </Link>
-            </div>
+            <Button
+              type="button"
+              onClick={() => navigate("/auth")}
+              variant="ghost"
+              className="w-full"
+            >
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Voltar para o login
+            </Button>
           </form>
         </CardContent>
       </Card>
