@@ -188,14 +188,14 @@ export default function RedDataChatPage() {
           {messages.map((msg, index) => (
             <div
               key={msg.id || index}
-              className={`chat-bubble ${msg.role === "user" ? "chat-user" : "chat-ai"}`}
+              className={`chat-bubble ${msg.role === "user" ? "chat-user" : "chat-ai"} animate-fade-in`}
             >
               {msg.content}
             </div>
           ))}
 
           {isLoading && (
-            <div className="chat-ai">
+            <div className="chat-ai animate-fade-in">
               <div className="typing-indicator">
                 <span></span><span></span><span></span>
               </div>
@@ -267,14 +267,14 @@ export default function RedDataChatPage() {
             {messages.map((msg, index) => (
               <div
                 key={msg.id || index}
-                className={`chat-bubble ${msg.role === "user" ? "chat-user" : "chat-ai"}`}
+                className={`chat-bubble ${msg.role === "user" ? "chat-user" : "chat-ai"} animate-fade-in`}
               >
                 {msg.content}
               </div>
             ))}
 
             {isLoading && (
-              <div className="chat-ai">
+              <div className="chat-ai animate-fade-in">
                 <div className="typing-indicator">
                   <span></span><span></span><span></span>
                 </div>
