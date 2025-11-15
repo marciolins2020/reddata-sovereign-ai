@@ -247,15 +247,7 @@ export default function RedDataChatPage() {
               <span className="text-sm text-muted-foreground">IA Soberana</span>
             </div>
             <div className="chat-header-right flex items-center gap-3">
-              {!isLoggedIn ? (
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  onClick={() => navigate('/auth')}
-                >
-                  Login
-                </Button>
-              ) : (
+              {isLoggedIn && (
                 <>
                   <span className="text-sm text-muted-foreground">10k tokens</span>
                   <UserProfileDropdown />
